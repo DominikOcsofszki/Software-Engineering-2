@@ -15,6 +15,9 @@ public class Bewerbung {
     @Column(name = "bewerbung_id")
     private Integer bewerbungId;
 
+    @Column(name = "bewerbung_pdf")
+    private byte[] pdf;
+
     @ManyToOne
     @JoinColumn(name = "nutzer_id", referencedColumnName = "nutzer_id", nullable = false)
     private Nutzer nutzer;
