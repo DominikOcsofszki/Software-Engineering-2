@@ -19,3 +19,7 @@ cp commit-msg .git/hooks/commit-msg
 mvn org.apache.maven.plugins:maven-checkstyle-plugin:3.1.1:check
 
 ```
+```shell
+mvn org.apache.maven.plugins:maven-checkstyle-plugin:3.1.1:check | grep "Checkstyle"
+
+```
