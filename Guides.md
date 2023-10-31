@@ -1,8 +1,9 @@
 # Guides
+1. Convention
+2. Checkstyle
 
 
-
-## Adding Concentional commits to the project
+## 1. Adding Concentional commits to the project
 
 ### Commit types
 - Permitted types : 'feat', 'fix', 'perf', 'refactor', 'style', 'test', 'build', 'ops', 'docs', 'merge'
@@ -13,7 +14,7 @@ npm install --global git-conventional-commits
 cp commit-msg .git/hooks/commit-msg
 ```
 
-Checkstyle:
+## 2. Checkstyle:
  ```shell
 mvn org.apache.maven.plugins:maven-checkstyle-plugin:3.1.1:check
 
