@@ -24,7 +24,7 @@
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
         <!--        To activate Check-style validation, change the value of the property to "validate"-->
         <checkstyle-validation.var>none</checkstyle-validation.var>
-        <!--        <checkstyle-validation.var>validate</checkstyle-validation.var>-->
+<!--                <checkstyle-validation.var>validate</checkstyle-validation.var>-->
     </properties>
 
     <dependencyManagement>
