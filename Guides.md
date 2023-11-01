@@ -23,3 +23,9 @@ mvn org.apache.maven.plugins:maven-checkstyle-plugin:3.1.1:check
 mvn org.apache.maven.plugins:maven-checkstyle-plugin:3.1.1:check | grep "Checkstyle"
 
 ```
+Produces a check style report in target/checkstyle-result.xml and opens it
+```shell
+mvn site
+open target/site/checkstyle.html 
+
+```
