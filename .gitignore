@@ -12,3 +12,8 @@ target/
 
 # Vaadin
 
+.classpath
+.factorypath
+.project
+.settings/
+frontend/
