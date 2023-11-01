@@ -16,12 +16,10 @@ cp commit-msg .git/hooks/commit-msg
 
 ## 2. Checkstyle:
  ```shell
-mvn org.apache.maven.plugins:maven-checkstyle-plugin:3.1.1:check
-
+mvn checkstyle:checkstyle  
 ```
-```shell
-mvn org.apache.maven.plugins:maven-checkstyle-plugin:3.1.1:check | grep "Checkstyle"
-
+```
+mvn checkstyle:checkstyle   | grep "Checkstyle"
 ```
 Produces a check style report in target/checkstyle-result.xml and opens it
 ```shell
