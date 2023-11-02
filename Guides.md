@@ -27,3 +27,11 @@ mvn site
 open target/site/checkstyle.html 
 
 ```
+## 3. SonarQube:
+
+```
+export sonarlogintokken=.....................
+```
+ ```
+ mvn verify sonar:sonar -Dsonar.login=$sonarlogintokken    
+ ```

@@ -17,3 +17,5 @@ frontend/
 .factorypath
 .project
 .settings
+.exit
+.sh
