@@ -12,7 +12,7 @@ pipeline {
               steps {
                 echo 'mvn --version, mvn install'
                 sh 'mvn --version'
-                sh 'mvn install'
+                sh 'mvn install -P production,sonar-coverage'
               }
             }
     }
