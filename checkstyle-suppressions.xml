@@ -14,5 +14,8 @@
     <suppress checks="JavadocPackage"
               files=".*"
               lines="0-9999"/>
+    <suppress checks="FinalParameters"
+              files=".*"
+              lines="0-9999"/>
 
 </suppressions>
