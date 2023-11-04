@@ -1,11 +1,10 @@
-package de.hbrs.se2.womm;
+package de.hbrs.se2.womm.selenium;
 
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SeleniumTest extends AbstractTestSelenium {
-
 
     @Test
     void testHBRS() {
@@ -15,4 +14,5 @@ public class SeleniumTest extends AbstractTestSelenium {
         // Verify
         assertThat(title).contains("h-brs");
     }
+
 }
