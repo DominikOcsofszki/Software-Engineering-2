@@ -5,8 +5,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.views.doing_HomepageStudentView_Dominik.MainLayout;
 
-@Route(value = "StelleAnzeigeErstellenView", layout = MainLayout.class)
-@PageTitle("StelleAnzeigeErstellenView")
-public class StelleAnzeigeErstellenView extends VerticalLayout {
+@Route(value = "xxx", layout = MainLayout.class)
+@PageTitle("xxx")
+public class xxx extends VerticalLayout {
 
 }

@@ -10,7 +10,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.theme.lumo.LumoUtility;
-import org.apache.catalina.webresources.FileResource;
+import de.hbrs.se2.womm.views.*;
+import de.hbrs.se2.womm.views.doing_HomepageStudentView_Dominik.*;
 
 public class MainLayout extends AppLayout {
 
@@ -39,8 +40,8 @@ public class MainLayout extends AppLayout {
 
     private void createDrawer() {
         addToDrawer(new VerticalLayout(
-                new RouterLink("DisplayView", JobProjectWorkshopDisplayView.class),
-                new RouterLink("DisplayView", HomepageStudentView.class),
+                new RouterLink("JobProjectWorkshopDisplayView", JobProjectWorkshopDisplayView.class),
+                new RouterLink("HomepageStudentView", HomepageStudentView.class),
                 new RouterLink("AboStudentView", AboStudentView.class),
                 new RouterLink("ApplicationView", ApplicationView.class),
                 new RouterLink("ApplicationsView", ApplicationsView.class),
