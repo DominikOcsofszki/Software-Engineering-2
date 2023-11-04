@@ -1,9 +1,7 @@
+package de.hbrs.se2.womm;
 /***
  * Testklasse Selenium
  */
-package de.hbrs.se2.womm;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,7 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-class SeleniumTestLocalTest {
+import static org.assertj.core.api.Assertions.assertThat;
+
+abstract class AbstractTestSelenium {
     WebDriver driver;
 
     @BeforeAll
@@ -31,15 +31,6 @@ class SeleniumTestLocalTest {
         driver.quit();
     }
 
-    // ToDo: Variable for localhost or tomcat(after it works)
-    /*@Test
-    void testLocal() {  //Run localy, if deployed on server, this test will fail
-        // Exercise
-        driver.get("http://localhost:8080");
-        String title = driver.getTitle().toLowerCase();
-        // Verify
-        assertThat(title).contains("w.o.m.m");
-    }*/
     @Test
     void testHBRS() {
         // Exercise
@@ -48,4 +39,5 @@ class SeleniumTestLocalTest {
         // Verify
         assertThat(title).contains("h-brs");
     }
+
 }
