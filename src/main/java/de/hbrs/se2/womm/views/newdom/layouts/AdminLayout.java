@@ -1,17 +1,20 @@
 package de.hbrs.se2.womm.views.newdom.layouts;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.i18n.LocaleChangeEvent;
-import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.RouterLink;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.*;
 import de.hbrs.se2.womm.views.newdom.HomepageStudentView;
 import de.hbrs.se2.womm.views.newdom.HomepageUnternehmenView;
 import de.hbrs.se2.womm.views.newdom.JobProjectWorkshopDisplayView;
 import de.hbrs.se2.womm.views.newdom.LoginViewDo;
 
-public class AdminLayout extends AbstractLayout implements LocaleChangeObserver {
+public class AdminLayout extends AbstractLayout  {
 
+    protected AdminLayout(SecurityService securityService) {
+        super.createHeaderWithLogoutButton(new Button("Log out", e -> securityService.logout()));
+    }
 
     @Override
     void createDrawer() {
@@ -35,8 +38,4 @@ public class AdminLayout extends AbstractLayout implements LocaleChangeObserver 
         ));
     }
 
-    @Override
-    public void localeChange(LocaleChangeEvent event) {
-
-    }
 }
