@@ -9,9 +9,12 @@ import de.hbrs.se2.womm.views.newdom.JobProjectWorkshopDisplayView;
 import de.hbrs.se2.womm.views.newdom.LoginViewDo;
 
 public class BothLayout extends AbstractLayout {
+
+
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
+                new RouterLink("TODO: Problem BOTH SEE ALL ITEMS", JobProjectWorkshopDisplayView.class),
                 new RouterLink("JobProjectWorkshopDisplayView", JobProjectWorkshopDisplayView.class),
                 new RouterLink("HomepageStudentView", HomepageStudentView.class),
                 new RouterLink("AboStudentView", AboStudentView.class),

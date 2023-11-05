@@ -6,13 +6,17 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.newdom.layouts.LoggedOutLayout;
 
 @AnonymousAllowed
 @Route(value = "logout", layout = LoggedOutLayout.class)
 @PageTitle("Preview")
 public class LogOut extends VerticalLayout {
-    public LogOut() {
+    private final SecurityService securityService;
+
+    public LogOut(SecurityService securityService) {
+        this.securityService = securityService;
         setUpBanner();
     }
 

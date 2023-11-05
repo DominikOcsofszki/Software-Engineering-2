@@ -7,8 +7,9 @@ import de.hbrs.se2.womm.views.newdom.HomepageStudentView;
 import de.hbrs.se2.womm.views.newdom.HomepageUnternehmenView;
 import de.hbrs.se2.womm.views.newdom.JobProjectWorkshopDisplayView;
 import de.hbrs.se2.womm.views.newdom.LoginViewDo;
-
 public class StudentLayout extends AbstractLayout {
+
+
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(

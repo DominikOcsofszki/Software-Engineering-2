@@ -11,6 +11,8 @@ import de.hbrs.se2.womm.views.newdom.JobProjectWorkshopDisplayView;
 import de.hbrs.se2.womm.views.newdom.LoginViewDo;
 
 public class AdminLayout extends AbstractLayout implements LocaleChangeObserver {
+
+
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(

@@ -10,6 +10,7 @@ import de.hbrs.se2.womm.views.newdom.LoginViewDo;
 
 public class UnternehmenLayout extends AbstractLayout {
 
+
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(

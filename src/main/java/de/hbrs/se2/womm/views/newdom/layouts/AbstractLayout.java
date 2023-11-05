@@ -1,10 +1,8 @@
 package de.hbrs.se2.womm.views.newdom.layouts;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -22,14 +20,11 @@ abstract class AbstractLayout extends AppLayout {
     private void createHeader() {
         H1 name = new H1("w.o.m.m.");
         Image logo = new Image("themes/theme_1/logo.png", "An image in the theme");
-        Button logout = new Button("Logout", event -> {
-            UI.getCurrent().getPage().setLocation("logout");
-        });
 
         logo.setWidth(50, Unit.PIXELS);
         logo.setHeight(50, Unit.PIXELS);
         logo.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.MEDIUM);
-        var header = new HorizontalLayout(new DrawerToggle(), logo, name, logout);
+        var header = new HorizontalLayout(new DrawerToggle(), logo, name);
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.setWidthFull();
         header.addClassNames(
