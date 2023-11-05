@@ -119,9 +119,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
-
-
     </dependencies>
 
 
@@ -144,7 +141,7 @@
                         <phase>${checkstyle-validation.var}</phase>
                         <inherited>true</inherited>
                         <configuration>
-<!--                            <failOnViolation>false</failOnViolation>-->
+                            <!--                            <failOnViolation>false</failOnViolation>-->
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
                         </configuration>
                         <goals>

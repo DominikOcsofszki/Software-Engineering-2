@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views;
+package de.hbrs.se2.womm.views.newdom;
 
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
@@ -6,14 +6,15 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
-import jakarta.annotation.security.RolesAllowed;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.views.newdom.layouts.LoggedOutLayout;
+import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
 
-@RolesAllowed({"UNTERNEHMEN","ADMIN"})
-@Route(value = "HomepageUnternehmenView", layout = UnternehmenLayout.class)
-@PageTitle("HomepageUnternehmenView")
-public class HomepageUnternehmenViewDo extends VerticalLayout {
-    public HomepageUnternehmenViewDo() {
+@AnonymousAllowed
+@Route(value = "Preview", layout = LoggedOutLayout.class)
+@PageTitle("Preview")
+public class PreviewDo extends VerticalLayout {
+    public PreviewDo() {
         setUpTitle();
         setUpHeader();
         setUpBanner();
@@ -22,16 +23,16 @@ public class HomepageUnternehmenViewDo extends VerticalLayout {
     }
 
     private void setUpTitle() {
-        H1 h1 = new H1("HomepageUnternehmenView");
+        H1 h1 = new H1("PREVIEW");
         add(h1);
     }
 
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
-        header.add(new H1("Profil bearbeiten"));
-        header.add(new H1("Icon"));
-        header.add(new H1("Start"));
-        header.add(new H1("Logout"));
+//        header.add(new H1("Profil bearbeiten"));
+//        header.add(new H1("Icon"));
+//        header.add(new H1("Start"));
+//        header.add(new H1("Logout"));
         add(header);
     }
 
@@ -43,11 +44,11 @@ public class HomepageUnternehmenViewDo extends VerticalLayout {
 
     private void seUpSearchFields() {
         HorizontalLayout searchFields = new HorizontalLayout();
-        searchFields.add(new H1("Dropdown-Employment"));
-        searchFields.add(new H1("Dropdown-Jobart"));
-        searchFields.add(new H1("Searchfield"));
-        searchFields.add(new H1("Searchfield-Button"));
-        searchFields.add(new H1("Remove-Filter-Button"));
+//        searchFields.add(new H1("Dropdown-Employment"));
+//        searchFields.add(new H1("Dropdown-Jobart"));
+//        searchFields.add(new H1("Searchfield"));
+//        searchFields.add(new H1("Searchfield-Button"));
+//        searchFields.add(new H1("Remove-Filter-Button"));
         add(searchFields);
     }
 

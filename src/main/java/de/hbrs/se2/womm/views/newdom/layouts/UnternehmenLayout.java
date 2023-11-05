@@ -1,8 +1,8 @@
-package de.hbrs.se2.womm.views.layouts;
+package de.hbrs.se2.womm.views.newdom.layouts;
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
-import de.hbrs.se2.womm.views.HomepageUnternehmenViewDo;
+import de.hbrs.se2.womm.views.newdom.HomepageUnternehmenViewDo;
 
 public class UnternehmenLayout extends AbstractLayout {
 
