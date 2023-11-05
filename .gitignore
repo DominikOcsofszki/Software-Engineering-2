@@ -8,3 +8,14 @@
 # Maven
 log/
 target/
+**/target/**
+
+# Vaadin
+
+frontend/
+.classpath
+.factorypath
+.project
+.settings
+.exit
+.sh
