@@ -12,8 +12,8 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = "HomepageUnternehmenView", layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN","ADMIN"})
 @PageTitle("HomepageUnternehmenView")
-public class HomepageUnternehmenViewDo extends VerticalLayout {
-    public HomepageUnternehmenViewDo() {
+public class HomepageUnternehmenView extends VerticalLayout {
+    public HomepageUnternehmenView() {
         setUpTitle();
         setUpHeader();
         setUpBanner();

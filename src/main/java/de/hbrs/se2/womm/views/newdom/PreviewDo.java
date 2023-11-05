@@ -8,7 +8,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.views.newdom.layouts.LoggedOutLayout;
-import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
 
 @AnonymousAllowed
 @Route(value = "Preview", layout = LoggedOutLayout.class)
@@ -23,7 +22,9 @@ public class PreviewDo extends VerticalLayout {
     }
 
     private void setUpTitle() {
-        H1 h1 = new H1("PREVIEW");
+        Translation translation = new Translation();
+        H1 h1 = new H1(translation.getTranslation("preview", translation.LOCALE_GER));
+//        H1 h1 = new H1("PREVIEW");
         add(h1);
     }
 
@@ -33,6 +34,7 @@ public class PreviewDo extends VerticalLayout {
 //        header.add(new H1("Icon"));
 //        header.add(new H1("Start"));
 //        header.add(new H1("Logout"));
+
         add(header);
     }
 

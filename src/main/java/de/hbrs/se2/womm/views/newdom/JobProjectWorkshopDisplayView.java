@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.doing_HomepageStudentView_Dominik;
+package de.hbrs.se2.womm.views.newdom;
 
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

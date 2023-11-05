@@ -17,10 +17,12 @@ public class LoginViewDo extends VerticalLayout {
 
         var login = new LoginForm();
         login.setAction("login");
-
-        add(new H1("w.o.o.m."),
+        login.setForgotPasswordButtonVisible(false);
+        add(
+                new H1("w.o.o.m."),
                 login
         );
 
     }
+
 }
