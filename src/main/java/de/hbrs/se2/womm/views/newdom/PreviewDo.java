@@ -13,7 +13,9 @@ import de.hbrs.se2.womm.views.newdom.layouts.LoggedOutLayout;
 @Route(value = "Preview", layout = LoggedOutLayout.class)
 @PageTitle("Preview")
 public class PreviewDo extends VerticalLayout {
+
     public PreviewDo() {
+
         setUpTitle();
         setUpHeader();
         setUpBanner();
@@ -22,9 +24,7 @@ public class PreviewDo extends VerticalLayout {
     }
 
     private void setUpTitle() {
-        Translation translation = new Translation();
-        H1 h1 = new H1(translation.getTranslation("preview", translation.LOCALE_GER));
-//        H1 h1 = new H1("PREVIEW");
+        H1 h1 = new H1("PREVIEW");
         add(h1);
     }
 

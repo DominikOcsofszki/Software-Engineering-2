@@ -4,18 +4,16 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.i18n.I18NProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = "HomepageStudentView", layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("HomepageStudentView")
 public class HomepageStudentView extends VerticalLayout {
-    public HomepageStudentView(@Autowired I18NProvider i18NProvider) {
+    public HomepageStudentView() {
         setUpTitle();
         setUpHeader();
         setUpBanner();
