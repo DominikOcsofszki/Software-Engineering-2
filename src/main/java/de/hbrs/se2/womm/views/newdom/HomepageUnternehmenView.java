@@ -6,14 +6,14 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
+import de.hbrs.se2.womm.views.newdom.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-@RolesAllowed({"STUDENT","ADMIN"})
-@Route(value = "HomepageStudentView", layout = StudentLayout.class)
-@PageTitle("HomepageStudentView")
-public class HomepageStudentViewDo extends VerticalLayout {
-    public HomepageStudentViewDo() {
+@Route(value = "HomepageUnternehmenView", layout = UnternehmenLayout.class)
+@RolesAllowed({"UNTERNEHMEN","ADMIN"})
+@PageTitle("HomepageUnternehmenView")
+public class HomepageUnternehmenViewDo extends VerticalLayout {
+    public HomepageUnternehmenViewDo() {
         setUpTitle();
         setUpHeader();
         setUpBanner();
@@ -22,7 +22,7 @@ public class HomepageStudentViewDo extends VerticalLayout {
     }
 
     private void setUpTitle() {
-        H1 h1 = new H1("UNTERNEHMEN");
+        H1 h1 = new H1("HomepageUnternehmenView");
         add(h1);
     }
 
