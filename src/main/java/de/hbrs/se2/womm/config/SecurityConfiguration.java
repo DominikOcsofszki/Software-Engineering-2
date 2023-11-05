@@ -29,7 +29,7 @@ public class SecurityConfiguration extends VaadinWebSecurity {
                         roles("STUDENT").build(),
                 User.withUsername("unternehmen")
                         .password("{noop}unternehmen").
-                        roles("UNTERNHEMEN").build(),
+                        roles("UNTERNEHMEN").build(),
                 User.withUsername("admin")
                         .password("{noop}admin").
                         roles("ADMIN").build()

@@ -25,7 +25,8 @@ public class PreviewDo extends VerticalLayout {
 
     private void setUpTitle() {
         H1 h1 = new H1("PREVIEW");
-        add(h1);
+        H1 h2 = new H1("Could be landingPage?");
+        add(h1, h2);
     }
 
     private void setUpHeader() {
