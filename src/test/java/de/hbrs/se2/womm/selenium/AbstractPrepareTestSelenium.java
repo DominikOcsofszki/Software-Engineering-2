@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-abstract class AbstractPrepareTestSelenium {
+public abstract class AbstractPrepareTestSelenium {
     WebDriver driver;
 
     @BeforeAll
@@ -26,6 +26,10 @@ abstract class AbstractPrepareTestSelenium {
     @AfterEach
     void teardown() {
         driver.quit();
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
 

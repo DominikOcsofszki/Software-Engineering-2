@@ -12,6 +12,8 @@ public class SeleniumTest extends AbstractPrepareTestSelenium {
         driver.get("https://www.h-brs.de/en");
         String title = driver.getTitle().toLowerCase();
         // Verify
+
+
         assertThat(title).contains("h-brs");
     }
 
