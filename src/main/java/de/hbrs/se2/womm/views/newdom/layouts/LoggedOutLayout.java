@@ -15,10 +15,10 @@ public class LoggedOutLayout extends AbstractLayout {
 
 
     void createDrawer() {
-        addToDrawer(new VerticalLayout(
-                new RouterLink("Login", LoginViewDo.class),
-                new RouterLink("Register - ToDo", LoginViewDo.class),
-                new RouterLink("Preview/LandingPage? ", PreviewDo.class)
-        ));
+//        addToDrawer(new VerticalLayout(
+//                new RouterLink("Login", LoginViewDo.class),
+//                new RouterLink("Register - ToDo", LoginViewDo.class),
+//                new RouterLink("Preview/LandingPage? ", PreviewDo.class)
+//        ));
     }
 }
