@@ -12,5 +12,4 @@ import jakarta.annotation.security.RolesAllowed;
 @PageTitle("LandingPageView")
 @RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
 public class LandingPageView extends VerticalLayout {
-
 }

@@ -11,4 +11,5 @@ import jakarta.annotation.security.RolesAllowed;
 @RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
 public class ApplicationView extends VerticalLayout {
 
+
 }
