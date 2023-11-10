@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>de.hbrs.se2</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>w.o.m.m.</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>w.o.m.m.</name>
     <description>w.o.m.m.</description>
