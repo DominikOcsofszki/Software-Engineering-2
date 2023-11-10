@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface NutzerTag extends JpaRepository<NutzerTag, Long> {
     List<NutzerTag> findNutzerTagByNutzer_NutzerID(long nutzerID);
+
+    List<NutzerTag> findNutzerTagByTag_TagID(long tagID);
 }
