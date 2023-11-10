@@ -18,7 +18,7 @@ public class Chat {
     private Integer chatId;
 
     @Lob
-    @Column(name = "chat_verlauf")
+    @Column(name = "chat_verlauf", columnDefinition = "bytea")
     private byte[] chatVerlauf;
 
     @ManyToOne
