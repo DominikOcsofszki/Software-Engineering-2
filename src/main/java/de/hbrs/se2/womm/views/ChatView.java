@@ -10,5 +10,4 @@ import jakarta.annotation.security.RolesAllowed;
 @PageTitle("ChatView")
 @RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
 public class ChatView extends VerticalLayout {
-
 }

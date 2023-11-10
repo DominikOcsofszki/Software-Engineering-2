@@ -33,7 +33,7 @@ public class Nutzer {
     private String nutzerOrt;
 
     @Lob
-    @Column(name = "nutzer_profilbild")
+    @Column(name = "nutzer_profilbild", columnDefinition = "bytea")
     private byte[] nutzerProfilbild;
 
 }
