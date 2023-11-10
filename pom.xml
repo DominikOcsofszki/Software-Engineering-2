@@ -15,6 +15,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>w.o.m.m.</name>
     <description>w.o.m.m.</description>
+    <packaging>war</packaging> <!-- changed to war for tomcat -->
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
