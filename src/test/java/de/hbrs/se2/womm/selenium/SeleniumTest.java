@@ -1,11 +1,7 @@
-//package de.hbrs.se2.womm.selenium;
-//
-//import org.junit.jupiter.api.Test;
-//
-//import static org.assertj.core.api.Assertions.assertThat;
-//
-//public class SeleniumTest extends AbstractPrepareTestSelenium {
-//
+package de.hbrs.se2.womm.selenium;
+
+public class SeleniumTest extends AbstractPrepareTestSelenium {
+
 //    @Test
 //    void testHBRS() {
 //        // Exercise
@@ -14,5 +10,5 @@
 //        // Verify
 //        assertThat(title).contains("h-brs");
 //    }
-//
-//}
+
+}
