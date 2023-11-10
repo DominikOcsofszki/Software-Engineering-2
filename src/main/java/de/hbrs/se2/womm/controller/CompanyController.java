@@ -1,7 +1,6 @@
 package de.hbrs.se2.womm.controller;
 
-import de.hbrs.se2.womm.dtos.CompanyRequest;
-import org.atmosphere.config.service.Get;
+import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class CompanyController {
     }
 
     @PatchMapping("/company/{id}")
-    public ResponseEntity<Void> updateCompany(@PathVariable String id, @RequestBody CompanyRequest request) {
+    public ResponseEntity<Void> updateCompany(@PathVariable String id, @RequestBody UnternehmenDTO request) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

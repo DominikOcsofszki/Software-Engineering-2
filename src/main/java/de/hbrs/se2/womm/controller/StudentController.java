@@ -1,6 +1,6 @@
 package de.hbrs.se2.womm.controller;
 
-import de.hbrs.se2.womm.dtos.StudentRequest;
+import de.hbrs.se2.womm.dtos.StudentDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class StudentController {
     }
 
     @PatchMapping("/student/{id}")
-    public ResponseEntity<Void> updateStudent(@PathVariable String id, @RequestBody StudentRequest request) {
+    public ResponseEntity<Void> updateStudent(@PathVariable String id, @RequestBody StudentDTO request) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
