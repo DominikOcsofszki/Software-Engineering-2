@@ -13,7 +13,7 @@ public class BothLayout extends AbstractLayout {
 
     protected BothLayout(SecurityService securityService) {
         super.createHeaderWithLogoutButton(new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
-                e -> securityService.logout()));
+                e -> securityService.logout()), true);
     }
 
     @Override

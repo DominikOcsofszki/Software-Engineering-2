@@ -12,7 +12,7 @@ public class StudentLayout extends AbstractLayout {
     protected StudentLayout(SecurityService securityService) {
         super.createHeaderWithLogoutButton(
                 new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
-                        e -> securityService.logout())
+                        e -> securityService.logout()), true
         );
     }
 
