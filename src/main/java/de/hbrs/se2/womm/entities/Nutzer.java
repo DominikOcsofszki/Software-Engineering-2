@@ -1,16 +1,20 @@
 package de.hbrs.se2.womm.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 @Entity
 @Table(name = "nutzer",schema = "se")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-public class Nutzer {
+public class Nutzer implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +40,39 @@ public class Nutzer {
     @Column(name = "nutzer_profilbild", columnDefinition = "bytea")
     private byte[] nutzerProfilbild;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return nutzerPasswort;
+    }
+
+    @Override
+    public String getUsername() {
+        return nutzerName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
 
