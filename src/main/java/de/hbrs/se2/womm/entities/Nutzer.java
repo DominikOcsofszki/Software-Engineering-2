@@ -14,11 +14,12 @@ import java.util.Collection;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(name = "nutzer_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
 public class Nutzer implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "nutzer_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "nutzer_id", columnDefinition = "serial")
     private Integer nutzerId;
 
     @Column(name = "nutzer_name", nullable = false)
@@ -36,7 +37,6 @@ public class Nutzer implements UserDetails {
     @Column(name = "nutzer_ort", nullable = false)
     private String nutzerOrt;
 
-    @Lob
     @Column(name = "nutzer_profilbild", columnDefinition = "bytea")
     private byte[] nutzerProfilbild;
 
