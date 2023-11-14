@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.newdom;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.html.*;
@@ -10,12 +11,12 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.views.newdom.layouts.LoggedOutLayout;
+import de.hbrs.se2.womm.views.*;
 import de.hbrs.se2.womm.views.newdom.layouts.UnternehmenLayout;
-import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
+
+import javax.management.Notification;
 
 @Route(value = "HomepageUnternehmenView", layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN","ADMIN"})
@@ -42,22 +43,31 @@ public class HomepageUnternehmenView extends AbstractView {
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
-        header.add(new Button("Create advertisement", new Icon(VaadinIcon.PLUS)));
-        header.add(new Button("View applications", new Icon(VaadinIcon.EYE)));
-        header.add(new Button("Notifications", new Icon(VaadinIcon.BELL)));
-        header.add(new Button("Chat", new Icon(VaadinIcon.COMMENTS_O)));
-        Button b = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
-        header.add(b);
-        header.add(new Button("Logout Firmname", new Icon(VaadinIcon.EXIT_O)));
+        Button b1 = new Button("Create advertisement", new Icon(VaadinIcon.PLUS));
+        b1.addClickListener( e -> UI.getCurrent().navigate(StelleAnzeigeErstellenView.class));
+        header.add(b1);
+        Button b2 = new Button("View applications", new Icon(VaadinIcon.EYE));
+        b2.addClickListener( e -> UI.getCurrent().navigate(ApplicationsView.class));
+        header.add(b2);
+        Button b3 = new Button("Notifications", new Icon(VaadinIcon.BELL));
+        b3.addClickListener( e -> UI.getCurrent().navigate(NotificationView.class));
+        header.add(b3);
+        Button b4 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
+        b4.addClickListener( e -> UI.getCurrent().navigate(ChatView.class));
+        header.add(b4);
+        Button b5 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
+        b5.addClickListener( e -> UI.getCurrent().navigate(CreateChangeStudentProfileView.class));
+        header.add(b5);
+        //header.add(new Button("Logout Firmname", new Icon(VaadinIcon.EXIT_O)));
         add(header);
         // Layout (letzten zwei buttons nach rechts)
-        b.getElement().getStyle().set("margin-left", "auto");
+        b5.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
     }
 
     private void setUpBanner() {
         VerticalLayout banner = new VerticalLayout();
-        Image i = new Image("themes/banner/banner.jpg","https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
+        Image i = new Image("themes/theme_1/banner.jpg","https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
         i.setWidth("100%");
         banner.add(i);
         add(banner);

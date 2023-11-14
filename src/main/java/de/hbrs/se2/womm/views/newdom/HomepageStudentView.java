@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.newdom;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
@@ -12,6 +13,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.views.ChatView;
+import de.hbrs.se2.womm.views.NotificationView;
+import de.hbrs.se2.womm.views.StelleAnzeigeErstellenView;
 import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
@@ -55,15 +59,23 @@ public class HomepageStudentView extends VerticalLayout {
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
-        header.add(new Button("View subscriptions", new Icon(VaadinIcon.EYE)));
-        header.add(new Button("Notifications", new Icon(VaadinIcon.BELL)));
-        header.add(new Button("Chat", new Icon(VaadinIcon.COMMENTS_O)));
-        Button b = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
-        header.add(b);
-        header.add(new Button("Logout Studentname", new Icon(VaadinIcon.EXIT_O)));
+        Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
+        //b1.addClickListener( e -> UI.getCurrent().navigate(SubscriptionsView.class));
+        header.add(b1);
+        Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
+        b2.addClickListener( e -> UI.getCurrent().navigate(NotificationView.class));
+        header.add(b2);
+        Button b3 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
+        b3.addClickListener( e -> UI.getCurrent().navigate(ChatView.class));
+        header.add(b3);
+        Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
+        b4.addClickListener( e -> UI.getCurrent().navigate(ChatView.class));
+        header.add(b4);
+
+        //header.add(new Button("Logout Studentname", new Icon(VaadinIcon.EXIT_O)));
         add(header);
         // Layout (letzten zwei buttons nach rechts)
-        b.getElement().getStyle().set("margin-left", "auto");
+        b4.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
     }
 
