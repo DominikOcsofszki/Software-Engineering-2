@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/users/companies")
 public class CompanyController {
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<Void> getAllCompanies() {
         return new ResponseEntity<>(HttpStatus.OK);
     }
