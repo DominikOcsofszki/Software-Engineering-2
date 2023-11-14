@@ -25,6 +25,8 @@ public class AuthenticationService {
                 .nutzerName(request.getUsername())
                 .nutzerMail(request.getEmail())
                 .nutzerPasswort(passwordEncoder.encode(request.getPassword()))
-                .nutzerOrt(request.getLocation()).build());
+                .nutzerOrt(request.getLocation())
+                .nutzerAktiv(true)
+                .build());
     }
 }
