@@ -13,6 +13,7 @@ public class StudentLayout extends AbstractLayout {
         super.createHeaderWithLogoutButton(
                 new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
                         e -> securityService.logout())
+                //b.getElement().getStyle().set("margin-top", "auto");
         );
     }
 

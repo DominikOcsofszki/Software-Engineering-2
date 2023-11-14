@@ -1,87 +1,55 @@
-package de.hbrs.se2.womm.views.newdom;
+package de.hbrs.se2.womm.views;
 
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
-import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Hr;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.views.ChatView;
-import de.hbrs.se2.womm.views.NotificationView;
-import de.hbrs.se2.womm.views.StelleAnzeigeErstellenView;
-import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
-import jakarta.annotation.security.RolesAllowed;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.views.newdom.layouts.LoggedOutLayout;
 
-@Route(value = "HomepageStudentView", layout = StudentLayout.class)
-@RolesAllowed({"STUDENT","ADMIN"})
-@PageTitle("HomepageStudentView")
-public class HomepageStudentView extends VerticalLayout {
-    private final SecurityService securityService;
+@AnonymousAllowed
+@Route(value = "UnternehmenPreviewView", layout = LoggedOutLayout.class)
+@PageTitle("Preview")
+public class UnternehmenPreviewView extends VerticalLayout{
 
-    public HomepageStudentView(SecurityService securityService) {
-        this.securityService = securityService;
-        //setUpTitle();
+    public UnternehmenPreviewView() {
         setUpHeader();
         setUpBanner();
         setUpSearchFields();
         setUpBigCompanyAnnouncement();
-
-        /*
-        String u = securityService.getAuthenticatedUser().getUsername();
-        Button logout = new Button("Log out " + u, e -> securityService.logout());
-
-        var header = new HorizontalLayout(new DrawerToggle(), logout);
-        add(header);
-         */
     }
 
-//    public HomepageStudentView() {
-//        setUpTitle();
-//        setUpHeader();
-//        setUpBanner();
-//        seUpSearchFields();
-//        setUpBigCompanyAnnouncement();
-//    }
-
-    /*
-    private void setUpTitle() {
-        H1 h1 = new H1("HomepageStudentView");
-        add(h1);
-    }*/
 
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
-        Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
-        //b1.addClickListener( e -> UI.getCurrent().navigate(SubscriptionsView.class));
-        header.add(b1);
-        Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
-        b2.addClickListener( e -> UI.getCurrent().navigate(NotificationView.class));
-        header.add(b2);
-        Button b3 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
-        b3.addClickListener( e -> UI.getCurrent().navigate(ChatView.class));
-        header.add(b3);
-        Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
-        b4.addClickListener( e -> UI.getCurrent().navigate(ChatView.class));
-        header.add(b4);
-
-        //header.add(new Button("Logout Studentname", new Icon(VaadinIcon.EXIT_O)));
+        header.add(new Button("Create advertisement", new Icon(VaadinIcon.PLUS)));
+        header.add(new Button("View applications", new Icon(VaadinIcon.EYE)));
+        header.add(new Button("Notifications", new Icon(VaadinIcon.BELL)));
+        header.add(new Button("Chat", new Icon(VaadinIcon.COMMENTS_O)));
+        Button b = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
+        header.add(b);
+        header.add(new Button("Logout Firmname", new Icon(VaadinIcon.EXIT_O)));
         add(header);
         // Layout (letzten zwei buttons nach rechts)
-        b4.getElement().getStyle().set("margin-left", "auto");
+        b.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
     }
 
     private void setUpBanner() {
         VerticalLayout banner = new VerticalLayout();
-        Image i = new Image("themes/theme_1/banner.jpg","https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
+        Image i = new Image("themes/banner/banner.jpg","https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
         i.setWidth("100%");
         banner.add(i);
         add(banner);
@@ -116,7 +84,6 @@ public class HomepageStudentView extends VerticalLayout {
 
         add(searchFields);
     }
-
     private void setUpBigCompanyAnnouncement() {
         VerticalLayout searchResults = new VerticalLayout();
         HorizontalLayout bigCompanyAnnouncement = new HorizontalLayout();

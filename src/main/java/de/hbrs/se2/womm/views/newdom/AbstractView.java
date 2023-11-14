@@ -12,9 +12,9 @@ public abstract class AbstractView extends VerticalLayout {
     protected AbstractView(SecurityService securityService) {
         this.securityService = securityService;
         String username = securityService.getAuthenticatedUser().getUsername();
-        Button logout = new Button("Log out " + username, e -> securityService.logout());
-        var header = new HorizontalLayout(new DrawerToggle(), logout);
-        add(header);
+        //Button logout = new Button("Log out " + username, e -> securityService.logout());
+        //var header = new HorizontalLayout(new DrawerToggle(), logout);
+       // add(header);
     }
 
 
