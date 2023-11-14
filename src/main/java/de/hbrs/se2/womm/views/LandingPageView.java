@@ -75,9 +75,9 @@ public class LandingPageView extends VerticalLayout {
     private VerticalLayout createHeroSection() {
         VerticalLayout heroSection = new VerticalLayout();
         heroSection.setAlignItems(FlexComponent.Alignment.CENTER);
-        Image heroImage = new Image("themes/theme_1/Womm_people_round.jpg", "");
+        Image heroImage = new Image("themes/theme_1/Hiring_pic.jpg", "");
         heroImage.setWidth("500px");
-        heroImage.setHeight("300px");
+        heroImage.setHeight("400px");
         heroSection.add(heroImage);
         return heroSection;
     }
