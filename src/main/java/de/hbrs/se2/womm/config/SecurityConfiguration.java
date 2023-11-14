@@ -18,9 +18,17 @@ public class SecurityConfiguration extends VaadinWebSecurity {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        APIRequestMatcher aPIRequestMatcher = new APIRequestMatcher();
+        http.authorizeHttpRequests(urlRegistry -> {
+            urlRegistry.requestMatchers(aPIRequestMatcher::matches)
+                    .permitAll();
+        });
         super.configure(http);
         setLoginView(http, LoginViewDo.class);
     }
+
+
+
 
     //ToDo Connect to DB
     @Bean
