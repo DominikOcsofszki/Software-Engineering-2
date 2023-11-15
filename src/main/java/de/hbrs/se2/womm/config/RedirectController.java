@@ -7,14 +7,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@RequestMapping("tmpDelete")
+@RequestMapping("")
 public class RedirectController {
 
     @GetMapping("")
     public RedirectView redirectWithUsingRedirectView(RedirectAttributes attributes) {
-        attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
-        //ToDo adding Security for redirecting for each different user
-        return new RedirectView("vaadin/login");
+        return new RedirectView("vaadin/");
     }
 
 }
