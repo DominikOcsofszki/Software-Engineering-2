@@ -45,7 +45,7 @@ public class UHomepageUnternehmenView extends VerticalLayout {
         b4.addClickListener( e -> UI.getCurrent().navigate(UChatView.class));
         header.add(b4);
         Button b5 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
-        b5.addClickListener( e -> UI.getCurrent().navigate(SCreateChangeStudentProfileView.class));
+        b5.addClickListener( e -> UI.getCurrent().navigate(UEditFirmProfileDisplayView.class));
         header.add(b5);
         //header.add(new Button("Logout Firmname", new Icon(VaadinIcon.EXIT_O)));
         add(header);
