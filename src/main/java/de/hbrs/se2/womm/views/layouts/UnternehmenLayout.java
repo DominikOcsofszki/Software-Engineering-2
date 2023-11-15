@@ -20,15 +20,16 @@ public class UnternehmenLayout extends AbstractLayout {
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
-                new RouterLink("JobProjectWorkshopDisplayView", SJobProjectWorkshopDisplayView.class),
-                new RouterLink("ApplicationsView", UApplicationsView.class),
-                new RouterLink("EditFirmProfileDisplayView", UEditFirmProfileDisplayView.class),
-                new RouterLink("HomepageUnternehmenView", UHomepageUnternehmenView.class),
-                new RouterLink("StelleAnzeigeErstellenView", UStelleAnzeigeErstellenView.class),
-                new RouterLink("StudentProfileDisplayView", StudentProfileDisplayView.class),
-                new RouterLink("ApplicationView", UApplicationView.class),
-                new RouterLink("ChatView", UChatView.class),
-                new RouterLink("FirmProfileDisplayView", UFirmProfileDisplayView.class)
+
+                new RouterLink("UApplicationView ", UApplicationView.class),
+                new RouterLink("UApplicationsView ", UApplicationsView.class),
+                new RouterLink("UChatView ", UChatView.class),
+                new RouterLink("UEditFirmProfileDisplayView ", UEditFirmProfileDisplayView.class),
+                new RouterLink("UFirmProfileDisplayView ", UFirmProfileDisplayView.class),
+                new RouterLink("UHomepageUnternehmenView ", UHomepageUnternehmenView.class),
+                new RouterLink("UStelleAnzeigeErstellenView ", UStelleAnzeigeErstellenView.class),
+                new RouterLink("UUnternehmenPreviewView ", UUnternehmenPreviewView.class)
+
         ));
     }
 }
