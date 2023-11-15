@@ -45,7 +45,7 @@ public class UFirmProfileDisplayView extends VerticalLayout {
         editButton.addClickListener(e -> {
             // Logic to navigate to the edit profile view
 //            getUI().ifPresent(ui -> ui.navigate("UEditFirmProfileDisplayView"));
-            getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.EditFirmProfileDisplay));
+            getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UEditFirmProfileDisplayView));
         });
         add(editButton);
     }
