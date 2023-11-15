@@ -53,7 +53,7 @@ public class HomepageUnternehmenView extends AbstractView {
         b3.addClickListener( e -> UI.getCurrent().navigate(NotificationView.class));
         header.add(b3);
         Button b4 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
-        b4.addClickListener( e -> UI.getCurrent().navigate(ChatView.class));
+        b4.addClickListener( e -> UI.getCurrent().navigate(UChatView.class));
         header.add(b4);
         Button b5 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
         b5.addClickListener( e -> UI.getCurrent().navigate(CreateChangeStudentProfileView.class));

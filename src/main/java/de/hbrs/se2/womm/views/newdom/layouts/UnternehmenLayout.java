@@ -26,9 +26,9 @@ public class UnternehmenLayout extends AbstractLayout {
                 new RouterLink("HomepageUnternehmenView", HomepageUnternehmenView.class),
                 new RouterLink("StelleAnzeigeErstellenView", StelleAnzeigeErstellenView.class),
                 new RouterLink("StudentProfileDisplayView", StudentProfileDisplayView.class),
-                new RouterLink("---ApplicationView", ApplicationView.class),
-                new RouterLink("---ChatView", ChatView.class),
-                new RouterLink("---FirmProfileDisplayView", FirmProfileDisplayView.class)
+                new RouterLink("ApplicationView", UApplicationView.class),
+                new RouterLink("ChatView", UChatView.class),
+                new RouterLink("FirmProfileDisplayView", UFirmProfileDisplayView.class)
         ));
     }
 }

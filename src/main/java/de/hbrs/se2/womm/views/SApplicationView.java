@@ -3,12 +3,12 @@ package de.hbrs.se2.womm.views;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import de.hbrs.se2.womm.views.newdom.layouts.BothLayout;
+import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-@Route(value = "ApplicationView", layout = BothLayout.class)
+@Route(value = "SApplicationView", layout = StudentLayout.class)
 @PageTitle("ApplicationView")
-@RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
-public class ApplicationView extends VerticalLayout {
+@RolesAllowed({ "ADMIN", "STUDENT"})
+public class SApplicationView extends VerticalLayout {
 
 }

@@ -6,18 +6,18 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.PWA;
-import de.hbrs.se2.womm.views.newdom.layouts.BothLayout;
+import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-@Route(value = "FirmProfileDisplayView", layout = BothLayout.class)
+@Route(value = "UFirmProfileDisplayView", layout = StudentLayout.class)
 @PageTitle("FirmProfileDisplayView")
 @RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
-public class FirmProfileDisplayView extends VerticalLayout {
-    public FirmProfileDisplayView() {
+public class UFirmProfileDisplayView extends VerticalLayout {
+    public UFirmProfileDisplayView() {
         // Header
         H1 header = new H1("Firm Profile");
         add(header);
+
 
         // Banner
         Div banner = new Div();

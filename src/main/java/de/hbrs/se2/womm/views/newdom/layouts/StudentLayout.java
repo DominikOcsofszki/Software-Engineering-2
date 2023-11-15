@@ -24,9 +24,9 @@ public class StudentLayout extends AbstractLayout {
                 new RouterLink("AboStudentView", AboStudentView.class),
                 new RouterLink("CreateChangeStudentProfileView", CreateChangeStudentProfileView.class),
                 new RouterLink("NotificationView", NotificationView.class),
-                new RouterLink("---ApplicationView", ApplicationView.class),
-                new RouterLink("---ChatView", ChatView.class),
-                new RouterLink("---FirmProfileDisplayView", FirmProfileDisplayView.class)
+                new RouterLink("ApplicationView", SApplicationView.class),
+                new RouterLink("ChatView", SChatView.class),
+                new RouterLink("FirmProfileDisplayView", SFirmProfileDisplayView.class)
         ));
     }
 }
