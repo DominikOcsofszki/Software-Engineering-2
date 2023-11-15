@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.newdom.layouts;
+package de.hbrs.se2.womm.views.layouts;
 
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -8,11 +8,9 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.theme.lumo.LumoUtility;
-//import org.springdoc.core.service.SecurityService;
 
 abstract class AbstractLayout extends AppLayout {
     HorizontalLayout header = new HorizontalLayout();
-    //    H1 name = new H1("w.o.m.m.");
     Image nameImage = new Image("themes/theme_1/Womm_text_logo.png", "An image in the theme");
 
     Image logo = new Image("themes/theme_1/logo.png", "An image in the theme");
@@ -28,7 +26,7 @@ abstract class AbstractLayout extends AppLayout {
         if (withMenu) this.header.add(new DrawerToggle());
 //        this.header.add(name,logo);
         this.header.add(nameImage, logo);
-        if(logout != null)this.header.add(logout);
+        if (logout != null) this.header.add(logout);
         addToNavbar(header);
     }
 
@@ -55,6 +53,4 @@ abstract class AbstractLayout extends AppLayout {
 
     void createDrawer() {
     }
-
-    ;
 }

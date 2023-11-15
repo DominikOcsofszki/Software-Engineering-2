@@ -19,3 +19,15 @@ target/
 .exit
 .sh
 my-tools
+
+frontend/generated/**
+
+node_modules/
+package-lock.json
+package.json
+src/main/dev-bundle/
+tsconfig.json
+types.d.ts
+vite.config.ts
+vite.generated.ts
+frontend/index.html
