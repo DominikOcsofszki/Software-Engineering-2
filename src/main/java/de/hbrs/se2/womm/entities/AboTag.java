@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Table(name = "abo_tag",schema = "se")
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 public class AboTag {
 
     @Id
@@ -28,5 +29,8 @@ public class AboTag {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
+    public AboTag() {
+
+    }
 }
 

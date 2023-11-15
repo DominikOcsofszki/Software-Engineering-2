@@ -1,13 +1,14 @@
 package de.hbrs.se2.womm.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "abo_student_unternehmen", schema = "se")
 public class AboStudentUnternehmen {
@@ -27,5 +28,9 @@ public class AboStudentUnternehmen {
     @ManyToOne
     @JoinColumn(name = "unternehmen_id")
     private Unternehmen unternehmen;
+
+    public AboStudentUnternehmen() {
+
+    }
 }
 
