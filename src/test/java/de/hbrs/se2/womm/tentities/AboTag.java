@@ -1,10 +1,10 @@
-package de.hbrs.se2.womm.entities;
+package de.hbrs.se2.womm.tentities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "abo_tag",schema = "se")
+@Table(name = "abo_tag",schema = "test")
 @Getter
 @Setter
 @AllArgsConstructor

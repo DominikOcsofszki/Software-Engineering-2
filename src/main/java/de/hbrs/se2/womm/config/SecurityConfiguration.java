@@ -1,7 +1,7 @@
 package de.hbrs.se2.womm.config;
 
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
-import de.hbrs.se2.womm.views.newdom.LoginViewDo;
+import de.hbrs.se2.womm.views.LoginView;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,7 +26,7 @@ public class SecurityConfiguration extends VaadinWebSecurity {
                     .permitAll();
         });
         super.configure(http);
-        setLoginView(http, LoginViewDo.class);
+        setLoginView(http, LoginView.class);
     }
 
 
