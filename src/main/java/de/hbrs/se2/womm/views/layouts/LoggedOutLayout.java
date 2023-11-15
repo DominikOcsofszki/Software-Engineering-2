@@ -7,4 +7,10 @@ public class LoggedOutLayout extends AbstractLayout {
         super.createHeaderWithLogoutButton(null, false);
     }
 
+
+
+//                    new RouterLink("LandingPageView ",LandingPageView .class),
+//                new RouterLink("LoginView ",LoginView .class),
+//                new RouterLink("RegistrierungStudentView ",RegistrierungStudentView .class),
+
 }
