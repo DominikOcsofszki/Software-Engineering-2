@@ -11,8 +11,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-import de.hbrs.se2.womm.views.newdom.LoginViewDo;
-import de.hbrs.se2.womm.views.newdom.layouts.LoggedOutLayout;
+import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = "LandingPageView", layout = LoggedOutLayout.class)
@@ -117,13 +116,13 @@ public class LandingPageView extends VerticalLayout {
         HorizontalLayout registrationSection = new HorizontalLayout();
 
             Button buttonReg = new Button("SignUp");
-            buttonReg.addClickListener( e -> UI.getCurrent().navigate(LoginViewDo.class));
+            buttonReg.addClickListener( e -> UI.getCurrent().navigate(LoginView.class));
             buttonReg.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
             buttonReg.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             registrationSection.add(buttonReg);
 
             Button buttonLog = new Button("LogIn");
-            buttonLog.addClickListener( e -> UI.getCurrent().navigate(LoginViewDo.class));
+            buttonLog.addClickListener( e -> UI.getCurrent().navigate(LoginView.class));
             buttonLog.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
             buttonLog.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             registrationSection.add(buttonLog);

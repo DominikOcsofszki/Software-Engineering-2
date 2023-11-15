@@ -6,8 +6,7 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
-import de.hbrs.se2.womm.views.newdom.layouts.UnternehmenLayout;
+import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = "UFirmProfileDisplayView", layout = UnternehmenLayout.class)
@@ -44,7 +43,8 @@ public class UFirmProfileDisplayView extends VerticalLayout {
         Button editButton = new Button("Edit Profile");
         editButton.addClickListener(e -> {
             // Logic to navigate to the edit profile view
-            getUI().ifPresent(ui -> ui.navigate("UEditFirmProfileDisplayView"));
+//            getUI().ifPresent(ui -> ui.navigate("UEditFirmProfileDisplayView"));
+            getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.EditFirmProfileDisplay));
         });
         add(editButton);
     }
