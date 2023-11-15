@@ -12,9 +12,10 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
+import de.hbrs.se2.womm.views.layouts.ROUTING;
 import jakarta.annotation.security.RolesAllowed;
 
-@Route(value = "LandingPageView", layout = LoggedOutLayout.class)
+@Route(value = ROUTING.ALL.LandingPageView, layout = LoggedOutLayout.class)
 @RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
 @AnonymousAllowed
 @PageTitle("LandingPageView")

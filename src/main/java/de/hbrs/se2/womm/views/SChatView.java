@@ -3,10 +3,11 @@ package de.hbrs.se2.womm.views;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-@Route(value = "SChatView", layout = StudentLayout.class)
+@Route(value = ROUTING.STUDENT.SChatView, layout = StudentLayout.class)
 @RolesAllowed({ "ADMIN", "STUDENT"})
 @PageTitle("ChatView")
 public class SChatView extends VerticalLayout {

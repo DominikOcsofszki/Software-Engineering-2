@@ -7,15 +7,15 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-//@AnonymousAllowed
-@Route(value = "SStudentProfileDisplayView", layout = StudentLayout.class)
+@Route(value = ROUTING.STUDENT.SStudentProfileDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("StudentProfileDisplayView")
-public class StudentProfileDisplayView extends VerticalLayout {
-    public StudentProfileDisplayView() {
+public class SStudentProfileDisplayView extends VerticalLayout {
+    public SStudentProfileDisplayView() {
 
         Header();
         Profil();

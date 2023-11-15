@@ -14,8 +14,9 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
+import de.hbrs.se2.womm.views.layouts.ROUTING;
 
-@Route(value = "UUnternehmenPreviewView", layout = LoggedOutLayout.class)
+@Route(value = ROUTING.UNTERNEHMEN.UUnternehmenPreviewView, layout = LoggedOutLayout.class)
 @AnonymousAllowed
 @PageTitle("Preview")
 public class UUnternehmenPreviewView extends VerticalLayout{
