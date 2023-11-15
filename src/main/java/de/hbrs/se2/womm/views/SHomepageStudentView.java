@@ -31,7 +31,7 @@ public class SHomepageStudentView extends VerticalLayout {
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
         Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
-        //b1.addClickListener( e -> UI.getCurrent().navigate(SubscriptionsView.class));
+        b1.addClickListener( e -> UI.getCurrent().navigate(SAboStudentView.class));
         header.add(b1);
         Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
         b2.addClickListener( e -> UI.getCurrent().navigate(SNotificationView.class));
@@ -40,7 +40,7 @@ public class SHomepageStudentView extends VerticalLayout {
         b3.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
         header.add(b3);
         Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
-        b4.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
+        b4.addClickListener( e -> UI.getCurrent().navigate(SCreateChangeStudentProfileView.class));
         header.add(b4);
 
         //header.add(new Button("Logout Studentname", new Icon(VaadinIcon.EXIT_O)));
