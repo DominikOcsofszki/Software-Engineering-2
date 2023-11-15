@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.tentities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import java.util.Date;
 @Table(name = "unternehmen",schema = "test")
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 public class Unternehmen {
 
     @Id
@@ -32,5 +33,8 @@ public class Unternehmen {
     @JoinColumn(name = "nutzer_id")
     private Nutzer nutzer;
 
+    public Unternehmen() {
+
+    }
 }
 

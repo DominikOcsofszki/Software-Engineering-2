@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.tentities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Table(name = "bewerbung",schema = "test")
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 public class Bewerbung {
 
     @Id
@@ -32,4 +33,7 @@ public class Bewerbung {
     @JoinColumn(name = "student_id")
     private Student student;
 
+    public Bewerbung() {
+
+    }
 }

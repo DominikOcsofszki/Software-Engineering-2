@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.tentities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Table(name = "tag",schema = "test")
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 public class Tag {
 
     @Id
@@ -20,4 +21,7 @@ public class Tag {
     @Column(name = "tag_text", nullable = false)
     private String tagText;
 
+    public Tag() {
+
+    }
 }
