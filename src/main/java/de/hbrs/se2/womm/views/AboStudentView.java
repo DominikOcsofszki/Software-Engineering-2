@@ -14,8 +14,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.lumo.LumoUtility;
-import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
@@ -24,7 +22,7 @@ import jakarta.annotation.security.RolesAllowed;
 @PageTitle("AboStudentView")
 public class AboStudentView extends VerticalLayout {
 
-    public AboStudentView(SecurityService securityService) {
+    public AboStudentView() {
         setUpSearchFields();
         setUpNotification();
     }

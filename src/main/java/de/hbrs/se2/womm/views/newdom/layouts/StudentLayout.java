@@ -5,7 +5,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.*;
-import de.hbrs.se2.womm.views.newdom.HomepageStudentView;
+import de.hbrs.se2.womm.views.HomepageStudentView;
 public class StudentLayout extends AbstractLayout {
 
 
