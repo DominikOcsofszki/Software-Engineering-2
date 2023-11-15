@@ -19,13 +19,15 @@ public class StudentLayout extends AbstractLayout {
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
-                new RouterLink("HomepageStudentView", SHomepageStudentView.class),
-                new RouterLink("AboStudentView", SAboStudentView.class),
-                new RouterLink("CreateChangeStudentProfileView", SCreateChangeStudentProfileView.class),
-                new RouterLink("NotificationView", SNotificationView.class),
-                new RouterLink("ApplicationView", SApplicationView.class),
-                new RouterLink("ChatView", SChatView.class),
-                new RouterLink("FirmProfileDisplayView", SFirmProfileDisplayView.class)
+                new RouterLink("SAboStudentView ", SAboStudentView.class),
+                new RouterLink("SApplicationView ", SApplicationView.class),
+                new RouterLink("SChatView ", SChatView.class),
+                new RouterLink("SCreateChangeStudentProfileView ", SCreateChangeStudentProfileView.class),
+                new RouterLink("SFirmProfileDisplayView ", SFirmProfileDisplayView.class),
+                new RouterLink("SHomepageStudentView ", SHomepageStudentView.class),
+                new RouterLink("SJobProjectWorkshopDisplayView ", SJobProjectWorkshopDisplayView.class),
+                new RouterLink("SNotificationView ", SNotificationView.class),
+                new RouterLink("SStudentProfileDisplayView ", SStudentProfileDisplayView.class)
         ));
     }
 }
