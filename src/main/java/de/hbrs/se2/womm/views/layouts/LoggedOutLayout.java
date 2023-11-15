@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.newdom.layouts;
+package de.hbrs.se2.womm.views.layouts;
 
 public class LoggedOutLayout extends AbstractLayout {
 

@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.newdom.layouts;
+package de.hbrs.se2.womm.views.layouts;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
