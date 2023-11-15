@@ -39,7 +39,7 @@ public class UHomepageUnternehmenView extends VerticalLayout {
         b2.addClickListener( e -> UI.getCurrent().navigate(UApplicationsView.class));
         header.add(b2);
         Button b3 = new Button("Notifications", new Icon(VaadinIcon.BELL));
-        b3.addClickListener( e -> UI.getCurrent().navigate(SNotificationView.class));
+        b3.addClickListener( e -> UI.getCurrent().navigate(UNotificationView.class));
         header.add(b3);
         Button b4 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
         b4.addClickListener( e -> UI.getCurrent().navigate(UChatView.class));

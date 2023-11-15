@@ -30,6 +30,7 @@ public class ROUTING {
         public static final String UHomepageUnternehmenView = "UHomepageUnternehmenView";
         public static final String UStelleAnzeigeErstellenView = "UStelleAnzeigeErstellenView";
         public static final String UUnternehmenPreviewView = "UUnternehmenPreviewView";
+        public static final String UNotificationView = "UNotificationView";
     }
 }
 
