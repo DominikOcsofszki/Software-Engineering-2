@@ -13,6 +13,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
@@ -58,7 +59,8 @@ public class UNotificationView extends VerticalLayout {
         notification.setMargin(true);
         notification.setAlignItems(Alignment.STRETCH);
 
-        Image image = new Image("/image/myimage.png", "Alternative image text");
+        Image image = ASSETS.buildPlaceholder(100,100);
+//        Image image = new Image("/image/myimage.png", "Alternative image text"); //ToDo delete
         notification.add(image);
 
         notification1.add(new H1("Company Name"));
