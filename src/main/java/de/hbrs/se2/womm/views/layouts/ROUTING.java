@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views;
+package de.hbrs.se2.womm.views.layouts;
 
 public class ROUTING {
     static public class STUDENT {
