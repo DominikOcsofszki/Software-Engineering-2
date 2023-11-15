@@ -11,8 +11,8 @@ import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = "UFirmProfileDisplayView", layout = UnternehmenLayout.class)
-@PageTitle("FirmProfileDisplayView")
 @RolesAllowed({"UNTERNEHMEN", "ADMIN"})
+@PageTitle("FirmProfileDisplayView")
 public class UFirmProfileDisplayView extends VerticalLayout {
     public UFirmProfileDisplayView() {
         // Header

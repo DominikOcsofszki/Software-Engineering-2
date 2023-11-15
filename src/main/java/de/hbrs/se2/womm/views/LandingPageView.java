@@ -15,9 +15,9 @@ import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = "LandingPageView", layout = LoggedOutLayout.class)
+@RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
 @AnonymousAllowed
 @PageTitle("LandingPageView")
-@RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
 public class LandingPageView extends VerticalLayout {
 
     public LandingPageView() {

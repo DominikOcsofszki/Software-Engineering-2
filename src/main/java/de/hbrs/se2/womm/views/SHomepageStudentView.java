@@ -11,46 +11,41 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
+import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-@Route(value = "HomepageUnternehmenView", layout = UnternehmenLayout.class)
-@RolesAllowed({"UNTERNEHMEN","ADMIN"})
-@PageTitle("HomepageUnternehmenView")
+@Route(value = "SHomepageStudentView", layout = StudentLayout.class)
+@RolesAllowed({"STUDENT","ADMIN"})
+@PageTitle("HomepageStudentView")
+public class SHomepageStudentView extends VerticalLayout {
 
-public class HomepageUnternehmenView extends VerticalLayout {
-    public HomepageUnternehmenView() {
+    public SHomepageStudentView() {
         setUpHeader();
         setUpBanner();
-
         setUpSearchFields();
         setUpBigCompanyAnnouncement();
     }
 
-
-
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
-        Button b1 = new Button("Create advertisement", new Icon(VaadinIcon.PLUS));
-        b1.addClickListener( e -> UI.getCurrent().navigate(StelleAnzeigeErstellenView.class));
+        Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
+        //b1.addClickListener( e -> UI.getCurrent().navigate(SubscriptionsView.class));
         header.add(b1);
-        Button b2 = new Button("View applications", new Icon(VaadinIcon.EYE));
-        b2.addClickListener( e -> UI.getCurrent().navigate(ApplicationsView.class));
+        Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
+        b2.addClickListener( e -> UI.getCurrent().navigate(SNotificationView.class));
         header.add(b2);
-        Button b3 = new Button("Notifications", new Icon(VaadinIcon.BELL));
-        b3.addClickListener( e -> UI.getCurrent().navigate(NotificationView.class));
+        Button b3 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
+        b3.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
         header.add(b3);
-        Button b4 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
-        b4.addClickListener( e -> UI.getCurrent().navigate(UChatView.class));
+        Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
+        b4.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
         header.add(b4);
-        Button b5 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
-        b5.addClickListener( e -> UI.getCurrent().navigate(CreateChangeStudentProfileView.class));
-        header.add(b5);
-        //header.add(new Button("Logout Firmname", new Icon(VaadinIcon.EXIT_O)));
+
+        //header.add(new Button("Logout Studentname", new Icon(VaadinIcon.EXIT_O)));
         add(header);
         // Layout (letzten zwei buttons nach rechts)
-        b5.getElement().getStyle().set("margin-left", "auto");
+        b4.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
     }
 

@@ -7,8 +7,8 @@ import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = "SApplicationView", layout = StudentLayout.class)
-@PageTitle("ApplicationView")
 @RolesAllowed({ "ADMIN", "STUDENT"})
+@PageTitle("ApplicationView")
 public class SApplicationView extends VerticalLayout {
 
 }

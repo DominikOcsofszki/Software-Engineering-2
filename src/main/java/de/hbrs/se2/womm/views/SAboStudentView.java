@@ -17,12 +17,12 @@ import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-@Route(value = "AboStudentView", layout = StudentLayout.class)
+@Route(value = "SAboStudentView", layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("AboStudentView")
-public class AboStudentView extends VerticalLayout {
+public class SAboStudentView extends VerticalLayout {
 
-    public AboStudentView() {
+    public SAboStudentView() {
         setUpSearchFields();
         setUpNotification();
     }

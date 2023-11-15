@@ -9,8 +9,8 @@ import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = "SFirmProfileDisplayView", layout = StudentLayout.class)
-@PageTitle("FirmProfileDisplayView")
 @RolesAllowed({ "ADMIN", "STUDENT"})
+@PageTitle("FirmProfileDisplayView")
 public class SFirmProfileDisplayView extends VerticalLayout {
     public SFirmProfileDisplayView() {
         // Header

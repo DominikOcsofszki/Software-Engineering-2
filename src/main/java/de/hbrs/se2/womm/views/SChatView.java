@@ -7,7 +7,7 @@ import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = "SChatView", layout = StudentLayout.class)
-@PageTitle("ChatView")
 @RolesAllowed({ "ADMIN", "STUDENT"})
+@PageTitle("ChatView")
 public class SChatView extends VerticalLayout {
 }

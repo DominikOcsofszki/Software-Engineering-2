@@ -6,9 +6,9 @@ import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-@Route(value = "ApplicationsView", layout = UnternehmenLayout.class)
+@Route(value = "UEditFirmProfileDisplayView", layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN","ADMIN"})
-@PageTitle("ApplicationsView")
-public class ApplicationsView extends VerticalLayout {
+@PageTitle("EditFirmProfileDisplayView")
+public class UEditFirmProfileDisplayView extends VerticalLayout {
 
 }
