@@ -11,6 +11,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -29,7 +30,8 @@ public class UFirmProfileDisplayView extends VerticalLayout {
         // Logo, Company Name, Subscribe and Chat Buttons
         HorizontalLayout logoAndSubscribeLayout = new HorizontalLayout();
         Div logoAndName = new Div();
-        Image companyLogo = new Image("themes/theme_1/logo_placeholder.png", "");
+        Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");
+        // Image companyLogo = new Image("themes/theme_1/logo_placeholder.png", "");
         companyLogo.setWidth("150px"); // Adjust the width as needed
         logoAndName.add(companyLogo);
         logoAndName.add(new H2("Firm Name")); // Replace with the actual company name
