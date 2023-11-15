@@ -11,7 +11,7 @@ import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = "SFirmProfileDisplayView", layout = StudentLayout.class)
 @PageTitle("FirmProfileDisplayView")
-@RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
+@RolesAllowed({ "ADMIN", "STUDENT"})
 public class SFirmProfileDisplayView extends VerticalLayout {
     public SFirmProfileDisplayView() {
         // Header
@@ -22,7 +22,7 @@ public class SFirmProfileDisplayView extends VerticalLayout {
         // Banner
         Div banner = new Div();
         banner.addClassName("company-banner");
-        Image companyLogo = new Image("themes/theme1/womm_text_logo.png", "");
+        Image companyLogo = new Image("themes/theme_1/Womm_text_logo.png", "");
         companyLogo.setWidth("150px"); // Adjust the width as needed
         banner.add(companyLogo);
         banner.add(new H2("Firm Name")); // Replace with actual company name
@@ -40,11 +40,11 @@ public class SFirmProfileDisplayView extends VerticalLayout {
         add(contentLayout);
 
         // Edit button
-        Button editButton = new Button("Edit Profile");
-        editButton.addClickListener(e -> {
-            // Logic to navigate to the edit profile view
-            getUI().ifPresent(ui -> ui.navigate("EditFirmProfileDisplayView"));
-        });
-        add(editButton);
+//        Button editButton = new Button("Edit Profile");
+//        editButton.addClickListener(e -> {
+//            // Logic to navigate to the edit profile view
+//            getUI().ifPresent(ui -> ui.navigate("EditFirmProfileDisplayView"));
+//        }); //ToDo commented out since only available for Unternehmen
+//        add(editButton);
     }
 }
