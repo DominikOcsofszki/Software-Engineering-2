@@ -14,6 +14,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -59,7 +60,8 @@ public class SAboStudentView extends VerticalLayout {
         notification.setMargin(true);
         notification.setAlignItems(FlexComponent.Alignment.STRETCH);
 
-        Image image = new Image("/image/myimage.png", "Alternative image text");
+        Image image = new Image(ASSETS.RANDOM.USER, "Alternative image text");
+        image.setHeight(100, Unit.PIXELS);
         notification.add(image);
 
 

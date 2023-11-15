@@ -28,8 +28,7 @@ public class UnternehmenLayout extends AbstractLayout {
                 new RouterLink("UFirmProfileDisplayView ", UFirmProfileDisplayView.class),
                 new RouterLink("UHomepageUnternehmenView ", UHomepageUnternehmenView.class),
                 new RouterLink("UStelleAnzeigeErstellenView ", UStelleAnzeigeErstellenView.class),
-                new RouterLink("UUnternehmenPreviewView ", UUnternehmenPreviewView.class),
-                new RouterLink(ROUTING.UNTERNEHMEN.UNotificationView, UNotificationView.class)
+                new RouterLink("UNotificationView", UNotificationView.class)
 
         ));
     }
