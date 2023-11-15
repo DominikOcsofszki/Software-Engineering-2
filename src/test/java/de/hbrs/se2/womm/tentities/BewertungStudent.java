@@ -1,20 +1,19 @@
 package de.hbrs.se2.womm.tentities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "bewertung_student",schema = "test")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class BewertungStudent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "bewertung_student_id")
     private Integer bewertungStudentId;
 
@@ -32,8 +31,5 @@ public class BewertungStudent {
     @JoinColumn(name = "student_id")
     private Student student;
 
-    public BewertungStudent() {
-
-    }
 }
 

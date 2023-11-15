@@ -1,20 +1,19 @@
 package de.hbrs.se2.womm.tentities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "stelle_tag",schema = "test")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class StelleTag {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "stelle_tag_id")
     private Integer stelleTagId;
 
@@ -26,8 +25,5 @@ public class StelleTag {
     @JoinColumn(name = "stelle_id")
     private Stelle stelle;
 
-    public StelleTag() {
-
-    }
 }
 

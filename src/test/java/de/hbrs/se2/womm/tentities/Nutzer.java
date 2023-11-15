@@ -1,20 +1,19 @@
 package de.hbrs.se2.womm.tentities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "nutzer",schema = "test")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Nutzer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "nutzer_id")
     private Integer nutzerId;
 
@@ -36,9 +35,5 @@ public class Nutzer {
     @Lob
     @Column(name = "nutzer_profilbild", columnDefinition = "bytea")
     private byte[] nutzerProfilbild;
-
-    public Nutzer() {
-
-    }
 }
 
