@@ -17,7 +17,7 @@ public class ROUTING {
         public static final String SHomepageStudentView = "SHomepageStudentView";
         public static final String SJobProjectWorkshopDisplayView = "SJobProjectWorkshopDisplayView";
         public static final String SNotificationView = "SNotificationView";
-        public static final String StudentProfileDisplayView = "StudentProfileDisplayView";
+        public static final String SStudentProfileDisplayView = "SStudentProfileDisplayView";
 
 
     }
