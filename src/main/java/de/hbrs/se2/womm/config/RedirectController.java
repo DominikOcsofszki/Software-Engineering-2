@@ -11,10 +11,10 @@ import org.springframework.web.servlet.view.RedirectView;
 public class RedirectController {
 
     @GetMapping("")
-    public RedirectView redirectWithUsingRedirectView(
-            RedirectAttributes attributes) {
+    public RedirectView redirectWithUsingRedirectView(RedirectAttributes attributes) {
         attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
         //ToDo adding Security for redirecting for each different user
-        return new RedirectView("vaadin/LandingPageView");
+        return new RedirectView("vaadin/login");
     }
+
 }
