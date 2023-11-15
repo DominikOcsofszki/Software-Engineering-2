@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.entities;
+package de.hbrs.se2.womm.tentities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "unternehmen",schema = "se")
+@Table(name = "unternehmen",schema = "test")
 @Getter
 @Setter
 @AllArgsConstructor

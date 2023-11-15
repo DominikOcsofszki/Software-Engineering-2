@@ -1,29 +1,29 @@
-package de.hbrs.se2.womm.entities;
+package de.hbrs.se2.womm.tentities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "nutzer_tag",schema = "se")
+@Table(name = "stelle_tag",schema = "test")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class NutzerTag {
+public class StelleTag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "nutzer_tag_id")
-    private Integer nutzerTagId;
+    @Column(name = "stelle_tag_id")
+    private Integer stelleTagId;
 
     @ManyToOne
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
     @ManyToOne
-    @JoinColumn(name = "nutzer_id")
-    private Nutzer nutzer;
+    @JoinColumn(name = "stelle_id")
+    private Stelle stelle;
 
 }
 

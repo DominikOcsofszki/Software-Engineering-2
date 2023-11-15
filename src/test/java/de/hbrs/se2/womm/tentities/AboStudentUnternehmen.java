@@ -1,31 +1,31 @@
-package de.hbrs.se2.womm.entities;
+package de.hbrs.se2.womm.tentities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@Table(name = "abo_tag",schema = "se")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AboTag {
+@Entity
+@Table(name = "abo_student_unternehmen", schema = "test")
+public class AboStudentUnternehmen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "abo_id")
     private Integer aboId;
 
-    @Column(name = "abo_benachrichtigung")
-    private Boolean aboBenachrichtigung;
+    @Column(name = "abo_benachrichtigungen")
+    private Boolean aboBenachrichtigungen;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "tag_id")
-    private Tag tag;
+    @JoinColumn(name = "unternehmen_id")
+    private Unternehmen unternehmen;
 }
 
