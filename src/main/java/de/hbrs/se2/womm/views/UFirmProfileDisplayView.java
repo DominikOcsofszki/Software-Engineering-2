@@ -7,11 +7,12 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.views.newdom.layouts.StudentLayout;
+import de.hbrs.se2.womm.views.newdom.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-@Route(value = "UFirmProfileDisplayView", layout = StudentLayout.class)
+@Route(value = "UFirmProfileDisplayView", layout = UnternehmenLayout.class)
 @PageTitle("FirmProfileDisplayView")
-@RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
+@RolesAllowed({"UNTERNEHMEN", "ADMIN"})
 public class UFirmProfileDisplayView extends VerticalLayout {
     public UFirmProfileDisplayView() {
         // Header
@@ -22,7 +23,7 @@ public class UFirmProfileDisplayView extends VerticalLayout {
         // Banner
         Div banner = new Div();
         banner.addClassName("company-banner");
-        Image companyLogo = new Image("themes/theme1/womm_text_logo.png", "");
+        Image companyLogo = new Image("themes/theme_1/Womm_text_logo.png", "");
         companyLogo.setWidth("150px"); // Adjust the width as needed
         banner.add(companyLogo);
         banner.add(new H2("Firm Name")); // Replace with actual company name
