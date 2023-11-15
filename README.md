@@ -16,4 +16,5 @@
 - [Git Commit Conventions](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
 - [Dumbo / PostgreSQL](https://dumbo.inf.h-brs.de/phppgadmin/)
 - [Jenkins](https://sepp-jenkins.inf.h-brs.de/job/w.o.m.m/)
-- [SonarQube](https://sepp-sonar.inf.h-brs.de/dashboard?id=w.o.m.m) 
+- [SonarQube](https://sepp-sonar.inf.h-brs.de/dashboard?id=w.o.m.m)
+- [Swagger UI (after login)](http://localhost:8080/swagger-ui/index.html) 
