@@ -34,7 +34,7 @@ public class StudentProfileDisplayView extends VerticalLayout {
         header.add(b);
         b.addClickListener( e -> UI.getCurrent().navigate(LandingPageView.class));
         b = new Button("Start Chatting");
-        b.addClickListener( e -> UI.getCurrent().navigate(ChatView.class));
+        b.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
         header.add(b);
         b.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
