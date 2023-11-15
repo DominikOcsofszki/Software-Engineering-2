@@ -13,4 +13,10 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse.builder()
                 .code(HttpStatus.NOT_FOUND.value()).message(e.getMessage()).build());
     }
+
+    @ExceptionHandler(value = UsernameAlreadyTakenException.class)
+    public ResponseEntity<ErrorResponse> usernameTaken(UsernameAlreadyTakenException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse.builder()
+                .code(HttpStatus.BAD_REQUEST.value()).message(e.getMessage()).build());
+    }
 }
