@@ -13,7 +13,7 @@ public class UnternehmenLayout extends AbstractLayout {
 
     protected UnternehmenLayout(SecurityService securityService) {
         super.createHeaderWithLogoutButton(new Button("Log out: " +
-                securityService.getAuthenticatedUser().getUsername(), e -> securityService.logout()));
+                securityService.getAuthenticatedUser().getUsername(), e -> securityService.logout()), true);
     }
 
 
