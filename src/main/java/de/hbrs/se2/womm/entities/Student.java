@@ -1,9 +1,7 @@
 package de.hbrs.se2.womm.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -11,12 +9,15 @@ import java.util.Date;
 @Table(name = "student", schema = "se")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(name = "student_id_seq", sequenceName = "student_id_seq", allocationSize = 1)
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "student_id", columnDefinition = "serial")
     private Integer studentId;
 
     @Column(name = "student_vorname", nullable = false)
