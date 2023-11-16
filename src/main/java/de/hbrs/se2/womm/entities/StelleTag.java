@@ -1,10 +1,12 @@
 package de.hbrs.se2.womm.entities;
 
+import de.hbrs.se2.womm.config.CONFIG;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "stelle_tag",schema = "se")
+//@Table(name = "stelle_tag",schema = "se")
+@Table(name = "stelle_tag",schema = CONFIG.DB.USING)
 @Getter
 @Setter
 @AllArgsConstructor

@@ -1,5 +1,7 @@
 package de.hbrs.se2.womm.entities;
 
+import de.hbrs.se2.womm.config.CONFIG;
+import de.hbrs.se2.womm.views.layouts.ASSETS;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +11,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "abo_student_unternehmen", schema = "se")
+//@Table(name = "abo_student_unternehmen", schema = "se")
+@Table(name = "abo_student_unternehmen", schema = CONFIG.DB.USING)
 public class AboStudentUnternehmen {
 
     @Id

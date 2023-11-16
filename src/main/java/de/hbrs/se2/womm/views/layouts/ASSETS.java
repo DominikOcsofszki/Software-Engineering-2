@@ -2,6 +2,7 @@ package de.hbrs.se2.womm.views.layouts;
 
 public class ASSETS {
 
+
     static public class LOGO {
 
     }

@@ -1,12 +1,14 @@
 package de.hbrs.se2.womm.entities;
 
+import de.hbrs.se2.womm.config.CONFIG;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "student", schema = "se")
+//@Table(name = "student", schema = "se")
+@Table(name = "student", schema = CONFIG.DB.USING)
 @Getter
 @Setter
 @AllArgsConstructor
