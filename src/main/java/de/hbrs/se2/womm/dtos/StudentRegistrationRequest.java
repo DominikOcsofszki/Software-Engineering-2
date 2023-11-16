@@ -7,11 +7,9 @@ import lombok.EqualsAndHashCode;
 import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UnternehmenDTO extends NutzerDTO {
-    private Long unternehmenId;
-    private String name;
-    private String beschreibung;
+public class StudentRegistrationRequest extends RegistrationRequest {
+    private String firstname;
+    private String lastname;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date gruendung;
-    private Long nutzerId;
+    private Date dob;
 }
