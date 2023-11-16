@@ -11,7 +11,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "abo_student_unternehmen", schema = CONFIG.DB.USING)
+//@Table(name = "abo_student_unternehmen", schema = CONFIG.DB.USING)
+@Table(name = "abo_student_unternehmen")
 public class AboStudentUnternehmen {
 
     @Id
