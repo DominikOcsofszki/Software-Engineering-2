@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-//@Table(name = "stelle", schema = "se")
 @Table(name = "stelle", schema = CONFIG.DB.USING)
 @Getter
 @Setter

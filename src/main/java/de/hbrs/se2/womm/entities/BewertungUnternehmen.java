@@ -7,7 +7,6 @@ import lombok.*;
 
 @Entity
 @Table(name = "bewertung_unternehmen",schema = CONFIG.DB.USING)
-//@Table(name = "bewertung_unternehmen",schema = "se")
 @Getter
 @Setter
 @AllArgsConstructor

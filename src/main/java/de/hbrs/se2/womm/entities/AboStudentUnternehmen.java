@@ -11,7 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-//@Table(name = "abo_student_unternehmen", schema = "se")
 @Table(name = "abo_student_unternehmen", schema = CONFIG.DB.USING)
 public class AboStudentUnternehmen {
 

@@ -7,7 +7,6 @@ import lombok.*;
 
 @Entity
 @Table(name = "abo_tag",schema = CONFIG.DB.USING)
-//@Table(name = "abo_tag",schema = "se")
 @Getter
 @Setter
 @AllArgsConstructor

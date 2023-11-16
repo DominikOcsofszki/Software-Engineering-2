@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-//@Table(name = "bewertung_student",schema = "se")
 @Table(name = "bewertung_student",schema = CONFIG.DB.USING)
 @Getter
 @Setter

@@ -8,7 +8,6 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-//@Table(name = "unternehmen",schema = "se")
 @Table(name = "unternehmen",schema = CONFIG.DB.USING)
 @Getter
 @Setter
