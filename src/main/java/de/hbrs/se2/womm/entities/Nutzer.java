@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "nutzer",schema = "se")
@@ -39,9 +40,12 @@ public class Nutzer implements UserDetails {
     @Column(name = "nutzer_profilbild", columnDefinition = "bytea")
     private byte[] nutzerProfilbild;
 
+    @Transient
+    private Set<GrantedAuthority> authorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
