@@ -15,8 +15,7 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
 
     @Autowired
     private NutzerRepository nutzerRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
     @Override
     public void createUser(UserDetails user) {
         nutzerRepository.save((Nutzer) user);

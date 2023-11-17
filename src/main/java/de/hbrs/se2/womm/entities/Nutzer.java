@@ -3,9 +3,12 @@ package de.hbrs.se2.womm.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Set;
 
 @Entity
@@ -40,11 +43,13 @@ public class Nutzer implements UserDetails {
     @Column(name = "nutzer_profilbild", columnDefinition = "bytea")
     private byte[] nutzerProfilbild;
 
-    @Transient
-    private Set<GrantedAuthority> authorities;
+    @Column(name = "nutzer_rolle", nullable = false)
+    private String rolle;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority(rolle));
         return authorities;
     }
 

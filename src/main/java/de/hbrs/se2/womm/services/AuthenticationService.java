@@ -7,6 +7,7 @@ import de.hbrs.se2.womm.entities.Nutzer;
 import de.hbrs.se2.womm.entities.Student;
 import de.hbrs.se2.womm.entities.Unternehmen;
 import de.hbrs.se2.womm.exceptions.UsernameAlreadyTakenException;
+import de.hbrs.se2.womm.model.Roles;
 import de.hbrs.se2.womm.repositories.NutzerRepository;
 import de.hbrs.se2.womm.repositories.StudentRepository;
 import de.hbrs.se2.womm.repositories.UnternehmenRepository;
@@ -29,7 +30,7 @@ public class AuthenticationService {
 
     public void registerStudent(StudentRegistrationRequest request) throws UsernameAlreadyTakenException {
         String username = request.getUsername();
-        createUser(request, username);
+        createUser(request, username, Roles.STUDENT.toString());
         // speichert Studenten mit FK zur Nutzer-Tabelle
         Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
         studentRepository.save(Student.builder()
@@ -43,7 +44,7 @@ public class AuthenticationService {
 
     public void registerCompany(CompanyRegistrationRequest request) throws UsernameAlreadyTakenException {
         String username = request.getUsername();
-        createUser(request, username);
+        createUser(request, username, Roles.UNTERNEHMEN.toString());
         // speichert Unternehmen mit FK zur Nutzer-Tabelle
         Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
         unternehmenRepository.save(Unternehmen.builder()
@@ -55,7 +56,7 @@ public class AuthenticationService {
     /**
      * speichert einen Nutzer für Student- oder Unternehmensanfrage
      */
-    private void createUser(RegistrationRequest request, String username) throws UsernameAlreadyTakenException {
+    private void createUser(RegistrationRequest request, String username, String role) throws UsernameAlreadyTakenException {
         if (nutzerRepository.existsNutzerByNutzerName(username))
             throw new UsernameAlreadyTakenException("Username " + username + " is already taken!");
         userDetailsManager.createUser(Nutzer.builder()
@@ -63,6 +64,7 @@ public class AuthenticationService {
                     .nutzerMail(request.getEmail())
                     .nutzerPasswort(passwordEncoder.encode(request.getPassword()))
                     .nutzerOrt(request.getLocation())
+                    .rolle(role)
                     .nutzerAktiv(true)
                 .build());
     }
