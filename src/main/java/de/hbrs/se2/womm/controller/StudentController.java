@@ -1,19 +1,27 @@
 package de.hbrs.se2.womm.controller;
 
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.services.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users/students")
 public class StudentController {
 
-    // TODO add logic to methods and suitable return types for ResponseEntities
+    @Autowired
+    StudentService studentService;
 
     @GetMapping("")
-    public ResponseEntity<Void> getAllStudents() {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<List<StudentDTO>> getAllStudents() {
+        return new ResponseEntity<>(
+                studentService.getAllStudents(),
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/{id}")
