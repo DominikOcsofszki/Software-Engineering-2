@@ -16,12 +16,12 @@ public class StudentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/student/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Void> getStudentById(@PathVariable String id) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/student/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> updateStudent(@PathVariable String id, @RequestBody StudentDTO request) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
