@@ -3,6 +3,8 @@ package de.hbrs.se2.womm.views;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -11,20 +13,29 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.controller.OfferController;
+import de.hbrs.se2.womm.entities.Stelle;
+import de.hbrs.se2.womm.entities.StelleTag;
+import de.hbrs.se2.womm.entities.Unternehmen;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Route(value = ROUTING.STUDENT.SHomepageStudentView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("HomepageStudentView")
 public class SHomepageStudentView extends VerticalLayout {
-
+    //private List<String> currentTags1;
+    //private List<String> currentTags2;
     public SHomepageStudentView() {
         setUpHeader();
         setUpBanner();
         setUpSearchFields();
         setUpBigCompanyAnnouncement();
+
     }
 
     private void setUpHeader() {
@@ -64,6 +75,7 @@ public class SHomepageStudentView extends VerticalLayout {
         MultiSelectComboBox filter1 = new MultiSelectComboBox("Offer type");
         filter1.setItems("Job offer", "Project", "Workshop", "Internship");
         filter1.setWidth("min-content");
+        //currentTags1 = (List<String>) filter1.getSelectedItems();
         searchFields.add(filter1);
         //Industry
         MultiSelectComboBox filter2 = new MultiSelectComboBox("Industry");
@@ -73,6 +85,8 @@ public class SHomepageStudentView extends VerticalLayout {
                 "Gastgewerbe und Tourismus", "Rechtswesen", "Soziale Dienste und gemeinnützige Organisationen",
                 "Fertigung und Produktion", "Transport und Logistik", "Bauwesen", "Energie und Umwelt",
                 "Forschung und Entwicklung", "Design und Kunst", "Landwirtschaft", "Personalwesen", "Telekommunikation");
+        //currentTags2 = (List<String>) filter2.getSelectedItems();
+
         searchFields.add(filter2);
         //Suchfeld
         TextField textField = new TextField();
@@ -84,23 +98,40 @@ public class SHomepageStudentView extends VerticalLayout {
         Button b = new Button("Search", new Icon(VaadinIcon.SEARCH));
         searchFields.add(b);
         b.getElement().getStyle().set("margin-top", "auto");
-
         add(searchFields);
     }
 
     private void setUpBigCompanyAnnouncement() {
         VerticalLayout searchResults = new VerticalLayout();
-        HorizontalLayout bigCompanyAnnouncement = new HorizontalLayout();
         searchResults.add(new H2("Search Results"));
         searchResults.add(new Hr());
+        //temp
+        Stelle s1 = new Stelle();
+        s1.setStelleId(1);
+        s1.setStelleTitel("Softwareentwickler m/w/d");
+        s1.setStelleOrt("Bonn");
+        s1.setUnternehmen(new Unternehmen());
+        s1.setStelleBeschreibung("beschreibungstext");
+        s1.setStelleWebsite("www.beispiel.de");
+        Stelle s2 = new Stelle();
+        Stelle s3 = new Stelle();
 
-        VerticalLayout bigCompanyAnnouncement1 = new VerticalLayout();
-        VerticalLayout bigCompanyAnnouncement2 = new VerticalLayout();
+        // filter mit currenTags?
+        List<Stelle> ads = Arrays.asList(s1,s2,s3);;
 
+        // Create a grid bound to the list
+        Grid<Stelle> grid = new Grid<>();
+        grid.setItems(ads);
+        //grid.addColumn(Stelle::getStelleId).setHeader("ID"); // eher raus
+        grid.addColumn(Stelle::getStelleTitel).setHeader("Stelle");
+        grid.addColumn(Stelle::getStelleOrt).setHeader("Ort");
+        grid.addColumn(Stelle::getUnternehmen).setHeader("Unternehmen");
+        // add link firma?
+        //grid.addColumn(Stelle::getStelleBeschreibung).setHeader("Beschreibung"); // vielleicht erst beim draufklicken
+        grid.addColumn(Stelle::getStelleWebsite).setHeader("Website");
+        grid.addItemClickListener(e -> UI.getCurrent().navigate(SJobProjectWorkshopDisplayView.class));
 
-        bigCompanyAnnouncement.add(bigCompanyAnnouncement1);
-        bigCompanyAnnouncement.add(bigCompanyAnnouncement2);
-        searchResults.add(bigCompanyAnnouncement);
+        searchResults.add(grid);
         add(searchResults);
     }
 }
