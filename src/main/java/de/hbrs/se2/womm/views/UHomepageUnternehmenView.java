@@ -126,7 +126,7 @@ public class UHomepageUnternehmenView extends VerticalLayout {
         // add link firma?
         //grid.addColumn(Stelle::getStelleBeschreibung).setHeader("Beschreibung"); // vielleicht erst beim draufklicken
         grid.addColumn(Stelle::getStelleWebsite).setHeader("Website");
-        grid.addItemClickListener(e -> UI.getCurrent().navigate(SJobProjectWorkshopDisplayView.class));
+        grid.addItemClickListener(e -> UI.getCurrent().navigate(UFirmProfileDisplayView.class));
 
         searchResults.add(grid);
         add(searchResults);
