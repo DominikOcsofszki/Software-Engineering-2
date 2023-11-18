@@ -25,7 +25,9 @@ public class ASSETS {
         public static String IMG6 = "themes/theme_1/logo.png";
         public static String IMG7 = "themes/theme_1/previewPage.png";
         public static String IMG8 = "themes/theme_1/user.png";
-        public static String IMG9 = "themes/theme_1/logo_placeholder.png";
+        public static String IMG9 = "themes/theme_1/Logo_placeholder.png";
+        public static String IMG10 = "themes/theme_1/Userpic_placeholder.png";
+        public static String IMG11 = "themes/theme_1/Job_application_pic_placeholder.png";
 
 
     }
