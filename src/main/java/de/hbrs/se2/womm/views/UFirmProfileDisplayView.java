@@ -119,7 +119,7 @@ public class UFirmProfileDisplayView extends VerticalLayout {
         jobGrid.addItemClickListener(event -> {
             Stelle selectedStelle = event.getItem();
             if (selectedStelle != null) {
-                UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
+                UI.getCurrent().navigate(UApplicationView.class);
             }
         });
 
