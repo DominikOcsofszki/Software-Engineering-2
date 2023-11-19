@@ -11,6 +11,7 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.router.PageTitle;
@@ -63,6 +64,10 @@ public class UEditFirmProfileDisplayView extends VerticalLayout {
             // Implement your saving logic here
         });
 
+        // Company description Text Area
+        TextArea descriptionTextArea = new TextArea("Company Description");
+        descriptionTextArea.setWidth("100%");
+        descriptionTextArea.setHeight("200px");
         add(buttonsLayout);
         buttonsLayout.add(logoAndEditLayout);
         buttonsLayout.add(saveButton);
@@ -72,6 +77,7 @@ public class UEditFirmProfileDisplayView extends VerticalLayout {
         ratingLayout.add(new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR));
         ratingLayout.add(new Span(" (123 Reviews)"));
         add(ratingLayout);
+
 
         // Company Location, Number of Employees, and Company Website (Editable Fields)
         TextField locationField = new TextField("Company Location");
@@ -84,6 +90,8 @@ public class UEditFirmProfileDisplayView extends VerticalLayout {
         websiteField.setValue("http://www.companywebsite.com");
 
         add(locationField, employeesField, websiteField);
+
+        add(descriptionTextArea);
 
         // Job Advertisements - Grid for Displaying Job Postings
         Grid<Stelle> jobGrid = new Grid<>();
