@@ -11,6 +11,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import jakarta.annotation.security.RolesAllowed;
@@ -56,7 +57,7 @@ public class LandingPageView extends VerticalLayout {
 
     private HorizontalLayout createHeader() {
         HorizontalLayout header = new HorizontalLayout();
-        Image logoImage = new Image("themes/theme_1/Womm_big_logo.png", "");
+        Image logoImage = new Image(ASSETS.IMG.IMG2, "");
         logoImage.setWidth("280px");
         logoImage.setHeight("60px");
         header.add(logoImage);
@@ -75,9 +76,9 @@ public class LandingPageView extends VerticalLayout {
     private VerticalLayout createHeroSection() {
         VerticalLayout heroSection = new VerticalLayout();
         heroSection.setAlignItems(FlexComponent.Alignment.CENTER);
-        Image heroImage = new Image("themes/theme_1/Hiring_pic.jpg", "");
+        Image heroImage = new Image(ASSETS.IMG.IMG1, "");
         heroImage.setWidth("500px");
-        heroImage.setHeight("400px");
+        heroImage.setHeight("300px");
         heroSection.add(heroImage);
         return heroSection;
     }
@@ -102,11 +103,11 @@ public class LandingPageView extends VerticalLayout {
     private VerticalLayout createDescriptionSection() {
         VerticalLayout descriptionSection = new VerticalLayout();
         descriptionSection.setAlignItems(FlexComponent.Alignment.CENTER);
-        H1 title = new H1("Find your dream job on w.o.m.m.");
+        H1 title = new H1("Discover Your Ideal Student Job on W.O.M.M!");
         title.getStyle().set("color", "#044FA3"); // HEX-Farbcode
         descriptionSection.add(title);
 
-        Paragraph description = new Paragraph("Your job search portal. Discover thousands of job opportunities and more.");
+        Paragraph description = new Paragraph("Your job search portal. Your Gateway to Student Employment.");
         description.getStyle().set("color", "#044FA3"); // HEX-Farbcode
         descriptionSection.add(description);
 

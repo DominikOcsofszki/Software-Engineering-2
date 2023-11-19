@@ -102,6 +102,13 @@ public class UEditFirmProfileDisplayView extends VerticalLayout {
         List<Stelle> stellenanzeigen = createDummyStellenanzeigen();
         jobGrid.setItems(stellenanzeigen);
 
+        jobGrid.addItemClickListener(event -> {
+            Stelle selectedStelle = event.getItem();
+            if (selectedStelle != null) {
+                UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
+            }
+
+        });
         add(jobGrid);
     }
 
