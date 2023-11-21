@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<ErrorResponse> catchEmAll(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorResponse.builder()
+                .code(HttpStatus.INTERNAL_SERVER_ERROR.value()).message(e.getMessage()).build());
+    }
+
     @ExceptionHandler(value = UsernameNotFoundException.class)
     public ResponseEntity<ErrorResponse> usernameNotFound(UsernameNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse.builder()
