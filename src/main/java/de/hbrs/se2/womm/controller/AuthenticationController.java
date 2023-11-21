@@ -1,11 +1,13 @@
 package de.hbrs.se2.womm.controller;
 
 import de.hbrs.se2.womm.dtos.*;
+import de.hbrs.se2.womm.exceptions.AuthenticationException;
 import de.hbrs.se2.womm.exceptions.UsernameAlreadyTakenException;
 import de.hbrs.se2.womm.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,9 +30,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> loginUser(@RequestBody LoginRequest request) {
-        // TODO: add logic
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Authentication> loginUser(@RequestBody LoginRequest request) throws AuthenticationException {
+        return new ResponseEntity<>(authenticationService.loginUser(request), HttpStatus.OK);
     }
 
     @PostMapping("/logout")
