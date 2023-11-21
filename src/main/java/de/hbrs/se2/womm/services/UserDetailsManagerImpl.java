@@ -5,7 +5,6 @@ import de.hbrs.se2.womm.repositories.NutzerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +56,6 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
         if (user == null) throw new UsernameNotFoundException("No User found for username: " + username);
-        return null;
+        return user;
     }
 }
