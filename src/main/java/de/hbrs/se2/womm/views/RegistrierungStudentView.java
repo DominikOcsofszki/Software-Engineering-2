@@ -66,6 +66,7 @@ public class RegistrierungStudentView extends VerticalLayout {
         email.setErrorMessage("Email is required");
 
         Button reg = new Button("Register", event -> {
+            //TODO
             UI.getCurrent().getPage().reload();
         });
 
