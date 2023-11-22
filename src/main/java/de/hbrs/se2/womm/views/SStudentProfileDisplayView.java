@@ -43,10 +43,10 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         VerticalLayout headervert2 = new VerticalLayout();
         Span s = new Span("Name");
         s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "grey");
+        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
         Span s1 = new Span("Tobias Bromberg");
         s1.getElement().getStyle().set("font-size", "45px");
-        s1.getElement().getStyle().set("color", "black");
+        s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
         headervert2.add(s1);
         headervert2.setSpacing(false);
@@ -56,10 +56,10 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         headervert2 = new VerticalLayout();
         s = new Span("Studiengang");
         s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "grey");
+        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
         s1 = new Span("Informatik (B.Sc.)");
         s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "black");
+        s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
         headervert2.add(s1);
         headervert2.setSpacing(false);
@@ -69,10 +69,10 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         headervert2 = new VerticalLayout();
         s = new Span("Kontakt");
         s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "grey");
+        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
         s1 = new Span("MyExampleMail@yahoo.com");
         s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "black");
+        s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
         headervert2.add(s1);
         headervert2.setSpacing(false);
@@ -82,10 +82,10 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         headervert2 = new VerticalLayout();
         s = new Span("Abschlüsse");
         s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "grey");
+        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
         s1 = new Span("Noch keine");
         s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "black");
+        s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
         headervert2.add(s1);
         headervert2.setSpacing(false);
@@ -95,10 +95,10 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         headervert2 = new VerticalLayout();
         s = new Span("Sprachen");
         s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "grey");
+        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
         s1 = new Span("Deutsch,Englisch");
         s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "black");
+        s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
         headervert2.add(s1);
         headervert2.setSpacing(false);
@@ -108,10 +108,10 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         headervert2 = new VerticalLayout();
         s = new Span("Interessen");
         s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "grey");
+        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
         s1 = new Span("Datenbanken, Testen, Websites");
         s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "black");
+        s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
         headervert2.add(s1);
         headervert2.setSpacing(false);
