@@ -25,7 +25,7 @@
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
         <checkstyle-validation.var>none</checkstyle-validation.var> <!-- off<- none/validate -> on-->
         <sonar.host.url>https://sepp-sonar.inf.h-brs.de/</sonar.host.url>
-
+        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
     </properties>
     <reporting>
         <plugins>
@@ -45,6 +45,11 @@
     </reporting>
 
     <dependencyManagement>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
         <dependencies>
             <dependency>
                 <groupId>com.vaadin</groupId>
@@ -163,6 +168,24 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source> <!-- depending on your project -->
+                    <target>1.8</target> <!-- depending on your project -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
+                        </path>
+                        <!-- other annotation processors -->
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>
