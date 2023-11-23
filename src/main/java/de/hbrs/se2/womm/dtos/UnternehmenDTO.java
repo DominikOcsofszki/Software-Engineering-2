@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.dtos;
 
+import de.hbrs.se2.womm.entities.Nutzer;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -14,5 +15,5 @@ public class UnternehmenDTO {
     private String name;
     private String beschreibung;
     private String gruendung;
-    private Long nutzerId;
+    private Nutzer nutzer;
 }
