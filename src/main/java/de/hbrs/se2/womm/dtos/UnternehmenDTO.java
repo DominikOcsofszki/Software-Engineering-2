@@ -3,8 +3,6 @@ package de.hbrs.se2.womm.dtos;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class UnternehmenDTO extends NutzerDTO {

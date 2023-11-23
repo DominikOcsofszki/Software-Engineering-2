@@ -3,8 +3,6 @@ package de.hbrs.se2.womm.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "unternehmen",schema = "se")
 @Getter
