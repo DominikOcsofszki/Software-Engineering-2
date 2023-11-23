@@ -1,7 +1,6 @@
 package de.hbrs.se2.womm.controller;
 
 import de.hbrs.se2.womm.dtos.StudentDTO;
-import de.hbrs.se2.womm.entities.Student;
 import de.hbrs.se2.womm.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,19 +19,20 @@ public class StudentController {
     @GetMapping("students")
     public ResponseEntity<List<StudentDTO>> getAllStudents() {
         return new ResponseEntity<>(
-                studentService.getAllStudents(),
+                studentService.getAlleStudenten(),
                 HttpStatus.OK
         );
     }
 
     @GetMapping("students/{id}")
     public ResponseEntity<List<StudentDTO>> getStudentById(@PathVariable String id) {
-        List<StudentDTO> alleStudenten = studentService.getAllStudents();
+        List<StudentDTO> alleStudenten = studentService.getAlleStudenten();
         return new ResponseEntity<>(alleStudenten, HttpStatus.OK);
     }
 
-    @PutMapping("students/{id}")
-    public ResponseEntity<Void> updateStudent(@PathVariable String id, @RequestBody StudentDTO request) {
+    @PostMapping("students")
+    public ResponseEntity<Void> updateStudent(@PathVariable String id, @RequestBody StudentDTO studentDTO) {
+        studentService.saveStudent(studentDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
