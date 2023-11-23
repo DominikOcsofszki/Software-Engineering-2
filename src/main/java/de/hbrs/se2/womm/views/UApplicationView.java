@@ -43,8 +43,7 @@ public class UApplicationView extends VerticalLayout {
         HorizontalLayout top = new HorizontalLayout();
         top.setAlignItems(FlexComponent.Alignment.CENTER);
         top.setJustifyContentMode(JustifyContentMode.AROUND);
-        Image image = new Image();
-        image.setSrc("https://i.imgur.com/DFjdKHE.jpg");
+        Image image = new Image("themes/theme_1/user.png", "User");
         //image.setSrc(bewerbung.getStudent().getStudentPicture());
         image.setWidth(200, Unit.PIXELS);
         image.setHeight(200, Unit.PIXELS);
