@@ -27,7 +27,7 @@ public class StudentController {
     @GetMapping("students/{id}")
     public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
         return studentService.getById(id)
-                .map(studentDTO -> new ResponseEntity<StudentDTO>(studentDTO, HttpStatus.OK))
+                .map(studentDTO -> new ResponseEntity<>(studentDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
 
     }

@@ -4,7 +4,6 @@ import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.entities.Student;
 import de.hbrs.se2.womm.repositories.StudentRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
