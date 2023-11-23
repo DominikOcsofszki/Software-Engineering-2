@@ -25,13 +25,15 @@ public class StudentController {
     }
 
     @GetMapping("students/{id}")
-    public ResponseEntity<List<StudentDTO>> getStudentById(@PathVariable String id) {
-        List<StudentDTO> alleStudenten = studentService.getAlleStudenten();
-        return new ResponseEntity<>(alleStudenten, HttpStatus.OK);
+    public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
+        return studentService.getById(id)
+                .map(studentDTO -> new ResponseEntity<StudentDTO>(studentDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+
     }
 
     @PostMapping("students")
-    public ResponseEntity<Void> updateStudent(@PathVariable String id, @RequestBody StudentDTO studentDTO) {
+    public ResponseEntity<Void> updateStudent(@RequestBody StudentDTO studentDTO) {
         studentService.saveStudent(studentDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
