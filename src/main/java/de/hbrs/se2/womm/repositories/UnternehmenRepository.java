@@ -11,5 +11,5 @@ public interface UnternehmenRepository extends JpaRepository<Unternehmen, Long> 
 
     Unternehmen findUnternehmenByNutzer_NutzerId(long nutzerID);
 
-    List<Unternehmen> findUnternehmenByUnternehmenNameContaining(String unternehmenName);
+    List<Unternehmen> findUnternehmenByUnternehmenNameIgnoreCaseContaining(String unternehmenName);
 }
