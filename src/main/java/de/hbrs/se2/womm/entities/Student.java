@@ -3,8 +3,6 @@ package de.hbrs.se2.womm.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "student")
 @Getter
@@ -17,7 +15,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "student_id")
-    private Integer studentId;
+    private Long studentId;
 
     @Column(name = "student_vorname", nullable = false)
     private String studentVorname;
