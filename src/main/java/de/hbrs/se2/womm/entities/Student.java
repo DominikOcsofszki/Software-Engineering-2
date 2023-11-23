@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "student", schema = "se")
+@Table(name = "student")
 @Getter
 @Setter
 @AllArgsConstructor
