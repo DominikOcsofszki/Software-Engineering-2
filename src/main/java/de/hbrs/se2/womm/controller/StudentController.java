@@ -13,8 +13,11 @@ import java.util.List;
 @RequestMapping("/api/users/")
 public class StudentController {
 
-    @Autowired
     StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping("students")
     public ResponseEntity<List<StudentDTO>> getAllStudents() {
