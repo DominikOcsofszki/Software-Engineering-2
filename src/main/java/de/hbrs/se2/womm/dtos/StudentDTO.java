@@ -8,7 +8,7 @@ import java.util.Date;
 public class StudentDTO {
     private String vorname;
     private String name;
-    private Date geburtstag;
+    private String geburtstag;
     private boolean benachrichtigung;
     private String bio;
     private String spezialisierung;
