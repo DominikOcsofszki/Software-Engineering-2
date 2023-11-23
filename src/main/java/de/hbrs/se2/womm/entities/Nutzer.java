@@ -2,10 +2,6 @@ package de.hbrs.se2.womm.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
 
 @Entity
 @Table(name = "nutzer",schema = "se")
@@ -14,7 +10,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Nutzer implements UserDetails {
+public class Nutzer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,42 +32,8 @@ public class Nutzer implements UserDetails {
     @Column(name = "nutzer_ort", nullable = false)
     private String nutzerOrt;
 
+    @Lob
     @Column(name = "nutzer_profilbild", columnDefinition = "bytea")
     private byte[] nutzerProfilbild;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return nutzerPasswort;
-    }
-
-    @Override
-    public String getUsername() {
-        return nutzerName;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
 

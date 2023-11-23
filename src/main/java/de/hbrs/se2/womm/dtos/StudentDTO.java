@@ -1,12 +1,11 @@
 package de.hbrs.se2.womm.dtos;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.Date;
+
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class StudentDTO extends NutzerDTO {
+public class StudentDTO {
     private String vorname;
     private String name;
     private Date geburtstag;
