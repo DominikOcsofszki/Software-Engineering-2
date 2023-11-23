@@ -26,7 +26,7 @@ public class Unternehmen {
     private String unternehmenBeschreibung;
 
     @Column(name = "unternehmen_gruendung")
-    private Date unternehmenGruendung;
+    private String unternehmenGruendung;
 
     @OneToOne
     @JoinColumn(name = "nutzer_id")

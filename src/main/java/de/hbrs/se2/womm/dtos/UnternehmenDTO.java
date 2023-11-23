@@ -12,6 +12,6 @@ public class UnternehmenDTO extends NutzerDTO {
     private String name;
     private String beschreibung;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date gruendung;
+    private String gruendung;
     private Long nutzerId;
 }

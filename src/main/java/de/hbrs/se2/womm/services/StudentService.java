@@ -2,39 +2,40 @@ package de.hbrs.se2.womm.services;
 
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.entities.Student;
+import de.hbrs.se2.womm.mapper.StudentMapper;
 import de.hbrs.se2.womm.repositories.StudentRepository;
-import org.modelmapper.ModelMapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class StudentService {
-    private StudentRepository studentRepository;
-    private ModelMapper modelMapper;
+    private final StudentRepository studentRepository;
+    private final StudentMapper studentMapper = StudentMapper.INSTANCE;
 
-    public StudentService(StudentRepository studentRepository, ModelMapper modelMapper) {
+    public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
-        this.modelMapper = modelMapper;
     }
 
     public List<StudentDTO> getAlleStudenten() {
         return studentRepository
                 .findAll()
                 .stream()
-                .map(student -> modelMapper.map(student, StudentDTO.class))
+                .map(studentMapper::studentToStudentDto)
                 .toList();
     }
 
     public Optional<StudentDTO> getById(Long id) {
         return studentRepository
                 .findById(id)
-                .map(student -> modelMapper.map(student, StudentDTO.class));
+                .map(studentMapper::studentToStudentDto);
     }
 
     public void saveStudent(StudentDTO studentDTO) {
-        Student student = modelMapper.map(studentDTO, Student.class);
+        Student student = studentMapper.studentDtoToStudent(studentDTO);
         studentRepository.save(student);
     }
 }

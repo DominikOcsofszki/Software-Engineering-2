@@ -17,7 +17,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "student_id")
-    private Integer studentId;
+    private Long studentId;
 
     @Column(name = "student_vorname", nullable = false)
     private String studentVorname;
@@ -26,7 +26,7 @@ public class Student {
     private String studentName;
 
     @Column(name = "student_geburtstag", nullable = false)
-    private Date studentGeburtstag;
+    private String studentGeburtstag;
 
     @Column(name = "student_benachrichtigung", nullable = false)
     private Boolean studentBenachrichtigung;

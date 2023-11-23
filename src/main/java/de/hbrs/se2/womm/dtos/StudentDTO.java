@@ -1,17 +1,17 @@
 package de.hbrs.se2.womm.dtos;
 
+import de.hbrs.se2.womm.entities.Nutzer;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import java.util.Date;
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class StudentDTO extends NutzerDTO {
-    private String vorname;
-    private String name;
-    private Date geburtstag;
-    private boolean benachrichtigung;
-    private String bio;
-    private String spezialisierung;
-    private Integer semester;
+public class StudentDTO {
+    private Nutzer nutzer;
+    private Long studentId;
+    private String studentVorname;
+    private String studentName;
+    private String studentGeburtstag;
+    private boolean studentBenachrichtigung;
+    private String studentBio;
+    private String studentSpezialisierung;
+    private Integer studentSemester;
 }
