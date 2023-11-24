@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class AuthenticationService {
 
     public void registerStudent(StudentRegistrationRequest request) throws UsernameAlreadyTakenException {
         String username = request.getUsername();
-        createUser(request, username, Roles.STUDENT.toString());
+        createUser(request, username, Roles.ROLE_STUDENT.toString());
         // speichert Studenten mit FK zur Nutzer-Tabelle
         Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
         studentRepository.save(Student.builder()
@@ -51,7 +52,7 @@ public class AuthenticationService {
 
     public void registerCompany(CompanyRegistrationRequest request) throws UsernameAlreadyTakenException {
         String username = request.getUsername();
-        createUser(request, username, Roles.UNTERNEHMEN.toString());
+        createUser(request, username, Roles.ROLE_UNTERNEHMEN.toString());
         // speichert Unternehmen mit FK zur Nutzer-Tabelle
         Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
         unternehmenRepository.save(Unternehmen.builder()
@@ -64,8 +65,10 @@ public class AuthenticationService {
         Nutzer user = nutzerRepository.findNutzerByNutzerName(request.getUsername());
         if (user == null) throw new AuthenticationException("Invalid username");
         try {
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(user, request.getPassword(), user.getAuthorities()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return authentication;
         } catch (Exception e) {
             throw new AuthenticationException("Invalid password");
         }
