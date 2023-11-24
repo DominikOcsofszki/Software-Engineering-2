@@ -25,7 +25,6 @@
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
         <checkstyle-validation.var>none</checkstyle-validation.var> <!-- off<- none/validate -> on-->
         <sonar.host.url>https://sepp-sonar.inf.h-brs.de/</sonar.host.url>
-
     </properties>
     <reporting>
         <plugins>
@@ -52,6 +51,12 @@
                 <version>${vaadin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>1.5.5.Final</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -121,6 +126,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.5.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xmlunit</groupId>
+            <artifactId>xmlunit-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.5.Final</version>
+        </dependency>
     </dependencies>
 
 
@@ -165,6 +184,7 @@
                     </excludes>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

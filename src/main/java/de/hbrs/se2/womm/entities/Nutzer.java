@@ -40,6 +40,7 @@ public class Nutzer implements UserDetails {
     @Column(name = "nutzer_ort", nullable = false)
     private String nutzerOrt;
 
+    @Lob
     @Column(name = "nutzer_profilbild", columnDefinition = "bytea")
     private byte[] nutzerProfilbild;
 
