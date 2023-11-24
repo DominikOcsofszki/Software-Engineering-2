@@ -3,11 +3,13 @@ package de.hbrs.se2.womm.views.layouts;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
-import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.services.SecurityService;
 import de.hbrs.se2.womm.views.*;
 import de.hbrs.se2.womm.views.SHomepageStudentView;
-public class StudentLayout extends AbstractLayout {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
+public class StudentLayout extends AbstractLayout {
 
     protected StudentLayout(SecurityService securityService) {
         super.createHeaderWithLogoutButton(

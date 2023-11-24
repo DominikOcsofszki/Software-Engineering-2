@@ -3,10 +3,9 @@ package de.hbrs.se2.womm.views.layouts;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
-import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.services.SecurityService;
 import de.hbrs.se2.womm.views.*;
 import de.hbrs.se2.womm.views.UHomepageUnternehmenView;
-import de.hbrs.se2.womm.views.SJobProjectWorkshopDisplayView;
 
 public class UnternehmenLayout extends AbstractLayout {
 
