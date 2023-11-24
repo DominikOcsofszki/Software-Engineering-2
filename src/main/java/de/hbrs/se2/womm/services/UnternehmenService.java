@@ -29,4 +29,9 @@ public class UnternehmenService {
                 .stream()
                 .map(mapper::unternehmenZuDTO).toList();
     }
+    public List<UnternehmenDTO> findAllUnternehmen() {
+        return unternehmenRepository.findAll()
+                .stream()
+                .map(mapper::unternehmenZuDTO).toList();
+    }
 }
