@@ -18,8 +18,8 @@ public class UnternehmenController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Void> getAllUnternehmen() {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<List<UnternehmenDTO>> getAllUnternehmen() {
+        return new ResponseEntity<>(unternehmenService.getAll(),HttpStatus.OK);
     }
 
     @GetMapping("/Unternehmen/{id}")
@@ -30,7 +30,7 @@ public class UnternehmenController {
 
     @GetMapping("/Unternehmen")
     public ResponseEntity<List<UnternehmenDTO>> getUnternehmenByName(@RequestParam(name = "name") String name) {
-         List<UnternehmenDTO> gefunden = unternehmenService.getUnternehmenDTOPerName(name);
+        List<UnternehmenDTO> gefunden = unternehmenService.getUnternehmenDTOPerName(name);
         return new ResponseEntity<>(gefunden,HttpStatus.OK);
     }
 
