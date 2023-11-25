@@ -5,16 +5,15 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-import de.hbrs.se2.womm.services.UnternehmenService;
+import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 
 @PageTitle("MainView")
 @AnonymousAllowed
 @Route(value = "filter", layout = LoggedOutLayout.class)
-public class AlleUnternehmenView extends VerticalLayout {
+public class FilterView extends VerticalLayout {
 
-    public AlleUnternehmenView(UnternehmenService unternehmenService){
-        de.hbrs.se2.womm.views.extra.FilterGridComponentUnternehmen filterGridComponent = new de.hbrs.se2.womm.views.extra.FilterGridComponentUnternehmen(unternehmenService);
-        add(filterGridComponent);
+    public FilterView(StudentService unternehmenService){
+        add(new ComponentMusterFilterGrid(unternehmenService));
     }
 }
