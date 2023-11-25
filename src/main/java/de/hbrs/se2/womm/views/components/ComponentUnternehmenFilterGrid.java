@@ -13,12 +13,12 @@ import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.components.SEARCHFILTER;
 
 import static de.hbrs.se2.womm.views.components.SEARCHFILTER.*;
-public class FilterGridComponentUnternehmen extends VerticalLayout {
+public class ComponentUnternehmenFilterGrid extends VerticalLayout {
     Grid<UnternehmenDTO> grid = new Grid<>();
     TextField filterText = new TextField();
     Select<SEARCHFILTER> select = new Select<>();
 
-    public FilterGridComponentUnternehmen(UnternehmenService unternehmenService) {
+    public ComponentUnternehmenFilterGrid(UnternehmenService unternehmenService) {
         addClassName("list-view");
         setSizeFull();
         configureGrid();
