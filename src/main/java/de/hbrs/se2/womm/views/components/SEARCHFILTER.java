@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views;
+package de.hbrs.se2.womm.views.components;
 
 
 public enum SEARCHFILTER {
