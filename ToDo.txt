@@ -1,0 +1,2 @@
+A mapper for mapping nutzer.profilimg => DTO.Logo
+Refactor the api since wrong names
