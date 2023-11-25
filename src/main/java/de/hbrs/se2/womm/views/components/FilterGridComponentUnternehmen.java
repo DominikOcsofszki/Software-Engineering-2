@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views;
+package de.hbrs.se2.womm.views.extra;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -7,35 +7,26 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
-
 import com.vaadin.flow.component.AbstractField;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.services.UnternehmenService;
-import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
+import de.hbrs.se2.womm.views.components.SEARCHFILTER;
 
-
-import static de.hbrs.se2.womm.views.SEARCHFILTER.*;
-
-@PageTitle("MainView")
-@AnonymousAllowed
-@Route(value = "", layout = LoggedOutLayout.class)
-public class MainView extends VerticalLayout {
+import static de.hbrs.se2.womm.views.components.SEARCHFILTER.*;
+public class FilterGridComponentUnternehmen extends VerticalLayout {
     Grid<UnternehmenDTO> grid = new Grid<>();
     TextField filterText = new TextField();
     Select<SEARCHFILTER> select = new Select<>();
 
-public MainView(UnternehmenService unternehmenService) {
-    addClassName("list-view");
-    setSizeFull();
-    configureGrid();
-    grid.setItems(unternehmenService.findAllUnternehmen());
-    add(getToolbar(), grid);
-    setFilterBy(select.getValue());
-    select.addValueChangeListener(event -> setFilterBy(event.getValue()));
-}
+    public FilterGridComponentUnternehmen(UnternehmenService unternehmenService) {
+        addClassName("list-view");
+        setSizeFull();
+        configureGrid();
+        grid.setItems(unternehmenService.getAll());
+        add(getToolbar(), grid);
+        setFilterBy(select.getValue());
+        select.addValueChangeListener(event -> setFilterBy(event.getValue()));
+    }
     private Select<SEARCHFILTER> selectFilterMenu() {
         select.setPlaceholder("Filter");
         select.setItems(SEARCHFILTER.allSEARCHFILTER());
