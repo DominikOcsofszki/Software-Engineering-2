@@ -17,12 +17,11 @@ public class StudentDTO {
     private String studentSpezialisierung;
     private Integer studentSemester;
 
-    private com.vaadin.flow.component.html.Image getPlaceholderImage(){
-        return ASSETS.buildPlaceholder(50,50);
-    }
     public Image getImage(){
-        if(nutzer == null || nutzer.getNutzerProfilbild() == null) return getPlaceholderImage();
-        return new com.vaadin.flow.component.html.Image("data:image/png;base64,"
+        if(nutzer == null || nutzer.getNutzerProfilbild() == null) {
+            return ASSETS.buildPlaceholder(50,50);
+        }
+        return new Image("data:image/png;base64,"
                 + nutzer.getNutzerProfilbild(), "getImage");
     }
     public static String[] getAllFilter(){
