@@ -6,7 +6,7 @@ import de.hbrs.se2.womm.views.layouts.ASSETS;
 import lombok.Data;
 
 @Data
-public class StudentDTO {
+public class StudentDTO extends AbstractDTO{
     private Nutzer nutzer;
     private Long studentId;
     private String studentVorname;

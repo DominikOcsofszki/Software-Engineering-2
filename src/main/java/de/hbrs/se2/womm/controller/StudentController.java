@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users/")
-public class StudentController {
+public class StudentController extends AbstractControllerOurs {
 
     StudentService studentService;
 
