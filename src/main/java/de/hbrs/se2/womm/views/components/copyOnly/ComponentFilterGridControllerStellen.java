@@ -9,17 +9,18 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
+import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
-import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.dtos.StelleDTO;
 
 import java.util.List;
 
 public class ComponentFilterGridControllerStellen extends VerticalLayout {
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
-    Grid<StudentDTO> grid = new Grid<>();
-    String[] filterByItemsFromDTO = StudentDTO.getAllFilter();
+    Grid<StelleDTO> grid = new Grid<>();
+    String[] filterByItemsFromDTO = StelleDTO.getAllFilter();
 
     public ComponentFilterGridControllerStellen(AbstractControllerForFilter controller) {
         List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
@@ -29,7 +30,7 @@ public class ComponentFilterGridControllerStellen extends VerticalLayout {
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
     private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerForFilter controller){
-        return ((StudentController)controller).getAllStudents().getBody(); //ToDo: change Cast here
+        return ((StelleController)controller).getAll().getBody(); //ToDo: change Cast here
     }
 
     private void setUpGrid(List<? extends AbstractDTO> itemsForGrid){
@@ -37,7 +38,7 @@ public class ComponentFilterGridControllerStellen extends VerticalLayout {
         setSizeFull();
         configureGrid();
 //        grid.setItems();
-        grid.setItems((List<StudentDTO>)itemsForGrid); //TODO: change Cast here
+        grid.setItems((List<StelleDTO>)itemsForGrid); //TODO: change Cast here
 
     }
     private Select<String> selectFilterMenu() {
@@ -57,16 +58,12 @@ public class ComponentFilterGridControllerStellen extends VerticalLayout {
     }
 
     private void configureGrid() {
-//        grid.addColumn(StudentDTO::getNutzer).setHeader("Nutzer").setSortable(true).setComparator(StudentDTO::getNutzer);
-        grid.addColumn(StudentDTO::getStudentId).setHeader("StudentId").setSortable(true).setComparator(StudentDTO::getStudentId);
-        grid.addColumn(StudentDTO::getStudentVorname).setHeader("StudentVorname").setSortable(true).setComparator(StudentDTO::getStudentVorname);
-        grid.addColumn(StudentDTO::getStudentName).setHeader("StudentName").setSortable(true).setComparator(StudentDTO::getStudentName);
-        grid.addColumn(StudentDTO::getStudentGeburtstag).setHeader("StudentGeburtstag").setSortable(true).setComparator(StudentDTO::getStudentGeburtstag);
-//        grid.addColumn(StudentDTO::getStudentBenachrichtigung).setHeader("StudentBenachrichtigung").setSortable(true).setComparator(StudentDTO::getStudentBenachrichtigung);
-        grid.addColumn(StudentDTO::getStudentBio).setHeader("StudentBio").setSortable(true).setComparator(StudentDTO::getStudentBio);
-        grid.addColumn(StudentDTO::getStudentSpezialisierung).setHeader("StudentSpezialisierung").setSortable(true).setComparator(StudentDTO::getStudentSpezialisierung);
-        grid.addColumn(StudentDTO::getStudentSemester).setHeader("StudentSemester").setSortable(true).setComparator(StudentDTO::getStudentSemester);
-
+        grid.addColumn(StelleDTO::getStelleId).setHeader("StelleId").setSortable(true).setComparator(StelleDTO::getStelleId);
+        grid.addColumn(StelleDTO::getStelleTitel).setHeader("StelleTitel").setSortable(true).setComparator(StelleDTO::getStelleTitel);
+        grid.addColumn(StelleDTO::getStelleOrt).setHeader("StelleOrt").setSortable(true).setComparator(StelleDTO::getStelleOrt);
+        grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader("StelleBeschreibung").setSortable(true).setComparator(StelleDTO::getStelleBeschreibung);
+        grid.addColumn(StelleDTO::getStelleWebsite).setHeader("StelleWebsite").setSortable(true).setComparator(StelleDTO::getStelleWebsite);
+        grid.addColumn(StelleDTO::getStelleUnternehmen).setHeader("StelleUnternehmen").setSortable(true).setComparator(StelleDTO::UnternehmenName);
     }
 
 
@@ -75,24 +72,21 @@ public class ComponentFilterGridControllerStellen extends VerticalLayout {
                 (AbstractField.ComponentValueChangeEvent<TextField, String> event)
                         -> {
                     String inputSearchNameFilter = event.getValue();
-                    ((ListDataProvider<StudentDTO>) grid.getDataProvider()).
-                            setFilter((StudentDTO studentDTO)
-                                    -> filterFunction(studentDTO, inputSearchNameFilter, searchBy));
+                    ((ListDataProvider<StelleDTO>) grid.getDataProvider()).
+                            setFilter((StelleDTO stelleDTO)
+                                    -> filterFunction(stelleDTO, inputSearchNameFilter, searchBy));
                 }
         );
     }
-    private boolean filterFunction(StudentDTO studentDTO, String inputSearchNameFilter, String searchBy) {
+    private boolean filterFunction(StelleDTO stelleDTO, String inputSearchNameFilter, String searchBy) {
         inputSearchNameFilter = inputSearchNameFilter.toLowerCase();
         String checkUnternehmen = switch (searchBy) {
-            case "nutzer" -> studentDTO.getNutzer().toString().toLowerCase();
-            case "studentId" -> studentDTO.getStudentId().toString().toLowerCase();
-            case "studentVorname" -> studentDTO.getStudentVorname().toString().toLowerCase();
-            case "studentName" -> studentDTO.getStudentName().toString().toLowerCase();
-            case "studentGeburtstag" -> studentDTO.getStudentGeburtstag().toString().toLowerCase();
-//            case "studentBenachrichtigung" -> studentDTO.getStudentBenachrichtigung().toString().toLowerCase();
-            case "studentBio" -> studentDTO.getStudentBio().toString().toLowerCase();
-            case "studentSpezialisierung" -> studentDTO.getStudentSpezialisierung().toString().toLowerCase();
-            case "studentSemester" -> studentDTO.getStudentSemester().toString().toLowerCase();
+            case  "stelleId" -> stelleDTO.getStelleId().toString().toLowerCase();
+            case  "stelleTitel" -> stelleDTO.getStelleTitel().toString().toLowerCase();
+            case  "stelleOrt" -> stelleDTO.getStelleOrt().toString().toLowerCase();
+            case  "stelleBeschreibung" -> stelleDTO.getStelleBeschreibung().toString().toLowerCase();
+            case  "stelleWebsite" -> stelleDTO.getStelleWebsite().toString().toLowerCase();
+            case  "stelleUnternehmen" -> stelleDTO.getStelleUnternehmen().toString().toLowerCase();
             default -> throw new IllegalStateException("Unexpected value: " + searchBy);
         };
         return checkUnternehmen.contains(inputSearchNameFilter);
