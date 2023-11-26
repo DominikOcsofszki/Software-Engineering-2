@@ -13,9 +13,7 @@ public class ASSETS {
     static public class LOGO {
 
     }
-
-    static public class IMG {
-        public static String PLACEHOLDER = "themes/theme_1/logo_placeholder.png";
+        static public class IMG {
 
         public static String IMG1 = "themes/theme_1/Hiring_pic.jpg";
         public static String IMG2 = "themes/theme_1/Womm_big_logo.png";
@@ -26,6 +24,7 @@ public class ASSETS {
         public static String IMG7 = "themes/theme_1/previewPage.png";
         public static String IMG8 = "themes/theme_1/user.png";
         public static String IMG9 = "themes/theme_1/logo_placeholder.png";
+        public static String PLACEHOLDER = "themes/theme_1/logo_placeholder.png";
 
 
     }

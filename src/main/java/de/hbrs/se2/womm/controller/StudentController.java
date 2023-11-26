@@ -32,7 +32,6 @@ public class StudentController {
         return studentService.getById(id)
                 .map(studentDTO -> new ResponseEntity<>(studentDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
-
     }
 
     @PostMapping("students")
