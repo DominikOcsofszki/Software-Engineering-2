@@ -17,7 +17,7 @@ public class UnternehmenController {
         this.unternehmenService = unternehmenService;
     }
 
-    @GetMapping("")
+    @GetMapping("/Unternehmen")
     public ResponseEntity<List<UnternehmenDTO>> getAllUnternehmen() {
         return new ResponseEntity<>(unternehmenService.getAll(),HttpStatus.OK);
     }
