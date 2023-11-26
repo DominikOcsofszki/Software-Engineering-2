@@ -1,28 +1,41 @@
 package de.hbrs.se2.womm.controller;
 
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.services.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/users/students")
-public class StudentController {
+@RequestMapping("/api/users/")
+public class StudentController extends AbstractControllerOurs {
 
-    // TODO add logic to methods and suitable return types for ResponseEntities
+    StudentService studentService;
 
-    @GetMapping("")
-    public ResponseEntity<Void> getAllStudents() {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
-    @GetMapping("/student/{id}")
-    public ResponseEntity<Void> getStudentById(@PathVariable String id) {
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("students")
+    public ResponseEntity<List<StudentDTO>> getAllStudents() {
+        return new ResponseEntity<>(
+                studentService.getAlleStudenten(),
+                HttpStatus.OK
+        );
     }
 
-    @PatchMapping("/student/{id}")
-    public ResponseEntity<Void> updateStudent(@PathVariable String id, @RequestBody StudentDTO request) {
+    @GetMapping("students/{id}")
+    public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
+        return studentService.getById(id)
+                .map(studentDTO -> new ResponseEntity<>(studentDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping("students")
+    public ResponseEntity<Void> updateStudent(@RequestBody StudentDTO studentDTO) {
+        studentService.saveStudent(studentDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,12 +1,18 @@
 package de.hbrs.se2.womm.dtos;
 
+import de.hbrs.se2.womm.entities.Unternehmen;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
+@Builder
 @Data
+@Getter
 public class StelleDTO {
     private Long stelleId;
-    private String titel;
-    private String ort;
-    private String beschreibung;
-    private String website;
+    private String stelleTitel;
+    private String stelleOrt;
+    private String stelleBeschreibung;
+    private String stelleWebsite;
+    private Unternehmen stelleUnternehmen;
 }

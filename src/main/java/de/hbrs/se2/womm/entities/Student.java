@@ -3,10 +3,8 @@ package de.hbrs.se2.womm.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "student", schema = "se")
+@Table(name = "student")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,7 +15,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "student_id")
-    private Integer studentId;
+    private Long studentId;
 
     @Column(name = "student_vorname", nullable = false)
     private String studentVorname;
@@ -26,7 +24,7 @@ public class Student {
     private String studentName;
 
     @Column(name = "student_geburtstag", nullable = false)
-    private Date studentGeburtstag;
+    private String studentGeburtstag;
 
     @Column(name = "student_benachrichtigung", nullable = false)
     private Boolean studentBenachrichtigung;

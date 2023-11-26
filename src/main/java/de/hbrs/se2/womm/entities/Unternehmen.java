@@ -3,10 +3,8 @@ package de.hbrs.se2.womm.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "unternehmen",schema = "se")
+@Table(name = "unternehmen")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,13 +18,13 @@ public class Unternehmen {
     private Integer unternehmenId;
 
     @Column(name = "unternehmen_name", nullable = false)
-    private String unternehmenName;
+    private String name;
 
     @Column(name = "unternehmen_beschreibung")
-    private String unternehmenBeschreibung;
+    private String beschreibung;
 
     @Column(name = "unternehmen_gruendung")
-    private Date unternehmenGruendung;
+    private String gruendung;
 
     @OneToOne
     @JoinColumn(name = "nutzer_id")
