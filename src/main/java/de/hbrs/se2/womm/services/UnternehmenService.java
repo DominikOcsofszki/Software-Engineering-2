@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.services;
 
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.entities.Unternehmen;
 import de.hbrs.se2.womm.mapper.UnternehmenMapper;
 import de.hbrs.se2.womm.repositories.UnternehmenRepository;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class UnternehmenService{
     }
 
     public List<UnternehmenDTO> getUnternehmenDTOPerName(String unternehmenName) {
-        return unternehmenRepository.findUnternehmenByUnternehmenNameIgnoreCaseContaining(unternehmenName)
+        return unternehmenRepository.findUnternehmenByNameIgnoreCaseContaining(unternehmenName)
                 .stream()
                 .map(unternehmenMapper::unternehmenZuDTO).toList();
     }
@@ -31,6 +32,11 @@ public class UnternehmenService{
         return unternehmenRepository.findAll()
                 .stream()
                 .map(unternehmenMapper::unternehmenZuDTO).toList();
+    }
+
+    public void saveUnternehmen(UnternehmenDTO unternehmenDTO){
+        Unternehmen unternehmen = unternehmenMapper.dtoZuUnternehmen(unternehmenDTO);
+        unternehmenRepository.save(unternehmen);
     }
 
 }
