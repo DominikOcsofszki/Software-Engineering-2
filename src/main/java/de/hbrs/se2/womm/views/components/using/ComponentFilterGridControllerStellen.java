@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.components.copyOnly;
+package de.hbrs.se2.womm.views.components.using;
 
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.grid.Grid;
@@ -10,7 +10,6 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
 import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 
