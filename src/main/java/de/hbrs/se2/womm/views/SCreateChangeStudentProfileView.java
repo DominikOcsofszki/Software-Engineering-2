@@ -2,10 +2,14 @@ package de.hbrs.se2.womm.views;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.component.textfield.*;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -28,12 +32,14 @@ import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
-import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -50,6 +56,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import java.util.ArrayList;
 import java.util.List;
+import com.vaadin.flow.component.checkbox.Checkbox;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -92,6 +99,13 @@ public class SCreateChangeStudentProfileView extends VerticalLayout {
         TextField textField3 = new TextField();
         TextArea textArea = new TextArea();
         TextArea textArea2 = new TextArea();
+        DatePicker datePicker = new DatePicker("");
+        Checkbox checkbox1 = new Checkbox();
+        NumberField numberField = new NumberField();
+        LocalDate datum = LocalDate.parse("1999-01-01");
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd z");
+        //ZonedDateTime zonedDateTime = ZonedDateTime.parse("2015-05-05 Europe/Paris", formatter);
+        //LocalDate datum = LocalDate.from(java.time.ZonedDateTime.now().toInstant());
         ////////////////////Profile Picture//////////////////////////////////////////////////////////////////////////////
         Image i = new Image("themes/theme_1/user.png","Image not found");
         i.setWidth("100%");
@@ -130,49 +144,56 @@ public class SCreateChangeStudentProfileView extends VerticalLayout {
         headervert.add(headervert2);
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
-        ////////////////////Studiengang////////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Studiengang");
+        ////////////////////Geburtstag///////////////////////////////////////////////////////////////////////////////////
+        s = new Span("Geburtstag");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
         //select.setLabel("Select");
-        select.setWidth("100%");
-        setSelectSampleData(select);
+        //select.setWidth("100%");
+        //setSelectSampleData(select);
 
         s1 = new Span("Informatik (B.Sc.)");
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");          //color black
         headervert2.add(s);
         //headervert2.add(s1);
-        headervert2.add(select);
+        //headervert2.add(select);
+
+
+        datePicker.setValue(datum);
+        headervert2.add(datePicker);
         headervert2.setSpacing(false);
         headervert2.setPadding(false);
         headervert.add(headervert2);
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
-        ////////////////////Kontakt//////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////Benachrichtigungen///////////////////////////////////////////////////////////////////////////
         s = new Span("Kontakt");
-        textField.setLabel("Private email");
-        textField.setWidth("100%");
-        textField.setValue("max_mustermann@h-brs.de");
-        headervert2.add(s);
-        headervert2.add(textField);
-        textField2.setLabel("Rufnummer");
-        textField2.setWidth("100%");
-        textField2.setValue("01234 56789");
-        headervert2.add(textField2);
+        checkbox1.setLabel("Ich möchte Benachrichtigungen erhalten");
+        //checkbox.setLabel("I accept the terms and conditions");
+        //textField.setLabel("Private email");
+        //textField.setWidth("100%");
+        //textField.setValue("max_mustermann@h-brs.de");
+        //headervert2.add(s);
+        //headervert2.add(textField);
+        //textField2.setLabel("Rufnummer");
+        //textField2.setWidth("100%");
+        //textField2.setValue("01234 56789");
+        //headervert2.add(textField2);
        /* s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
         s1 = new Span("MyExampleMail@yahoo.com");
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");          //color black
         headervert2.add(s1);*/
+        headervert2.add(checkbox1);
         headervert2.setSpacing(false);
         headervert2.setPadding(false);
         headervert.add(headervert2);
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
-        ////////////////////Abschlüsse///////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Abschlüsse");
+        ////////////////////Biographie///////////////////////////////////////////////////////////////////////////////////
+        s = new Span("Biographie");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
         //textArea.setLabel("Text area");
@@ -189,26 +210,8 @@ public class SCreateChangeStudentProfileView extends VerticalLayout {
         headervert.add(headervert2);
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
-        ////////////////////Sprachen/////////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Sprachen");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        textField3.setLabel("Sprachen");
-        textField3.setWidth("100%");
-        textField3.setValue("Deutsch, Englisch");
-        s1 = new Span("Deutsch,Englisch");
-        s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "#192434");         //color black
-        headervert2.add(s);
-        //headervert2.add(s1);
-        headervert2.add(textField3);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////Interessen///////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Interessen");
+        ////////////////////Spezialisierungen////////////////////////////////////////////////////////////////////////////
+        s = new Span("Spezialisierungen");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
         textArea2.setWidth("100%");
@@ -224,6 +227,22 @@ public class SCreateChangeStudentProfileView extends VerticalLayout {
         Button b = new Button("Save Changes");
         b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         headervert.add(headervert2);
+        headervert.add(new Hr());
+        headervert2 = new VerticalLayout();
+        ////////////////////Semester////////////////////////////////////////////////////////////////////////////
+        s = new Span("Aktuelles Semester");
+        s.getElement().getStyle().set("font-size", "20px");
+        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
+        numberField.setLabel("Ich bin in Semester:");
+        numberField.setValue(4d);
+        numberField.setWidth("min-content");
+        headervert2.add(s);
+        headervert2.add(numberField);
+        headervert2.setSpacing(false);
+        headervert2.setPadding(false);
+        headervert.add(headervert2);
+        headervert.add(new Hr());
+
         headervert.add(b);
         Image im = new Image();
 
