@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.services;
 
+import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Unternehmen;
 import de.hbrs.se2.womm.mapper.UnternehmenMapper;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UnternehmenService{
+public class UnternehmenService implements IgetAllService{
     private final UnternehmenRepository unternehmenRepository;
     private final UnternehmenMapper unternehmenMapper = UnternehmenMapper.INSTANCE;
 
@@ -39,4 +40,10 @@ public class UnternehmenService{
         unternehmenRepository.save(unternehmen);
     }
 
+    @Override
+    public List<? extends AbstractDTO> getAllService() {
+        return unternehmenRepository.findAll()
+                .stream()
+                .map(unternehmenMapper::unternehmenZuDTO).toList();
+    }
 }
