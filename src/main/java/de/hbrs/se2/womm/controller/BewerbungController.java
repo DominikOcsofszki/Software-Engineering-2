@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.controller;
 
+import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.services.BewerbungService;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bewerbung")
-public class BewerbungController extends AbstractControllerForFilter {
+public class BewerbungController extends AbstractControllerForFilter implements IgetAllController{
 
     BewerbungService bewerbungService;
 
@@ -22,7 +23,7 @@ public class BewerbungController extends AbstractControllerForFilter {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<BewerbungDTO>> getAll() {
+    public ResponseEntity<List<BewerbungDTO>> getAllBewerbung() {
         return new ResponseEntity<>(bewerbungService.getAll(), HttpStatus.OK);
     }
 
@@ -31,5 +32,12 @@ public class BewerbungController extends AbstractControllerForFilter {
         return bewerbungService.getById(id)
                 .map((bewerbungDTO) -> new ResponseEntity<>(bewerbungDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    }
+    @Override
+    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
+        return new ResponseEntity<>(
+                bewerbungService.getAllService(),
+                HttpStatus.OK
+        );
     }
 }

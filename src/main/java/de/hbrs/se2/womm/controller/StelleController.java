@@ -1,8 +1,12 @@
 package de.hbrs.se2.womm.controller;
 
+import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
+import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.services.StelleService;
 import javassist.NotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/")
-public class StelleController extends AbstractControllerForFilter {
+public class StelleController extends AbstractControllerForFilter implements IgetAllController{
 
     StelleService stelleService;
 
@@ -36,5 +40,14 @@ public class StelleController extends AbstractControllerForFilter {
     @PostMapping("stellen")
     public void saveStelle(@RequestBody StelleDTO stelleDTO) {
         stelleService.saveStelle(stelleDTO);
+    }
+
+    @Override
+    @GetMapping("all")
+    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
+        return new ResponseEntity<>(
+                stelleService.getAllService(),
+                HttpStatus.OK
+        );
     }
 }
