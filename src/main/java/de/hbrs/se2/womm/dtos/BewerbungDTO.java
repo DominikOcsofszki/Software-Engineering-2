@@ -11,4 +11,14 @@ public class BewerbungDTO extends AbstractDTO{
     private String bewerbungText;
     private Stelle bewerbungStelle;
     private Student bewerbungStudent;
+
+    public static String[] getAllFilter(){
+        return new String[]{
+                "bewerbungId",
+                "bewerbungPdf",
+                "bewerbungText",
+                "bewerbungStelle",
+                "bewerbungStudent"
+        };
+    }
 }
