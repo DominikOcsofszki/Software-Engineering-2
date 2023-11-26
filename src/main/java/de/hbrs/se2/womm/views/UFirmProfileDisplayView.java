@@ -37,25 +37,25 @@ public class UFirmProfileDisplayView extends VerticalLayout {
         logoAndName.add(new H2("Firm Name")); // Replace with the actual company name
         logoAndSubscribeLayout.add(logoAndName);
 
-        // Subscribe Button
-        Button subscribeButton = new Button("Subscribe");
-        subscribeButton.addClickListener(e -> {
-            // Logic for subscription
-            // You can implement the subscription logic here
-            Notification.show("Subscribed!");
-        });
-        logoAndSubscribeLayout.add(subscribeButton);
-
-        // Chat Button
-        Button chatButton = new Button("Chat");
-        chatButton.addClickListener(e -> {
-            // Logic for opening a chat
-            Notification.show("Opening Chat...");
-        });
-
+//        // Subscribe Button
+//        Button subscribeButton = new Button("Subscribe");
+//        subscribeButton.addClickListener(e -> {
+//            // Logic for subscription
+//            // You can implement the subscription logic here
+//            Notification.show("Subscribed!");
+//        }); //ToDo Delete since only for student
+//        logoAndSubscribeLayout.add(subscribeButton);
+//
+//        // Chat Button
+//        Button chatButton = new Button("Chat");
+//        chatButton.addClickListener(e -> {
+//            // Logic for opening a chat
+//            Notification.show("Opening Chat...");
+//        }); //ToDo Delete since only for student
+//
         add(buttonsLayout);
         buttonsLayout.add(logoAndSubscribeLayout);
-        buttonsLayout.add(chatButton);
+//        buttonsLayout.add(chatButton);
 
         // Rating with Number of Reviews
         HorizontalLayout ratingLayout = new HorizontalLayout();

@@ -13,8 +13,7 @@ public class ASSETS {
     static public class LOGO {
 
     }
-
-    static public class IMG {
+        static public class IMG {
 
         public static String IMG1 = "themes/theme_1/Hiring_pic.jpg";
         public static String IMG2 = "themes/theme_1/Womm_big_logo.png";
