@@ -24,6 +24,7 @@
         <vaadin.version>24.2.0</vaadin.version>
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
         <checkstyle-validation.var>none</checkstyle-validation.var> <!-- off<- none/validate -> on-->
+        <checkstyle-version.var>3.3.1</checkstyle-version.var> <!-- off<- none/validate -> on-->
         <sonar.host.url>https://sepp-sonar.inf.h-brs.de/</sonar.host.url>
     </properties>
     <reporting>
@@ -31,7 +32,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>${checkstyle-version.var}</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -148,7 +149,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${checkstyle-version.var}</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
