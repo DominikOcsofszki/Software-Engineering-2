@@ -23,25 +23,23 @@ public class ComponentMusterFilterGridController extends VerticalLayout {
     Grid<StudentDTO> grid = new Grid<>();
     String[] filterByItemsFromDTO = StudentDTO.getAllFilter();
 
-
-    public ComponentMusterFilterGridController(AbstractControllerOurs studentController) {
-        List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(studentController);
-
+    public ComponentMusterFilterGridController(AbstractControllerOurs controller) {
+        List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
         setUpGrid(itemsForGrid);
         add(getToolbar(), grid);
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
     private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerOurs controller){
-        return ((StudentController)controller).getAllStudents().getBody();
+        return ((StudentController)controller).getAllStudents().getBody(); //ToDo: change Cast here
     }
 
     private void setUpGrid(List<? extends AbstractDTO> itemsForGrid){
         addClassName("list-view");
         setSizeFull();
         configureGrid();
-        grid.setItems();
-        grid.setItems((DataProvider<StudentDTO, Void>) itemsForGrid);
+//        grid.setItems();
+        grid.setItems((List<StudentDTO>)itemsForGrid); //TODO: change Cast here
 
     }
     private Select<String> selectFilterMenu() {

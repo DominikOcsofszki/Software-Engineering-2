@@ -18,9 +18,14 @@ public class FilterView extends VerticalLayout {
 
 //    public FilterView(StudentService studentService){
     public FilterView(StudentController studentController){
+//        add(new ComponentMusterFilterGridControllerStudent(studentController));
+    add(new ComponentMusterFilterGridController(studentController));
+
 //        add(new ComponentMusterFilterGridController(studentController));
-        add(new ComponentMusterFilterGridControllerStudent(studentController));
+//        add(new ComponentMusterFilterGridControllerStudent(studentController));
+
 //        add(new ComponentUnternehmenFilterGridAPI());
+
 //        add(new ComponentStudentsFilterGrid(studentService));
         ImageService imageService = new ImageService();
         Image newImge = imageService.test();

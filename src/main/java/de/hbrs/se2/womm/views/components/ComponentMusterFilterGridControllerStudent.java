@@ -12,6 +12,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.entities.Student;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ComponentMusterFilterGridControllerStudent extends VerticalLayout {
     public ComponentMusterFilterGridControllerStudent(StudentController studentController) {
         List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(studentController);
 
-        setUpGrid(itemsForGrid);
+        setUpGrid((List<StudentDTO>)itemsForGrid);
         add(getToolbar(), grid);
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
@@ -34,12 +35,13 @@ public class ComponentMusterFilterGridControllerStudent extends VerticalLayout {
         return studentController.getAllStudents().getBody();
     }
 
-    private void setUpGrid(List<? extends AbstractDTO> itemsForGrid){
+    private void setUpGrid(List<StudentDTO> itemsForGrid){
+//        private void setUpGrid(List<? extends AbstractDTO> itemsForGrid){
         addClassName("list-view");
         setSizeFull();
         configureGrid();
-        grid.setItems();
-        grid.setItems((DataProvider<StudentDTO, Void>) itemsForGrid);
+//        grid.setItems();
+        grid.setItems(itemsForGrid);
     }
     private Select<String> selectFilterMenu() {
         select.setPlaceholder("Filter");

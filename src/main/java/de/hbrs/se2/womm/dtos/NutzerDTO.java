@@ -16,7 +16,7 @@ public class NutzerDTO {
     private String ort;
     private byte[] profilbild;
 
-    public String getNutzerProfilbild() {
-        return Arrays.toString(profilbild);
+    public byte[] getNutzerProfilbild() {
+        return profilbild;
     }
 }
