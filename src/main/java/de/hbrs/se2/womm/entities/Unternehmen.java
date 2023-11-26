@@ -18,13 +18,13 @@ public class Unternehmen {
     private Integer unternehmenId;
 
     @Column(name = "unternehmen_name", nullable = false)
-    private String unternehmenName;
+    private String name;
 
     @Column(name = "unternehmen_beschreibung")
-    private String unternehmenBeschreibung;
+    private String beschreibung;
 
     @Column(name = "unternehmen_gruendung")
-    private String unternehmenGruendung;
+    private String gruendung;
 
     @OneToOne
     @JoinColumn(name = "nutzer_id")
