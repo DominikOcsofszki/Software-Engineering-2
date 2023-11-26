@@ -2,6 +2,7 @@ package de.hbrs.se2.womm.views;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -25,8 +26,10 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         Button b = new Button("Home");
         header.add(b);
         b.addClickListener( e -> UI.getCurrent().navigate(LandingPageView.class));
+        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         b = new Button("Start Chatting");
         b.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
+        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         header.add(b);
         b.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
@@ -35,8 +38,8 @@ public class SStudentProfileDisplayView extends VerticalLayout {
     private void Profil() {
         HorizontalLayout header = new HorizontalLayout();
         Image i = new Image("themes/theme_1/user.png","Image not found");
-        i.setWidth("30%");
-        i.setHeight("30%");
+        i.setWidth("20%");
+        i.setHeight("20%");
         //i.setHeight(300, Unit.PIXELS); //for fixed values
         header.add(i);
         VerticalLayout headervert = new VerticalLayout();
@@ -54,10 +57,11 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         headervert.add(headervert2);
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
-        s = new Span("Studiengang");
+        s = new Span("Geburtstag");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("Informatik (B.Sc.)");
+        s1 = new Span("01.01.1997");
+
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
@@ -67,10 +71,11 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         headervert.add(headervert2);
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
-        s = new Span("Kontakt");
+        headervert.setWidth("50%");
+        s = new Span("Biographie");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("MyExampleMail@yahoo.com");
+        s1 = new Span("2018 nach dem Abitur, Ausbildung als Einzelhandeskaufmann, 2021 nach der Ausbildung angestellt als Einzelhandelskaufmann, Seit 2022 Vollzeit-Informatikstudent.");
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
@@ -80,10 +85,10 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         headervert.add(headervert2);
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
-        s = new Span("Abschlüsse");
+        s = new Span("Spezialisierungen");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("Noch keine");
+        s1 = new Span("Windows-User, Social-Media-Plattformen, Officeprogramme, diverse IDEs: viel Java-Coding Erfahrung, mäßige C-Coding  Erfahrung");
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
@@ -93,10 +98,10 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         headervert.add(headervert2);
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
-        s = new Span("Sprachen");
+        s = new Span("Akutelles Semester");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("Deutsch,Englisch");
+        s1 = new Span("4.");
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
@@ -105,18 +110,6 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         headervert2.setPadding(false);
         headervert.add(headervert2);
         headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        s = new Span("Interessen");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("Datenbanken, Testen, Websites");
-        s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "#192434");     //color black
-        headervert2.add(s);
-        headervert2.add(s1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
         header.add(headervert);
         add(header);
     }
