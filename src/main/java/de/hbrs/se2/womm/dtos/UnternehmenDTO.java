@@ -12,7 +12,7 @@ import com.vaadin.flow.component.html.Image;
 @Data
 @Builder
 @Getter
-public class UnternehmenDTO {
+public class UnternehmenDTO extends AbstractDTO{
     private Long unternehmenId;
     private String name;
     private String beschreibung;
