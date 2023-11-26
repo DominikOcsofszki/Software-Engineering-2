@@ -5,7 +5,7 @@ import de.hbrs.se2.womm.entities.Student;
 import lombok.Data;
 
 @Data
-public class BewerbungDTO {
+public class BewerbungDTO extends AbstractDTO{
     private Long bewerbungId;
     private byte[] bewerbungPdf;
     private String bewerbungText;

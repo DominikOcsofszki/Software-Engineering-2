@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-public class UnternehmenController {
+public class UnternehmenController extends AbstractControllerForFilter {
     UnternehmenService unternehmenService;
 
     public UnternehmenController(UnternehmenService unternehmenService){

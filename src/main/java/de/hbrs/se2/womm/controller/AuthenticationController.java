@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/auth")
-public class AuthenticationController {
+public class AuthenticationController extends AbstractControllerForFilter {
 
     // TODO add logic to methods and suitable return types for ResponseEntities
 

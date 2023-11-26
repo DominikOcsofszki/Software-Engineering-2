@@ -16,7 +16,6 @@ import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 @Route(value = "filter", layout = LoggedOutLayout.class)
 public class FilterView extends VerticalLayout {
 
-//    public FilterView(StudentService studentService){
     public FilterView(StudentController studentController){
 //        add(new ComponentMusterFilterGridControllerStudent(studentController));
     add(new ComponentMusterFilterGridController(studentController));
