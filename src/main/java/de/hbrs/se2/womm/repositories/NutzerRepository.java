@@ -8,7 +8,5 @@ import java.util.List;
 public interface NutzerRepository extends JpaRepository<Nutzer, Long> {
     Nutzer findByNutzerId(long nutzerID);
 
-    List<Nutzer> findByNutzerNameContaining(String name);
-
     List<Nutzer> findByNutzerMailContaining(String mail);
 }
