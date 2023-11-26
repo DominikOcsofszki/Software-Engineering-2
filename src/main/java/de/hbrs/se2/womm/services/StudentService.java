@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentService implements FilterMethods{
+public class StudentService{
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper = StudentMapper.INSTANCE;
 
@@ -35,10 +35,5 @@ public class StudentService implements FilterMethods{
     public void saveStudent(StudentDTO studentDTO) {
         Student student = studentMapper.studentDtoToStudent(studentDTO);
         studentRepository.save(student);
-    }
-
-    @Override
-    public List<StudentDTO> getAll() {
-        return getAlleStudenten();
     }
 }

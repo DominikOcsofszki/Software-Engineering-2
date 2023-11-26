@@ -18,7 +18,7 @@ public class UnternehmenDTO {
     private String beschreibung;
     private String gruendung;
     private Nutzer nutzer;
-    public Image getImage(){
+    public Image PlaceholderOrImage(){
         if(nutzer == null || nutzer.getNutzerProfilbild() == null) {
             return ASSETS.buildPlaceholder(50,50);
         }

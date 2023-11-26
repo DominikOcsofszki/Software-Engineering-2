@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UnternehmenService implements FilterMethods{
+public class UnternehmenService{
     private final UnternehmenRepository unternehmenRepository;
     private final UnternehmenMapper unternehmenMapper = UnternehmenMapper.INSTANCE;
 
@@ -27,15 +27,10 @@ public class UnternehmenService implements FilterMethods{
                 .stream()
                 .map(unternehmenMapper::unternehmenZuDTO).toList();
     }
-    public List<UnternehmenDTO> getAllUnternehmen() {
-        return unternehmenRepository
-                .findAll()
-                .stream()
-                .map(unternehmenMapper::unternehmenZuDTO)
-                .toList();
-    }
-    @Override
     public List<UnternehmenDTO> getAll() {
-        return getAllUnternehmen();
+        return unternehmenRepository.findAll()
+                .stream()
+                .map(unternehmenMapper::unternehmenZuDTO).toList();
     }
+
 }

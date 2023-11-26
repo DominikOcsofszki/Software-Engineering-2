@@ -17,7 +17,7 @@ public class StudentDTO {
     private String studentSpezialisierung;
     private Integer studentSemester;
 
-    public Image getImage(){
+    public Image PlaceholderOrImage(){
         if(nutzer == null || nutzer.getNutzerProfilbild() == null) {
             return ASSETS.buildPlaceholder(50,50);
         }
