@@ -1,6 +1,6 @@
 
 Change studentDTO  and StudentDTO to your DTO names
-%s=\(\w*\) "\(\w\)\(\w*\)",= \1 "\2\3" -> studentDTO.get\U\2\E\3().toString().toLowerCase();
+%s=\(\w*\) "\(\w\)\(\w*\)",= case \1 "\2\3" -> studentDTO.get\U\2\E\3().toString().toLowerCase();
 
 
 %s=.* "\(\w\)\(\w*\)",=        grid.addColumn(StudentDTO::get\U\1\E\2).setHeader("\U\1\E\2").setSortable(true).setComparator(StudentDTO::get\U\1\E\2);
