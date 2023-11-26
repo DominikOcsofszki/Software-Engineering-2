@@ -3,7 +3,7 @@ package de.hbrs.se2.womm.consumer;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,49 +14,49 @@ import java.util.List;
 
 public class DemoConsumer {
 
-    DemoConsumer(URL url) {
+    DemoConsumer() {
+
+    }
+
+    public List<UnternehmenDTO> getUnternehmen(URL url) {
+        StringBuffer content = new StringBuffer();
         try {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestProperty("Content-Type", "application/json");
-
             con.setRequestMethod("GET");
 //            int responseCode = con.getResponseCode();
-//            System.out.println("Response Code: " + responseCode);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer content = new StringBuffer();
             while ((inputLine = in.readLine()) != null) {
                 content.append(inputLine);
             }
-//            System.out.println("content:" + content.toString());
             in.close();
             con.disconnect();
-            jsonToStudentDTO(content.toString());
         } catch (Exception e) {
             System.out.println(e);
         }
+        return jsonToDTO(content.toString());
+
     }
-    private List<StudentDTO> jsonToStudentDTO(String json) {
+    private List<UnternehmenDTO> jsonToDTO(String json) {
         Gson gson = new Gson();
-        ArrayList<StudentDTO> studentDTOList = new ArrayList<>();
+        ArrayList<UnternehmenDTO> dtoList = new ArrayList<>();
         JsonArray jsonArray = new Gson().fromJson(json, JsonArray.class);
         for (JsonElement item: jsonArray) {
-//            System.out.println(item);
-//            JsonObject jsonObject = item.getAsJsonObject();
-            studentDTOList.add(gson.fromJson(item, StudentDTO.class));
+            dtoList.add(gson.fromJson(item, UnternehmenDTO.class));
         }
-        System.out.println(studentDTOList);
-        return studentDTOList;
+//        System.out.println(dtoList);
+        return dtoList;
     }
 
     public static void main(String[] args) {
 
         try {
             URL url = new URL("http://localhost:8080/api/users");
-            DemoConsumer consumer = new DemoConsumer(url);
-
-
+            UnternehmenConsumer consumer = new UnternehmenConsumer();
+            List<UnternehmenDTO> dtoList = consumer.getUnternehmen(url);
+            dtoList.forEach(System.out::println);
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.components;
 
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -7,26 +8,41 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import com.vaadin.flow.component.AbstractField;
+import de.hbrs.se2.womm.consumer.UnternehmenConsumer;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.services.UnternehmenService;
-import de.hbrs.se2.womm.views.components.SEARCHFILTER;
 
-import static de.hbrs.se2.womm.views.components.SEARCHFILTER.*;
-public class ComponentUnternehmenFilterGrid extends VerticalLayout {
+import java.net.URL;
+import java.util.List;
+
+import static de.hbrs.se2.womm.views.components.SEARCHFILTER.NAME;
+
+public class ComponentUnternehmenFilterGridAPI extends VerticalLayout {
     Grid<UnternehmenDTO> grid = new Grid<>();
     TextField filterText = new TextField();
     Select<SEARCHFILTER> select = new Select<>();
 
-    public ComponentUnternehmenFilterGrid(UnternehmenService unternehmenService) {
+    public ComponentUnternehmenFilterGridAPI() {
         addClassName("list-view");
         setSizeFull();
         configureGrid();
-        grid.setItems(unternehmenService.getAll());
+//        grid.setItems(unternehmenService.getAll());
+        grid.setItems(getItemsForGridFromApi());
         add(getToolbar(), grid);
         setFilterBy(select.getValue());
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
+    private List<UnternehmenDTO> getItemsForGridFromApi(){
+        UnternehmenConsumer consumer = new UnternehmenConsumer();
+        try {
+            URL url = new URL("http://localhost:8080/api/users");
+            return consumer.getUnternehmen(url);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     private Select<SEARCHFILTER> selectFilterMenu() {
         select.setPlaceholder("Filter");
         select.setItems(SEARCHFILTER.allSEARCHFILTER());

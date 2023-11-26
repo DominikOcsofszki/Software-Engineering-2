@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.components;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -9,9 +10,11 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import de.hbrs.se2.womm.consumer.UnternehmenConsumer;
 import de.hbrs.se2.womm.dtos.StudentDTO;
-import de.hbrs.se2.womm.services.StudentService;
 
+
+import java.net.URL;
 import java.util.List;
 
 public class ComponentMusterFilterGrid extends VerticalLayout {
@@ -21,17 +24,57 @@ public class ComponentMusterFilterGrid extends VerticalLayout {
     String[] filterByItemsFromDTO = StudentDTO.getAllFilter();
 
 
-    public ComponentMusterFilterGrid(StudentService studentService) {
-        List<StudentDTO> itemsForGrid = studentService.getAll();
+    public ComponentMusterFilterGrid() {
+        List<StudentDTO> itemsForGrid = getItemsForGridFromApi();
 
         setUpGrid(itemsForGrid);
         add(getToolbar(), grid);
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
-    private List<StudentDTO> getItemsForGridFromApi(StudentService studentService){
-        return studentService.getAll();
+    private List<StudentDTO> getItemsForGridFromApi(){
+//        UnternehmenConsumer consumer = new UnternehmenConsumer();
+//        URL url = new URL("http://localhost:8080/api/users");
+//        return consumer.getUnternehmen(url);
+//        return new ArrayList<>(StudentDTO.getAllFilter());
+        return null;
+//        return getAllStudents();
     }
+//    public List<StudentDTO> getAllStudents() {
+//                try {
+//                    URL url = new URL("https://api.covid19api.com/summary");
+//                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//
+//                    connection.setRequestMethod("GET");
+//
+//                    int responseCode = connection.getResponseCode();
+//                    System.out.println("Response Code: " + responseCode);
+//
+//                    // Read the response from the API
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//                    StringBuilder response = new StringBuilder();
+//                    String line;
+//
+//                    while ((line = reader.readLine()) != null) {
+//                        response.append(line);
+//                    }
+//                    reader.close();
+//                    System.out.println("Response: " + response.toString());
+//                    // Convert the response to JSON
+//                    ObjectMapper objectMapper = new ObjectMapper();
+//                    StudentDTO dto = objectMapper.readValue(response.toString(), StudentDTO.class);
+//
+//                    // Use the DTO object
+//                    System.out.println("DTO Field: " + dto.getStudentName());
+//
+//                    // Close the connection
+//                    connection.disconnect();
+//                    return dto;
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//    }
     private void setUpGrid(List<StudentDTO> itemsForGrid){
         addClassName("list-view");
         setSizeFull();

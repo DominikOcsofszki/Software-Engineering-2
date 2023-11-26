@@ -27,7 +27,7 @@ public class ComponentStudentsFilterGrid extends VerticalLayout {
         addClassName("list-view");
         setSizeFull();
         configureGrid();
-        grid.setItems(studentService.getAll());
+        grid.setItems(studentService.getAlleStudenten());
     }
     private Select<String> selectFilterMenu() {
         select.setPlaceholder("Filter");

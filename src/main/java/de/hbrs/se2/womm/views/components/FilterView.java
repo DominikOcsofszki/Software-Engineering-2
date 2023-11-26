@@ -1,10 +1,12 @@
 package de.hbrs.se2.womm.views.components;
 
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.services.ImageService;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 
@@ -13,7 +15,9 @@ import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 @Route(value = "filter", layout = LoggedOutLayout.class)
 public class FilterView extends VerticalLayout {
 
-    public FilterView(StudentService unternehmenService){
-        add(new ComponentMusterFilterGrid(unternehmenService));
+    public FilterView(){
+        ImageService imageService = new ImageService();
+        Image newImge = imageService.test();
+        add(newImge);
     }
 }
