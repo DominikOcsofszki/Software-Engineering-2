@@ -34,18 +34,9 @@ public class UnternehmenController {
         return new ResponseEntity<>(gefunden,HttpStatus.OK);
     }
 
-    @PatchMapping("/Unternehmen/{id}")
-    public ResponseEntity<Void> updateUnternehmen(@PathVariable String id, @RequestBody UnternehmenDTO request) {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/Unternehmen/{id}/offers")
-    public ResponseEntity<Void> getAllOffersByUnternehmen(@PathVariable String id) {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/Unternehmen/{UnternehmenId}/offer/{offerId}")
-    public ResponseEntity<Void> getAllOffersByUnternehmen(@PathVariable String UnternehmenId, @PathVariable String offerId) {
+    @PostMapping("/Unternehmen")
+    public ResponseEntity<Void> saveUnternehmen(@RequestBody UnternehmenDTO zuErstellendesUnternehmen){
+        unternehmenService.saveUnternehmen(zuErstellendesUnternehmen);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
