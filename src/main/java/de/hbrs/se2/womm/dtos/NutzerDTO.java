@@ -5,8 +5,6 @@ import lombok.Data;
 @Data
 public class NutzerDTO {
     private Long nutzerId;
-    private String benutzername;
-    private String passwort;
     private String email;
     private boolean aktiv;
     private String ort;
