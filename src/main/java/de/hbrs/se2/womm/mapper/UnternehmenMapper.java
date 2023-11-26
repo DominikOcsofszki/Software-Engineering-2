@@ -11,10 +11,6 @@ import org.mapstruct.factory.Mappers;
 public interface UnternehmenMapper {
     UnternehmenMapper INSTANCE = Mappers.getMapper(UnternehmenMapper.class);
 
-    @Mapping(target = "nutzer", source = "nutzer")
-    @Mapping(target = "name", source = "unternehmenName")
-    @Mapping(target = "gruendung", source = "unternehmenGruendung")
-    @Mapping(target = "beschreibung", source = "unternehmenBeschreibung")
     UnternehmenDTO unternehmenZuDTO(Unternehmen unternehmen);
 
 }
