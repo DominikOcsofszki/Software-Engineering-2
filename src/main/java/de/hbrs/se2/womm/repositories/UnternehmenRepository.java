@@ -4,11 +4,12 @@ import de.hbrs.se2.womm.entities.Unternehmen;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UnternehmenRepository extends JpaRepository<Unternehmen, Long> {
-    Unternehmen findUnternehmenByUnternehmenId(long unternehmenID);
+    Optional<Unternehmen> findUnternehmenByUnternehmenId(long unternehmenID);
 
     Unternehmen findUnternehmenByNutzer_NutzerId(long nutzerID);
 
-    List<Unternehmen> findUnternehmenByUnternehmenNameContaining(String unternehmenName);
+    List<Unternehmen> findUnternehmenByNameIgnoreCaseContaining(String unternehmenName);
 }

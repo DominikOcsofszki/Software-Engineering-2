@@ -1,17 +1,28 @@
 package de.hbrs.se2.womm.dtos;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import de.hbrs.se2.womm.entities.Nutzer;
+import de.hbrs.se2.womm.views.layouts.ASSETS;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-import java.util.Date;
+//import java.awt.*;
+import com.vaadin.flow.component.html.Image;
+
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class UnternehmenDTO extends NutzerDTO {
+@Builder
+@Getter
+public class UnternehmenDTO extends AbstractDTO{
     private Long unternehmenId;
     private String name;
     private String beschreibung;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date gruendung;
-    private Long nutzerId;
+    private String gruendung;
+    private NutzerDTO nutzer;
+    public Image PlaceholderOrImage(){
+        if(nutzer == null || nutzer.getNutzerProfilbild() == null) {
+            return ASSETS.buildPlaceholder(50,50);
+        }
+        return new Image("data:image/png;base64,"
+                + nutzer.getNutzerProfilbild(), "getImage");
+    }
 }
