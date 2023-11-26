@@ -35,3 +35,6 @@ export sonarlogintokken=.....................
  ```
  mvn verify sonar:sonar -Dsonar.login=$sonarlogintokken    
  ```
+
+Link to Swagger UI:(after login)
+http://localhost:8080/swagger-ui/index.html

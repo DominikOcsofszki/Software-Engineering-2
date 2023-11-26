@@ -1,9 +1,7 @@
 package de.hbrs.se2.womm.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -11,11 +9,13 @@ import java.util.Date;
 @Table(name = "unternehmen",schema = "se")
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Unternehmen {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "unternehmen_id")
     private Integer unternehmenId;
 
@@ -31,6 +31,5 @@ public class Unternehmen {
     @OneToOne
     @JoinColumn(name = "nutzer_id")
     private Nutzer nutzer;
-
 }
 

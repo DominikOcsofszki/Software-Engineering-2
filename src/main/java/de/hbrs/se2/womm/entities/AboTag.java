@@ -1,19 +1,19 @@
 package de.hbrs.se2.womm.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "abo_tag",schema = "se")
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AboTag {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "abo_id")
     private Integer aboId;
 
@@ -27,6 +27,5 @@ public class AboTag {
     @ManyToOne
     @JoinColumn(name = "tag_id")
     private Tag tag;
-
 }
 

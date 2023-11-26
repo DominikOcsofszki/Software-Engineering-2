@@ -11,7 +11,7 @@ public class StudentController {
 
     // TODO add logic to methods and suitable return types for ResponseEntities
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<Void> getAllStudents() {
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,14 +1,17 @@
 package de.hbrs.se2.womm.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
-
 @Data
-public class UnternehmenDTO {
+@EqualsAndHashCode(callSuper = true)
+public class UnternehmenDTO extends NutzerDTO {
     private Long unternehmenId;
     private String name;
     private String beschreibung;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date gruendung;
     private Long nutzerId;
 }
