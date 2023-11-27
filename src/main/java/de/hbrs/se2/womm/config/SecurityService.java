@@ -20,4 +20,17 @@ public class SecurityService {
     public void logout() {
         authenticationContext.logout();
     }
+
+    public boolean isUserAdmin() {
+        return getAuthenticatedUser().toString().contains("ADMIN");
+    }
+
+    public boolean isUserUnternehmen() {
+        return getAuthenticatedUser().toString().contains("UNTERNEHMEN");
+    }
+
+    public boolean isUserStudent() {
+        return getAuthenticatedUser().toString().contains("STUDENT");
+    }
+
 }
