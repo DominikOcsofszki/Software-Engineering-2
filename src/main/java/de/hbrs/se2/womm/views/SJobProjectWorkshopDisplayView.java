@@ -12,6 +12,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.views.layouts.ASSETS;
@@ -23,7 +24,6 @@ import jakarta.annotation.security.RolesAllowed;
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("JobProjectWorkshopDisplayView")
 public class SJobProjectWorkshopDisplayView extends VerticalLayout {
-
 
     public SJobProjectWorkshopDisplayView() {
         setUpBanner();
@@ -63,19 +63,31 @@ public class SJobProjectWorkshopDisplayView extends VerticalLayout {
         VerticalLayout stellenanzeige = new VerticalLayout();
 
 
-        //ToDo bestimmete StellenanzeigeBezeichnung anzeigen
-        //Textfeld
-        Paragraph bezeichnung = new Paragraph();
-        bezeichnung.setEnabled(false);
-        bezeichnung.setText("Werksstudenten-Stelle");
+        //ToDo bestimmete StelleTitel anzeigen
+        //Textfeld StelleTitel
+        Paragraph titel = new Paragraph();
+        titel.setText("Werksstudenten-Stelle");
 
-        stellenanzeige.add(bezeichnung);
+        stellenanzeige.add(titel);
 
-        //ToDo bestimmte StellenanzeigeBeschreibung anzeigen
-        //Textfeld
+        //ToDo bestimmete StelleOrt anzeigen
+        //Textfeld StelleOrt
+        Paragraph ort = new Paragraph();
+        ort.setText("Bonn");
+
+        stellenanzeige.add(ort);
+
+        //ToDo bestimmete StelleOrt anzeigen
+        //Textfeld StelleWebsite
+        Paragraph website = new Paragraph();
+        website.setText("https://www.google.com/");
+
+        stellenanzeige.add(website);
+
+        //ToDo bestimmte StelleBeschreibung anzeigen
+        //Textfeld StelleBeschreibung
         Paragraph beschreibung = new Paragraph();
         beschreibung.setWidthFull();
-        beschreibung.setEnabled(false);
         beschreibung.setText("Hier könnte ihre Werbung für einen ausbeutenden Job stehen.");
 
         stellenanzeige.add(beschreibung);

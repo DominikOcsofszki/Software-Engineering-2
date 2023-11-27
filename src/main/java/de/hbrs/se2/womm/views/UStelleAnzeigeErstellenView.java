@@ -15,6 +15,14 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.controller.StelleController;
+import de.hbrs.se2.womm.controller.UnternehmenController;
+import de.hbrs.se2.womm.dtos.StelleDTO;
+import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.entities.Unternehmen;
+import de.hbrs.se2.womm.mapper.StelleMapper;
+import de.hbrs.se2.womm.mapper.UnternehmenMapper;
 import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
@@ -28,7 +36,21 @@ import java.util.List;
 @PageTitle("StelleAnzeigeErstellenView")
 public class UStelleAnzeigeErstellenView extends VerticalLayout {
 
-    public UStelleAnzeigeErstellenView() {
+    TextField stelleTitel = new TextField();
+    TextField stelleOrt = new TextField();
+    TextField stelleWebsite = new TextField();
+    TextArea stelleBeschreibung = new TextArea();
+
+    StelleController stelleController;
+
+    UnternehmenController unternehmenController;
+
+    SecurityService securityService;
+
+    public UStelleAnzeigeErstellenView(StelleController stelleController, UnternehmenController unternehmenController, SecurityService securityService) {
+        this.stelleController = stelleController;
+        this.unternehmenController = unternehmenController;
+        this.securityService = securityService;
         setUpHeader();
         setUpStellenanzeige();
     }
@@ -51,31 +73,66 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout {
 
         stellenanzeige.add(stellenanzeigenTyp);
 
-        //Textfeld
-        TextField bezeichnung = new TextField();
-        bezeichnung.setPlaceholder("Stellenbezeichnung");
-        bezeichnung.setClearButtonVisible(true);
+        //TextfeldTitel
+        stelleTitel.setPlaceholder("Stellenbezeichnung");
+        stelleTitel.setClearButtonVisible(true);
 
-        stellenanzeige.add(bezeichnung);
+        stellenanzeige.add(stelleTitel);
 
-        //Textfeld
-        TextArea beschreibung = new TextArea();
-        beschreibung.setWidthFull();
-        beschreibung.setPlaceholder("Stellenbeschreibung");
-        beschreibung.setClearButtonVisible(true);
+        //Textfeld StelleOrt
+        stelleOrt.setPlaceholder("Ortsname");
+        stelleOrt.setClearButtonVisible(true);
 
-        stellenanzeige.add(beschreibung);
+        stellenanzeige.add(stelleOrt);
+
+        //Textfeld StelleWebsite
+        stelleWebsite.setPlaceholder("URL");
+        stelleWebsite.setClearButtonVisible(true);
+
+        stellenanzeige.add(stelleWebsite);
+
+        //Textfeld StelleBeschreibung
+        stelleBeschreibung.setWidthFull();
+        stelleBeschreibung.setPlaceholder("Stellenbeschreibung");
+        stelleBeschreibung.setClearButtonVisible(true);
+
+        stellenanzeige.add(stelleBeschreibung);
 
         //ToDo -Erstellung eines Datenbankobjekts mit StellenanzeigeTyp, StellenanzeigeBezeichnung, StellenanzeigeBeschreibung, FirmenLogo, FirmenName
         //ToDo -Routing zum korrekten UnternehmenView
         //Erstellen-Button
         Button erstellenButton = new Button("Erstellen");
         erstellenButton.addClickListener(e -> {
-            getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
+            getUI().ifPresent(ui -> stelleDTO());
         });
+
+       // erstellenButton.addClickListener(e -> {
+       //     getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
+       // });
         stellenanzeige.add(erstellenButton);
 
         add(stellenanzeige);
+
     }
+
+    private void stelleDTO(){
+
+        long getUserId = securityService.getUserID();
+        UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(getUserId).getBody();
+        Unternehmen unternehmen = UnternehmenMapper.INSTANCE.dtoZuUnternehmen(unternehmenDTO);
+        StelleDTO erzeugDTO = StelleDTO.builder()
+//                .stelleId(3l)
+                .stelleTitel(stelleTitel.getValue())
+                .stelleOrt(stelleOrt.getValue())
+                .stelleWebsite(stelleWebsite.getValue())
+                .stelleBeschreibung(stelleBeschreibung.getValue())
+                .stelleUnternehmen(unternehmen)
+                .build();
+        stelleController.saveStelle(erzeugDTO);
+        System.out.println(erzeugDTO);
+    }
+
+
+
 
 }
