@@ -19,8 +19,8 @@ public class StudentLayout extends AbstractLayout {
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
-                new RouterLink("SAboStudentView ", SAboStudentView.class),
-                new RouterLink("SApplicationView ", SApplicationView.class),
+                new RouterLink("Abo ", SAboStudentView.class),
+                new RouterLink("Application ", SApplicationView.class),
                 new RouterLink("SChatView ", SChatView.class),
                 new RouterLink("SCreateChangeStudentProfileView ", SCreateChangeStudentProfileView.class),
                 new RouterLink("SFirmProfileDisplayView ", SFirmProfileDisplayView.class),

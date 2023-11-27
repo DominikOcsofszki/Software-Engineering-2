@@ -8,18 +8,28 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.function.ValueProvider;
 import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 
+import java.awt.*;
 import java.util.List;
 
 public class ComponentFilterGridControllerStellen extends VerticalLayout {
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
     Grid<StelleDTO> grid = new Grid<>();
-    String[] filterByItemsFromDTO = StelleDTO.getAllFilter();
+//    String[] filterByItemsFromDTO = StelleDTO.getAllFilter();
+    String[] filterByItemsFromDTO = {
+            "stelleId",
+            "stelleTitel",
+            "stelleOrt",
+            "stelleBeschreibung",
+            "stelleWebsite",
+            "stelleUnternehmen"
+    };
 
     public ComponentFilterGridControllerStellen(AbstractControllerForFilter controller) {
         List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
