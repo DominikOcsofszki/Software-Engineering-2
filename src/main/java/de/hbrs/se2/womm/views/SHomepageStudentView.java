@@ -12,7 +12,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.views.components.using.ComponentFilterGridControllerStellen;
+import de.hbrs.se2.womm.views.components.ComponentUnternehmenFilterGridAPI;
+import de.hbrs.se2.womm.views.components.copyOnly.ComponentFilterGridControllerStellen;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -28,7 +29,6 @@ public SHomepageStudentView(StelleController controller) { //ToDo: this was adde
         setUpHeader();
         setUpBanner();
         setUpSearchFields();
-        setUpBigCompanyAnnouncement();
     }
     private void setUpComponentFilterGridControllerStellen(){ //ToDo: this was added
         add(new ComponentFilterGridControllerStellen(controller));
@@ -66,6 +66,11 @@ public SHomepageStudentView(StelleController controller) { //ToDo: this was adde
     }
 
     private void setUpSearchFields() {
+    /*
+        VerticalLayout searchResults = new VerticalLayout();
+        searchResults.add(new H2("Search Results"));
+        searchResults.add(new Hr()); */
+        /*
         HorizontalLayout searchFields = new HorizontalLayout();
         //Offer type
         MultiSelectComboBox filter1 = new MultiSelectComboBox("Offer type");
@@ -93,26 +98,8 @@ public SHomepageStudentView(StelleController controller) { //ToDo: this was adde
         b.getElement().getStyle().set("margin-top", "auto");
 
         add(searchFields);
+        */
         setUpComponentFilterGridControllerStellen(); //ToDo: this was added
-
-    }
-
-    private void setUpBigCompanyAnnouncement() {
-        VerticalLayout searchResults = new VerticalLayout();
-        HorizontalLayout bigCompanyAnnouncement = new HorizontalLayout();
-        searchResults.add(new H2("Search Results"));
-
-
-        searchResults.add(new Hr());
-
-        VerticalLayout bigCompanyAnnouncement1 = new VerticalLayout();
-        VerticalLayout bigCompanyAnnouncement2 = new VerticalLayout();
-
-
-        bigCompanyAnnouncement.add(bigCompanyAnnouncement1);
-        bigCompanyAnnouncement.add(bigCompanyAnnouncement2);
-        searchResults.add(bigCompanyAnnouncement);
-        add(searchResults);
 
     }
 }
