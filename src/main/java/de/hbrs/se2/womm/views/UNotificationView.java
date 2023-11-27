@@ -1,8 +1,10 @@
 package de.hbrs.se2.womm.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
@@ -11,12 +13,17 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Route(value = ROUTING.UNTERNEHMEN.UNotificationView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN","ADMIN"})
@@ -24,53 +31,87 @@ import jakarta.annotation.security.RolesAllowed;
 public class UNotificationView extends VerticalLayout {
 
     public UNotificationView() {
-        setUpSearchFields();
-        setUpNotification();
+        setUpHeader();
+        setUpUNotification();
     }
 
-    private void setUpSearchFields() {
-        HorizontalLayout searchFields = new HorizontalLayout();
-
+    private void setUpHeader(){
+        HorizontalLayout header = new HorizontalLayout();
         //Suchfeld
-        searchFields.add(new H1("New Notification"));
-        TextField textField = new TextField();
-        textField.focus();
-        textField.setPlaceholder("Enter company name or keyword");
-        textField.setPrefixComponent(VaadinIcon.SEARCH.create());
-        textField.setWidth(350, Unit.PIXELS);
-        textField.setHeight(50, Unit.PIXELS);
-        searchFields.add(textField);
-
-        // Suche-Button
-        Button b = new Button("Search", new Icon(VaadinIcon.SEARCH));
-        searchFields.add(b);
-        textField.getElement().getStyle().set("margin-left", "auto");
-        searchFields.setWidthFull();
-        add(searchFields);
+        header.add(new H1("Neue Benachrichtigungen"));
+        add(header);
     }
 
-    private void setUpNotification() {
-        HorizontalLayout notification = new HorizontalLayout();
-        VerticalLayout notification1 = new VerticalLayout();
+    private static final String LIT_TEMPLATE_HTML = """
+            <vaadin-button title="Go to ..."
+                           @click="${clickHandler}"
+                           theme="tertiary-inline small link">
+                ${item.id}
+            </vaadin-button>""";
+
+    private void setUpUNotification() {
+        VerticalLayout notification = new VerticalLayout();
+
+        //Todo Für Unternehmen zugehörige Benachrichtigungen anzeigen
+        //ToDo demoInhalte ersetzen
+
+        Image image1 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
+        Image image2 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
+        Image image3 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
+        Image image4 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
+
+        image1.setHeight(40, Unit.PIXELS);
+        image2.setHeight(40, Unit.PIXELS);
+        image3.setHeight(40, Unit.PIXELS);
+        image4.setHeight(40, Unit.PIXELS);
+
+        List<demoInhalt> inhalt = Arrays.asList(
+                new demoInhalt(image1,"Paul Stein", "Bewerbung auf das Stellenangebot : <Bezeichnung des Stellenangebots>"),
+                new demoInhalt(image2,"Max Mustermann", "Bewerbung auf das Stellenangebot : <Bezeichnung des Stellenangebots>"),
+                new demoInhalt(image3,"Maximilian Paul Karl Heinz Knabe", "Bewerbung auf das Stellenangebot : <Bezeichnung des Stellenangebots>"),
+                new demoInhalt(image4,"Max Mustermann", "Bewerbung auf das Stellenangebot : <Bezeichnung des Stellenangebots>"));
+
+        Grid<demoInhalt> grid = new Grid<>(demoInhalt.class, false);
+
+        //ToDo Verlinkung zur entsprechenden Bewerbung anpassen
+
+        grid.setItems(inhalt);
+        grid.addComponentColumn(demoInhalt::getImage).setHeader("Profilbild").setWidth("10%");
+        grid.addColumn(LitRenderer.<demoInhalt>of(LIT_TEMPLATE_HTML)
+                .withProperty("id",demoInhalt::getName)
+                .withFunction("clickHandler", person -> {
+                    UI.getCurrent().navigate(SFirmProfileDisplayView.class);
+                })).setHeader("Name").setWidth("25%").setSortable(true);
+        grid.addColumn(demoInhalt::getMessage).setHeader("Nachricht").setWidth("65%");
+        notification.add(grid);
+        grid.recalculateColumnWidths();
+
+        notification.setWidth("100%");
+
         add(notification);
 
-        notification.setWidth("auto");
-        notification.setMargin(true);
-        notification.setAlignItems(Alignment.STRETCH);
+    }
 
-        Image image = new Image("/image/myimage.png", "Alternative image text");
-        notification.add(image);
+    private class demoInhalt{
+        Image image;
+        String name;
+        String message;
 
-        notification1.add(new H1("Company Name"));
-        notification1.add(new H2("Industry"));
-        notification.add(notification1);
+        private Image getImage(){
+            return image;
+        }
+        private String getName(){
+            return name;
+        }
+        private String getMessage(){
+            return message;
+        }
 
-        Button primaryButton = new Button("unsubscribe");
-        primaryButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY,
-                ButtonVariant.LUMO_CONTRAST);
-
-        notification.add(primaryButton);
-        notification.setWidth("98.5%");
+        private demoInhalt(Image image,String name, String message){
+            this.image = image;
+            this.name = name;
+            this.message = message;
+        }
     }
 
 }
