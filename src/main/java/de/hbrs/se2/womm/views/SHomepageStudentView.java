@@ -31,7 +31,7 @@ public SHomepageStudentView(StelleController controller) { //ToDo: this was adde
         setUpSearchFields();
     }
     private void setUpComponentFilterGridControllerStellen(){ //ToDo: this was added
-        add(new ComponentFilterGridControllerStellen(controller));
+//        add(new ComponentFilterGridControllerStellen(controller));
     }
 
     private void setUpHeader() {

@@ -31,7 +31,7 @@ public class UHomepageUnternehmenView extends VerticalLayout {
     }
 
     private void setUpComponentFilterGridControllerStellen(){ //ToDo: this was added
-        add(new ComponentFilterGridControllerStellen(controller));
+//        add(new ComponentFilterGridControllerStellen(controller));
     }
 
 
