@@ -38,7 +38,7 @@ public class AuthenticationService {
 
     public void registerStudent(StudentRegistrationRequest request) throws UsernameAlreadyTakenException {
         String username = request.getUsername();
-        createUser(request, username, Roles.ROLE_STUDENT.toString());
+        createUser(request, username, Roles.STUDENT.name());
         // speichert Studenten mit FK zur Nutzer-Tabelle
         Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
         studentRepository.save(Student.builder()
@@ -52,7 +52,7 @@ public class AuthenticationService {
 
     public void registerCompany(CompanyRegistrationRequest request) throws UsernameAlreadyTakenException {
         String username = request.getUsername();
-        createUser(request, username, Roles.ROLE_UNTERNEHMEN.toString());
+        createUser(request, username, Roles.UNTERNEHMEN.name());
         // speichert Unternehmen mit FK zur Nutzer-Tabelle
         Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
         unternehmenRepository.save(Unternehmen.builder()

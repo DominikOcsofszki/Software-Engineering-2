@@ -3,16 +3,22 @@ package de.hbrs.se2.womm.views.layouts;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import de.hbrs.se2.womm.services.SecurityService;
 import de.hbrs.se2.womm.views.*;
 import de.hbrs.se2.womm.views.UHomepageUnternehmenView;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public class UnternehmenLayout extends AbstractLayout {
 
+    private final transient AuthenticationContext authContext;
 
-    protected UnternehmenLayout(SecurityService securityService) {
-        super.createHeaderWithLogoutButton(new Button("Log out: " +
-                securityService.getAuthenticatedUser().getUsername(), e -> securityService.logout()), true);
+    protected UnternehmenLayout(AuthenticationContext authContext) {
+        this.authContext = authContext;
+        super.createHeaderWithLogoutButton(
+                new Button("Log out: " + authContext.getAuthenticatedUser(UserDetails.class).get().getUsername(),
+                        e -> authContext.logout()), true
+        );
     }
 
 

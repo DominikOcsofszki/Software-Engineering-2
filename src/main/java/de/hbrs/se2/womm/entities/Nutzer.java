@@ -50,7 +50,7 @@ public class Nutzer implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(rolle));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + rolle));
         return authorities;
     }
 

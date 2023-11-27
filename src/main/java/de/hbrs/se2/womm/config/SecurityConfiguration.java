@@ -23,9 +23,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends VaadinWebSecurity {
-    @Autowired
-    private UserDetailsManagerImpl userDetailsManager;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         APIRequestMatcher aPIRequestMatcher = new APIRequestMatcher();
@@ -55,7 +52,7 @@ public class SecurityConfiguration extends VaadinWebSecurity {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsManager);
+        authProvider.setUserDetailsService(userDetailsManager());
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -69,10 +66,5 @@ public class SecurityConfiguration extends VaadinWebSecurity {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    void configSecurityContextStrategy() {
-        SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_GLOBAL);
     }
 }
