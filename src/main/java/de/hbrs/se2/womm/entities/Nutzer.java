@@ -25,12 +25,6 @@ public class Nutzer implements UserDetails {
     @Column(name = "nutzer_id")
     private Integer nutzerId;
 
-    @Column(name = "nutzer_name", nullable = false)
-    private String nutzerName;
-
-    @Column(name = "nutzer_passwort", nullable = false)
-    private String nutzerPasswort;
-
     @Column(name = "nutzer_mail", nullable = false)
     private String nutzerMail;
 

@@ -18,8 +18,8 @@ public class UnternehmenController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Void> getAllUnternehmen() {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<List<UnternehmenDTO>> getAllUnternehmen() {
+        return new ResponseEntity<>(unternehmenService.getAll(),HttpStatus.OK);
     }
 
     @GetMapping("/Unternehmen/{id}")
@@ -30,22 +30,13 @@ public class UnternehmenController {
 
     @GetMapping("/Unternehmen")
     public ResponseEntity<List<UnternehmenDTO>> getUnternehmenByName(@RequestParam(name = "name") String name) {
-         List<UnternehmenDTO> gefunden = unternehmenService.getUnternehmenDTOPerName(name);
+        List<UnternehmenDTO> gefunden = unternehmenService.getUnternehmenDTOPerName(name);
         return new ResponseEntity<>(gefunden,HttpStatus.OK);
     }
 
-    @PatchMapping("/Unternehmen/{id}")
-    public ResponseEntity<Void> updateUnternehmen(@PathVariable String id, @RequestBody UnternehmenDTO request) {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/Unternehmen/{id}/offers")
-    public ResponseEntity<Void> getAllOffersByUnternehmen(@PathVariable String id) {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/Unternehmen/{UnternehmenId}/offer/{offerId}")
-    public ResponseEntity<Void> getAllOffersByUnternehmen(@PathVariable String UnternehmenId, @PathVariable String offerId) {
+    @PostMapping("/Unternehmen")
+    public ResponseEntity<Void> saveUnternehmen(@RequestBody UnternehmenDTO zuErstellendesUnternehmen){
+        unternehmenService.saveUnternehmen(zuErstellendesUnternehmen);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
