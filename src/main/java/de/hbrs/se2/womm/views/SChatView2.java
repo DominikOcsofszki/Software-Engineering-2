@@ -36,7 +36,7 @@ public class SChatView2 extends VerticalLayout implements HasUrlParameter<String
     }
     private void setUpHeader() {
         add("ChatView");
-        Button b5 = new Button("Chat"+valueFromQuerry, new Icon(VaadinIcon.COMMENTS_O));
+        Button b5 = new Button("ClickMeForRouting", new Icon(VaadinIcon.COMMENTS_O));
         b5.addClickListener( e ->
                 UI.getCurrent().navigate(
                         SChatView.class,valueFromQuerry
