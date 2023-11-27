@@ -58,12 +58,12 @@ public class ComponentFilterGridControllerStellen extends VerticalLayout {
     }
 
     private void configureGrid() {
-        grid.addColumn(StelleDTO::getStelleId).setHeader("StelleId").setSortable(true).setComparator(StelleDTO::getStelleId);
-        grid.addColumn(StelleDTO::getStelleTitel).setHeader("StelleTitel").setSortable(true).setComparator(StelleDTO::getStelleTitel);
-        grid.addColumn(StelleDTO::getStelleOrt).setHeader("StelleOrt").setSortable(true).setComparator(StelleDTO::getStelleOrt);
-        grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader("StelleBeschreibung").setSortable(true).setComparator(StelleDTO::getStelleBeschreibung);
-        grid.addColumn(StelleDTO::getStelleWebsite).setHeader("StelleWebsite").setSortable(true).setComparator(StelleDTO::getStelleWebsite);
-        grid.addColumn(StelleDTO::getStelleUnternehmen).setHeader("StelleUnternehmen").setSortable(true).setComparator(StelleDTO::UnternehmenName);
+        grid.addColumn(StelleDTO::getStelleId).setHeader("Id").setSortable(true).setComparator(StelleDTO::getStelleId);
+        grid.addColumn(StelleDTO::getStelleTitel).setHeader("Titel").setSortable(true).setComparator(StelleDTO::getStelleTitel);
+        grid.addColumn(StelleDTO::getStelleOrt).setHeader("Ort").setSortable(true).setComparator(StelleDTO::getStelleOrt);
+        grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader("Beschreibung").setSortable(true).setComparator(StelleDTO::getStelleBeschreibung);
+        grid.addColumn(StelleDTO::getStelleWebsite).setHeader("Website").setSortable(true).setComparator(StelleDTO::getStelleWebsite);
+        grid.addColumn(StelleDTO::getStelleUnternehmen).setHeader("Unternehmen").setSortable(true).setComparator(StelleDTO::UnternehmenName);
     }
 
 
@@ -81,12 +81,12 @@ public class ComponentFilterGridControllerStellen extends VerticalLayout {
     private boolean filterFunction(StelleDTO stelleDTO, String inputSearchNameFilter, String searchBy) {
         inputSearchNameFilter = inputSearchNameFilter.toLowerCase();
         String checkUnternehmen = switch (searchBy) {
-            case  "stelleId" -> stelleDTO.getStelleId().toString().toLowerCase();
-            case  "stelleTitel" -> stelleDTO.getStelleTitel().toString().toLowerCase();
-            case  "stelleOrt" -> stelleDTO.getStelleOrt().toString().toLowerCase();
-            case  "stelleBeschreibung" -> stelleDTO.getStelleBeschreibung().toString().toLowerCase();
-            case  "stelleWebsite" -> stelleDTO.getStelleWebsite().toString().toLowerCase();
-            case  "stelleUnternehmen" -> stelleDTO.getStelleUnternehmen().toString().toLowerCase();
+            case  "Id" -> stelleDTO.getStelleId().toString().toLowerCase();
+            case  "Titel" -> stelleDTO.getStelleTitel().toString().toLowerCase();
+            case  "Ort" -> stelleDTO.getStelleOrt().toString().toLowerCase();
+            case  "Beschreibung" -> stelleDTO.getStelleBeschreibung().toString().toLowerCase();
+            case  "Website" -> stelleDTO.getStelleWebsite().toString().toLowerCase();
+            case  "Unternehmen" -> stelleDTO.getStelleUnternehmen().toString().toLowerCase();
             default -> throw new IllegalStateException("Unexpected value: " + searchBy);
         };
         return checkUnternehmen.contains(inputSearchNameFilter);
