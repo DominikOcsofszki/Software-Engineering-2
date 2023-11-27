@@ -1,8 +1,10 @@
 package de.hbrs.se2.womm.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.details.Details;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -11,6 +13,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.entities.Stelle;
 import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -19,6 +22,8 @@ import jakarta.annotation.security.RolesAllowed;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 @Route(value = ROUTING.STUDENT.SFirmProfileDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
@@ -80,7 +85,7 @@ public class SFirmProfileDisplayView extends VerticalLayout {
         // Link to Company Website with Icon
         HorizontalLayout websiteLayout = new HorizontalLayout();
         Icon linkIcon = new Icon(VaadinIcon.EXTERNAL_LINK);
-        linkIcon.setColor("grey"); // Set the color as needed
+        linkIcon.setColor(""); // Set the color as needed
         websiteLayout.add(linkIcon, new Anchor("http://www.companywebsite.com", "Company Website"));
         detailsLayout.add(websiteLayout);
 
@@ -92,66 +97,49 @@ public class SFirmProfileDisplayView extends VerticalLayout {
                 "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
                 "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
         add(companyDescription);
+        // Job Advertisements - Grid zur Anzeige der Stellenanzeigen
+        Grid<Stelle> jobGrid = new Grid<>();
 
-        // Job Advertisements
-        Accordion jobAccordion = new Accordion();
+        //jobGrid.addColumn(i -> new Image(ASSETS.IMG.IMG11, "Firmen Logo Hier")).setHeader("Preview");
+        //jobGrid.addComponentColumn(person -> new Image(person.getImageUrl(), "alt text")).setHeader("Preview"); // Valeska
+        jobGrid.addColumn(Stelle::getStelleTitel).setHeader("Job title");
+        jobGrid.addColumn(Stelle::getStelleTitel).setHeader("Job description");
+        jobGrid.addColumn(Stelle::getStelleOrt).setHeader("Location");
 
-        for (int i = 1; i <= 6; i++) {
-            VerticalLayout jobLayout = createJobAdvertisementLayout(i);
-            jobAccordion.add("Job Advertisement " + i, jobLayout);
-        }
 
-        add(jobAccordion);
+        List<Stelle> stellenanzeigen = createDummyStellenanzeigen(); // Annahme: Methode zum Erstellen von Dummy-Stellenanzeigen
+        jobGrid.setItems(stellenanzeigen);
 
-        // Edit Button
-//        Button editButton = new Button("Edit Profile");
-//        editButton.addClickListener(e -> {
-//            // Logic to navigate to the edit profile view
-//            getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UEditFirmProfileDisplayView));
-//        });
-//        add(editButton); //ToDo remove since only available for Unternehmen
+        jobGrid.addItemClickListener(event -> {
+            Stelle selectedStelle = event.getItem();
+            if (selectedStelle != null) {
+                UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
+            }
+        });
 
-        // Publish Time
-        LocalDateTime publishTime = LocalDateTime.now().minus(13, ChronoUnit.HOURS);
-        add(new Paragraph("Published " + calculateTimeSincePublish(publishTime) + " ago"));
+        add(jobGrid);
     }
-
-    private VerticalLayout createJobAdvertisementLayout(int jobNumber) {
-        VerticalLayout jobLayout = new VerticalLayout();
-
-        // Job Title
-        jobLayout.add(new H3("Job Title " + jobNumber));
-
-        // Company Name
-        jobLayout.add(new Paragraph("Company Name"));
-
-        // Location and Logo
-        HorizontalLayout locationAndLogoLayout = new HorizontalLayout();
-        locationAndLogoLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span("Job Location " + jobNumber)); // Replace with the actual job location
-        Image jobLogo = new Image("themes/theme1/job-logo.png", "");
-        jobLogo.setWidth("50px"); // Adjust the width as needed
-        locationAndLogoLayout.add(jobLogo);
-
-        jobLayout.add(locationAndLogoLayout);
-
-        // Job Description
-        Details jobDetails = new Details("Job Description", new Paragraph("Job Description for Job " + jobNumber));
-        jobLayout.add(jobDetails);
-
-        return jobLayout;
-    }
-
-    private String calculateTimeSincePublish(LocalDateTime publishTime) {
-        LocalDateTime currentTime = LocalDateTime.now();
-        long hoursSincePublish = ChronoUnit.HOURS.between(publishTime, currentTime);
-        if (hoursSincePublish < 1) {
-            long minutesSincePublish = ChronoUnit.MINUTES.between(publishTime, currentTime);
-            return minutesSincePublish + " minutes";
-        } else {
-            return hoursSincePublish + " hours";
+    // Dummy-Stellenanzeigen erstellen (nur für Testzwecke)
+    private List<Stelle> createDummyStellenanzeigen() {
+        List<Stelle> dummyStellenanzeigen = new ArrayList<>();
+        // Hier könntest du echte Stellenanzeigen aus einer Datenquelle laden oder Dummy-Daten verwenden
+        for (int i = 1; i <= 5; i++) {
+            Stelle stelle = new Stelle();
+            stelle.setStelleId(i);
+            stelle.setStelleTitel("Job " + i);
+            stelle.setStelleTitel("Description " + i);
+            stelle.setStelleOrt("Location " + i);
+            // Weitere Stellenanzeigen-Eigenschaften setzen
+            dummyStellenanzeigen.add(stelle);
         }
+        return dummyStellenanzeigen;
     }
 }
+
+
+
+
+
 
 //package de.hbrs.se2.womm.views;
 //
