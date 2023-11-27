@@ -6,18 +6,16 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
-import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-@Route(value = "SChatView", layout = StudentLayout.class)
+@Route(value = "SChatView2", layout = StudentLayout.class)
 @RolesAllowed({ "ADMIN", "STUDENT"})
-@PageTitle("ChatView")
-public class SChatView extends VerticalLayout implements HasUrlParameter<String> {
+@PageTitle("ChatView2")
+public class SChatView2 extends VerticalLayout implements HasUrlParameter<String> {
 
     String valueFromQuerry;
     TextField textField = new TextField("GoToSite", "1", "1");
@@ -33,8 +31,7 @@ public class SChatView extends VerticalLayout implements HasUrlParameter<String>
             textField.setValue(valueFromQuerry);
         }
     }
-    public SChatView() {
-        add(textField);
+    public SChatView2() {
         setUpHeader();
     }
     private void setUpHeader() {
@@ -42,7 +39,7 @@ public class SChatView extends VerticalLayout implements HasUrlParameter<String>
         Button b5 = new Button("Chat"+valueFromQuerry, new Icon(VaadinIcon.COMMENTS_O));
         b5.addClickListener( e ->
                 UI.getCurrent().navigate(
-                        SChatView2.class,textField.getValue()
+                        SChatView.class,valueFromQuerry
                 ));
 
         add(b5);
