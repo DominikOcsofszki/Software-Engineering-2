@@ -30,8 +30,9 @@ public class StelleService {
                 .map(stelleMapper::stelleToStelleDto);
     }
 
-    public void saveStelle(StelleDTO stelleDTO) {
+    public StelleDTO saveStelle(StelleDTO stelleDTO) {
         Stelle stelle = stelleMapper.stelleDtoToStelle(stelleDTO);
-        stelleRepository.save(stelle);
+        Stelle erzeugteStelle = stelleRepository.save(stelle);
+        return stelleMapper.stelleToStelleDto(erzeugteStelle);
     }
 }
