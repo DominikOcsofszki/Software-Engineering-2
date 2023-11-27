@@ -13,8 +13,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.LitRenderer;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
@@ -34,7 +33,7 @@ import java.util.List;
 @Route(value = ROUTING.UNTERNEHMEN.UStelleAnzeigeErstellenView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN","ADMIN"})
 @PageTitle("StelleAnzeigeErstellenView")
-public class UStelleAnzeigeErstellenView extends VerticalLayout {
+public class UStelleAnzeigeErstellenView extends VerticalLayout implements HasUrlParameter<String> {
 
     TextField stelleTitel = new TextField();
     TextField stelleOrt = new TextField();
@@ -46,6 +45,19 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout {
     UnternehmenController unternehmenController;
 
     SecurityService securityService;
+
+    String valueFromQuerry;
+
+    @Override
+    public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
+        if (parameter == null) {
+            valueFromQuerry = "";
+        } else {
+            add(String.format("parameter: %s.",
+                    parameter));
+            valueFromQuerry = parameter;
+        }
+    }
 
     public UStelleAnzeigeErstellenView(StelleController stelleController, UnternehmenController unternehmenController, SecurityService securityService) {
         this.stelleController = stelleController;
@@ -103,7 +115,10 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout {
         //Erstellen-Button
         Button erstellenButton = new Button("Erstellen");
         erstellenButton.addClickListener(e -> {
-            getUI().ifPresent(ui -> stelleDTO());
+            String stelleIdFromFunction = String.valueOf(stelleDTO());
+            UI.getCurrent().navigate(UStelleAnzeigeErstellenView.class,stelleIdFromFunction);
+            //getUI().ifPresent(ui -> stelleDTO());
+
         });
 
        // erstellenButton.addClickListener(e -> {
@@ -115,13 +130,13 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout {
 
     }
 
-    private void stelleDTO(){
+    private long stelleDTO(){
 
+        long stelleId = 3l;
         long getUserId = securityService.getUserID();
         UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(getUserId).getBody();
         Unternehmen unternehmen = UnternehmenMapper.INSTANCE.dtoZuUnternehmen(unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()
-//                .stelleId(3l)
                 .stelleTitel(stelleTitel.getValue())
                 .stelleOrt(stelleOrt.getValue())
                 .stelleWebsite(stelleWebsite.getValue())
@@ -130,6 +145,7 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout {
                 .build();
         stelleController.saveStelle(erzeugDTO);
         System.out.println(erzeugDTO);
+        return stelleId;
     }
 
 
