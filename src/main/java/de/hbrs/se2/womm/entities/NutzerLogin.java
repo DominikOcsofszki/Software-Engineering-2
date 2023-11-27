@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "nutzerLogin")
+@Table(name = "nutzer_login")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,13 +13,13 @@ import lombok.*;
 public class NutzerLogin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "nutzerLogin_id")
+    @Column(name = "nutzer_login_id")
     private Integer nutzerId;
 
-    @Column(name = "nutzerLogin_name", nullable = false)
+    @Column(name = "nutzer_login_name", nullable = false)
     private String nutzerName;
 
-    @Column(name = "nutzerLogin_passwort", nullable = false)
+    @Column(name = "nutzer_login_passwort", nullable = false)
     private String nutzerPasswort;
 
     @OneToOne
