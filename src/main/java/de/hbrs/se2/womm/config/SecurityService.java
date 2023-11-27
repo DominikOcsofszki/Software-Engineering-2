@@ -21,7 +21,4 @@ public class SecurityService {
         authenticationContext.logout();
     }
 
-    public long getUserID(){
-        return 1l;
-    }
 }
