@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/application")
-public class ApplicationController {
+public class ApplicationController extends AbstractControllerForFilter {
 
     // TODO add logic to methods and suitable return types for ResponseEntities
 

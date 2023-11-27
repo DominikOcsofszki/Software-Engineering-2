@@ -6,41 +6,42 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import de.hbrs.se2.womm.controller.UnternehmenController;
+import de.hbrs.se2.womm.controller.StudentController;
+import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
-
+import de.hbrs.se2.womm.entities.Student;
 
 import java.util.List;
 
-public class ComponentMusterFilterGrid extends VerticalLayout {
+public class ComponentMusterFilterGridControllerStudent extends VerticalLayout {
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
     Grid<StudentDTO> grid = new Grid<>();
     String[] filterByItemsFromDTO = StudentDTO.getAllFilter();
 
 
-    public ComponentMusterFilterGrid() {
-        List<StudentDTO> itemsForGrid = getItemsForGrid();
+    public ComponentMusterFilterGridControllerStudent(StudentController studentController) {
+        List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(studentController);
 
-        setUpGrid(itemsForGrid);
+        setUpGrid((List<StudentDTO>)itemsForGrid);
         add(getToolbar(), grid);
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
-    private List<StudentDTO> getItemsForGrid(){
-//        UnternehmenController controller = new UnternehmenController();
-        return null;
+    private List<? extends AbstractDTO> getItemsForGrid(StudentController studentController){
+        return studentController.getAllStudents().getBody();
     }
 
     private void setUpGrid(List<StudentDTO> itemsForGrid){
+//        private void setUpGrid(List<? extends AbstractDTO> itemsForGrid){
         addClassName("list-view");
         setSizeFull();
         configureGrid();
-        grid.setItems();
+//        grid.setItems();
         grid.setItems(itemsForGrid);
-
     }
     private Select<String> selectFilterMenu() {
         select.setPlaceholder("Filter");
@@ -62,13 +63,13 @@ public class ComponentMusterFilterGrid extends VerticalLayout {
     private void configureGrid() {
 //        grid.addColumn(StudentDTO::getNutzer).setHeader("Nutzer").setSortable(true).setComparator(StudentDTO::getNutzer);
         grid.addColumn(StudentDTO::getStudentId).setHeader("StudentId").setSortable(true).setComparator(StudentDTO::getStudentId);
-        grid.addColumn(StudentDTO::getStudentVorname).setHeader("StudentVorname").setSortable(true).setComparator(StudentDTO::getStudentVorname);
-        grid.addColumn(StudentDTO::getStudentName).setHeader("StudentName").setSortable(true).setComparator(StudentDTO::getStudentName);
-        grid.addColumn(StudentDTO::getStudentGeburtstag).setHeader("StudentGeburtstag").setSortable(true).setComparator(StudentDTO::getStudentGeburtstag);
-//        grid.addColumn(StudentDTO::getStudentBenachrichtigung).setHeader("StudentBenachrichtigung").setSortable(true).setComparator(StudentDTO::getStudentBenachrichtigung);
-        grid.addColumn(StudentDTO::getStudentBio).setHeader("StudentBio").setSortable(true).setComparator(StudentDTO::getStudentBio);
-        grid.addColumn(StudentDTO::getStudentSpezialisierung).setHeader("StudentSpezialisierung").setSortable(true).setComparator(StudentDTO::getStudentSpezialisierung);
-        grid.addColumn(StudentDTO::getStudentSemester).setHeader("StudentSemester").setSortable(true).setComparator(StudentDTO::getStudentSemester);
+//        grid.addColumn(StudentDTO::getStudentVorname).setHeader("StudentVorname").setSortable(true).setComparator(StudentDTO::getStudentVorname);
+//        grid.addColumn(StudentDTO::getStudentName).setHeader("StudentName").setSortable(true).setComparator(StudentDTO::getStudentName);
+//        grid.addColumn(StudentDTO::getStudentGeburtstag).setHeader("StudentGeburtstag").setSortable(true).setComparator(StudentDTO::getStudentGeburtstag);
+////        grid.addColumn(StudentDTO::getStudentBenachrichtigung).setHeader("StudentBenachrichtigung").setSortable(true).setComparator(StudentDTO::getStudentBenachrichtigung);
+//        grid.addColumn(StudentDTO::getStudentBio).setHeader("StudentBio").setSortable(true).setComparator(StudentDTO::getStudentBio);
+//        grid.addColumn(StudentDTO::getStudentSpezialisierung).setHeader("StudentSpezialisierung").setSortable(true).setComparator(StudentDTO::getStudentSpezialisierung);
+//        grid.addColumn(StudentDTO::getStudentSemester).setHeader("StudentSemester").setSortable(true).setComparator(StudentDTO::getStudentSemester);
 
     }
 

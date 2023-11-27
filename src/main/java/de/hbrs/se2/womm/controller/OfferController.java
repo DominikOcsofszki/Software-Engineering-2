@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/offers")
-public class OfferController {
+public class OfferController extends AbstractControllerForFilter {
 
     // TODO add logic to methods and suitable return types for ResponseEntities
 

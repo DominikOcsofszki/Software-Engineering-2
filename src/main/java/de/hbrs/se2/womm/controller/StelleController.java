@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.controller;
 
+import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.services.StelleService;
 import javassist.NotFoundException;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class StelleController {
+public class StelleController extends AbstractControllerForFilter implements IgetAllController{
 
     StelleService stelleService;
 
@@ -38,5 +39,14 @@ public class StelleController {
     @PostMapping("/stellen")
     public ResponseEntity<StelleDTO> saveStelle(@RequestBody StelleDTO stelleDTO) {
         return new ResponseEntity<>(stelleService.saveStelle(stelleDTO), HttpStatus.OK);
+    }
+
+    @Override
+    @GetMapping("all")
+    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
+        return new ResponseEntity<>(
+                stelleService.getAllService(),
+                HttpStatus.OK
+        );
     }
 }

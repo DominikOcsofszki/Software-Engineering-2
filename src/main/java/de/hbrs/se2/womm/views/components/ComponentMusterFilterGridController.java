@@ -8,44 +8,41 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import de.hbrs.se2.womm.controller.UnternehmenController;
+import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
+import de.hbrs.se2.womm.controller.StudentController;
+import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
-
 
 import java.util.List;
 
-public class ComponentMusterFilterGrid extends VerticalLayout {
+public class ComponentMusterFilterGridController extends VerticalLayout {
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
     Grid<StudentDTO> grid = new Grid<>();
     String[] filterByItemsFromDTO = StudentDTO.getAllFilter();
 
-
-    public ComponentMusterFilterGrid() {
-        List<StudentDTO> itemsForGrid = getItemsForGrid();
-
+    public ComponentMusterFilterGridController(AbstractControllerForFilter controller) {
+        List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
         setUpGrid(itemsForGrid);
         add(getToolbar(), grid);
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
-    private List<StudentDTO> getItemsForGrid(){
-//        UnternehmenController controller = new UnternehmenController();
-        return null;
+    private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerForFilter controller){
+        return ((StudentController)controller).getAllStudents().getBody(); //ToDo: change Cast here
     }
 
-    private void setUpGrid(List<StudentDTO> itemsForGrid){
+    private void setUpGrid(List<? extends AbstractDTO> itemsForGrid){
         addClassName("list-view");
         setSizeFull();
         configureGrid();
-        grid.setItems();
-        grid.setItems(itemsForGrid);
+//        grid.setItems();
+        grid.setItems((List<StudentDTO>)itemsForGrid); //TODO: change Cast here
 
     }
     private Select<String> selectFilterMenu() {
         select.setPlaceholder("Filter");
         select.setItems(filterByItemsFromDTO);
-//        select.setValue(NAME);
         return select;
     }
     private HorizontalLayout getToolbar() {
