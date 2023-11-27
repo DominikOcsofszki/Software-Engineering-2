@@ -14,5 +14,5 @@ public class StelleDTO {
     private String stelleOrt;
     private String stelleBeschreibung;
     private String stelleWebsite;
-    private Unternehmen stelleUnternehmen;
+    private UnternehmenDTO stelleUnternehmen;
 }
