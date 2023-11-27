@@ -14,7 +14,7 @@ public class RedirectController {
     protected RedirectController(SecurityService securityService) {
         this.securityService = securityService;
     }
-    @GetMapping("")
+    @GetMapping("/")
     public RedirectView redirectWithUsingRedirectView(RedirectAttributes attributes) {
         String loggedInUser = securityService.getAuthenticatedUser().getUsername();
         System.out.println("loggedInUser: " + loggedInUser);
