@@ -20,8 +20,15 @@ public class ComponentFilterGridControllerStellen extends VerticalLayout {
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
     Grid<StelleDTO> grid = new Grid<>();
-    String[] filterByItemsFromDTO = StelleDTO.getAllFilter();
-
+    //String[] filterByItemsFromDTO = StelleDTO.getAllFilter();
+    String[] filterByItemsFromDTO = {
+                //"Id",
+                "Titel",
+                "Ort",
+                "Beschreibung",
+                "Website",
+                "Unternehmen"
+    };
     public ComponentFilterGridControllerStellen(AbstractControllerForFilter controller) {
         List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
         setUpGrid(itemsForGrid);
@@ -58,7 +65,7 @@ public class ComponentFilterGridControllerStellen extends VerticalLayout {
     }
 
     private void configureGrid() {
-        grid.addColumn(StelleDTO::getStelleId).setHeader("Id").setSortable(true).setComparator(StelleDTO::getStelleId);
+        //grid.addColumn(StelleDTO::getStelleId).setHeader("Id").setSortable(true).setComparator(StelleDTO::getStelleId);
         grid.addColumn(StelleDTO::getStelleTitel).setHeader("Titel").setSortable(true).setComparator(StelleDTO::getStelleTitel);
         grid.addColumn(StelleDTO::getStelleOrt).setHeader("Ort").setSortable(true).setComparator(StelleDTO::getStelleOrt);
         grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader("Beschreibung").setSortable(true).setComparator(StelleDTO::getStelleBeschreibung);
@@ -81,7 +88,7 @@ public class ComponentFilterGridControllerStellen extends VerticalLayout {
     private boolean filterFunction(StelleDTO stelleDTO, String inputSearchNameFilter, String searchBy) {
         inputSearchNameFilter = inputSearchNameFilter.toLowerCase();
         String checkUnternehmen = switch (searchBy) {
-            case  "Id" -> stelleDTO.getStelleId().toString().toLowerCase();
+            //case  "Id" -> stelleDTO.getStelleId().toString().toLowerCase();
             case  "Titel" -> stelleDTO.getStelleTitel().toString().toLowerCase();
             case  "Ort" -> stelleDTO.getStelleOrt().toString().toLowerCase();
             case  "Beschreibung" -> stelleDTO.getStelleBeschreibung().toString().toLowerCase();
