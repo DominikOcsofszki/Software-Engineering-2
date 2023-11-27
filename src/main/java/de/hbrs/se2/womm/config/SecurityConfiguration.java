@@ -28,11 +28,11 @@ public class SecurityConfiguration extends VaadinWebSecurity {
     }
 
 
-    @Override
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable);
-        return http.build();
-    }
+//    @Override
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.csrf(AbstractHttpConfigurer::disable);
+//        return http.build();
+//    }
 
     //ToDo Connect to DB
     @Bean
