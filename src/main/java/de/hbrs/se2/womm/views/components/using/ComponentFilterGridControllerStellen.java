@@ -12,6 +12,7 @@ import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
+import tools.generate.GenerateStelle;
 
 import java.util.List;
 
@@ -22,7 +23,9 @@ public class ComponentFilterGridControllerStellen extends VerticalLayout {
     String[] filterByItemsFromDTO = StelleDTO.getAllFilter();
 
     public ComponentFilterGridControllerStellen(AbstractControllerForFilter controller) {
-        List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
+//        List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
+        List<? extends AbstractDTO> itemsForGrid = GenerateStelle.generateStelle(10000);
+
         setUpGrid(itemsForGrid);
         add(getToolbar(), grid);
         setFilterBy(filterByItemsFromDTO[0]);
