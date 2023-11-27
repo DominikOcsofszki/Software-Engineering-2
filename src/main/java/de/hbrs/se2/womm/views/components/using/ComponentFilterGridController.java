@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.components;
+package de.hbrs.se2.womm.views.components.using;
 
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.grid.Grid;
@@ -15,13 +15,13 @@ import de.hbrs.se2.womm.dtos.StudentDTO;
 
 import java.util.List;
 
-public class ComponentMusterFilterGridController extends VerticalLayout {
+public class ComponentFilterGridController extends VerticalLayout {
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
     Grid<StudentDTO> grid = new Grid<>();
     String[] filterByItemsFromDTO = StudentDTO.getAllFilter();
 
-    public ComponentMusterFilterGridController(AbstractControllerForFilter controller) {
+    public ComponentFilterGridController(AbstractControllerForFilter controller) {
         List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
         setUpGrid(itemsForGrid);
         add(getToolbar(), grid);

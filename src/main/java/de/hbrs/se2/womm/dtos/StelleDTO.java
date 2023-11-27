@@ -8,11 +8,25 @@ import lombok.Getter;
 @Builder
 @Data
 @Getter
-public class StelleDTO {
+public class StelleDTO extends AbstractDTO {
     private Long stelleId;
     private String stelleTitel;
     private String stelleOrt;
     private String stelleBeschreibung;
     private String stelleWebsite;
     private Unternehmen stelleUnternehmen;
+
+    public static String[] getAllFilter(){
+        return new String[]{
+                "stelleId",
+                "stelleTitel",
+                "stelleOrt",
+                "stelleBeschreibung",
+                "stelleWebsite",
+                "stelleUnternehmen"
+        };
+    }
+    public String UnternehmenName(){
+        return stelleUnternehmen.getName();
+    }
 }

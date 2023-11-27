@@ -9,7 +9,7 @@ import java.util.Arrays;
 @Builder
 @Getter
 @Data
-public class NutzerDTO {
+public class NutzerDTO extends AbstractDTO{
     private Long nutzerId;
     private String email;
     private boolean aktiv;
