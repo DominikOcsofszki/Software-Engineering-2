@@ -1,6 +1,6 @@
 package de.hbrs.se2.womm.config;
 
-import com.vaadin.flow.component.button.Button;
+import de.hbrs.se2.womm.services.SecurityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

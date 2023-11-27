@@ -1,7 +1,7 @@
 package de.hbrs.se2.womm.services;
 
-import de.hbrs.se2.womm.entities.Nutzer;
-import de.hbrs.se2.womm.repositories.NutzerRepository;
+import de.hbrs.se2.womm.entities.NutzerLogin;
+import de.hbrs.se2.womm.repositories.NutzerLoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,21 +13,21 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserDetailsManagerImpl implements UserDetailsManager {
 
     @Autowired
-    private NutzerRepository nutzerRepository;
+    private NutzerLoginRepository nutzerLoginRepository;
 
     @Override
     public void createUser(UserDetails user) {
-        nutzerRepository.save((Nutzer) user);
+        nutzerLoginRepository.save((NutzerLogin) user);
     }
 
     @Override
     public void updateUser(UserDetails user) {
-        nutzerRepository.save((Nutzer) user);
+        nutzerLoginRepository.save((NutzerLogin) user);
     }
 
     @Override
     public void deleteUser(String username) throws UsernameNotFoundException {
-        Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
+        NutzerLogin user = nutzerLoginRepository.findNutzerByNutzerName(username);
         if (user == null) throw new UsernameNotFoundException("No User found for username: " + username);
     }
 
@@ -41,20 +41,20 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
     @Override
     @Transactional
     public void changePassword(String oldPassword, String newPassword) {
-        Nutzer userDetails = nutzerRepository.findNutzerByNutzerPasswort(oldPassword);
+        NutzerLogin userDetails = nutzerLoginRepository.findNutzerByNutzerPasswort(oldPassword);
         if (userDetails == null) throw new UsernameNotFoundException("Invalid password");
         userDetails.setNutzerPasswort(newPassword);
-        nutzerRepository.save(userDetails);
+        nutzerLoginRepository.save(userDetails);
     }
 
     @Override
     public boolean userExists(String username) {
-        return nutzerRepository.existsNutzerByNutzerName(username);
+        return nutzerLoginRepository.existsNutzerByNutzerName(username);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
+        NutzerLogin user = nutzerLoginRepository.findNutzerByNutzerName(username);
         if (user == null) throw new UsernameNotFoundException("No User found for username: " + username);
         return user;
     }

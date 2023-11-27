@@ -9,6 +9,8 @@ import lombok.Getter;
 //import java.awt.*;
 import com.vaadin.flow.component.html.Image;
 
+import java.util.Arrays;
+
 @Data
 @Builder
 @Getter
@@ -19,10 +21,10 @@ public class UnternehmenDTO extends AbstractDTO{
     private String gruendung;
     private NutzerDTO nutzer;
     public Image PlaceholderOrImage(){
-        if(nutzer == null || nutzer.getNutzerProfilbild() == null) {
+        if(nutzer == null || nutzer.getProfilbild() == null) {
             return ASSETS.buildPlaceholder(50,50);
         }
         return new Image("data:image/png;base64,"
-                + nutzer.getNutzerProfilbild(), "getImage");
+                + Arrays.toString(nutzer.getProfilbild()), "getImage");
     }
 }

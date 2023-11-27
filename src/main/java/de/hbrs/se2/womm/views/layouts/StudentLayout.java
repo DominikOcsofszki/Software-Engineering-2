@@ -4,11 +4,8 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.spring.security.AuthenticationContext;
-import de.hbrs.se2.womm.services.SecurityService;
 import de.hbrs.se2.womm.views.*;
 import de.hbrs.se2.womm.views.SHomepageStudentView;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class StudentLayout extends AbstractLayout {

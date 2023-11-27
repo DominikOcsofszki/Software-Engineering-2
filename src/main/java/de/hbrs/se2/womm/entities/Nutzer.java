@@ -18,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Nutzer implements UserDetails {
+public class Nutzer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,45 +37,5 @@ public class Nutzer implements UserDetails {
     @Lob
     @Column(name = "nutzer_profilbild", columnDefinition = "bytea")
     private byte[] nutzerProfilbild;
-
-    @Column(name = "nutzer_rolle", nullable = false)
-    private String rolle;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + rolle));
-        return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return nutzerPasswort;
-    }
-
-    @Override
-    public String getUsername() {
-        return nutzerName;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
 

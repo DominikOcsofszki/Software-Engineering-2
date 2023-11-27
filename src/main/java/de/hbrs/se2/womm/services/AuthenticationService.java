@@ -5,11 +5,13 @@ import de.hbrs.se2.womm.dtos.LoginRequest;
 import de.hbrs.se2.womm.dtos.RegistrationRequest;
 import de.hbrs.se2.womm.dtos.StudentRegistrationRequest;
 import de.hbrs.se2.womm.entities.Nutzer;
+import de.hbrs.se2.womm.entities.NutzerLogin;
 import de.hbrs.se2.womm.entities.Student;
 import de.hbrs.se2.womm.entities.Unternehmen;
 import de.hbrs.se2.womm.exceptions.AuthenticationException;
 import de.hbrs.se2.womm.exceptions.UsernameAlreadyTakenException;
 import de.hbrs.se2.womm.model.Roles;
+import de.hbrs.se2.womm.repositories.NutzerLoginRepository;
 import de.hbrs.se2.womm.repositories.NutzerRepository;
 import de.hbrs.se2.womm.repositories.StudentRepository;
 import de.hbrs.se2.womm.repositories.UnternehmenRepository;
@@ -26,6 +28,8 @@ public class AuthenticationService {
     @Autowired
     private UserDetailsManagerImpl userDetailsManager;
     @Autowired
+    private NutzerLoginRepository nutzerLoginRepository;
+    @Autowired
     private NutzerRepository nutzerRepository;
     @Autowired
     private StudentRepository studentRepository;
@@ -38,9 +42,10 @@ public class AuthenticationService {
 
     public void registerStudent(StudentRegistrationRequest request) throws UsernameAlreadyTakenException {
         String username = request.getUsername();
+        String email = request.getEmail();
         createUser(request, username, Roles.STUDENT.name());
         // speichert Studenten mit FK zur Nutzer-Tabelle
-        Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
+        Nutzer user = nutzerRepository.findNutzerByNutzerMail(email);
         studentRepository.save(Student.builder()
                     .studentVorname(request.getFirstname())
                     .studentName(request.getLastname())
@@ -52,17 +57,18 @@ public class AuthenticationService {
 
     public void registerCompany(CompanyRegistrationRequest request) throws UsernameAlreadyTakenException {
         String username = request.getUsername();
+        String email = request.getEmail();
         createUser(request, username, Roles.UNTERNEHMEN.name());
         // speichert Unternehmen mit FK zur Nutzer-Tabelle
-        Nutzer user = nutzerRepository.findNutzerByNutzerName(username);
+        Nutzer user = nutzerRepository.findNutzerByNutzerMail(email);
         unternehmenRepository.save(Unternehmen.builder()
                     .nutzer(user)
-                    .unternehmenName(request.getName())
+                    .name(request.getName())
                 .build());
     }
 
     public Authentication loginUser(LoginRequest request) throws AuthenticationException {
-        Nutzer user = nutzerRepository.findNutzerByNutzerName(request.getUsername());
+        NutzerLogin user = nutzerLoginRepository.findNutzerByNutzerName(request.getUsername());
         if (user == null) throw new AuthenticationException("Invalid username");
         try {
             Authentication authentication = authenticationManager.authenticate(
@@ -78,15 +84,22 @@ public class AuthenticationService {
      * speichert einen Nutzer für Student- oder Unternehmensanfrage
      */
     private void createUser(RegistrationRequest request, String username, String role) throws UsernameAlreadyTakenException {
-        if (nutzerRepository.existsNutzerByNutzerName(username))
+        if (nutzerLoginRepository.existsNutzerByNutzerName(username))
             throw new UsernameAlreadyTakenException("Username " + username + " is already taken!");
-        userDetailsManager.createUser(Nutzer.builder()
-                    .nutzerName(request.getUsername())
-                    .nutzerMail(request.getEmail())
-                    .nutzerPasswort(passwordEncoder.encode(request.getPassword()))
-                    .nutzerOrt(request.getLocation())
-                    .rolle(role)
-                    .nutzerAktiv(true)
-                .build());
+
+        Nutzer nutzer = Nutzer.builder()
+                .nutzerMail(request.getEmail())
+                .nutzerOrt(request.getLocation())
+                .nutzerAktiv(true).build();
+
+        Nutzer savedNutzer = nutzerRepository.save(nutzer);
+
+        NutzerLogin nutzerLogin = NutzerLogin.builder()
+                .nutzerName(request.getUsername())
+                .nutzerPasswort(passwordEncoder.encode(request.getPassword()))
+                .rolle(role)
+                .nutzer(savedNutzer).build();
+
+        userDetailsManager.createUser(nutzerLogin);
     }
 }
