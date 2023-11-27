@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.controller;
 
+import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.services.StudentService;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users/")
-public class StudentController extends AbstractControllerOurs {
+public class StudentController extends AbstractControllerForFilter implements IgetAllController {
 
     StudentService studentService;
 
@@ -37,5 +38,13 @@ public class StudentController extends AbstractControllerOurs {
     public ResponseEntity<Void> updateStudent(@RequestBody StudentDTO studentDTO) {
         studentService.saveStudent(studentDTO);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
+        return new ResponseEntity<>(
+                studentService.getAllService(),
+                HttpStatus.OK
+        );
     }
 }

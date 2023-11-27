@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.services;
 
+import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.entities.Stelle;
 import de.hbrs.se2.womm.mapper.StelleMapper;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StelleService {
+public class StelleService implements IgetAllService {
     private final StelleRepository stelleRepository;
     private final StelleMapper stelleMapper = StelleMapper.INSTANCE;
 
@@ -33,5 +34,12 @@ public class StelleService {
     public void saveStelle(StelleDTO stelleDTO) {
         Stelle stelle = stelleMapper.stelleDtoToStelle(stelleDTO);
         stelleRepository.save(stelle);
+    }
+
+    @Override
+    public List<? extends AbstractDTO> getAllService() {
+        return stelleRepository.findAll()
+                .stream()
+                .map(stelleMapper::stelleToStelleDto).toList();
     }
 }

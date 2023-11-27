@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.controller;
 
+import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.services.UnternehmenService;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-public class UnternehmenController {
+public class UnternehmenController extends AbstractControllerForFilter implements IgetAllController{
     UnternehmenService unternehmenService;
 
     public UnternehmenController(UnternehmenService unternehmenService){
@@ -39,4 +40,14 @@ public class UnternehmenController {
         unternehmenService.saveUnternehmen(zuErstellendesUnternehmen);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-}
+
+
+        @Override
+        @GetMapping("all")
+        public ResponseEntity<List<? extends AbstractDTO>> getAll() {
+            return new ResponseEntity<>(
+                    unternehmenService.getAllService(),
+                    HttpStatus.OK
+            );
+        }
+    }

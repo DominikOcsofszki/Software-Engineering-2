@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class LoginRequest {
+public class LoginRequest extends AbstractDTO{
     private String username;
     private String password;
 }
