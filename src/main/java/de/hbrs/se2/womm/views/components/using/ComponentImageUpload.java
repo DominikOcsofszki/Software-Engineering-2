@@ -30,7 +30,7 @@ public class ComponentImageUpload extends VerticalLayout {
         add(upload, output);
 
         // Configure upload component
-        upload.setAcceptedFileTypes("image/jpeg", "image/png", "image/gif");
+        upload.setAcceptedFileTypes("image/jpeg", "image/png", "image/gif", "application/pdf");
         upload.addSucceededListener(event -> {
             output.removeAll();
             output.add(new Text("Uploaded: "+originalFileName+" to "+ file.getAbsolutePath()+ "Type: "+mimeType));
