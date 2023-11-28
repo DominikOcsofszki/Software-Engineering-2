@@ -13,15 +13,10 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.StreamResource;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
-import com.vaadin.flow.server.frontend.installer.DefaultFileDownloader;
-import de.hbrs.se2.womm.controller.ApplicationController;
 import de.hbrs.se2.womm.controller.BewerbungController;
 import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
-import de.hbrs.se2.womm.entities.Bewerbung;
-import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -36,6 +31,16 @@ public class UApplicationView extends VerticalLayout implements HasUrlParameter<
     private BewerbungController bewerbungController;
     private StudentController studentController;
 
+    private BewerbungDTO bewerbung;
+    private Long bewerbungID;
+    private String bewerbungText;
+
+    private StudentDTO student;
+    private Long studentID;
+    private String studentName;
+    private String studentVorname;
+    private byte[] studentProfilePicture;
+
     public UApplicationView(BewerbungController bewerbungController, StudentController studentController) throws InterruptedException {
         super();
         this.bewerbungController = bewerbungController;
@@ -44,19 +49,20 @@ public class UApplicationView extends VerticalLayout implements HasUrlParameter<
 
 
     @Override
-    public void setParameter(BeforeEvent beforeEvent, @OptionalParameter String parameter) {
-        if (parameter == null || parameter.equals("example")) {
+    public void setParameter(BeforeEvent beforeEvent, @OptionalParameter String bewerbungID) {
+        if (bewerbungID == null || bewerbungID.equals("example")) {
             setUpExample();
         } else {
             try {
-                BewerbungDTO bewerbung = bewerbungController.getById(Long.parseLong(parameter)).getBody();
+                this.bewerbungID = Long.parseLong(bewerbungID);
+                bewerbung = bewerbungController.getById(this.bewerbungID).getBody();
                 if (bewerbung == null) {
-                    setUpNotFound(parameter);
+                    setUpNotFound(bewerbungID);
                 } else {
-                    setUpApplication(bewerbung);
+                    setUpApplication();
                 }
             } catch (Exception e) {
-                add(new H1(String.format("%s ist keine gültige ID.",parameter)));
+                add(new H1(String.format("%s ist keine gültige ID.", bewerbungID)));
             }
         }
     }
@@ -88,35 +94,38 @@ public class UApplicationView extends VerticalLayout implements HasUrlParameter<
         add(new H1(String.format("Die Bewerbung mit der ID '%s' konnte nicht gefunden werden.", id)));
     }
 
-    void setUpApplication(BewerbungDTO application) {
-        setUpTop(application);
-        setUpAnschreiben(application);
+    void setUpApplication() {
+        bewerbungText = bewerbung.getBewerbungText();
+        studentID = bewerbung.getBewerbungStudent().getStudentId();
+        student = studentController.getStudentById(studentID).getBody();
+        studentName = student.getStudentName();
+        studentVorname = student.getStudentVorname();
+        studentProfilePicture = student.getNutzer().getNutzerProfilbild();
+        setUpTop();
+        setUpAnschreiben();
     }
 
-    private void setUpTop(BewerbungDTO bewerbung) {
-        StudentDTO student = studentController.getStudentById(
-                bewerbung.getBewerbungStudent().getStudentId()
-        ).getBody();
+    private void setUpTop() {
         HorizontalLayout top = new HorizontalLayout();
         top.setAlignItems(FlexComponent.Alignment.CENTER);
         top.setJustifyContentMode(JustifyContentMode.AROUND);
-        StreamResource resource = new StreamResource(student.getStudentName() + ".jpg", () -> new ByteArrayInputStream(student.getNutzer().getNutzerProfilbild()));
-        Image image = new Image(resource, student.getStudentName());
+        StreamResource resource = new StreamResource(studentName + ".jpg", () -> new ByteArrayInputStream(studentProfilePicture));
+        Image image = new Image(resource, studentName);
         image.setWidth(200, Unit.PIXELS);
         image.setHeight(200, Unit.PIXELS);
         image.getStyle().set("border", "3px solid black");
         top.add(image);
-        var name = new H3(String.format("%s, %s", student.getStudentName(), student.getStudentVorname()));
+        var name = new H3(String.format("%s, %s", studentName, studentVorname));
         top.add(name);
         Button chat = new Button("Chat", event -> {
-            UI.getCurrent().navigate(ROUTING.UNTERNEHMEN.UChatView + "/" + student.getStudentId());
+            UI.getCurrent().navigate(ROUTING.UNTERNEHMEN.UChatView + "/" + studentID);
         });
         top.add(chat);
         add(top);
     }
 
-    private void setUpAnschreiben(BewerbungDTO bewerbung) {
-        var anschreiben = new Paragraph(bewerbung.getBewerbungText());
+    private void setUpAnschreiben() {
+        var anschreiben = new Paragraph(bewerbungText);
         var details = new Details("Anschreiben", anschreiben);
         details.setOpened(true);
         details.getStyle().set("border", "3px dotted black");
