@@ -36,7 +36,7 @@ public class SNotificationView extends VerticalLayout {
 
     public SNotificationView() {
         setUpHeader();
-        setUpSNotification();
+        // SetUpSNotification();
         add(new ComponentFilterGridControllerBenachrichtigungen());
     }
 

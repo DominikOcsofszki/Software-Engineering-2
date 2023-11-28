@@ -16,6 +16,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.views.components.using.ComponentFilterGridControllerBenachrichtigungen;
+import de.hbrs.se2.womm.views.components.using.TEMPLATE;
 import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -42,12 +44,13 @@ public class UNotificationView extends VerticalLayout {
         add(header);
     }
 
-    private static final String LIT_TEMPLATE_HTML = """
+    /*private static final String LIT_TEMPLATE_HTML = """
             <vaadin-button title="Go to ..."
                            @click="${clickHandler}"
                            theme="tertiary-inline small link">
                 ${item.id}
             </vaadin-button>""";
+     */
 
     private void setUpUNotification() {
         VerticalLayout notification = new VerticalLayout();
@@ -77,10 +80,10 @@ public class UNotificationView extends VerticalLayout {
 
         grid.setItems(inhalt);
         grid.addComponentColumn(demoInhalt::getImage).setHeader("Profilbild").setWidth("10%");
-        grid.addColumn(LitRenderer.<demoInhalt>of(LIT_TEMPLATE_HTML)
+        grid.addColumn(LitRenderer.<demoInhalt>of(TEMPLATE.LIT_TEMPLATE_HTML)
                 .withProperty("id",demoInhalt::getName)
                 .withFunction("clickHandler", person -> {
-                    UI.getCurrent().navigate(SFirmProfileDisplayView.class);
+                    UI.getCurrent().navigate(UApplicationView.class);
                 })).setHeader("Name").setWidth("25%").setSortable(true);
         grid.addColumn(demoInhalt::getMessage).setHeader("Nachricht").setWidth("65%");
         notification.add(grid);

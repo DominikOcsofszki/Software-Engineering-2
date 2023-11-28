@@ -121,7 +121,7 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout implements HasUr
     private long stelleDTO(){
 
         long stelleId = 3l;
-        long getUserId = 3l;
+        long getUserId = 1l;
         UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(getUserId).getBody();
 //        Unternehmen unternehmen = UnternehmenMapper.INSTANCE.dtoZuUnternehmen(unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()

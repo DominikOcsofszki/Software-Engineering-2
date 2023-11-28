@@ -118,7 +118,7 @@ public class ComponentFilterGridControllerStellen
         addClickableItemsToGridStelle("Titel");
         //grid.addColumn(StelleDTO::getStelleId).setHeader("Id").setSortable(true).setComparator(StelleDTO::getStelleId);
 //        grid.addColumn(StelleDTO::getStelleTitel).setHeader("Titel").setSortable(true).setComparator(StelleDTO::getStelleTitel);
-        grid.addColumn(StelleDTO::getStelleTitel).setHeader("Titel").setSortable(true).setComparator(StelleDTO::getStelleTitel);
+        //grid.addColumn(StelleDTO::getStelleTitel).setHeader("Titel").setSortable(true).setComparator(StelleDTO::getStelleTitel);
         grid.addColumn(StelleDTO::getStelleOrt).setHeader("Ort").setSortable(true).setComparator(StelleDTO::getStelleOrt);
         grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader("Beschreibung").setSortable(true).setComparator(StelleDTO::getStelleBeschreibung);
         grid.addColumn(StelleDTO::getStelleWebsite).setHeader("Website").setSortable(true).setComparator(StelleDTO::getStelleWebsite);

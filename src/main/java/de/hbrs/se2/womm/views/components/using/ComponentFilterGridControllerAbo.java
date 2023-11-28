@@ -45,7 +45,7 @@ public class ComponentFilterGridControllerAbo
     }
 
     private List<? extends AbstractDTO> getItemsForGrid() {
-//        return ((StelleController) controller).getAll().getBody(); //ToDo: change Cast here
+ //       return ((StelleController) controller).getAll().getBody(); //ToDo: change Cast here
         return GenerateAbonnementsDTOStillUnternehmen.generateUnternehmenDTO(demoNumber);
     }
 
