@@ -20,8 +20,9 @@ public class ComponentFilterGridControllerBewerbung extends VerticalLayout {
     Select<String> select = new Select<>();
     Grid<BewerbungDTO> grid = new Grid<>();
     String[] filterByItemsFromDTO = BewerbungDTO.getAllFilter();
-
-    public ComponentFilterGridControllerBewerbung(AbstractControllerForFilter controller) {
+long idLoggedInUser;
+    public ComponentFilterGridControllerBewerbung(AbstractControllerForFilter controller,long id) {
+        this.idLoggedInUser = id;
         List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
         setUpGrid(itemsForGrid);
         add(getToolbar(), grid);
@@ -30,6 +31,8 @@ public class ComponentFilterGridControllerBewerbung extends VerticalLayout {
     }
     private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerForFilter controller){
         return ((BewerbungController)controller).getAll().getBody(); //ToDo: change Cast here
+//        return ((BewerbungController)controller).ge(this.idLoggedInUser).getBody(); //ToDo: change Cast here
+//        return Gene
     }
 
     private void setUpGrid(List<? extends AbstractDTO> itemsForGrid){
