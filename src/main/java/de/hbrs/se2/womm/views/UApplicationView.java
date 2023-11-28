@@ -45,14 +45,18 @@ public class UApplicationView extends VerticalLayout implements HasUrlParameter<
 
     @Override
     public void setParameter(BeforeEvent beforeEvent, @OptionalParameter String parameter) {
-        if (parameter == null) {
+        if (parameter == null || parameter.equals("example")) {
             setUpExample();
         } else {
-            BewerbungDTO bewerbung = bewerbungController.getById(Long.parseLong(parameter)).getBody();
-            if (bewerbung == null) {
-                setUpNotFound(parameter);
-            } else {
-                setUpApplication(bewerbung);
+            try {
+                BewerbungDTO bewerbung = bewerbungController.getById(Long.parseLong(parameter)).getBody();
+                if (bewerbung == null) {
+                    setUpNotFound(parameter);
+                } else {
+                    setUpApplication(bewerbung);
+                }
+            } catch (Exception e) {
+                add(new H1(String.format("%s ist keine gültige ID.",parameter)));
             }
         }
     }
