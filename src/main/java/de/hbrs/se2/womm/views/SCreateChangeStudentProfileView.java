@@ -20,6 +20,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
+import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 import java.time.LocalDate;
@@ -28,8 +29,7 @@ import java.util.List;
 
 
 
-@AnonymousAllowed
-@Route(value = ROUTING.STUDENT.SCreateChangeStudentProfileView, layout = LoggedOutLayout.class)
+@Route(value = ROUTING.STUDENT.SCreateChangeStudentProfileView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
 public class SCreateChangeStudentProfileView extends VerticalLayout {
@@ -52,13 +52,7 @@ public class SCreateChangeStudentProfileView extends VerticalLayout {
         //b.getElement().getStyle().set("font-family","Open Sans");
         //b.getElement().getStyle().set("font-style","normal");
         header.add(b);
-        b = new Button("Start Chatting");
-        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        b.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
-
-        b.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
-        header.add(b);
         add(header);
     }
     private void Profil() {
