@@ -1,8 +1,6 @@
 package de.hbrs.se2.womm.views;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
@@ -10,33 +8,58 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.BeforeEvent;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
-import de.hbrs.se2.womm.views.layouts.ASSETS;
+import com.vaadin.flow.router.*;
+import de.hbrs.se2.womm.controller.StelleController;
+import de.hbrs.se2.womm.dtos.StelleDTO;
+import de.hbrs.se2.womm.services.ImageService;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
+import javassist.NotFoundException;
+import tools.generate.GenerateStelleDTO;
 
 @Route(value = ROUTING.STUDENT.SJobProjectWorkshopDisplayView, layout = StudentLayout.class)
-@RolesAllowed({"STUDENT","ADMIN"})
+@RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("JobProjectWorkshopDisplayView")
-public class SJobProjectWorkshopDisplayView extends VerticalLayout {
-
-    public SJobProjectWorkshopDisplayView() {
+public class SJobProjectWorkshopDisplayView extends VerticalLayout implements HasUrlParameter<String> {
+    private String parameter;
+    StelleController stelleController;
+    StelleDTO stelleDTO = GenerateStelleDTO.generateStelleDTO(1).get(0);
+     long stelleId = 1;
+    @Override
+    public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
+        this.parameter = parameter;
+        if(this.parameter != null) this.stelleId = Long.parseLong(this.parameter);
+        System.out.println("Parameter: " + this.parameter);
+        try {
+            this.stelleDTO = setUpStelleDTO(this.stelleId);
+        } catch (NotFoundException e) {
+            throw new RuntimeException(e);
+        }
         setUpBanner();
         setUpHeader();
         setUpStellenanzeige();
         setUpButtons();
+    }
+    public SJobProjectWorkshopDisplayView(StelleController stelleController) {
+        this.stelleController = stelleController;
+//        setUpBanner();
+//        setUpHeader();
+//        setUpStellenanzeige();
+//        setUpButtons();
+        //ToDo setUpStelleDTO running after setParameter
+    }
+    private StelleDTO setUpStelleDTO(long id) throws NotFoundException {
+//            StelleDTO stelleDTO = stelleController.getById(Long.parseLong(parameter));
+            StelleDTO stelleDTO = stelleController.getById(id);
+            return stelleDTO;
     }
 
     //ToDo Banner anpassen
 
     private void setUpBanner() {
         VerticalLayout banner = new VerticalLayout();
-        Image i = new Image("themes/theme_1/banner.jpg","https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
+        Image i = new Image("themes/theme_1/banner.jpg", "https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
         i.setWidth("100%");
         banner.add(i);
         add(banner);
@@ -44,19 +67,27 @@ public class SJobProjectWorkshopDisplayView extends VerticalLayout {
 
     //ToDo bestimmten FirmenNamen + FirmenLogo anzeigen
 
-    private void setUpHeader(){
+    private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
+        ImageService imageService = new ImageService();
 
         //Logo
-        Image i = new Image(ASSETS.RANDOM.USER, "Alternative image text");
-        i.setWidth("25%");
+//        Image i = new Image(ASSETS.RANDOM.USER, "Alternative image text");
+//        Image i = this.stelleDTO.getStelleUnternehmen().PlaceholderOrImage(); //ToDo Changed
+
+//        Image i = imageService.getImage(this.stelleDTO.getStelleUnternehmen().getNutzer()); //ToDo Changed
+//        Image i = imageService.test();
+        Image i = imageService.getRandomImageHeight(100);
+//        i.setWidth("25%");
         header.add(i);
 
         //Ueberschrift
-        header.add(new H1("Unternehmenname"));
+//        header.add(new H1("Unternehmenname"));
+        String unternehmenName = this.stelleDTO.getStelleUnternehmen().getName(); //ToDo Changed
+        header.add(new H1(unternehmenName));
+//        header.add(new H1("Unternehmenname"));
         add(header);
     }
-
 
 
     private void setUpStellenanzeige() {
@@ -65,22 +96,29 @@ public class SJobProjectWorkshopDisplayView extends VerticalLayout {
 
         //ToDo bestimmete StelleTitel anzeigen
         //Textfeld StelleTitel
+//        Paragraph titel = new Paragraph();
         Paragraph titel = new Paragraph();
-        titel.setText("Werksstudenten-Stelle");
+        String stelleTitel = this.stelleDTO.getStelleTitel(); //ToDo Changed
+        titel.setText(stelleTitel);
+//        titel.setText("Werksstudenten-Stelle");
 
         stellenanzeige.add(titel);
 
         //ToDo bestimmete StelleOrt anzeigen
         //Textfeld StelleOrt
         Paragraph ort = new Paragraph();
-        ort.setText("Bonn");
+        String stelleOrt = this.stelleDTO.getStelleOrt(); //ToDo Changed
+        ort.setText(stelleOrt);
+//        ort.setText("Bonn");
 
         stellenanzeige.add(ort);
 
         //ToDo bestimmete StelleOrt anzeigen
         //Textfeld StelleWebsite
         Paragraph website = new Paragraph();
-        website.setText("https://www.google.com/");
+        String stelleWebsite = this.stelleDTO.getStelleWebsite(); //ToDo Changed
+        website.setText(stelleWebsite);
+//        website.setText("https://www.google.com/");
 
         stellenanzeige.add(website);
 
@@ -88,7 +126,9 @@ public class SJobProjectWorkshopDisplayView extends VerticalLayout {
         //Textfeld StelleBeschreibung
         Paragraph beschreibung = new Paragraph();
         beschreibung.setWidthFull();
-        beschreibung.setText("Hier könnte ihre Werbung für einen ausbeutenden Job stehen.");
+        String stelleBeschreibung = this.stelleDTO.getStelleBeschreibung(); //ToDo Changed
+        beschreibung.setText(stelleBeschreibung);
+//        beschreibung.setText("Hier könnte ihre Werbung für einen ausbeutenden Job stehen.");
 
         stellenanzeige.add(beschreibung);
 
@@ -109,13 +149,13 @@ public class SJobProjectWorkshopDisplayView extends VerticalLayout {
 
         //ToDo Chat für bestimmete Studenten-Unternehmen Kombination öffnen
         //Chat-Button
-        Button chatButton = new Button("Chat",  new Icon(VaadinIcon.COMMENTS_O));
+        Button chatButton = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
         chatButton.addClickListener(e -> {
             getUI().ifPresent(ui -> ui.navigate(ROUTING.STUDENT.SChatView));
         });
         buttons.add(chatButton);
-
         add(buttons);
     }
+
 
 }
