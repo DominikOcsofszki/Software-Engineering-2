@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.services;
+package de.hbrs.se2.womm.config;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;

@@ -17,7 +17,7 @@ import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.controller.AuthenticationController;
 import de.hbrs.se2.womm.dtos.LoginRequest;
 import de.hbrs.se2.womm.exceptions.AuthenticationException;
-import de.hbrs.se2.womm.services.SecurityService;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;

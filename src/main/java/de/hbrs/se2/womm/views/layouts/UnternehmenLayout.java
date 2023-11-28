@@ -5,7 +5,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
-import de.hbrs.se2.womm.services.SecurityService;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.*;
 
 public class UnternehmenLayout extends AbstractLayout {
@@ -23,7 +23,8 @@ public class UnternehmenLayout extends AbstractLayout {
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
-        if (!securityService.isUserUnternehmen() && !securityService.isUserAdmin())
+        if (securityService.getAuthenticatedUser() == null ||
+                (!securityService.isUserUnternehmen() && !securityService.isUserAdmin()))
             UI.getCurrent().navigate(ROUTING.ALL.AccessDeniedView);
     }
 

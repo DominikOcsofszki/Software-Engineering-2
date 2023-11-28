@@ -5,7 +5,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
-import de.hbrs.se2.womm.services.SecurityService;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.*;
 
 public class StudentLayout extends AbstractLayout {
@@ -23,7 +23,9 @@ public class StudentLayout extends AbstractLayout {
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
-        if (!securityService.isUserStudent()) UI.getCurrent().navigate(ROUTING.ALL.AccessDeniedView);
+        if (securityService.getAuthenticatedUser() == null ||
+                (!securityService.isUserStudent() && !securityService.isUserAdmin()))
+            UI.getCurrent().navigate(ROUTING.ALL.AccessDeniedView);
     }
 
     @Override

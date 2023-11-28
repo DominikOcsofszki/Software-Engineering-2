@@ -1,6 +1,5 @@
-package de.hbrs.se2.womm.controller;
+package de.hbrs.se2.womm.config;
 
-import de.hbrs.se2.womm.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

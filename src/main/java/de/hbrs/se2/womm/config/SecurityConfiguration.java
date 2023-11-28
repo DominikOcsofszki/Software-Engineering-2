@@ -41,11 +41,11 @@ public class SecurityConfiguration extends VaadinWebSecurity {
         return new UserDetailsManagerImpl();
     }
 
-//    @Override
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.csrf(AbstractHttpConfigurer::disable);
-//        return http.build();
-//    }
+    @Override
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable);
+        return http.build();
+    }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
