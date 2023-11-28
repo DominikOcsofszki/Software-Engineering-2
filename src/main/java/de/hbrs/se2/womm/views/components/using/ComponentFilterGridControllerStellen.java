@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.components.copyOnly;
+package de.hbrs.se2.womm.views.components.using;
 
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.grid.Grid;
