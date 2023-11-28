@@ -2,6 +2,7 @@ package tools.generate;
 
 import de.hbrs.se2.womm.dtos.NutzerDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import tools.collection.Time;
 import tools.collection.UnternehmenAndWebsites;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 public class GenerateUnternehmen {
     private static long counter = 0;
 
-        public static List<UnternehmenDTO> generateUnternehmen(int howManyStellen) {
+        public static List<UnternehmenDTO> generateUnternehmenDTO(int howManyStellen) {
             ArrayList<UnternehmenDTO> stelleDtoList = new ArrayList<>();
             for (int i = 0; i < howManyStellen; i++) {
                 UnternehmenDTO stelleDTO = UnternehmenDTO.builder()
@@ -30,13 +31,13 @@ public class GenerateUnternehmen {
             case "unternehmenId" -> getCounterIncrement();
             case "name" -> UnternehmenAndWebsites.getRandomUnternehmenName();
             case "beschreibung" -> UnternehmenAndWebsites.getRandomWebsite();
-            case "gruendung" -> Years.randomGruendung();
+            case "gruendung" -> Time.randomGruendung();
             default -> throw new IllegalArgumentException("switchStatement not found");
         };
     }
 
     private static NutzerDTO getNutzerDTO(){
-            List<NutzerDTO> nutzerDTO = GenerateNutzer.generateStelle(1);
+            List<NutzerDTO> nutzerDTO = GenerateNutzer.generateNutzerDTO(1);
             return nutzerDTO.get(0);
         }
     private static String getCounterIncrement(){
@@ -46,7 +47,7 @@ public class GenerateUnternehmen {
 
 
         public static void main(String[] args) {
-            List<UnternehmenDTO> dto = GenerateUnternehmen.generateUnternehmen(5);
+            List<UnternehmenDTO> dto = GenerateUnternehmen.generateUnternehmenDTO(5);
             System.out.println(dto);
         }
     }

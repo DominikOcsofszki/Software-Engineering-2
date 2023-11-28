@@ -1,9 +1,7 @@
 package de.hbrs.se2.womm.views;
 
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
@@ -11,25 +9,46 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.*;
+import de.hbrs.se2.womm.controller.UnternehmenController;
+import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Stelle;
 import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
-import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
+import javassist.NotFoundException;
+import tools.generate.GenerateUnternehmen;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 @Route(value = ROUTING.STUDENT.SFirmProfileDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("FirmProfileDisplayView")
-public class SFirmProfileDisplayView extends VerticalLayout {
-    public SFirmProfileDisplayView() {
+public class SFirmProfileDisplayView extends VerticalLayout implements HasUrlParameter<String> {
+
+    private String parameter;
+    UnternehmenController unternehmenController;
+    UnternehmenDTO unternehmenDTO = GenerateUnternehmen.generateUnternehmenDTO(1).get(0);
+    long unternehmenId = 1;
+    @Override
+    public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
+        this.parameter = parameter;
+        if(this.parameter != null) this.unternehmenId = Long.parseLong(this.parameter);
+        System.out.println("Parameter: " + this.parameter);
+        try {
+            this.unternehmenDTO = setUpUnternehmenDTO(this.unternehmenId);
+        } catch (NotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private UnternehmenDTO setUpUnternehmenDTO(long id) throws NotFoundException {
+        return unternehmenController.getUnternehmenById(id).getBody();
+    }
+
+    public SFirmProfileDisplayView(UnternehmenController unternehmenController) {
+        this.unternehmenController=unternehmenController;
         // Logo, Company Name, Subscribe and Chat Button
         HorizontalLayout buttonsLayout = new HorizontalLayout();
 
