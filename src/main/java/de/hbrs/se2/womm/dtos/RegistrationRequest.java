@@ -7,4 +7,5 @@ public class RegistrationRequest extends AbstractDTO{
     private String username;
     private String password;
     private String email;
+    private String location;
 }

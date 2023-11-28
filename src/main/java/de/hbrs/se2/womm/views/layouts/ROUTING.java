@@ -5,6 +5,7 @@ public class ROUTING {
         public static final String LandingPageView = "LandingPageView";
         public static final String LoginView = "LoginView";
         public static final String RegistrierungStudentView = "RegistrierungStudentView";
+        public static final String AccessDeniedView = "AccessDeniedView";
     }
 
     static public class STUDENT {

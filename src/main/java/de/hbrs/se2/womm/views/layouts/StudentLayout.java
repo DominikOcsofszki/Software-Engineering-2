@@ -1,19 +1,31 @@
 package de.hbrs.se2.womm.views.layouts;
 
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.*;
-import de.hbrs.se2.womm.views.SHomepageStudentView;
+
 public class StudentLayout extends AbstractLayout {
 
+    private final SecurityService securityService;
 
     protected StudentLayout(SecurityService securityService) {
+        this.securityService = securityService;
         super.createHeaderWithLogoutButton(
                 new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
                         e -> securityService.logout()), true
         );
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        if (securityService.getAuthenticatedUser() == null ||
+                (!securityService.isUserStudent() && !securityService.isUserAdmin()))
+            UI.getCurrent().navigate(ROUTING.ALL.AccessDeniedView);
     }
 
     @Override
