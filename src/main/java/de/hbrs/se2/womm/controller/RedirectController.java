@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.config;
+package de.hbrs.se2.womm.controller;
 
 import de.hbrs.se2.womm.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
