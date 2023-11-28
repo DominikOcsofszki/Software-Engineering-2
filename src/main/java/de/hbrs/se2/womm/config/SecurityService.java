@@ -44,4 +44,7 @@ public class SecurityService {
         return getAuthenticatedUser().getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_" + Roles.STUDENT.name()));
     }
 
+    public long getLoggedInId() {
+        return 1;
+    }
 }
