@@ -117,7 +117,7 @@ public class LandingPageView extends VerticalLayout {
         HorizontalLayout registrationSection = new HorizontalLayout();
 
             Button buttonReg = new Button("SignUp");
-            buttonReg.addClickListener( e -> UI.getCurrent().navigate(LoginView.class));
+            buttonReg.addClickListener( e -> UI.getCurrent().navigate(RegistrierungStudentView.class));
             buttonReg.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
             buttonReg.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             registrationSection.add(buttonReg);
