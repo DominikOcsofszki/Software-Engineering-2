@@ -20,7 +20,6 @@ import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
-
 import java.io.ByteArrayInputStream;
 
 @Route(value = ROUTING.UNTERNEHMEN.UApplicationView, layout = UnternehmenLayout.class)
