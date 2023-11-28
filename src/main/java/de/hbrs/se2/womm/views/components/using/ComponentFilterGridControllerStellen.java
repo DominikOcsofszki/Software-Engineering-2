@@ -14,10 +14,8 @@ import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
 import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
-import de.hbrs.se2.womm.views.SAboStudentViewClicker;
 import de.hbrs.se2.womm.views.SFirmProfileDisplayView;
 import de.hbrs.se2.womm.views.SJobProjectWorkshopDisplayView;
 
