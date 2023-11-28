@@ -33,4 +33,7 @@ public class SecurityService {
         return getAuthenticatedUser().toString().contains("STUDENT");
     }
 
+    public long getLoggedInId() {
+        return 1;
+    }
 }
