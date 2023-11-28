@@ -20,11 +20,11 @@ public class StudentDTO extends AbstractDTO{
     private Integer studentSemester;
 
     public Image PlaceholderOrImage(){
-        if(nutzer == null || nutzer.getNutzerProfilbild() == null) {
+        if(nutzer == null || nutzer.getProfilbild() == null) {
             return ASSETS.buildPlaceholder(50,50);
         }
         return new Image("data:image/png;base64,"
-                + nutzer.getNutzerProfilbild(), "getImage");
+                + nutzer.getProfilbild(), "getImage");
     }
     public static String[] getAllFilter(){
         return new String[]{

@@ -19,9 +19,9 @@ public class ImageService {
         return Arrays.toString(imgBytes);
     }
     public com.vaadin.flow.component.html.Image getImage(NutzerDTO nutzerDTO){
-        if(nutzerDTO == null || nutzerDTO.getNutzerProfilbild() == null) return getPlaceholderImage();
+        if(nutzerDTO == null || nutzerDTO.getProfilbild() == null) return getPlaceholderImage();
 //        return new com.vaadin.flow.component.html.Image("data:image/png;base64,"+ nutzer.getNutzerProfilbild(), "getImage");
-        String bytesAsString = bytesToStringImage(nutzerDTO.getNutzerProfilbild());
+        String bytesAsString = bytesToStringImage(nutzerDTO.getProfilbild());
         return new com.vaadin.flow.component.html.Image(bytesAsString, "getImage");
 //        return new com.vaadin.flow.component.html.Image(nutzer.getNutzerProfilbild(), "getImage");
     }
