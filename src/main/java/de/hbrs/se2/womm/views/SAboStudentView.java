@@ -38,7 +38,7 @@ public class SAboStudentView extends VerticalLayout {
 
     public SAboStudentView() {
         setUpSearchFields();
-        setUpSubscription();
+        //setUpSubscription();
         add(new ComponentFilterGridControllerAbo());
 
     }
@@ -64,12 +64,14 @@ public class SAboStudentView extends VerticalLayout {
         add(searchFields);
     }
 
+    /*
     private static final String LIT_TEMPLATE_HTML = """
             <vaadin-button title="Go to ..."
                            @click="${clickHandler}"
                            theme="tertiary-inline small link">
                 ${item.id}
             </vaadin-button>""";
+
 
     private void setUpSubscription() {
         VerticalLayout notification = new VerticalLayout();
@@ -141,5 +143,7 @@ public class SAboStudentView extends VerticalLayout {
             this.message = message;
         }
     }
+
+     */
 
 }
