@@ -1,1 +1,2 @@
 %s=.* \(\w*\).=.\1(getValueAsString("\1"))
+%s=.* \(\w*\).=case "\1" -> xxx();

@@ -9,7 +9,7 @@ import tools.collection.UnternehmenAndWebsites;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenerateStelle {
+public class GenerateStelleDTO {
     private static long counter = 0;
 
     private static String getCounterIncrement(){
@@ -17,11 +17,11 @@ public class GenerateStelle {
         return String.valueOf(counter);
     }
 
-    public static List<StelleDTO> generateStelle(int howManyStellen) {
+    public static List<StelleDTO> generateStelleDTO(int howManyStellen) {
         ArrayList<StelleDTO> stelleDtoList = new ArrayList<>();
         for (int i = 0; i < howManyStellen; i++) {
             StelleDTO stelleDTO = StelleDTO.builder()
-            .stelleId(Long.valueOf(getValueAsString("stelleId")))
+                    .stelleId(Long.valueOf(getValueAsString("stelleId")))
                     .stelleTitel(getValueAsString("stelleTitel"))
                     .stelleOrt(getValueAsString("stelleOrt"))
                     .stelleBeschreibung(getValueAsString("stelleBeschreibung"))
@@ -42,7 +42,7 @@ public class GenerateStelle {
         return stelleDtoList;
     }
     private static UnternehmenDTO getUnternehmen(){
-        List<UnternehmenDTO> dto = GenerateUnternehmen.generateUnternehmen(1);
+        List<UnternehmenDTO> dto = GenerateUnternehmen.generateUnternehmenDTO(1);
         return dto.get(0);
     }
 //    private static Unternehmen unternehmenDTOToUnternehmen(UnternehmenDTO unternehmenDTO){
@@ -68,7 +68,7 @@ public class GenerateStelle {
 
 
     public static void main(String[] args) {
-        List<StelleDTO> stelleDTO = generateStelle(5);
+        List<StelleDTO> stelleDTO = generateStelleDTO(5);
         System.out.println(stelleDTO);
     }
 }
