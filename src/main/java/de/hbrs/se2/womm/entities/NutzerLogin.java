@@ -12,8 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "nutzerLogin")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
