@@ -1,23 +1,29 @@
 package de.hbrs.se2.womm.views.layouts;
 
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.spring.security.AuthenticationContext;
+import de.hbrs.se2.womm.services.SecurityService;
 import de.hbrs.se2.womm.views.*;
-import de.hbrs.se2.womm.views.SHomepageStudentView;
-import org.springframework.security.core.userdetails.UserDetails;
 
 public class StudentLayout extends AbstractLayout {
 
-    private final transient AuthenticationContext authContext;
+    private final SecurityService securityService;
 
-    protected StudentLayout(AuthenticationContext authContext) {
-        this.authContext = authContext;
+    protected StudentLayout(SecurityService securityService) {
+        this.securityService = securityService;
         super.createHeaderWithLogoutButton(
-                new Button("Log out: " + authContext.getAuthenticatedUser(UserDetails.class).get().getUsername(),
-                        e -> authContext.logout()), true
+                new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
+                        e -> securityService.logout()), true
         );
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        if (!securityService.isUserStudent()) UI.getCurrent().navigate(ROUTING.ALL.AccessDeniedView);
     }
 
     @Override
