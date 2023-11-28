@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "nutzerLogin")
+@Table(name = "nutzer_login")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,16 +19,16 @@ import java.util.Set;
 public class NutzerLogin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "nutzerLogin_id")
+    @Column(name = "nutzer_login_id")
     private Integer nutzerId;
 
-    @Column(name = "nutzerLogin_name", nullable = false)
+    @Column(name = "nutzer_login_name", nullable = false)
     private String nutzerName;
 
-    @Column(name = "nutzerLogin_passwort", nullable = false)
+    @Column(name = "nutzer_login_passwort", nullable = false)
     private String nutzerPasswort;
 
-    @Column(name = "nutzerLogin_rolle", nullable = false)
+    @Column(name = "nutzer_login_rolle", nullable = false)
     private String rolle;
 
     @OneToOne

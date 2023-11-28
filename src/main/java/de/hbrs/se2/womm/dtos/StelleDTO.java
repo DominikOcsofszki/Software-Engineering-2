@@ -14,7 +14,7 @@ public class StelleDTO extends AbstractDTO {
     private String stelleOrt;
     private String stelleBeschreibung;
     private String stelleWebsite;
-    private Unternehmen stelleUnternehmen;
+    private UnternehmenDTO stelleUnternehmen;
 
     public static String[] getAllFilter(){
         return new String[]{
