@@ -77,21 +77,18 @@ public abstract class AbstractComponentFilter<ExtendAbstractDTO extends Abstract
         inputSearchNameFilter = inputSearchNameFilter.toLowerCase();
         return checkItem.contains(inputSearchNameFilter);
     }
-     boolean filterFunction(ExtendAbstractDTO dto, String inputSearchNameFilter, String searchBy){
+
+    boolean filterFunction(ExtendAbstractDTO dto, String inputSearchNameFilter, String searchBy){
         String checkItem = checkItem(dto, searchBy);
-        //        String checkItem = switch (searchBy) {
+        return compareFilteringToLowerCase(checkItem, inputSearchNameFilter);
+    }
+    abstract String checkItem(ExtendAbstractDTO dto, String searchBy);
+//    String checkItem(ExtendAbstractDTO dto, String searchBy){
+//        String checkItem = switch (searchBy) {
 //            case "Unternehmen" -> dto.getName().toString().toLowerCase();
 //            case "Nachricht" -> dto.getBeschreibung().toString().toLowerCase();
 //            default -> throw new IllegalStateException("Unexpected value: " + searchBy);
 //        };
-        return compareFilteringToLowerCase(checkItem, inputSearchNameFilter);
-    }
-    String checkItem(ExtendAbstractDTO dto, String searchBy){
-        String checkItem = switch (searchBy) {
-            case "Unternehmen" -> dto.getName().toString().toLowerCase();
-            case "Nachricht" -> dto.getBeschreibung().toString().toLowerCase();
-            default -> throw new IllegalStateException("Unexpected value: " + searchBy);
-        };
-        return checkItem;
-    }
+//        return checkItem;
+//    }
 }
