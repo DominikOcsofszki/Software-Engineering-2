@@ -40,7 +40,7 @@ public class GenerateBewerbungDTO {
         return dto.get(0);
     }
     private static StudentDTO getStudentRandom(){
-        List<StudentDTO> dto = GenerateStudentDTO.generate(1);
+        List<StudentDTO> dto = GenerateStudentDTO.generateStudentDTO(1);
         return dto.get(0);
     }
     private static byte[] getPDF(){

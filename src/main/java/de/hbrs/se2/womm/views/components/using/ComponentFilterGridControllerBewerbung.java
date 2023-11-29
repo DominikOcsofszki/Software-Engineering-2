@@ -1,7 +1,9 @@
 package de.hbrs.se2.womm.views.components.using;
 
 import com.vaadin.flow.component.AbstractField;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -65,10 +67,16 @@ long idLoggedInUser;
 
     private void configureGrid() {
         grid.addColumn(BewerbungDTO::bewerbungStelleBezeichnung).setHeader("BewerbungStelle");
+        grid.addComponentColumn(item -> {
+            return new Button("Show Text", event -> {
+                Notification.show("BewerbungText: " + item.getBewerbungText());
+            });
+        });
         grid.addColumn(BewerbungDTO::getBewerbungText).setHeader("BewerbungText").setSortable(true).setComparator(BewerbungDTO::getBewerbungText);
         grid.addColumn(BewerbungDTO::bewerbungStudentName).setHeader("BewerbungStudent");
         grid.addColumn(BewerbungDTO::getBewerbungId).setHeader("BewerbungId").setSortable(true).setComparator(BewerbungDTO::getBewerbungId);
         grid.addColumn(BewerbungDTO::getBewerbungPdf).setHeader("BewerbungPdf");
+
     }
 
 

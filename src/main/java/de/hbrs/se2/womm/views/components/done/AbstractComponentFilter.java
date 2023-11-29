@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.components.refactoring;
+package de.hbrs.se2.womm.views.components.done;
 
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.grid.Grid;
@@ -17,26 +17,25 @@ import tools.generate.GenerateBenachrichtigungenDTOStillUnternehmen;
 import java.util.List;
 
 public abstract class AbstractComponentFilter<ExtendAbstractDTO extends AbstractDTO> extends VerticalLayout {
-    String parameter;
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
-    Grid<ExtendAbstractDTO> grid = new Grid<>();
+    protected Grid<ExtendAbstractDTO> grid = new Grid<>();
     public static String[] filterByItemsFromDTO;
-    int gridNumberOfItems = 100;
 
-    public AbstractComponentFilter(String[] filterByItemsFromDTO) {
-        this.filterByItemsFromDTO = filterByItemsFromDTO;
+    public AbstractComponentFilter() {
+        this.filterByItemsFromDTO = getFilterByItemsFromDTO();
         setUpFilter();
         setUpGrid(getItemsFromControllerOrGenerate());
         setUpToolbarAndAddGrid();
     }
+
+
     private void setUpFilter() {
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
-    abstract List<?> getItemsFromControllerOrGenerate();
-//        return GenerateBenachrichtigungenDTOStillUnternehmen.generateUnternehmenDTO(gridNumberOfItems);
-//    }
+
+    protected abstract List<?> getItemsFromControllerOrGenerate();
 
     private <T extends AbstractDTO> void setUpGrid(List<?> itemsForGrid) {
         addClassName("list-view");
@@ -45,6 +44,9 @@ public abstract class AbstractComponentFilter<ExtendAbstractDTO extends Abstract
         List<ExtendAbstractDTO> list = (List<ExtendAbstractDTO>) itemsForGrid;
         grid.setItems(list);
     }
+
+
+    protected abstract void configureGrid();
 
     private void setUpToolbarAndAddGrid() {
         filterText.setPlaceholder("Filter by...");
@@ -58,9 +60,6 @@ public abstract class AbstractComponentFilter<ExtendAbstractDTO extends Abstract
         add(toolbar, grid);
     }
 
-    abstract void configureGrid();
-
-
     private void setFilterBy(String searchBy) {
         filterText.addValueChangeListener(
                 (AbstractField.ComponentValueChangeEvent<TextField, String> event)
@@ -73,22 +72,17 @@ public abstract class AbstractComponentFilter<ExtendAbstractDTO extends Abstract
         );
     }
 
-    boolean compareFilteringToLowerCase(String checkItem, String inputSearchNameFilter){
+    boolean compareFilteringToLowerCase(String checkItem, String inputSearchNameFilter) {
         inputSearchNameFilter = inputSearchNameFilter.toLowerCase();
         return checkItem.contains(inputSearchNameFilter);
     }
 
-    boolean filterFunction(ExtendAbstractDTO dto, String inputSearchNameFilter, String searchBy){
+    boolean filterFunction(ExtendAbstractDTO dto, String inputSearchNameFilter, String searchBy) {
         String checkItem = checkItem(dto, searchBy);
         return compareFilteringToLowerCase(checkItem, inputSearchNameFilter);
     }
-    abstract String checkItem(ExtendAbstractDTO dto, String searchBy);
-//    String checkItem(ExtendAbstractDTO dto, String searchBy){
-//        String checkItem = switch (searchBy) {
-//            case "Unternehmen" -> dto.getName().toString().toLowerCase();
-//            case "Nachricht" -> dto.getBeschreibung().toString().toLowerCase();
-//            default -> throw new IllegalStateException("Unexpected value: " + searchBy);
-//        };
-//        return checkItem;
-//    }
+
+    protected abstract String checkItem(ExtendAbstractDTO dto, String searchBy);
+    protected abstract String[] getFilterByItemsFromDTO();
+
 }

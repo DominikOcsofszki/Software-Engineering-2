@@ -1,31 +1,38 @@
 package de.hbrs.se2.womm.views.components.refactoring;
 
-import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
-import tools.generate.GenerateBenachrichtigungenDTOStillUnternehmen;
+import de.hbrs.se2.womm.views.components.done.AbstractComponentFilter;
 import tools.generate.GenerateUnternehmen;
 
 import java.util.List;
 
-public class ComponentFilterUnternehmen extends AbstractComponentFilter<UnternehmenDTO>{
+public class ComponentFilterUnternehmen extends AbstractComponentFilter<UnternehmenDTO> {
 
-    public ComponentFilterUnternehmen(String[] filterByItemsFromDTO) {
-        super(filterByItemsFromDTO);
+    public ComponentFilterUnternehmen() {
+        super();
     }
 
     @Override
-    List<?> getItemsFromControllerOrGenerate() {
+    protected String[] getFilterByItemsFromDTO() {
+        return new String[]{
+                "Unternehmen",
+                "Nachricht"
+        };
+    }
+
+    @Override
+    protected List<?> getItemsFromControllerOrGenerate() {
         return GenerateUnternehmen.generateUnternehmenDTO(10);
     }
 
     @Override
-    void configureGrid() {
+    protected void configureGrid() {
         grid.addColumn(UnternehmenDTO::getName).setHeader("").
                 setSortable(true).setComparator(UnternehmenDTO::getName);
     }
 
     @Override
-    String checkItem(UnternehmenDTO dto, String searchBy) {
+    protected String checkItem(UnternehmenDTO dto, String searchBy) {
                 String checkItem = switch (searchBy) {
             case "Unternehmen" -> dto.getName().toString().toLowerCase();
             case "Nachricht" -> dto.getBeschreibung().toString().toLowerCase();
