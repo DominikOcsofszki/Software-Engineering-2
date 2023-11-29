@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Generator {
-    GenerateNutzerDTO generateNutzerDTO = new GenerateNutzerDTO();
-    GenerateBewerbungDTO generateBewerbungDTO = new GenerateBewerbungDTO();
-    GenerateStelleDTO generateStelleDTO = new GenerateStelleDTO();
-    GenerateUnternehmenDTO generateUnternehmenDTO = new GenerateUnternehmenDTO();
-    GenerateAbonnementsDTOStillUnternehmen generateAbonnementsDTO = new GenerateAbonnementsDTOStillUnternehmen();
-    GenerateBenachrichtigungenDTOStillUnternehmen generateBenachrichtigungenDTO = new GenerateBenachrichtigungenDTOStillUnternehmen();
+    public static final GenerateNutzerDTO generateNutzerDTO = new GenerateNutzerDTO();
+    public static final  GenerateBewerbungDTO generateBewerbungDTO = new GenerateBewerbungDTO();
+    public static final GenerateStelleDTO generateStelleDTO = new GenerateStelleDTO();
+    public static final GenerateUnternehmenDTO generateUnternehmenDTO = new GenerateUnternehmenDTO();
+    public static final GenerateAbonnementsDTOStillUnternehmen generateAbonnementsDTO = new GenerateAbonnementsDTOStillUnternehmen();
+    public static final GenerateBenachrichtigungenDTOStillUnternehmen generateBenachrichtigungenDTO = new GenerateBenachrichtigungenDTOStillUnternehmen();
 
 
 
@@ -32,9 +32,9 @@ public class Generator {
         System.out.println(listOfAllDTO);
     }
 
-    public static void main(String[] args) {
-        Generator generator = new Generator();
-        generator.generateAll(1);
-    }
+//    public static void main(String[] args) {
+//        Generator generator = new Generator();
+//        generator.generateAll(1);
+//    }
 
 }
