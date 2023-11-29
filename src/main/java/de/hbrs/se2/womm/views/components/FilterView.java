@@ -6,8 +6,8 @@ import com.vaadin.flow.router.Route;
 
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.controller.BewerbungController;
-import de.hbrs.se2.womm.views.components.using.ComponentFilterGridControllerAbo;
-import de.hbrs.se2.womm.views.components.using.ComponentFilterGridControllerBewerbung;
+import de.hbrs.se2.womm.services.BewerbungService;
+import de.hbrs.se2.womm.views.components.using.ComponentGenerateDBBewerbung;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 
 @PageTitle("MainView")
@@ -18,8 +18,9 @@ public class FilterView extends VerticalLayout {
 //    public FilterView(StelleController controller){
 //        add(new ComponentFilterGridControllerStellen(controller));
 //    }
-    public FilterView(BewerbungController controller){
-        add(new ComponentFilterGridControllerAbo());
+    public FilterView(BewerbungController controller, BewerbungService bewerbungService){
+        add(new ComponentGenerateDBBewerbung(controller,10,bewerbungService));
+//        add(new ComponentGenerateDBStellen(controller, 1));
 //        add(new ComponentFilterGridControllerBewerbung(controller));
     }
 

@@ -44,7 +44,8 @@ public class GenerateBewerbungDTO {
         return dto.get(0);
     }
     private static byte[] getPDF(){
-        return new byte[0];
+//        return null;
+        return new byte[100];
     }
 //    private static UnternehmenDTO getUnternehmen(){
 //        List<UnternehmenDTO> dto = GenerateUnternehmen.generateUnternehmenDTO(1);

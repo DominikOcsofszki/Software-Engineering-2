@@ -36,4 +36,7 @@ public class BewerbungService implements IgetAllService {
                 .stream()
                 .map(bewerbungMapper::bewerbungToBewerbungDto).toList();
     }
+    public void save(BewerbungDTO bewerbungDTO) {
+        bewerbungRepository.save(bewerbungMapper.bewerbungDtoToBewerbung(bewerbungDTO));
+    }
 }

@@ -20,6 +20,9 @@ public class BewerbungDTO extends AbstractDTO{
     public String bewerbungStudentName(){
         return bewerbungStudent.getStudentName();
     }
+    public  BewerbungDTO selfThis() {
+        return this;
+    }
     public static String[] getAllFilter(){
         return new String[]{
                 "bewerbungId",
