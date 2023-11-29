@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +15,9 @@ public class RedirectController {
     SecurityService securityService;
     @GetMapping("/")
     public RedirectView redirectWithUsingRedirectView(RedirectAttributes attributes) {
-        String loggedInUser = securityService.getAuthenticatedUser().getUsername();
-        System.out.println("loggedInUser: " + loggedInUser);
+        UserDetails loggedInUser = securityService.getAuthenticatedUser();
         if(loggedInUser != null){
+            System.out.println("loggedInUser: " + loggedInUser.getUsername());
             if(securityService.isUserAdmin()){
                 return new RedirectView("vaadin/admin");
             }else if(securityService.isUserUnternehmen()){

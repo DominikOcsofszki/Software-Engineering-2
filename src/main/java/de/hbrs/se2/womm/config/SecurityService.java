@@ -2,7 +2,6 @@ package de.hbrs.se2.womm.config;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
-import com.vaadin.flow.spring.security.AuthenticationContext;
 import de.hbrs.se2.womm.model.Roles;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import org.springframework.security.core.context.SecurityContext;
@@ -16,9 +15,11 @@ public class SecurityService {
 
     public UserDetails getAuthenticatedUser() {
         SecurityContext context = SecurityContextHolder.getContext();
-        Object principal = context.getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            return (UserDetails) context.getAuthentication().getPrincipal();
+        if (context != null && context.getAuthentication() != null) {
+            Object principal = context.getAuthentication().getPrincipal();
+            if (principal instanceof UserDetails) {
+                return (UserDetails) context.getAuthentication().getPrincipal();
+            }
         }
         // Anonymous or no authentication.
         return null;
