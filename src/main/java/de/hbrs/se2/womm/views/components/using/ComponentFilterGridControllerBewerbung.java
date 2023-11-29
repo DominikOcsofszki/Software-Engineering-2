@@ -12,6 +12,7 @@ import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
 import de.hbrs.se2.womm.controller.BewerbungController;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
+import tools.generate.GenerateBewerbungDTO;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class ComponentFilterGridControllerBewerbung extends VerticalLayout {
     Select<String> select = new Select<>();
     Grid<BewerbungDTO> grid = new Grid<>();
     String[] filterByItemsFromDTO = BewerbungDTO.getAllFilter();
+    int demoNr = 100;
 long idLoggedInUser;
     public ComponentFilterGridControllerBewerbung(AbstractControllerForFilter controller,long id) {
         this.idLoggedInUser = id;
@@ -30,7 +32,9 @@ long idLoggedInUser;
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
     private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerForFilter controller){
-        return ((BewerbungController)controller).getAll().getBody(); //ToDo: change Cast here
+        return GenerateBewerbungDTO.generateBewerbungDTO(demoNr);
+//        return ((BewerbungController)controller).getAll().getBody(); //ToDo: change Cast here
+
 //        return ((BewerbungController)controller).ge(this.idLoggedInUser).getBody(); //ToDo: change Cast here
 //        return Gene
     }
@@ -60,11 +64,11 @@ long idLoggedInUser;
     }
 
     private void configureGrid() {
+        grid.addColumn(BewerbungDTO::bewerbungStelleBezeichnung).setHeader("BewerbungStelle");
+        grid.addColumn(BewerbungDTO::getBewerbungText).setHeader("BewerbungText").setSortable(true).setComparator(BewerbungDTO::getBewerbungText);
+        grid.addColumn(BewerbungDTO::bewerbungStudentName).setHeader("BewerbungStudent");
         grid.addColumn(BewerbungDTO::getBewerbungId).setHeader("BewerbungId").setSortable(true).setComparator(BewerbungDTO::getBewerbungId);
         grid.addColumn(BewerbungDTO::getBewerbungPdf).setHeader("BewerbungPdf");
-        grid.addColumn(BewerbungDTO::getBewerbungText).setHeader("BewerbungText").setSortable(true).setComparator(BewerbungDTO::getBewerbungText);
-        grid.addColumn(BewerbungDTO::getBewerbungStelle).setHeader("BewerbungStelle");
-        grid.addColumn(BewerbungDTO::getBewerbungStudent).setHeader("BewerbungStudent");
     }
 
 
@@ -85,8 +89,8 @@ long idLoggedInUser;
             case  "bewerbungId" -> dto.getBewerbungId().toString().toLowerCase();
 //            case  "bewerbungPdf" -> dto.getBewerbungPdf().toString().toLowerCase();
             case  "bewerbungText" -> dto.getBewerbungText().toString().toLowerCase();
-//            case  "bewerbungStelle" -> dto.getBewerbungStelle().toString().toLowerCase();
-//            case  "bewerbungStudent" -> dto.getBewerbungStudent().toString().toLowerCase();
+            case  "bewerbungStelle" -> dto.getBewerbungStelle().getStelleTitel().toString().toLowerCase();
+            case  "bewerbungStudent" -> dto.getBewerbungStudent().getStudentName().toString().toLowerCase();
             default -> throw new IllegalStateException("Unexpected value: " + searchBy);
         };
         return checkUnternehmen.contains(inputSearchNameFilter);
