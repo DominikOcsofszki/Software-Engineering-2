@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.components;
+package de.hbrs.se2.womm.views.components.refactoring;
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -6,8 +6,7 @@ import com.vaadin.flow.router.Route;
 
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.controller.BewerbungController;
-import de.hbrs.se2.womm.views.components.using.ComponentFilterGridControllerAbo;
-import de.hbrs.se2.womm.views.components.using.ComponentFilterGridControllerBewerbung;
+import de.hbrs.se2.womm.views.components.refactoring.ComponentFilterExtends;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 
 @PageTitle("MainView")
@@ -19,7 +18,11 @@ public class FilterView extends VerticalLayout {
 //        add(new ComponentFilterGridControllerStellen(controller));
 //    }
     public FilterView(BewerbungController controller){
-        add(new ComponentFilterGridControllerAbo());
+        add(new ComponentFilterExtends());
+
+
+
+//        add(new ComponentFilterGridControllerAbo());
 //        add(new ComponentFilterGridControllerBewerbung(controller));
     }
 
