@@ -31,7 +31,7 @@ import org.springframework.security.core.Authentication;
 public class LoginView extends VerticalLayout {
     LoginForm login = new LoginForm();
 
-    LoginView(@Autowired AuthenticationController authenticationController, @Autowired SecurityService securityService) {
+    LoginView(@Autowired AuthenticationController authenticationController) {
         addClassName("login-view");
         setSizeFull();
         setAlignItems(Alignment.CENTER);
