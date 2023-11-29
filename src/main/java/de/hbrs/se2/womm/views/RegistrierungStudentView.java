@@ -1,12 +1,18 @@
 package de.hbrs.se2.womm.views;
 
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -17,17 +23,15 @@ import de.hbrs.se2.womm.controller.AuthenticationController;
 import de.hbrs.se2.womm.dtos.StudentRegistrationRequest;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
-import org.springframework.http.HttpStatusCode;
-
-import java.time.LocalDate;
-import java.util.Locale;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 
 @Route(value = ROUTING.ALL.RegistrierungStudentView, layout = LoggedOutLayout.class)
 @AnonymousAllowed
 @PageTitle("RegistrierungStudentView")
 public class RegistrierungStudentView extends VerticalLayout {
 
-    public RegistrierungStudentView() {
+    public RegistrierungStudentView(@Autowired AuthenticationController authenticationController) {
         super();
         setSizeFull();
 
@@ -93,8 +97,6 @@ public class RegistrierungStudentView extends VerticalLayout {
 
 
         Button registerComponent = new Button("Register", event -> {
-            /*
-            TODO
             try {
                 StudentRegistrationRequest request = new StudentRegistrationRequest();
                 request.setFirstname(nameComponent.getValue());
@@ -107,22 +109,51 @@ public class RegistrierungStudentView extends VerticalLayout {
                 //The output will be in the ISO-8601 format yyyy-MM-dd.
                 request.setDob(dateOfBirthComponent.getValue().toString());
 
-                //es gibt kein setLocation????
                 request.setLocation(locationComponent.getValue());
 
-                HttpStatusCode answer = (new AuthenticationController()).registerUser(request).getStatusCode();
+                ResponseEntity<Void> response = authenticationController.registerStudent(request);
 
-                if(answer.is2xxSuccessful()){
-                    UI.getCurrent().navigate(ROUTING.STUDENT.SHomepageStudentView);
-                    add(new H2("Registrirung Erfolgreich"));
-                } else {
+                if(response.getStatusCode().is2xxSuccessful()) {
+                    Notification notification = new Notification();
+                    notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 
+                    Div text = new Div(new Text("Registrierung erfolgreich!"));
+
+                    Button closeButton = new Button(new Icon("lumo", "cross"));
+                    closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+                    closeButton.setAriaLabel("Close");
+                    closeButton.addClickListener(e -> {
+                        notification.close();
+                        UI.getCurrent().navigate(ROUTING.ALL.LandingPageView);
+                    });
+
+                    HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                    layout.setAlignItems(Alignment.CENTER);
+
+                    notification.add(layout);
+                    notification.open();
                 }
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                Notification notification = new Notification();
+                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+                Div text = new Div(new Text(e.getMessage()));
+
+                Button closeButton = new Button(new Icon("lumo", "cross"));
+                closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+                closeButton.setAriaLabel("Close");
+                closeButton.addClickListener(evt -> {
+                    notification.close();
+                    this.setEnabled(true);
+                });
+
+                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                layout.setAlignItems(Alignment.CENTER);
+
+                notification.add(layout);
+                notification.open();
             }
 
-            */
         });
 
         FormLayout formLayout = new FormLayout();
