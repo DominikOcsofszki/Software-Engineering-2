@@ -18,7 +18,7 @@ public class FilterView extends VerticalLayout {
 //        add(new ComponentFilterGridControllerStellen(controller));
 //    }
     public FilterView(BewerbungController controller){
-        add(new ComponentFilterExtends());
+        add(new ComponentFilterUnternehmen(new String[]{"Unternehmen", "Admin"}));
 
 
 

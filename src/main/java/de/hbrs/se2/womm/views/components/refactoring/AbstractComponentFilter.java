@@ -16,7 +16,7 @@ import tools.generate.GenerateBenachrichtigungenDTOStillUnternehmen;
 
 import java.util.List;
 
-public class AbstractComponentFilter<ExtendAbstractDTO extends AbstractDTO> extends VerticalLayout {
+public abstract class AbstractComponentFilter<ExtendAbstractDTO extends AbstractDTO> extends VerticalLayout {
     String parameter;
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
@@ -34,9 +34,9 @@ public class AbstractComponentFilter<ExtendAbstractDTO extends AbstractDTO> exte
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
-    private List<?> getItemsFromControllerOrGenerate() {
-        return GenerateBenachrichtigungenDTOStillUnternehmen.generateUnternehmenDTO(gridNumberOfItems);
-    }
+    abstract List<?> getItemsFromControllerOrGenerate();
+//        return GenerateBenachrichtigungenDTOStillUnternehmen.generateUnternehmenDTO(gridNumberOfItems);
+//    }
 
     private <T extends AbstractDTO> void setUpGrid(List<?> itemsForGrid) {
         addClassName("list-view");
@@ -58,12 +58,7 @@ public class AbstractComponentFilter<ExtendAbstractDTO extends AbstractDTO> exte
         add(toolbar, grid);
     }
 
-    private void configureGrid() {
-//        grid.addItemClickListener(event -> {
-//            grid.select(event.getItem());
-//        });
-//        grid.addColumn(item -> ((UnternehmenDTO)item).getUnternehmenId()).setHeader("Beschreibung2");
-    }
+    abstract void configureGrid();
 
 
     private void setFilterBy(String searchBy) {
@@ -78,14 +73,25 @@ public class AbstractComponentFilter<ExtendAbstractDTO extends AbstractDTO> exte
         );
     }
 
-    private boolean filterFunction(ExtendAbstractDTO dto, String inputSearchNameFilter, String searchBy) {
+    boolean compareFilteringToLowerCase(String checkItem, String inputSearchNameFilter){
         inputSearchNameFilter = inputSearchNameFilter.toLowerCase();
-        return true;
-//        String checkUnternehmen = switch (searchBy) {
+        return checkItem.contains(inputSearchNameFilter);
+    }
+     boolean filterFunction(ExtendAbstractDTO dto, String inputSearchNameFilter, String searchBy){
+        String checkItem = checkItem(dto, searchBy);
+        //        String checkItem = switch (searchBy) {
 //            case "Unternehmen" -> dto.getName().toString().toLowerCase();
 //            case "Nachricht" -> dto.getBeschreibung().toString().toLowerCase();
 //            default -> throw new IllegalStateException("Unexpected value: " + searchBy);
 //        };
-//        return checkUnternehmen.contains(inputSearchNameFilter);
+        return compareFilteringToLowerCase(checkItem, inputSearchNameFilter);
+    }
+    String checkItem(ExtendAbstractDTO dto, String searchBy){
+        String checkItem = switch (searchBy) {
+            case "Unternehmen" -> dto.getName().toString().toLowerCase();
+            case "Nachricht" -> dto.getBeschreibung().toString().toLowerCase();
+            default -> throw new IllegalStateException("Unexpected value: " + searchBy);
+        };
+        return checkItem;
     }
 }
