@@ -15,7 +15,7 @@ public class Generator {
 
 
 
-    public void generateAll(int howMany){
+    public static void generateAll(int howMany){
         List<List<? extends AbstractDTO>> listOfAllDTO = new ArrayList<>();
         List<NutzerDTO> nutzerDTOList = generateNutzerDTO.generateNutzerDTO(howMany);
         List<BewerbungDTO> bewerbungDTOList = generateBewerbungDTO.generateBewerbungDTO(howMany);
