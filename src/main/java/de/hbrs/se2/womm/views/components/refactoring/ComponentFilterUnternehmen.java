@@ -20,7 +20,7 @@ public class ComponentFilterUnternehmen extends AbstractComponentFilter<Unterneh
 
     @Override
     void configureGrid() {
-        grid.addColumn(UnternehmenDTO::getName).setHeader("StudentVorname").
+        grid.addColumn(UnternehmenDTO::getName).setHeader("").
                 setSortable(true).setComparator(UnternehmenDTO::getName);
     }
 
