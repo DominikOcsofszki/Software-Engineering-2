@@ -2,7 +2,7 @@ package de.hbrs.se2.womm.views.components.refactoring;
 
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.views.components.done.AbstractComponentFilter;
-import tools.generate.GenerateUnternehmen;
+import tools.generate.GenerateUnternehmenDTO;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class ComponentFilterUnternehmen extends AbstractComponentFilter<Unterneh
 
     @Override
     protected List<?> getItemsFromControllerOrGenerate() {
-        return GenerateUnternehmen.generateUnternehmenDTO(10);
+        return GenerateUnternehmenDTO.generateUnternehmenDTO(10);
     }
 
     @Override

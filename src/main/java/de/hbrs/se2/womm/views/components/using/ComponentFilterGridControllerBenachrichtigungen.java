@@ -42,7 +42,7 @@ public class ComponentFilterGridControllerBenachrichtigungen
 
     private List<? extends AbstractDTO> getItemsForGrid() {
 //        return ((StelleController) controller).getAll().getBody(); //ToDo: change Cast here
-        return GenerateBenachrichtigungenDTOStillUnternehmen.generateUnternehmenDTO(demoNumber);
+        return GenerateBenachrichtigungenDTOStillUnternehmen.generateBenachrichtigungenDTO(demoNumber);
     }
 
     private void setUpGrid(List<? extends AbstractDTO> itemsForGrid) {

@@ -32,7 +32,7 @@ public class AbstractComponentFilterCopy<ExtendAbstractDTO extends AbstractDTO> 
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
     private List<?> getItemsFromControllerOrGenerate() {
-        return GenerateBenachrichtigungenDTOStillUnternehmen.generateUnternehmenDTO(gridNumberOfItems);
+        return GenerateBenachrichtigungenDTOStillUnternehmen.generateBenachrichtigungenDTO(gridNumberOfItems);
     }
 
     private <T extends AbstractDTO> void setUpGrid(List<?> itemsForGrid) {

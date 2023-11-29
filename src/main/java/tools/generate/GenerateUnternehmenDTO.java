@@ -8,9 +8,12 @@ import tools.collection.UnternehmenAndWebsites;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenerateUnternehmen {
+public class GenerateUnternehmenDTO {
     private static long counter = 0;
 
+    public static UnternehmenDTO GenerateOneUnternehmenDTO() {
+        return generateUnternehmenDTO(1).get(0);
+    }
         public static List<UnternehmenDTO> generateUnternehmenDTO(int howManyStellen) {
             ArrayList<UnternehmenDTO> stelleDtoList = new ArrayList<>();
             for (int i = 0; i < howManyStellen; i++) {
@@ -37,7 +40,7 @@ public class GenerateUnternehmen {
     }
 
     private static NutzerDTO getNutzerDTO(){
-            List<NutzerDTO> nutzerDTO = GenerateNutzer.generateNutzerDTO(1);
+            List<NutzerDTO> nutzerDTO = GenerateNutzerDTO.generateNutzerDTO(1);
             return nutzerDTO.get(0);
         }
     private static String getCounterIncrement(){
@@ -47,7 +50,7 @@ public class GenerateUnternehmen {
 
 
         public static void main(String[] args) {
-            List<UnternehmenDTO> dto = GenerateUnternehmen.generateUnternehmenDTO(5);
+            List<UnternehmenDTO> dto = GenerateUnternehmenDTO.generateUnternehmenDTO(5);
             System.out.println(dto);
         }
     }

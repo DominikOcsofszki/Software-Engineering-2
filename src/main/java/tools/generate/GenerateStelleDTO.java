@@ -17,6 +17,9 @@ public class GenerateStelleDTO {
         return String.valueOf(counter);
     }
 
+    public static StelleDTO generateOneRandomStelleDTO(){
+        return generateStelleDTO(1).get(0);
+    }
     public static List<StelleDTO> generateStelleDTO(int howManyStellen) {
         ArrayList<StelleDTO> stelleDtoList = new ArrayList<>();
         for (int i = 0; i < howManyStellen; i++) {
@@ -42,7 +45,7 @@ public class GenerateStelleDTO {
         return stelleDtoList;
     }
     private static UnternehmenDTO getUnternehmen(){
-        List<UnternehmenDTO> dto = GenerateUnternehmen.generateUnternehmenDTO(1);
+        List<UnternehmenDTO> dto = GenerateUnternehmenDTO.generateUnternehmenDTO(1);
         return dto.get(0);
     }
 //    private static Unternehmen unternehmenDTOToUnternehmen(UnternehmenDTO unternehmenDTO){

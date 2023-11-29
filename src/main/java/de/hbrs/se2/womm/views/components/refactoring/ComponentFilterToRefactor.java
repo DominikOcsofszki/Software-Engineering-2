@@ -37,7 +37,7 @@ public class ComponentFilterToRefactor<ExtendAbstractDTO extends AbstractDTO> ex
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
     private List<?> getItemsFromControllerOrGenerate() {
-        return GenerateBenachrichtigungenDTOStillUnternehmen.generateUnternehmenDTO(demoNumber);
+        return GenerateBenachrichtigungenDTOStillUnternehmen.generateBenachrichtigungenDTO(demoNumber);
     }
 
     private <T extends AbstractDTO> void setUpGrid(List<?> itemsForGrid) {

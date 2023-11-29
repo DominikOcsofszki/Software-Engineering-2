@@ -1,7 +1,6 @@
 package tools.generate;
 
 import de.hbrs.se2.womm.dtos.NutzerDTO;
-import de.hbrs.se2.womm.services.ImageService;
 import tools.collection.FirstNames;
 import tools.collection.LastNames;
 import tools.collection.Places;
@@ -9,7 +8,7 @@ import tools.collection.Places;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenerateNutzer {
+public class GenerateNutzerDTO {
     private static long counter = 0;
 
     public static NutzerDTO generateOneRandomNutzerDTO() {

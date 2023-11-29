@@ -16,7 +16,7 @@ public class GenerateStudentDTO {
         ArrayList<StudentDTO> stelleDtoList = new ArrayList<>();
         for (int i = 0; i < howManyStellen; i++) {
             StudentDTO stelleDTO = StudentDTO.builder()
-                    .nutzer(GenerateNutzer.generateOneRandomNutzerDTO())
+                    .nutzer(GenerateNutzerDTO.generateOneRandomNutzerDTO())
                     .studentId(Long.parseLong(getValueAsString("studentId")))
                     .studentVorname(getValueAsString("studentVorname"))
                     .studentName(getValueAsString("studentName"))
