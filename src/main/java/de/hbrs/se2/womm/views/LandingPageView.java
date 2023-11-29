@@ -26,7 +26,7 @@ public class LandingPageView extends VerticalLayout {
 
         // Header-Bereich
         HorizontalLayout header = createHeader();
-        add(header);
+//        add(header);
 
 
         // Hero-Bereich
