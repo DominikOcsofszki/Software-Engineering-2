@@ -16,6 +16,7 @@ abstract class AbstractLayout extends AppLayout {
     Image logo = new Image("themes/theme_1/logo.png", "An image in the theme");
 
     public AbstractLayout() {
+
         configLogo();
         configName();
         configHeader();
