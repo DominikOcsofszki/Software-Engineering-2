@@ -46,7 +46,7 @@ public class UnternehmenController extends AbstractControllerWomm {
         @GetMapping("all")
         public ResponseEntity<List<? extends AbstractDTO>> getAll() {
             return new ResponseEntity<>(
-                    unternehmenService.getAllService(),
+                    unternehmenService.getAll(),
                     HttpStatus.OK
             );
         }

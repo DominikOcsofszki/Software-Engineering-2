@@ -36,7 +36,7 @@ public class BewerbungController extends AbstractControllerWomm {
     @Override
     public ResponseEntity<List<? extends AbstractDTO>> getAll() {
         return new ResponseEntity<>(
-                bewerbungService.getAllService(),
+                bewerbungService.getAll(),
                 HttpStatus.OK
         );
     }

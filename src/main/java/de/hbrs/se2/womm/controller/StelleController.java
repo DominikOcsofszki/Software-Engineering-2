@@ -45,7 +45,7 @@ public class StelleController extends AbstractControllerWomm {
     @GetMapping("all")
     public ResponseEntity<List<? extends AbstractDTO>> getAll() {
         return new ResponseEntity<>(
-                stelleService.getAllService(),
+                null, //ToDo implement in StelleService
                 HttpStatus.OK
         );
     }

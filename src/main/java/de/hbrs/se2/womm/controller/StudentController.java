@@ -43,7 +43,7 @@ public class StudentController extends AbstractControllerWomm {
     @Override
     public ResponseEntity<List<? extends AbstractDTO>> getAll() {
         return new ResponseEntity<>(
-                studentService.getAllService(),
+                null, //ToDo implement in StudentService
                 HttpStatus.OK
         );
     }
