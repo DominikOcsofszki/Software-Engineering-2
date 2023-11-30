@@ -34,9 +34,10 @@ public abstract class AbstractComponentFilterWithController<ExtendAbstractDTO ex
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
 
-    protected List<?> getItemsFromControllerOrGenerate(){
-        return getItemsFromController();
-    }
+    abstract protected List<?> getItemsFromControllerOrGenerate();
+//    {
+//        return getItemsFromController();
+//    }
     protected List<?> getItemsFromController(){
         if (controller != null) return controller.getAll().getBody();
         return null;
