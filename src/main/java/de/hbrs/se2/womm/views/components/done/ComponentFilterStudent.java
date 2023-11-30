@@ -47,7 +47,6 @@ public class ComponentFilterStudent extends AbstractComponentFilter<StudentDTO> 
                 Notification.show("Email: " + item.getNutzer());
             });
         });
-//                setSortable(true).setComparator(StudentDTO::getStudentEmail);
     }
 
     @Override

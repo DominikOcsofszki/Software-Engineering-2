@@ -10,8 +10,7 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
-import de.hbrs.se2.womm.controller.BewerbungController;
+import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import tools.generate.GenerateBewerbungDTO;
@@ -25,7 +24,7 @@ public class ComponentFilterGridControllerBewerbung extends VerticalLayout {
     String[] filterByItemsFromDTO = BewerbungDTO.getAllFilter();
     int demoNr = 100;
 long idLoggedInUser;
-    public ComponentFilterGridControllerBewerbung(AbstractControllerForFilter controller,long id) {
+    public ComponentFilterGridControllerBewerbung(AbstractControllerWomm controller, long id) {
         this.idLoggedInUser = id;
         List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
         setUpGrid(itemsForGrid);
@@ -33,7 +32,7 @@ long idLoggedInUser;
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
-    private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerForFilter controller){
+    private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerWomm controller){
         return GenerateBewerbungDTO.generateBewerbungDTO(demoNr);
 //        return ((BewerbungController)controller).getAll().getBody(); //ToDo: change Cast here
 

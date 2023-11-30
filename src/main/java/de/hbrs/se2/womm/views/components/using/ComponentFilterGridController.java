@@ -8,7 +8,7 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
+import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
@@ -21,14 +21,14 @@ public class ComponentFilterGridController extends VerticalLayout {
     Grid<StudentDTO> grid = new Grid<>();
     String[] filterByItemsFromDTO = StudentDTO.getAllFilter();
 
-    public ComponentFilterGridController(AbstractControllerForFilter controller) {
+    public ComponentFilterGridController(AbstractControllerWomm controller) {
         List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
         setUpGrid(itemsForGrid);
         add(getToolbar(), grid);
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
-    private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerForFilter controller){
+    private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerWomm controller){
         return ((StudentController)controller).getAllStudents().getBody(); //ToDo: change Cast here
     }
 
