@@ -13,18 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UnternehmenConsumer {
-
-//    public UnternehmenConsumer() {
-//
-//    }
-
     public List<UnternehmenDTO> getUnternehmen(URL url) {
         StringBuffer content = new StringBuffer();
         try {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestMethod("GET");
-//            int responseCode = con.getResponseCode();
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
@@ -46,20 +40,6 @@ public class UnternehmenConsumer {
         for (JsonElement item: jsonArray) {
             dtoList.add(gson.fromJson(item, UnternehmenDTO.class));
         }
-//        System.out.println(dtoList);
         return dtoList;
     }
-
-//    public static void main(String[] args) {
-//
-//        try {
-//            URL url = new URL("http://localhost:8080/api/users");
-//            UnternehmenConsumer consumer = new UnternehmenConsumer();
-//            List<UnternehmenDTO> dtoList = consumer.getUnternehmen(url);
-//            dtoList.forEach(System.out::println);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//
-//    }
 }
