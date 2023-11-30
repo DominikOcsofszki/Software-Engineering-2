@@ -8,12 +8,27 @@ import de.hbrs.se2.womm.dtos.AbstractDTO;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractApiConsumer<ExtendsAbstractDTO extends AbstractDTO> {
-    public List<? extends AbstractDTO> getJsonFromUrl(URL url) {
+
+    abstract protected List<? extends AbstractDTO> getDtosFromUrlSubClass(String urlString);
+//        return getDtosFromUrlSubClass(url);
+
+    protected List<? extends AbstractDTO> getDtosFromUrl(String urlString) {
+        URL url;
+        try {
+            url = new URL(urlString);
+        } catch (MalformedURLException e) {
+            System.out.println("Malformed URL: " + urlString);
+            return null;
+        }
+        return getDtoFromURL(url);
+    }
+    private List<? extends AbstractDTO> getDtoFromURL(URL url) {
         StringBuffer content = new StringBuffer();
         try {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -31,21 +46,18 @@ public abstract class AbstractApiConsumer<ExtendsAbstractDTO extends AbstractDTO
             System.out.println(e);
         }
         return jsonToDTO(content.toString());
-
     }
 
-    protected List<ExtendsAbstractDTO> jsonToDTO(String json) {
+    private List<ExtendsAbstractDTO> jsonToDTO(String json) {
         Gson gson = new Gson();
         ArrayList<ExtendsAbstractDTO> dtoList = new ArrayList<>();
         JsonArray jsonArray = new Gson().fromJson(json, JsonArray.class);
         for (JsonElement item : jsonArray) {
             dtoList.add(jsonToDTO(item, gson));
-//            dtoList.add(gson.fromJson(item, ExtendsAbstractDTO.class));
         }
         return dtoList;
     }
 
     abstract protected ExtendsAbstractDTO jsonToDTO(JsonElement item, Gson gson);
-//    {
 //        gson.fromJson(item, ExtendsAbstractDTO.class)
 }
