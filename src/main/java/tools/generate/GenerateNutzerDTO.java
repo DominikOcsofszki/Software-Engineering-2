@@ -1,8 +1,7 @@
 package tools.generate;
 
 import de.hbrs.se2.womm.dtos.NutzerDTO;
-import tools.collection.FirstNames;
-import tools.collection.LastNames;
+import tools.collection.Names;
 import tools.collection.Places;
 
 import java.util.ArrayList;
@@ -38,8 +37,8 @@ public class GenerateNutzerDTO {
             case "nutzerId":
                 return getCounterIncrement();
             case "email":
-                String firstName = FirstNames.getRandomFirstName();
-                String lastName = LastNames.getRandomLastName();
+                String firstName = Names.getRandomFirstName();
+                String lastName = Names.getRandomLastName();
                 return studentEmailFromFirstNameAndLastNameHBRS(firstName, lastName);
             case "aktiv":
                 return "true";

@@ -35,8 +35,8 @@ public class GenerateStudentDTO {
         return switch (switchStatement) {
 //            case "nutzer" -> xxx();
             case "studentId" -> getCounterIncrement();
-            case "studentVorname" -> FirstNames.getRandomFirstName();
-            case "studentName" -> LastNames.getRandomLastName();
+            case "studentVorname" -> Names.getRandomFirstName();
+            case "studentName" -> Names.getRandomLastName();
             case "studentGeburtstag" -> Time.randomGeburtstag();
 //            case "studentBenachrichtigung" -> xxx();
             case "studentBio" -> LoremText.getRandomText();
