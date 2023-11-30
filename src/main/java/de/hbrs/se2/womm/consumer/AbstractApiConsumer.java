@@ -8,7 +8,6 @@ import de.hbrs.se2.womm.dtos.AbstractDTO;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +17,13 @@ public abstract class AbstractApiConsumer<ExtendsAbstractDTO extends AbstractDTO
     abstract protected List<? extends AbstractDTO> getDtosFromUrlSubClass(String urlString);
 //        return getDtosFromUrlSubClass(url);
 
-    protected List<? extends AbstractDTO> getDtosFromUrl(String urlString) {
+    protected List<? extends AbstractDTO> inSuperClassGetDtosFromUrl(String urlString) {
         URL url;
         try {
             url = new URL(urlString);
-        } catch (MalformedURLException e) {
-            System.out.println("Malformed URL: " + urlString);
+        } catch (Exception e) {
+            System.out.println("urlString: " + urlString);
+            System.out.println("Error: " + e);
             return null;
         }
         return getDtoFromURL(url);
@@ -44,6 +44,7 @@ public abstract class AbstractApiConsumer<ExtendsAbstractDTO extends AbstractDTO
             con.disconnect();
         } catch (Exception e) {
             System.out.println(e);
+            return null;
         }
         return jsonToDTO(content.toString());
     }

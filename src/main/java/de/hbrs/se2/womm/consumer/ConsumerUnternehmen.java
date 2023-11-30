@@ -11,11 +11,16 @@ public class ConsumerUnternehmen extends AbstractApiConsumer<UnternehmenDTO> {
 
     @Override
     protected List<? extends AbstractDTO> getDtosFromUrlSubClass(String urlString) {
-        return getDtosFromUrl(urlString);
+        return inSuperClassGetDtosFromUrl(urlString);
     }
 
     @Override
     protected UnternehmenDTO jsonToDTO(JsonElement item, Gson gson) {
         return gson.fromJson(item, UnternehmenDTO.class);
+    }
+
+    public static void main(String[] args) {
+        ConsumerUnternehmen consumerUnternehmen = new ConsumerUnternehmen();
+        consumerUnternehmen.getDtosFromUrlSubClass(CONSUMER_URLS.UNTERNEHMEN.GET_All_UNTERNEHMEN_URL);
     }
 }
