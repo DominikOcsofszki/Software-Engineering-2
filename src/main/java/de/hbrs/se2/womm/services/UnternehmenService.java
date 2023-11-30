@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UnternehmenService implements IgetAllService{
+public class UnternehmenService{
     private final UnternehmenRepository unternehmenRepository;
     private final UnternehmenMapper unternehmenMapper = UnternehmenMapper.INSTANCE;
 
@@ -38,12 +38,5 @@ public class UnternehmenService implements IgetAllService{
     public void saveUnternehmen(UnternehmenDTO unternehmenDTO){
         Unternehmen unternehmen = unternehmenMapper.dtoZuUnternehmen(unternehmenDTO);
         unternehmenRepository.save(unternehmen);
-    }
-
-    @Override
-    public List<? extends AbstractDTO> getAllService() {
-        return unternehmenRepository.findAll()
-                .stream()
-                .map(unternehmenMapper::unternehmenZuDTO).toList();
     }
 }

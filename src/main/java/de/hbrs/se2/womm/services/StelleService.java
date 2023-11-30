@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StelleService implements IgetAllService {
+public class StelleService {
     private final StelleRepository stelleRepository;
     private final StelleMapper stelleMapper = StelleMapper.INSTANCE;
 
@@ -35,12 +35,5 @@ public class StelleService implements IgetAllService {
         Stelle stelle = stelleMapper.stelleDtoToStelle(stelleDTO);
         Stelle erzeugteStelle = stelleRepository.save(stelle);
         return stelleMapper.stelleToStelleDto(erzeugteStelle);
-    }
-
-    @Override
-    public List<? extends AbstractDTO> getAllService() {
-        return stelleRepository.findAll()
-                .stream()
-                .map(stelleMapper::stelleToStelleDto).toList();
     }
 }

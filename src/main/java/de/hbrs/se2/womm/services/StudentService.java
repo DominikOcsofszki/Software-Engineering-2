@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentService implements IgetAllService{
+public class StudentService{
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper = StudentMapper.INSTANCE;
 
@@ -38,10 +38,4 @@ public class StudentService implements IgetAllService{
         studentRepository.save(student);
     }
 
-    @Override
-    public List<? extends AbstractDTO> getAllService() {
-        return studentRepository.findAll()
-                .stream()
-                .map(studentMapper::studentToStudentDto).toList();
-    }
 }
