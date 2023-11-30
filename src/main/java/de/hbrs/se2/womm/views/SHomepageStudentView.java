@@ -98,7 +98,7 @@ public SHomepageStudentView(StelleController controller) { //ToDo: this was adde
 
         add(searchFields);
         */
-        setUpComponentFilterGridControllerStellen(); //ToDo: this was added
+//        setUpComponentFilterGridControllerStellen(); //ToDo: this was added
 
     }
 }
