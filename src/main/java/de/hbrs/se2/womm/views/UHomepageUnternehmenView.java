@@ -12,6 +12,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.controller.StelleController;
+import de.hbrs.se2.womm.views.components.done.ComponentFilterStelle;
 import de.hbrs.se2.womm.views.components.using.ComponentFilterGridControllerStellen;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
@@ -31,7 +32,8 @@ public class UHomepageUnternehmenView extends VerticalLayout {
     }
 
     private void setUpComponentFilterGridControllerStellen(){ //ToDo: this was added
-        add(new ComponentFilterGridControllerStellen(controller));
+//        add(new ComponentFilterGridControllerStellen(controller));
+        add(new ComponentFilterStelle(controller));
     }
 
 
