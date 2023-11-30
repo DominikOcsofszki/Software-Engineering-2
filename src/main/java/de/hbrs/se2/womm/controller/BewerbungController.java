@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bewerbung")
-public class BewerbungController extends AbstractControllerForFilter implements IgetAllController{
+public class BewerbungController extends AbstractControllerWomm {
 
     BewerbungService bewerbungService;
 
@@ -36,7 +36,7 @@ public class BewerbungController extends AbstractControllerForFilter implements 
     @Override
     public ResponseEntity<List<? extends AbstractDTO>> getAll() {
         return new ResponseEntity<>(
-                bewerbungService.getAllService(),
+                bewerbungService.getAll(),
                 HttpStatus.OK
         );
     }

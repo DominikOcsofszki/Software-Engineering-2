@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-public class UnternehmenController extends AbstractControllerForFilter implements IgetAllController{
+public class UnternehmenController extends AbstractControllerWomm {
     UnternehmenService unternehmenService;
 
     public UnternehmenController(UnternehmenService unternehmenService){
@@ -46,7 +46,7 @@ public class UnternehmenController extends AbstractControllerForFilter implement
         @GetMapping("all")
         public ResponseEntity<List<? extends AbstractDTO>> getAll() {
             return new ResponseEntity<>(
-                    unternehmenService.getAllService(),
+                    unternehmenService.getAll(),
                     HttpStatus.OK
             );
         }

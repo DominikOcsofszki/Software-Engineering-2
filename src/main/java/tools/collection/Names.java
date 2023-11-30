@@ -2,13 +2,17 @@ package tools.collection;
 
 import java.util.Random;
 
-public class LastNames {
+public class Names {
     public static String getRandomLastName(){
-        int randomInt = new Random().nextInt(0, listOfRandomLastNames.length);
-        return listOfRandomLastNames[randomInt];
+        int randomInt = new Random().nextInt(0, listOfRandomNames.length);
+        return listOfRandomNames[randomInt];
+    }
+        public static String getRandomFirstName() {
+        int randomInt = new Random().nextInt(0, listOfRandomNames.length);
+        return listOfRandomNames[randomInt];
     }
 
-    private static String[] listOfRandomLastNames = {
+    private static String[] listOfRandomNames = {
             "Aaberg",
             "Aalst",
             "Aara",

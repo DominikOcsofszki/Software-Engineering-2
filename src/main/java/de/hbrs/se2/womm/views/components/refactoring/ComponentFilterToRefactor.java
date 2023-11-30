@@ -1,95 +1,81 @@
-package de.hbrs.se2.womm.views.components.using;
+package de.hbrs.se2.womm.views.components.refactoring;
 
 import com.vaadin.flow.component.AbstractField;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
-import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
-import de.hbrs.se2.womm.views.SJobProjectWorkshopDisplayView;
-import tools.generate.GenerateAbonnementsDTOStillUnternehmen;
 import tools.generate.GenerateBenachrichtigungenDTOStillUnternehmen;
 
 import java.util.List;
 
-public class ComponentFilterGridControllerBenachrichtigungen
-        extends VerticalLayout implements HasUrlParameter<String> {
+public class ComponentFilterToRefactor<ExtendAbstractDTO extends AbstractDTO> extends VerticalLayout implements HasUrlParameter<String> {
+    String parameter;
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
-    Grid<UnternehmenDTO> grid = new Grid<>();
+    Grid<ExtendAbstractDTO> grid = new Grid<>();
     int demoNumber = 100;
     public static String[] filterByItemsFromDTO = new String[]{
             "Unternehmen",
-            "Nachricht"
+            "xxx"
     };
 
-
-    public ComponentFilterGridControllerBenachrichtigungen() {
-        List<? extends AbstractDTO> itemsForGrid = getItemsForGrid();
-        setUpGrid(itemsForGrid);
-        add(getToolbar(), grid);
+    public ComponentFilterToRefactor() {
+        setUpGrid(getItemsFromControllerOrGenerate());
+        getToolbar();
+        setUpFilter();
+    }
+    private void setUpFilter() {
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
-
-    private List<? extends AbstractDTO> getItemsForGrid() {
-//        return ((StelleController) controller).getAll().getBody(); //ToDo: change Cast here
+    private List<?> getItemsFromControllerOrGenerate() {
         return GenerateBenachrichtigungenDTOStillUnternehmen.generateBenachrichtigungenDTO(demoNumber);
     }
 
-    private void setUpGrid(List<? extends AbstractDTO> itemsForGrid) {
+    private <T extends AbstractDTO> void setUpGrid(List<?> itemsForGrid) {
         addClassName("list-view");
         setSizeFull();
         configureGrid();
-//        grid.setItems();
-        grid.setItems((List<UnternehmenDTO>) itemsForGrid);
-
-
+        List<ExtendAbstractDTO> list = (List<ExtendAbstractDTO>) itemsForGrid;
+        grid.setItems(list);
     }
 
-    private Select<String> selectFilterMenu() {
-        select.setPlaceholder("Filter");
-        select.setItems(filterByItemsFromDTO);
-        return select;
-    }
-
-    private HorizontalLayout getToolbar() {
+    private void getToolbar() {
         filterText.setPlaceholder("Filter by...");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.setValueChangeTimeout(300);
-        Select<String> selecterMenu = selectFilterMenu();
-        var toolbar = new HorizontalLayout(filterText, selecterMenu);
+        select.setPlaceholder("Filter");
+        select.setItems(filterByItemsFromDTO);
+        HorizontalLayout toolbar = new HorizontalLayout(filterText, select);
         toolbar.addClassName("toolbar");
-        return toolbar;
+        add(toolbar, grid);
     }
-
-    private void addClickableItemsToGridStelle(String headerName) {
-        grid.addColumn(LitRenderer.<UnternehmenDTO>of(TEMPLATE.LIT_TEMPLATE_HTML)
-                        .withProperty("id", UnternehmenDTO::getName)
-                        .withFunction("clickHandler", dto ->
-                                UI.getCurrent().navigate(
-                                        SJobProjectWorkshopDisplayView.class,
-                                        dto.getUnternehmenId().toString())))
-                .setHeader(headerName)
-                .setSortable(true);
-    }
+//
+//    private void addClickableItemsToGridStelle(String headerName) {
+//        grid.addColumn(LitRenderer.<UnternehmenDTO>of(TEMPLATE.LIT_TEMPLATE_HTML)
+//                        .withProperty("id", UnternehmenDTO::getName)
+//                        .withFunction("clickHandler", dto ->
+//                                UI.getCurrent().navigate(
+//                                        SJobProjectWorkshopDisplayView.class,
+//                                        dto.getUnternehmenId().toString())))
+//                .setHeader(headerName)
+//                .setSortable(true);
+//    }
 
     private void configureGrid() {
-//        addComponentColumn(person -> {
-        grid.addComponentColumn(UnternehmenDTO::getLogo50).setHeader("Logo");
-//        grid.addColumn(UnternehmenDTO::getLogo).setHeader("Logo");
-        addClickableItemsToGridStelle("Unternehmen");
-        grid.addColumn(UnternehmenDTO::getBeschreibung).setHeader("Beschreibung")
-                .setSortable(true).setComparator(UnternehmenDTO::getBeschreibung);
+        grid.addItemClickListener(event -> {
+            grid.select(event.getItem());
+        });
+        grid.addColumn(item -> ((UnternehmenDTO)item).getUnternehmenId()).setHeader("Beschreibung2");
     }
 
 
@@ -117,6 +103,6 @@ public class ComponentFilterGridControllerBenachrichtigungen
 
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
-
+        this.parameter = parameter;
     }
 }

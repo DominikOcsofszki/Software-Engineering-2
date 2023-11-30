@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class StelleController extends AbstractControllerForFilter implements IgetAllController{
+public class StelleController extends AbstractControllerWomm {
 
     StelleService stelleService;
 
@@ -45,7 +45,7 @@ public class StelleController extends AbstractControllerForFilter implements Ige
     @GetMapping("all")
     public ResponseEntity<List<? extends AbstractDTO>> getAll() {
         return new ResponseEntity<>(
-                stelleService.getAllService(),
+                null, //ToDo implement in StelleService
                 HttpStatus.OK
         );
     }

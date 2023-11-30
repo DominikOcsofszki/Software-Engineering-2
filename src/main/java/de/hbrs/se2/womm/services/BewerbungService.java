@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BewerbungService implements IgetAllService {
+public class BewerbungService {
     BewerbungRepository bewerbungRepository;
     BewerbungMapper bewerbungMapper = BewerbungMapper.INSTNACE;
 
@@ -30,10 +30,4 @@ public class BewerbungService implements IgetAllService {
                 .map(bewerbungMapper::bewerbungToBewerbungDto);
     }
 
-    @Override
-    public List<? extends AbstractDTO> getAllService() {
-        return bewerbungRepository.findAll()
-                .stream()
-                .map(bewerbungMapper::bewerbungToBewerbungDto).toList();
-    }
 }

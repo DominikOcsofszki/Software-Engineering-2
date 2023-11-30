@@ -18,7 +18,7 @@ import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 import javassist.NotFoundException;
-import tools.generate.GenerateUnternehmen;
+import tools.generate.GenerateUnternehmenDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class SFirmProfileDisplayView extends VerticalLayout implements HasUrlPar
 
     private String parameter;
     UnternehmenController unternehmenController;
-    UnternehmenDTO unternehmenDTO = GenerateUnternehmen.generateUnternehmenDTO(1).get(0);
+    UnternehmenDTO unternehmenDTO = GenerateUnternehmenDTO.generateUnternehmenDTO(1).get(0);
     long unternehmenId = 1;
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {

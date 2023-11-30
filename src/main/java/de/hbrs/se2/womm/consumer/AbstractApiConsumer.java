@@ -3,7 +3,7 @@ package de.hbrs.se2.womm.consumer;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.dtos.AbstractDTO;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -12,19 +12,28 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnternehmenConsumer {
+public abstract class AbstractApiConsumer<ExtendsAbstractDTO extends AbstractDTO> {
 
-//    public UnternehmenConsumer() {
-//
-//    }
+    abstract protected List<? extends AbstractDTO> getDtosFromUrlSubClass(String urlString);
+//        return getDtosFromUrlSubClass(url);
 
-    public List<UnternehmenDTO> getUnternehmen(URL url) {
+    protected List<? extends AbstractDTO> inSuperClassGetDtosFromUrl(String urlString) {
+        URL url;
+        try {
+            url = new URL(urlString);
+        } catch (Exception e) {
+            System.out.println("urlString: " + urlString);
+            System.out.println("Error: " + e);
+            return null;
+        }
+        return getDtoFromURL(url);
+    }
+    private List<? extends AbstractDTO> getDtoFromURL(URL url) {
         StringBuffer content = new StringBuffer();
         try {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestMethod("GET");
-//            int responseCode = con.getResponseCode();
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
@@ -35,31 +44,21 @@ public class UnternehmenConsumer {
             con.disconnect();
         } catch (Exception e) {
             System.out.println(e);
+            return null;
         }
         return jsonToDTO(content.toString());
-
     }
-    private List<UnternehmenDTO> jsonToDTO(String json) {
+
+    private List<ExtendsAbstractDTO> jsonToDTO(String json) {
         Gson gson = new Gson();
-        ArrayList<UnternehmenDTO> dtoList = new ArrayList<>();
+        ArrayList<ExtendsAbstractDTO> dtoList = new ArrayList<>();
         JsonArray jsonArray = new Gson().fromJson(json, JsonArray.class);
-        for (JsonElement item: jsonArray) {
-            dtoList.add(gson.fromJson(item, UnternehmenDTO.class));
+        for (JsonElement item : jsonArray) {
+            dtoList.add(jsonToDTO(item, gson));
         }
-//        System.out.println(dtoList);
         return dtoList;
     }
 
-//    public static void main(String[] args) {
-//
-//        try {
-//            URL url = new URL("http://localhost:8080/api/users");
-//            UnternehmenConsumer consumer = new UnternehmenConsumer();
-//            List<UnternehmenDTO> dtoList = consumer.getUnternehmen(url);
-//            dtoList.forEach(System.out::println);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//
-//    }
+    abstract protected ExtendsAbstractDTO jsonToDTO(JsonElement item, Gson gson);
+//        gson.fromJson(item, ExtendsAbstractDTO.class)
 }

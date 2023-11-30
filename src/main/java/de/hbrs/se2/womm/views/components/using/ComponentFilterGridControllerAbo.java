@@ -2,9 +2,7 @@ package de.hbrs.se2.womm.views.components.using;
 
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -14,13 +12,10 @@ import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
-import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.views.SJobProjectWorkshopDisplayView;
-import de.hbrs.se2.womm.views.layouts.ASSETS;
 import tools.generate.GenerateAbonnementsDTOStillUnternehmen;
-import tools.generate.GenerateUnternehmen;
 
 import java.util.List;
 
@@ -46,7 +41,7 @@ public class ComponentFilterGridControllerAbo
 
     private List<? extends AbstractDTO> getItemsForGrid() {
  //       return ((StelleController) controller).getAll().getBody(); //ToDo: change Cast here
-        return GenerateAbonnementsDTOStillUnternehmen.generateUnternehmenDTO(demoNumber);
+        return GenerateAbonnementsDTOStillUnternehmen.generateAbonnementsDTO(demoNumber);
     }
 
     private void setUpGrid(List<? extends AbstractDTO> itemsForGrid) {

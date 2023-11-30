@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users/")
-public class StudentController extends AbstractControllerForFilter implements IgetAllController {
+public class StudentController extends AbstractControllerWomm {
 
     StudentService studentService;
 
@@ -43,7 +43,7 @@ public class StudentController extends AbstractControllerForFilter implements Ig
     @Override
     public ResponseEntity<List<? extends AbstractDTO>> getAll() {
         return new ResponseEntity<>(
-                studentService.getAllService(),
+                null, //ToDo implement in StudentService
                 HttpStatus.OK
         );
     }

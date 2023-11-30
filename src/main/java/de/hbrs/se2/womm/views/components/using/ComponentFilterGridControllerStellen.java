@@ -12,7 +12,7 @@ import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
-import de.hbrs.se2.womm.controller.AbstractControllerForFilter;
+import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
@@ -36,7 +36,7 @@ public class ComponentFilterGridControllerStellen
             "Unternehmen"
     };
 
-    public ComponentFilterGridControllerStellen(AbstractControllerForFilter controller) {
+    public ComponentFilterGridControllerStellen(AbstractControllerWomm controller) {
         List<? extends AbstractDTO> itemsForGrid = getItemsForGrid(controller);
         setUpGrid(itemsForGrid);
         add(getToolbar(), grid);
@@ -44,7 +44,7 @@ public class ComponentFilterGridControllerStellen
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
 
-    private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerForFilter controller) {
+    private List<? extends AbstractDTO> getItemsForGrid(AbstractControllerWomm controller) {
         return ((StelleController) controller).getAll().getBody(); //ToDo: change Cast here
     }
 
