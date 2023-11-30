@@ -55,4 +55,5 @@ public class GenerateStudentDTO {
         List<StudentDTO> dto = GenerateStudentDTO.generateStudentDTO(1);
         System.out.println(dto);
     }
+
 }
