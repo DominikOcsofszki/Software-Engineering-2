@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bewerbung")
-public class BewerbungController extends AbstractControllerForFilter implements IgetAllController{
+public class BewerbungController extends AbstractControllerWomm {
 
     BewerbungService bewerbungService;
 

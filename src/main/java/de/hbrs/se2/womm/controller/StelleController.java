@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class StelleController extends AbstractControllerForFilter implements IgetAllController{
+public class StelleController extends AbstractControllerWomm {
 
     StelleService stelleService;
 

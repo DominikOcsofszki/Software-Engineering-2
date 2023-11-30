@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users/")
-public class StudentController extends AbstractControllerForFilter implements IgetAllController {
+public class StudentController extends AbstractControllerWomm {
 
     StudentService studentService;
 
