@@ -1,22 +1,20 @@
-package de.hbrs.se2.womm.views.layouts;
+package de.hbrs.se2.womm.views.components.refactoring;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 public class AbstractView<ExtendsAbstractController extends AbstractControllerWomm> extends VerticalLayout {
-    ExtendsAbstractController controller;
+    private ExtendsAbstractController controller;
+    protected VaadinBuilderWomm vaadinBuilderWomm = new VaadinBuilderWomm();
+
     protected AbstractView(ExtendsAbstractController controller) {
         this.controller = controller;
         setWidth("100%");
         setHeight("100%");
         getStyle().set("overflow", "auto");
     }
-    public class StyleGuide{
-        public static final String HEADER = "header";
-        public static final String BANNER = "banner";
-        public static final String SEARCHFIELDS = "searchfields";
-        public static final String CONTENT = "content";
-        public static final String FOOTER = "footer";
-    }
+
+
 }

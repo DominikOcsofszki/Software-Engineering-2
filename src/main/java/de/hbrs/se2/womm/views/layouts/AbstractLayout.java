@@ -8,6 +8,7 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+import de.hbrs.se2.womm.views.components.refactoring.VaadinBuilderWomm;
 
 abstract class AbstractLayout extends AppLayout {
     HorizontalLayout header = new HorizontalLayout();
@@ -16,11 +17,13 @@ abstract class AbstractLayout extends AppLayout {
     Image logo = new Image("themes/theme_1/logo.png", "An image in the theme");
 
     public AbstractLayout() {
-
         configLogo();
         configName();
         configHeader();
         createDrawer();
+        if(CONFIGS.DEVMODE || CONFIGS.ADMIN) {
+            ifAdminOrDevModeAddButton();
+        }
     }
 
     void createHeaderWithLogoutButton(Button logout, boolean withMenu) {
@@ -53,5 +56,13 @@ abstract class AbstractLayout extends AppLayout {
 
 
     void createDrawer() {
+    }
+    void ifAdminOrDevModeAddButton() {
+        VaadinBuilderWomm vaadinBuilderWomm = new VaadinBuilderWomm();
+        Button buttonToShowMissingTranslated = vaadinBuilderWomm.ButtonBuilder.createButton("buttonToShowMissingTranslated");
+        buttonToShowMissingTranslated.addClickListener(
+                e -> VaadinBuilderWomm.printAllTextNotTranslatedToConsole()
+        );
+        header.add(buttonToShowMissingTranslated);
     }
 }
