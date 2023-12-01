@@ -12,4 +12,11 @@ public class AbstractView<ExtendsAbstractController extends AbstractControllerWo
         setHeight("100%");
         getStyle().set("overflow", "auto");
     }
+    public class StyleGuide{
+        public static final String HEADER = "header";
+        public static final String BANNER = "banner";
+        public static final String SEARCHFIELDS = "searchfields";
+        public static final String CONTENT = "content";
+        public static final String FOOTER = "footer";
+    }
 }

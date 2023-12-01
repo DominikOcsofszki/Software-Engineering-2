@@ -3,6 +3,9 @@ package de.hbrs.se2.womm.views.layouts;
 import com.vaadin.flow.component.html.Image;
 
 public class ASSETS {
+
+    public static final String STYLEGUIDE = "themes/style_guide/StyleSheetVaadin.png";
+
     public static Image buildPlaceholder(int width, int height) {
         Image placeholderIMG = new Image(ASSETS.IMG.PLACEHOLDER, "placeholder");
         placeholderIMG.setWidth(width + "px");
@@ -10,10 +13,17 @@ public class ASSETS {
         return placeholderIMG;
     }
 
+    static public class StyleGuide {
+        public static final String LogoText = "themes/style_guide/LogoText.png"; //ToDo
+        public static final String LogoPerson = "themes/style_guide/LogoPerson.png"; //ToDo
+        public static final String LogoWork = "themes/style_guide/LogoWork.png"; //ToDo
+    }
+
     static public class LOGO {
 
     }
-        static public class IMG {
+
+    static public class IMG {
 
         public static String IMG1 = "themes/theme_1/Hiring_pic.jpg";
         public static String IMG2 = "themes/theme_1/Womm_big_logo.png";
