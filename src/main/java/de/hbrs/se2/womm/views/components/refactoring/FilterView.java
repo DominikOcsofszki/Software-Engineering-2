@@ -11,7 +11,7 @@ import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 @PageTitle("MainView")
 @AnonymousAllowed
 @Route(value = "filter", layout = LoggedOutLayout.class)
-public class FilterView extends AbstractView {
+public class FilterView extends AbstractView<UnternehmenController> {
 
     public FilterView(UnternehmenController controller){
         super(controller);
