@@ -59,7 +59,7 @@ abstract class AbstractLayout extends AppLayout {
     }
     void ifAdminOrDevModeAddButton() {
         VaadinBuilderWomm vaadinBuilderWomm = new VaadinBuilderWomm();
-        Button buttonToShowMissingTranslated = vaadinBuilderWomm.ButtonBuilder.createButton("buttonToShowMissingTranslated");
+        Button buttonToShowMissingTranslated = vaadinBuilderWomm.Button.create("buttonToShowMissingTranslated");
         buttonToShowMissingTranslated.addClickListener(
                 e -> VaadinBuilderWomm.printAllTextNotTranslatedToConsole()
         );

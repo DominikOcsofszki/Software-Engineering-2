@@ -9,6 +9,8 @@ public class TranslateMap {
         put("doSthTranslateMe", "doSthTranslateMe<-TranslationNeeded");
         put("doSth", "doSth<-TranslationNeeded");
         put("sthNew", "sthNew<-TranslationNeeded");
+        put("Find your dream job on w.o.m.m.", "Finde deinen Traum Beruf auf w.o.m.m.");
+
     }};
 
 
