@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views;
 
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -19,6 +20,7 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AuthenticationController;
 import de.hbrs.se2.womm.dtos.StudentRegistrationRequest;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
@@ -31,8 +33,13 @@ import org.springframework.http.ResponseEntity;
 @PageTitle("RegistrierungStudentView")
 public class RegistrierungStudentView extends VerticalLayout {
 
-    public RegistrierungStudentView(@Autowired AuthenticationController authenticationController) {
+    SecurityService securityService;
+
+    public RegistrierungStudentView(@Autowired AuthenticationController authenticationController, SecurityService securityService) {
         super();
+
+        this.securityService = securityService;
+
         setSizeFull();
 
         setAlignItems(Alignment.CENTER);
@@ -173,5 +180,15 @@ public class RegistrierungStudentView extends VerticalLayout {
                 formLayout,
                 registerComponent
         );
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        if (securityService.getAuthenticatedUser() != null) {
+            if (securityService.isUserStudent()) UI.getCurrent().navigate(ROUTING.STUDENT.SHomepageStudentView);
+            if (securityService.isUserUnternehmen())
+                UI.getCurrent().navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView);
+        }
     }
 }
