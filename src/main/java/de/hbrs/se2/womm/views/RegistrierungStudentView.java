@@ -17,6 +17,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
@@ -48,20 +49,20 @@ public class RegistrierungStudentView extends VerticalLayout {
 
         add(new H4("Student/in Registration"));
 
-        var nameComponent = new com.vaadin.flow.component.textfield.TextField("Name");
+        TextField nameComponent = new TextField("Name");
         nameComponent.setTooltipText("Your REAL Name");
         nameComponent.setRequired(true);
         nameComponent.setRequiredIndicatorVisible(true);
         nameComponent.setErrorMessage("Name is required");
 
-        var surnameComponent = new com.vaadin.flow.component.textfield.TextField("Surname");
+        TextField surnameComponent = new TextField("Surname");
         surnameComponent.setTooltipText("Your REAL surname");
         surnameComponent.setClearButtonVisible(true);
         surnameComponent.setRequired(true);
         surnameComponent.setRequiredIndicatorVisible(true);
         surnameComponent.setErrorMessage("Surname is required");
 
-        var usernameComponent = new com.vaadin.flow.component.textfield.TextField("Username");
+        TextField usernameComponent = new TextField("Username");
         usernameComponent.setTooltipText("Your desired username");
         usernameComponent.setRequired(true);
         usernameComponent.setRequiredIndicatorVisible(true);
@@ -95,7 +96,7 @@ public class RegistrierungStudentView extends VerticalLayout {
         dateOfBirthComponent.setRequiredIndicatorVisible(true);
         dateOfBirthComponent.setErrorMessage("Invalid date given. Dates must follow the 'DD.MM.YYYY' format.");
 
-        var locationComponent = new com.vaadin.flow.component.textfield.TextField("Location");
+        TextField locationComponent = new TextField("Location");
         locationComponent.setTooltipText("Your current living location");
         locationComponent.setRequired(true);
         locationComponent.setRequiredIndicatorVisible(true);
