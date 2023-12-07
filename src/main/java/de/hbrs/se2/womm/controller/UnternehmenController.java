@@ -50,4 +50,9 @@ public class UnternehmenController extends AbstractControllerWomm {
                     HttpStatus.OK
             );
         }
+
+    @Override
+    public ResponseEntity<List<? extends AbstractDTO>> getDTObyID(String primaryKey) {
+        return null;//ToDo
     }
+}

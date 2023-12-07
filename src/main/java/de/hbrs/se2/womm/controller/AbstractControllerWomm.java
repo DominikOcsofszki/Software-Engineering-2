@@ -7,5 +7,6 @@ import java.util.List;
 
 public abstract class AbstractControllerWomm {
     public abstract ResponseEntity<List<? extends AbstractDTO>> getAll();
-
+//    public abstract ResponseEntity<List<? extends AbstractDTO>> getAllFilteredBy(); //ToDo
+    public abstract ResponseEntity<List<? extends AbstractDTO>> getDTObyID(String primaryKey);
 }

@@ -26,4 +26,9 @@ public class ApplicationController extends AbstractControllerWomm {
     public ResponseEntity<List<? extends AbstractDTO>> getAll() {
         return null;
     }
+
+    @Override
+    public ResponseEntity<List<? extends AbstractDTO>> getDTObyID(String primaryKey) {
+        return null; //ToDo
+    }
 }

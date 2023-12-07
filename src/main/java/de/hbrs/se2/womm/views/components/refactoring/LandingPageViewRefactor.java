@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views;
+package de.hbrs.se2.womm.views.components.refactoring;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -9,6 +9,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.views.LoginView;
+import de.hbrs.se2.womm.views.RegistrierungStudentView;
 import de.hbrs.se2.womm.views.components.refactoring.AbstractViewNoController;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import jakarta.annotation.security.RolesAllowed;
