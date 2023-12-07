@@ -49,7 +49,7 @@ public class StudentController extends AbstractControllerWomm {
     }
 
     @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyID(String primaryKey) {
-        return null; //ToDo
+    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKey(String primaryKey) {
+        return getStudentById(Long.parseLong(primaryKey));
     }
 }

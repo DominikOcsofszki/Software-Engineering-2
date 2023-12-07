@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.views.components.refactoring;
 
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -14,6 +15,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.views.LandingPageView;
@@ -23,14 +25,22 @@ import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 
 @Route(value = "refs", layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
 public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTO<StudentController, StudentDTO> {
+    @Override
+    String setPrimaryKey() {
+        return "1";
+//        return sth();
+    }
+
     public SCreateChangeStudentProfileViewRefactor(StudentController controller) {
         super(controller);
+        getDtoFromControllerWithSetPrimaryKey();
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
         Header();

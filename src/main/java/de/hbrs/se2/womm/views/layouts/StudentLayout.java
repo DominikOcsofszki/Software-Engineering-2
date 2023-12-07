@@ -2,13 +2,16 @@ package de.hbrs.se2.womm.views.layouts;
 
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.*;
+import de.hbrs.se2.womm.views.components.refactoring.VaadinBuilderWomm;
 
-public class StudentLayout extends AbstractLayout {
+public class StudentLayout extends AbstractLayoutLoggedIn {
 
     private final SecurityService securityService;
 
@@ -41,5 +44,10 @@ public class StudentLayout extends AbstractLayout {
                 new RouterLink("SNotificationView ", SNotificationView.class),
                 new RouterLink("SStudentProfileDisplayView ", SStudentProfileDisplayView.class)
         ));
+    }
+
+    @Override
+    public String getPrimaryFromLoggedInUser() { //ToDo check if correct primary
+        return securityService.getAuthenticatedUser().getUsername();
     }
 }

@@ -42,7 +42,7 @@ public class BewerbungController extends AbstractControllerWomm {
     }
 
     @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyID(String primaryKey) {
+    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKey(String primaryKey) {
         return null; //ToDo
     }
 }

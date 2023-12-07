@@ -8,7 +8,7 @@ import com.vaadin.flow.router.RouterLink;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.*;
 
-public class UnternehmenLayout extends AbstractLayout {
+public class UnternehmenLayout extends AbstractLayoutLoggedIn {
 
     private final SecurityService securityService;
 
@@ -43,5 +43,10 @@ public class UnternehmenLayout extends AbstractLayout {
                 new RouterLink("UNotificationView", UNotificationView.class)
 
         ));
+    }
+
+    @Override
+    public String getPrimaryFromLoggedInUser() { //ToDo check if correct primary
+        return securityService.getAuthenticatedUser().getUsername();
     }
 }

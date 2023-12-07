@@ -3,15 +3,17 @@ package de.hbrs.se2.womm.views.components.refactoring;
 import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 
-public class AbstractViewDTO<ExtendsAbstractController extends AbstractControllerWomm,
+public abstract class AbstractViewDTO<ExtendsAbstractController extends AbstractControllerWomm,
         ExtendsAbstractDTO extends AbstractDTO>
         extends AbstractViewNoController {
 
     private final ExtendsAbstractController controller;
     private ExtendsAbstractDTO dto;
-    public void getDtoFromController(String primaryKey){
-        dto = (ExtendsAbstractDTO) controller.getDTObyID(primaryKey).getBody();
+    public void getDtoFromControllerWithSetPrimaryKey(){
+        String primaryKey = setPrimaryKey();
+        dto = (ExtendsAbstractDTO) controller.getDTObyPrimaryKey(primaryKey).getBody();
     }
+    abstract String setPrimaryKey();
 
     public ExtendsAbstractDTO getDto() {
         return dto;
