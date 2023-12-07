@@ -18,6 +18,8 @@ import com.vaadin.flow.component.textfield.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.controller.StudentController;
+import de.hbrs.se2.womm.views.components.refactoring.AbstractView;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -32,8 +34,9 @@ import java.util.List;
 @Route(value = ROUTING.STUDENT.SCreateChangeStudentProfileView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
-public class SCreateChangeStudentProfileView extends VerticalLayout {
-    public SCreateChangeStudentProfileView() {
+public class SCreateChangeStudentProfileView extends AbstractView {
+    public SCreateChangeStudentProfileView(StudentController controller) {
+        super(controller);
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
         Header();
@@ -41,8 +44,10 @@ public class SCreateChangeStudentProfileView extends VerticalLayout {
     }
     private void Header(){
         HorizontalLayout header = new HorizontalLayout();
-        Button b = new Button("Home");
-        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+//        Button b = new Button("Home");
+//        getVaadinBuilderWomm().H1.create
+        Button b = getVaadinBuilderWomm().Button.create("Home");
+        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY   );
         b.getElement().getStyle().set("margin-right", "0%");
         b.addClickListener( e -> UI.getCurrent().navigate(LandingPageView.class));
         header.add(b);
@@ -76,7 +81,7 @@ public class SCreateChangeStudentProfileView extends VerticalLayout {
         ////////////////////Profile Picture//////////////////////////////////////////////////////////////////////////////
         Image i = new Image("themes/theme_1/user.png","Image not found");
         i.setWidth("100%");
-        i.setHeight("100%");
+//        i.setHeight("100%");
         //i.setHeight(300, Unit.PIXELS); //for fixed values
         //header.add(i);
         Button profile = new Button("Upload");
@@ -95,7 +100,8 @@ public class SCreateChangeStudentProfileView extends VerticalLayout {
         VerticalLayout headervert = new VerticalLayout();
         VerticalLayout headervert2 = new VerticalLayout();
         ////////////////////Name//////////////////////////////////////////////////////////////////////////////////////////
-        Span s = new Span("Name");
+//        Span s = new Span("Name");
+        Span s = getVaadinBuilderWomm().Span.create("Name");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");       //color grey
         Span s1 = new Span("Paul Stein");

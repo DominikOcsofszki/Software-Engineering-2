@@ -1,11 +1,14 @@
 package de.hbrs.se2.womm.views.components.refactoring;
 
 import com.vaadin.flow.component.Text;
+//import com.vaadin.flow.component.Span;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.html.Span;
+
 
 import java.util.HashSet;
 import java.util.Map;
@@ -20,6 +23,7 @@ public class VaadinBuilderWomm {
     public H1Builder H1 = new H1Builder();
     public H2Builder H2 = new H2Builder();
     public TextBuilder Text = new TextBuilder();
+    public SpanBuilder Span = new SpanBuilder();
     public ParagraphBuilder Paragraph = new ParagraphBuilder();
     private static Map<String, String> translateTextMap = TranslateMap.translateMap;
 //    private static Set<String> setOfText = new HashSet<>(translateTextMap.keySet());
@@ -64,6 +68,19 @@ public class VaadinBuilderWomm {
             return paragraph;
         }
     }
+    public class SpanBuilder {
+        private int countParagraph = 0;
+
+        public Span create(String text) {
+            String translatedText = translateText(text);
+            countParagraph++;
+            String querryId = "span-builder-" + this.countParagraph;
+            Span span = new Span(translatedText);
+            span.setText(translatedText);
+            span.setId(querryId);
+            return span;
+        }
+    }
 
     public class TextBuilder {
         private int countTextBuilder = 0;
@@ -75,6 +92,7 @@ public class VaadinBuilderWomm {
             Text textText = new Text(translatedText);
             textText.setText(translatedText);
 //            textText.setId(querryId);//ToDo update, how to set Querry Id
+//            System.out.println(textText.getId());
             return textText;
         }
     }
@@ -123,8 +141,9 @@ public class VaadinBuilderWomm {
             return translateTextMap.get(text);
         } else {
             newTextNeedsToBeTranslated.add(text);
-            System.out.println("put(\""+text+"\", \"" + text+"<-TranslationNeeded\");");
-            translateTextMap.put(text,"put(\""+text+"\" \"" + text+"<-TranslationNeeded\");");
+            System.out.println("put(\""+text+"\", \"" + text+"<-\");");
+//            translateTextMap.put(text,"put(\""+text+"\" \"" + text+"<-\");");
+            translateTextMap.put(text,"->"+text);
             return text;
         }
     }
