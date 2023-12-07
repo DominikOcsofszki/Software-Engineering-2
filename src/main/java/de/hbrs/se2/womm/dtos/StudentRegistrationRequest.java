@@ -10,4 +10,5 @@ public class StudentRegistrationRequest extends RegistrationRequest {
     private String lastname;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String dob;
+    private String location;
 }

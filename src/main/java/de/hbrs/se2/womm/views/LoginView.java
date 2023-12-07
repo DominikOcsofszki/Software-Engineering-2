@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views;
 
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -14,11 +15,12 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AuthenticationController;
 import de.hbrs.se2.womm.dtos.LoginRequest;
 import de.hbrs.se2.womm.exceptions.AuthenticationException;
-import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
+import de.hbrs.se2.womm.views.layouts.ROUTING;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +31,12 @@ import org.springframework.security.core.Authentication;
 @PermitAll
 @PageTitle("LoginView")
 public class LoginView extends VerticalLayout {
+
+    SecurityService securityService;
     LoginForm login = new LoginForm();
 
-    LoginView(@Autowired AuthenticationController authenticationController, @Autowired SecurityService securityService) {
+    LoginView(@Autowired AuthenticationController authenticationController, SecurityService securityService) {
+        this.securityService = securityService;
         addClassName("login-view");
         setSizeFull();
         setAlignItems(Alignment.CENTER);
@@ -73,5 +78,15 @@ public class LoginView extends VerticalLayout {
                 notification.open();
             }
         });
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        if (securityService.getAuthenticatedUser() != null) {
+            if (securityService.isUserStudent()) UI.getCurrent().navigate(ROUTING.STUDENT.SHomepageStudentView);
+            if (securityService.isUserUnternehmen())
+                UI.getCurrent().navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView);
+        }
     }
 }

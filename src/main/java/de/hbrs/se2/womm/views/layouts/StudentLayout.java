@@ -14,10 +14,12 @@ public class StudentLayout extends AbstractLayout {
 
     protected StudentLayout(SecurityService securityService) {
         this.securityService = securityService;
-        super.createHeaderWithLogoutButton(
-                new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
-                        e -> securityService.logout()), true
-        );
+        if (securityService.getAuthenticatedUser() != null) {
+            super.createHeaderWithLogoutButton(
+                    new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
+                            e -> securityService.logout()), true
+            );
+        }
     }
 
     @Override
