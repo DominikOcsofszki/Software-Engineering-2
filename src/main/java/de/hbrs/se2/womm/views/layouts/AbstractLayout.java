@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.layouts;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -9,6 +10,9 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import de.hbrs.se2.womm.views.components.refactoring.VaadinBuilderWomm;
+import org.atmosphere.interceptor.AtmosphereResourceStateRecovery;
+
+import static de.hbrs.se2.womm.views.components.refactoring.VaadinBuilderWomm.toggleDevMode;
 
 abstract class AbstractLayout extends AppLayout {
     HorizontalLayout header = new HorizontalLayout();
@@ -58,11 +62,27 @@ abstract class AbstractLayout extends AppLayout {
     void createDrawer() {
     }
     void ifAdminOrDevModeAddButton() {
-        VaadinBuilderWomm vaadinBuilderWomm = new VaadinBuilderWomm();
-        Button buttonToShowMissingTranslated = vaadinBuilderWomm.Button.create("buttonToShowMissingTranslated");
+        Button buttonToShowMissingTranslated = new Button("click for console put");
         buttonToShowMissingTranslated.addClickListener(
                 e -> VaadinBuilderWomm.printAllTextNotTranslatedToConsole()
         );
-        header.add(buttonToShowMissingTranslated);
+        Button buttonToggleDevMode = new Button( "buttonToggleDevMode-Selenium-Selector");
+        buttonToggleDevMode.addClickListener(
+                e -> {
+                    VaadinBuilderWomm.toggleDevMode();
+                    UI.getCurrent().getPage().reload();
+                }
+        );
+        Button translateToggle = new Button( "EN/DE");
+        translateToggle.addClickListener(
+                e -> {
+                    VaadinBuilderWomm.toggleTranslateText();
+                    UI.getCurrent().getPage().reload();
+                }
+        );
+        addToNavbar(buttonToShowMissingTranslated, buttonToggleDevMode, translateToggle);
+//        header.add(buttonToShowMissingTranslated);
+//        header.add(buttonToggleDevMode);
+//        header.add(translateToggle);
     }
 }

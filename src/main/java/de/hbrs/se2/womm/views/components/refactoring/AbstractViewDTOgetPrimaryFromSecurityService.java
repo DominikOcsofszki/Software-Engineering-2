@@ -4,7 +4,7 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 
-public abstract class AbstractViewDTOgetPrimaryFromService<ExtendsAbstractController extends AbstractControllerWomm,
+public abstract class AbstractViewDTOgetPrimaryFromSecurityService<ExtendsAbstractController extends AbstractControllerWomm,
         ExtendsAbstractDTO extends AbstractDTO>
         extends AbstractViewNoController {
 
@@ -35,7 +35,7 @@ public abstract class AbstractViewDTOgetPrimaryFromService<ExtendsAbstractContro
         return controller;
     }
 
-    protected AbstractViewDTOgetPrimaryFromService(ExtendsAbstractController controller, SecurityService securityService){
+    protected AbstractViewDTOgetPrimaryFromSecurityService(ExtendsAbstractController controller, SecurityService securityService){
         super();
         this.primaryKeyFromSecurityServiceWhenStartup = securityService.getLoggedInPrimaryKey();
         this.controller = controller;

@@ -22,13 +22,12 @@ import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 
 @Route(value = "demo", layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
-public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetPrimaryFromService<StudentController, StudentDTO> {
+public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetPrimaryFromSecurityService<StudentController, StudentDTO> {
 
 //    String ort = "Bonn";
 //    String fullName = "Paul Stein";

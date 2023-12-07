@@ -16,7 +16,8 @@ import java.util.Set;
 
 
 public class VaadinBuilderWomm {
-
+    private static boolean devMode = false;
+    private static boolean translateText = true;
     //ToDo Add button for showing all querry-selector
     public ButtonBuilder Button = new ButtonBuilder();
     public TextFieldBuilder TextField = new TextFieldBuilder();
@@ -29,6 +30,12 @@ public class VaadinBuilderWomm {
 //    private static Set<String> setOfText = new HashSet<>(translateTextMap.keySet());
     private static Set<String> newTextNeedsToBeTranslated = new HashSet<>();
 
+    public static void toggleTranslateText() {
+        translateText = !translateText;
+    }
+    public static void toggleDevMode() {
+        devMode = !devMode;
+    }
     public class H1Builder {
         private int countH1 = 0;
 
@@ -36,8 +43,10 @@ public class VaadinBuilderWomm {
             String translatedText = translateText(text);
             countH1++;
             String querryId = "h1-builder-" + this.countH1;
+            if(devMode) translatedText = querryId;
             H1 h1 = new H1(translatedText);
             h1.setText(translatedText);
+
             h1.setId(querryId);
             return h1;
         }
@@ -49,6 +58,7 @@ public class VaadinBuilderWomm {
             String translatedText = translateText(text);
             countH2++;
             String querryId = "h2-builder-" + this.countH2;
+            if(devMode) translatedText = querryId;
             H2 h2 = new H2(translatedText);
             h2.setText(translatedText);
             h2.setId(querryId);
@@ -62,6 +72,7 @@ public class VaadinBuilderWomm {
             String translatedText = translateText(text);
             countParagraph++;
             String querryId = "paragraph-builder-" + this.countParagraph;
+            if(devMode) translatedText = querryId;
             Paragraph paragraph = new Paragraph(translatedText);
             paragraph.setText(translatedText);
             paragraph.setId(querryId);
@@ -75,6 +86,7 @@ public class VaadinBuilderWomm {
             String translatedText = translateText(text);
             countParagraph++;
             String querryId = "span-builder-" + this.countParagraph;
+            if(devMode) translatedText = querryId;
             Span span = new Span(translatedText);
             span.setText(translatedText);
             span.setId(querryId);
@@ -104,10 +116,11 @@ public class VaadinBuilderWomm {
 
             String translatedText = translateText(text);
             this.countButtonOnView++;
-            String buttonId = "button-builder-" + this.countButtonOnView;
+            String querryId = "button-builder-" + this.countButtonOnView;
+            if(devMode) translatedText = querryId;
             Button button = new Button(translatedText);
             button.setText(translatedText);
-            button.setId(buttonId);
+            button.setId(querryId);
             return button;
         }
     }
@@ -124,15 +137,18 @@ public class VaadinBuilderWomm {
             String translatedTextTextValuePlaceholder = translateText(textValuePlaceholder);
 
             this.countTextFieldOnView++;
-            String textFieldId = "text-field-builder-" + this.countTextFieldOnView;
+            String querryId = "text-field-builder-" + this.countTextFieldOnView;
+            if(devMode) translatedTextTextValuePlaceholder = querryId;
+
             TextField textField = new TextField(translatedTextAbove);
             if (textValuePlaceholder != null) textField.setValue(translatedTextTextValuePlaceholder);
-            textField.setId(textFieldId);
+            textField.setId(querryId);
             return textField;
         }
     }
     public static String translateText(String text) {
         if(text == null) return null;
+        if(!translateText) return text;
         return addTextToFrontEndCheck(text);
     }
     private static String addTextToFrontEndCheck(String text) {
@@ -158,7 +174,8 @@ public class VaadinBuilderWomm {
         System.out.println("------------");
         System.out.println("Add this to TranslateMap.java");
         for(String translateMe : newTextNeedsToBeTranslated) {
-            System.out.println("put(\""+translateMe+"\", \"" + translateMe+"<-TranslationNeeded\");");
+//            System.out.println("put(\""+translateMe+"\", \"" + translateMe+"<-TranslationNeeded\");");
+            System.out.println("put(\""+translateMe+"\", \"\");");
         }
     }
 
