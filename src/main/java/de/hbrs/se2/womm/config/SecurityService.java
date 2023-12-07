@@ -22,7 +22,8 @@ public class SecurityService {
             }
         }
         // Anonymous or no authentication.
-        return null;
+        throw new IllegalStateException("User not authenticated");
+//        return null; //ToDo: @Toni redirect to login?
     }
 
     public void logout() {
