@@ -26,7 +26,7 @@ import java.util.Date;
 
 
 @Route(value = "demo", layout = StudentLayout.class)
-@RolesAllowed({"STUDENT","ADMIN"})
+@RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
 public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetPrimaryFromService<StudentController, StudentDTO> {
 
@@ -37,28 +37,29 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
 //    String email = "p_steinn@email.de";
 //    String bioText = "2018 nach dem Abitur, Ausbildung als Einzelhandeskaufmann, 2021 nach der Ausbildung angestellt als Einzelhandelskaufmann, Seit 2022 Vollzeit-Informatikstudent.";
 //    String skillText = "Windows-User, Social-Media-Plattformen, Officeprogramme, diverse IDEs: viel Java-Coding Erfahrung, mäßige C-Coding  Erfahrung";
-//    String semester = "3";
-
-    String ort = "Bonn";
-    String fullName = "Paul Stein";
-    String date ="2002-02-20";
-    String shortName = "pstein2s";
-    String email = "p_steinn@email.de";
-    String bioText = "2018 nach dem Abitur, Ausbildung als Einzelhandeskaufmann, 2021 nach der Ausbildung angestellt als Einzelhandelskaufmann, Seit 2022 Vollzeit-Informatikstudent.";
-    String skillText = "Windows-User, Social-Media-Plattformen, Officeprogramme, diverse IDEs: viel Java-Coding Erfahrung, mäßige C-Coding  Erfahrung";
     String semester = "3";
-    //
+
+    String ort = getDto().getNutzer().getOrt() == null ? "Ort missing?" : getDto().getNutzer().getOrt();
+    String firstName = getDto().getStudentVorname();
+    String lastName = getDto().getStudentName();
+    String fullName = firstName + " " + lastName;
+    String date = getDto().getStudentGeburtstag().toString();
+    String shortName = "Does not exists in DTO!!! remove ";
+    String email = getDto().getNutzer().getEmail() == null ? "Email missing?" : getDto().getNutzer().getEmail();
+    String bioText = getDto().getStudentBio() == null ? "Bio missing?" : getDto().getStudentBio();
+    String skillText = getDto().getStudentSpezialisierung() == null ?  "Skills missing?": getDto().getStudentSpezialisierung();
+//    long semester = 3l;
     Span s1 = new Span(fullName);
-//    LocalDate datum = LocalDate.parse("2002-02-20");
+    //    LocalDate datum = LocalDate.parse("2002-02-20");
     LocalDate datum = LocalDate.parse(date);
-    boolean getMessages  = true;
+    boolean getMessages = true;
     Checkbox checkbox1 = new Checkbox(getMessages);
 
-//    TextField textField = new TextField("","","pstein2s");
-    TextField textField = new TextField("","",shortName);
+    //    TextField textField = new TextField("","","pstein2s");
+    TextField textField = new TextField("", "", shortName);
     TextField textField1 = new TextField();
-    EmailField  validEmailField1  = new EmailField("",email);
-    EmailField  validEmailField2  = new EmailField();
+    EmailField validEmailField1 = new EmailField("", email);
+    EmailField validEmailField2 = new EmailField();
     PasswordField passwordField1 = new PasswordField();
     PasswordField passwordField2 = new PasswordField();
     PasswordField passwordField3 = new PasswordField();
@@ -67,6 +68,7 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
     DatePicker datePicker = new DatePicker("");
     //        Checkbox checkbox1 = new Checkbox();//ToDo Outside
     NumberField numberField = new NumberField();
+//    TextField numberField = new TextField();
     //        LocalDate datum = LocalDate.parse("2002-02-20"); //ToDo outside
     Span s2;
     Span s3;
@@ -75,9 +77,9 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
 //        textField.setValue("pstein2s");
 
 
-
     public SCreateChangeStudentProfileViewRefactor(StudentController controller, SecurityService securityService) {
         super(controller, securityService);
+        System.out.println(getDto());
 //        getDtoFromControllerWithSetPrimaryKey();
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
@@ -86,14 +88,15 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
         Header();
         Profil();
     }
-    private void Header(){
+
+    private void Header() {
         HorizontalLayout header = new HorizontalLayout();
 //        Button b = new Button("Home");
 //        getVaadinBuilderWomm().H1.create
         Button b = getVaadinBuilderWomm().Button.create("Home");
-        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY   );
+        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         b.getElement().getStyle().set("margin-right", "0%");
-        b.addClickListener( e -> UI.getCurrent().navigate(LandingPageView.class));
+        b.addClickListener(e -> UI.getCurrent().navigate(LandingPageView.class));
         header.add(b);
         b = new Button("Save Changes");
         b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -104,6 +107,7 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
         header.setWidth("100%");
         add(header);
     }
+
     private void Profil() {
         HorizontalLayout header = new HorizontalLayout();
 //        TextField textField = new TextField();
@@ -123,7 +127,7 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
 //        Span s3;
 //        Span s4;
         ////////////////////Profile Picture//////////////////////////////////////////////////////////////////////////////
-        Image i = new Image("themes/theme_1/user.png","Image not found");
+        Image i = new Image("themes/theme_1/user.png", "Image not found");
         i.setWidth("100%");
 //        i.setHeight("100%");
         //i.setHeight(300, Unit.PIXELS); //for fixed values
@@ -199,7 +203,7 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
         textField.setWidth("50%");
-        textField.getStyle().set("flex-grow","1");
+        textField.getStyle().set("flex-grow", "1");
 //        textField.setValue("pstein2s"); //ToDo outside
         headervert2.add(s);
         headervert2.add(textField);
@@ -219,13 +223,13 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
         s3.getElement().getStyle().set("font-size", "15px");
         s3.getElement().getStyle().set("color", "#CBA7A2");          //color error-red
         validEmailField1.setWidth("50%");
-        validEmailField1.getStyle().set("flex-grow","1");
+        validEmailField1.getStyle().set("flex-grow", "1");
         validEmailField1.setValue(this.email);
 //        validEmailField1.setValue("p_steinn@email.de");//ToDo Changed
         validEmailField1.setClearButtonVisible(true);
         validEmailField1.setErrorMessage("Enter a valid email address");
         validEmailField2.setWidth("50%");
-        validEmailField2.getStyle().set("flex-grow","1");
+        validEmailField2.getStyle().set("flex-grow", "1");
         validEmailField2.setValue("");
         validEmailField2.setClearButtonVisible(true);
         headervert2.add(s);
@@ -270,13 +274,13 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
         passwordField3.setMaxLength(12);
         passwordField3.setClearButtonVisible(true);
         passwordField1.setWidth("50%");
-        passwordField1.getStyle().set("flex-grow","1");
+        passwordField1.getStyle().set("flex-grow", "1");
         passwordField1.setValue("");
         passwordField2.setWidth("50%");
-        passwordField2.getStyle().set("flex-grow","1");
+        passwordField2.getStyle().set("flex-grow", "1");
         passwordField2.setValue("");
         passwordField3.setWidth("50%");
-        passwordField3.getStyle().set("flex-grow","1");
+        passwordField3.getStyle().set("flex-grow", "1");
         passwordField3.setValue("");
         headervert2.add(s);
         headervert2.add(passwordField1);
@@ -294,7 +298,7 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
         textField1.setWidth("min-content");
-        textField1.getStyle().set("flex-grow","1");
+        textField1.getStyle().set("flex-grow", "1");
         textField1.setValue(this.ort);
         headervert2.add(s);
         headervert2.add(textField1);
@@ -310,7 +314,7 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
         //textArea.setLabel("Text area");
         textArea.setWidth("100%");
         textArea.setValue(bioText);
-    //        textArea.setValue("2018 nach dem Abitur, Ausbildung als Einzelhandeskaufmann, 2021 nach der Ausbildung angestellt als Einzelhandelskaufmann, Seit 2022 Vollzeit-Informatikstudent.");//ToDo Changed
+        //        textArea.setValue("2018 nach dem Abitur, Ausbildung als Einzelhandeskaufmann, 2021 nach der Ausbildung angestellt als Einzelhandelskaufmann, Seit 2022 Vollzeit-Informatikstudent.");//ToDo Changed
         headervert2.add(s);
         headervert2.add(textArea);
         headervert2.setSpacing(false);
@@ -325,7 +329,7 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
         textArea2.setWidth("100%");
 //        textArea2.setValue("Windows-User, Social-Media-Plattformen, Officeprogramme, diverse IDEs: viel Java-Coding Erfahrung, mäßige C-Coding  Erfahrung");//ToDo changed
         textArea2.setValue(skillText);
-                headervert2.add(s);
+        headervert2.add(s);
         headervert2.add(textArea2);
         headervert2.setSpacing(false);
         headervert2.setPadding(false);
@@ -339,6 +343,7 @@ public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetP
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
         numberField.setLabel("Ich bin in Semester:");
+//        numberField.setValue(Double.valueOf(String.valueOf(semester)));
         numberField.setValue(Double.valueOf(semester));
 //        numberField.setValue(3d);//ToDo Changed
         numberField.setWidth("min-content");
