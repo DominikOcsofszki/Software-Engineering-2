@@ -14,8 +14,10 @@ import de.hbrs.se2.womm.views.components.refactoring.VaadinBuilderWomm;
 public class StudentLayout extends AbstractLayoutLoggedIn {
 
     private final SecurityService securityService;
+//    private final String primaryKey;
 
     protected StudentLayout(SecurityService securityService) {
+//        primaryKey = securityService.getAuthenticatedUser().getUsername();
         this.securityService = securityService;
         super.createHeaderWithLogoutButton(
                 new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
@@ -46,8 +48,4 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
         ));
     }
 
-    @Override
-    public String getPrimaryFromLoggedInUser() { //ToDo check if correct primary
-        return securityService.getAuthenticatedUser().getUsername();
-    }
 }

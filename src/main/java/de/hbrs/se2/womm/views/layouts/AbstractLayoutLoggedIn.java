@@ -12,5 +12,4 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
 import de.hbrs.se2.womm.views.components.refactoring.VaadinBuilderWomm;
 
 abstract class AbstractLayoutLoggedIn extends AbstractLayout {
-    abstract public String getPrimaryFromLoggedInUser();
 }

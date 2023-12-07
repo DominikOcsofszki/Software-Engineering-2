@@ -11,8 +11,9 @@ import de.hbrs.se2.womm.views.*;
 public class UnternehmenLayout extends AbstractLayoutLoggedIn {
 
     private final SecurityService securityService;
-
+    public final String primaryKey;
     protected UnternehmenLayout(SecurityService securityService) {
+        primaryKey = securityService.getAuthenticatedUser().getUsername();
         this.securityService = securityService;
         super.createHeaderWithLogoutButton(
                 new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
@@ -43,10 +44,5 @@ public class UnternehmenLayout extends AbstractLayoutLoggedIn {
                 new RouterLink("UNotificationView", UNotificationView.class)
 
         ));
-    }
-
-    @Override
-    public String getPrimaryFromLoggedInUser() { //ToDo check if correct primary
-        return securityService.getAuthenticatedUser().getUsername();
     }
 }

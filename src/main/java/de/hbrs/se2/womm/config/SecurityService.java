@@ -22,7 +22,7 @@ public class SecurityService {
             }
         }
         // Anonymous or no authentication.
-        return null;
+        return null; //ToDo: @Toni redirect to login?
     }
 
     public void logout() {
@@ -45,7 +45,7 @@ public class SecurityService {
         return getAuthenticatedUser().getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_" + Roles.STUDENT.name()));
     }
 
-    public long getLoggedInId() {
-        return 1;
+    public String getLoggedInPrimaryKey() {
+        return getAuthenticatedUser().getUsername();
     }
 }

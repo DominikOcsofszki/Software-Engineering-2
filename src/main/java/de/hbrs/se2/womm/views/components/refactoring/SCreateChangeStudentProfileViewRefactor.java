@@ -31,15 +31,14 @@ import java.util.Optional;
 @Route(value = "refs", layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
-public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTO<StudentController, StudentDTO> {
+public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetPrimaryFromService<StudentController, StudentDTO> {
     @Override
     String setPrimaryKey() {
-        return "1";
-//        return sth();
+        return super.getPrimaryKeyFromSecurityService();
     }
 
-    public SCreateChangeStudentProfileViewRefactor(StudentController controller) {
-        super(controller);
+    public SCreateChangeStudentProfileViewRefactor(StudentController controller, SecurityService securityService) {
+        super(controller, securityService);
         getDtoFromControllerWithSetPrimaryKey();
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
