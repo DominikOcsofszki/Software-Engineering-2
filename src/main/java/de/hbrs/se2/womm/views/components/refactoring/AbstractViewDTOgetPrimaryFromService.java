@@ -10,17 +10,21 @@ public abstract class AbstractViewDTOgetPrimaryFromService<ExtendsAbstractContro
 
     private final ExtendsAbstractController controller;
     private ExtendsAbstractDTO dto;
+    protected String primaryKeyFromSecurityServiceWhenStartup;
 
-    public String getPrimaryKeyFromSecurityService() {
-        return primaryKeyFromSecurityService;
+
+    public String getPrimaryKeyAsFromSecurityServiceWhenStartupString() {
+        return primaryKeyFromSecurityServiceWhenStartup;
     }
 
-    protected String primaryKeyFromSecurityService;
-    public void getDtoFromControllerWithSetPrimaryKey(){
+    private void setDtoFromControllerWithSetPrimaryKey(){
         String primaryKey = setPrimaryKey();
         dto = (ExtendsAbstractDTO) controller.getDTObyPrimaryKey(primaryKey).getBody();
     }
-    abstract String setPrimaryKey();
+//    abstract String setPrimaryKey();
+    String setPrimaryKey() {
+        return getPrimaryKeyAsFromSecurityServiceWhenStartupString();
+    }
 
     public ExtendsAbstractDTO getDto() {
         return dto;
@@ -33,8 +37,9 @@ public abstract class AbstractViewDTOgetPrimaryFromService<ExtendsAbstractContro
 
     protected AbstractViewDTOgetPrimaryFromService(ExtendsAbstractController controller, SecurityService securityService){
         super();
-        this.primaryKeyFromSecurityService = securityService.getLoggedInPrimaryKey();
+        this.primaryKeyFromSecurityServiceWhenStartup = securityService.getLoggedInPrimaryKey();
         this.controller = controller;
+        setDtoFromControllerWithSetPrimaryKey();
     }
 
 

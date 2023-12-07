@@ -48,8 +48,16 @@ public class StudentController extends AbstractControllerWomm {
         );
     }
 
+    private ResponseEntity<StudentDTO> getStudentByNutzerId(@PathVariable Long id) {
+        return new ResponseEntity<>(studentService.getStudentByNutzerId(id), HttpStatus.OK);
+//                .map(studentDTO -> new ResponseEntity<>(studentDTO, HttpStatus.OK))
+//                .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    }
+
     @Override
     public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKey(String primaryKey) {
-        return getStudentById(Long.parseLong(primaryKey));
+//        System.out.println("inside getDTObyPrimaryKey");
+//        System.out.println(primaryKey);
+        return getStudentByNutzerId(Long.parseLong(primaryKey));
     }
 }

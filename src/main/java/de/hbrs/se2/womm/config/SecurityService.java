@@ -46,6 +46,67 @@ public class SecurityService {
     }
 
     public String getLoggedInPrimaryKey() {
-        return getAuthenticatedUser().getUsername();
+        String username = getAuthenticatedUser().getUsername();
+//        return username;
+        return mapperForDev(username);
+    }
+
+    private String mapperForDev(String username) {
+
+        switch (username) {
+            case "Grinsekatze1":
+                return "52";
+            case "TheManTheMythTheLegend":
+                return "152";
+            case "unternehmen":
+                return "202";
+            case "student":
+                return "203";
+            case "TestUsername":
+                return "252";
+            case "test123":
+                return "352";
+            case "Test":
+                return "452";
+            case "DominikOcsofszki":
+                return "502";
+            default:
+                return "0";
+        }
+
+//        switch (username) {
+//            case "Grinsekatze1":
+//                return "1";
+//            case "TheManTheMythTheLegend":
+//                return "2";
+//            case "unternehmen":
+//                return "52";
+//            case "student":
+//                return "53";
+//            case "TestUsername":
+//                return "102";
+//            case "test123":
+//                return "202";
+//            case "Test":
+//                return "302";
+//            case "DominikOcsofszki":
+//                return "352";
+//            default:
+//                return "0";
+//        }
+
+//        switch (username) {
+////            case "admin":
+////                return "1";
+//            case "unternehmen":
+//                return "52";
+//            case "student":
+//                return "3";
+//            case "DominikOcsofszki":
+//                return "352";
+//            default:
+//                return "0";
+//        }
+
     }
 }

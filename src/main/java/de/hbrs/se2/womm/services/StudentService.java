@@ -38,4 +38,10 @@ public class StudentService{
         studentRepository.save(student);
     }
 
+    public StudentDTO getStudentByNutzerId(Long id) {
+        Student student =  studentRepository.findStudentByNutzer_NutzerId(id);
+        System.out.println(student);
+        System.out.println("Inside StudentService");
+        return studentMapper.studentToStudentDto(student);
+    }
 }
