@@ -2,6 +2,7 @@ package de.hbrs.se2.womm.config;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
+import de.hbrs.se2.womm.dtos.NutzerDTO;
 import de.hbrs.se2.womm.model.Roles;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import org.springframework.security.core.context.SecurityContext;
@@ -22,6 +23,7 @@ public class SecurityService {
             }
         }
         // Anonymous or no authentication.
+//        throw new IllegalStateException("User not authenticated");
         return null; //ToDo: @Toni redirect to login?
     }
 
@@ -46,9 +48,11 @@ public class SecurityService {
     }
 
     public String getLoggedInPrimaryKey() {
-        String username = getAuthenticatedUser().getUsername();
+        long nutzerId  = ((NutzerDTO)getAuthenticatedUser()).getNutzerId();
+        return String.valueOf(nutzerId);
+//        String username = getAuthenticatedUser().getUsername();
 //        return username;
-        return mapperForDev(username);
+//        return mapperForDev(username);
     }
 
     private String mapperForDev(String username) {

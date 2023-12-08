@@ -27,7 +27,7 @@ import java.time.LocalDate;
 @Route(value = "demo", layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
-public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetPrimaryFromSecurityService<StudentController, StudentDTO> {
+public class SCreateChangeStudentProfileViewRefactor extends AbstractViewDTOgetPrimaryFromSecurityServiceLast<StudentController, StudentDTO> {
 
 //    String ort = "Bonn";
 //    String fullName = "Paul Stein";

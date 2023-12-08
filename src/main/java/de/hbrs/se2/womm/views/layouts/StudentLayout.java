@@ -8,19 +8,23 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.dtos.NutzerDTO;
+import de.hbrs.se2.womm.entities.Nutzer;
 import de.hbrs.se2.womm.views.*;
 import de.hbrs.se2.womm.views.components.refactoring.VaadinBuilderWomm;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public class StudentLayout extends AbstractLayoutLoggedIn {
-
     private final SecurityService securityService;
-//    private final String primaryKey;
+//    private final long nutzerId;//ToDo changed here
 
     protected StudentLayout(SecurityService securityService) {
-//        primaryKey = securityService.getAuthenticatedUser().getUsername();
+//        nutzerId  = ((NutzerDTO)securityService.getAuthenticatedUser()).getNutzerId();//ToDo changed here
         this.securityService = securityService;
+        String username = securityService.getAuthenticatedUser() == null ?
+                "no user": securityService.getAuthenticatedUser().getUsername();
         super.createHeaderWithLogoutButton(
-                new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
+                new Button("Log out: " + username,
                         e -> securityService.logout()), true
         );
     }

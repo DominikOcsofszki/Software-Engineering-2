@@ -1,8 +1,9 @@
-package de.hbrs.se2.womm.views.components.refactoring;
+package de.hbrs.se2.womm.views.components.finaluse;
 
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
+import de.hbrs.se2.womm.views.components.refactoring.AbstractViewNoController;
 
 public abstract class AbstractViewDTOgetPrimaryFromSecurityService<ExtendsAbstractController extends AbstractControllerWomm,
         ExtendsAbstractDTO extends AbstractDTO>
@@ -21,10 +22,10 @@ public abstract class AbstractViewDTOgetPrimaryFromSecurityService<ExtendsAbstra
         String primaryKey = setPrimaryKey();
         dto = (ExtendsAbstractDTO) controller.getDTObyPrimaryKey(primaryKey).getBody();
     }
-//    abstract String setPrimaryKey();
-    String setPrimaryKey() {
-        return getPrimaryKeyAsFromSecurityServiceWhenStartupString();
-    }
+    abstract String setPrimaryKey();
+//    String setPrimaryKey() {
+//        return getPrimaryKeyAsFromSecurityServiceWhenStartupString();
+//    }
 
     public ExtendsAbstractDTO getDto() {
         return dto;

@@ -52,6 +52,16 @@ public class StelleController extends AbstractControllerWomm {
 
     @Override
     public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKey(String primaryKey) {
-        return null; //ToDo
+        StelleDTO stelleDTO = null;
+        try {
+             stelleDTO = this.getById(Long.parseLong(primaryKey)); //ToDo implement in StelleService
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return new ResponseEntity<>(
+                stelleDTO,
+                HttpStatus.OK
+        );
     }
 }

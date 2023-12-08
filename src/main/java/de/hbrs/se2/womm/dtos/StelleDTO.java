@@ -16,16 +16,6 @@ public class StelleDTO extends AbstractDTO {
     private String stelleWebsite;
     private UnternehmenDTO stelleUnternehmen;
 
-    public static String[] getAllFilter(){
-        return new String[]{
-                "stelleId",
-                "stelleTitel",
-                "stelleOrt",
-                "stelleBeschreibung",
-                "stelleWebsite",
-                "stelleUnternehmen"
-        };
-    }
     public String UnternehmenName(){
         return stelleUnternehmen.getName();
     }
