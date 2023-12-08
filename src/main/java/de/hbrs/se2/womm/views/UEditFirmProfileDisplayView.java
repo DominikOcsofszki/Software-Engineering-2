@@ -16,7 +16,12 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.controller.StelleController;
+import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.entities.Stelle;
+import de.hbrs.se2.womm.views.components.finaluse.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.views.components.finaluse.FilterGridStelle;
 import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
@@ -28,8 +33,21 @@ import java.util.List;
 @Route(value = ROUTING.UNTERNEHMEN.UEditFirmProfileDisplayView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN","ADMIN"})
 @PageTitle("EditFirmProfileDisplayView")
-public class UEditFirmProfileDisplayView extends VerticalLayout {
-    public UEditFirmProfileDisplayView() {
+//public class UEditFirmProfileDisplayView extends VerticalLayout {
+public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<StelleController, StelleDTO> {
+
+
+    protected UEditFirmProfileDisplayView(StelleController stelleController, SecurityService securityService) {
+        super(stelleController, securityService);
+        setUp();
+        add(new FilterGridStelle(stelleController, selectNutzerIDforDB()));
+    }
+//    public UEditFirmProfileDisplayView(StelleController stelleController, SecurityService securityService) {
+//        setUp();
+//        add(new FilterGridStelle(stelleController, securityService.getLoggedInNutzerID()));
+//    }
+
+    private void setUp(){
 
         // Logo Upload
         Upload logoUpload = new Upload();
@@ -94,34 +112,34 @@ public class UEditFirmProfileDisplayView extends VerticalLayout {
         add(descriptionTextArea);
 
         // Job Advertisements - Grid for Displaying Job Postings
-        Grid<Stelle> jobGrid = new Grid<>();
-        jobGrid.addColumn(Stelle::getStelleTitel).setHeader("Job title");
-        jobGrid.addColumn(Stelle::getStelleBeschreibung).setHeader("Job description");
-        jobGrid.addColumn(Stelle::getStelleOrt).setHeader("Location");
+//        Grid<Stelle> jobGrid = new Grid<>();
+//        jobGrid.addColumn(Stelle::getStelleTitel).setHeader("Job title");
+//        jobGrid.addColumn(Stelle::getStelleBeschreibung).setHeader("Job description");
+//        jobGrid.addColumn(Stelle::getStelleOrt).setHeader("Location");
 
-        List<Stelle> stellenanzeigen = createDummyStellenanzeigen();
-        jobGrid.setItems(stellenanzeigen);
-
-        jobGrid.addItemClickListener(event -> {
-            Stelle selectedStelle = event.getItem();
-            if (selectedStelle != null) {
-                UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
-            }
-
-        });
-        add(jobGrid);
+//        List<Stelle> stellenanzeigen = createDummyStellenanzeigen();
+//        jobGrid.setItems(stellenanzeigen);
+//
+//        jobGrid.addItemClickListener(event -> {
+//            Stelle selectedStelle = event.getItem();
+//            if (selectedStelle != null) {
+//                UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
+//            }
+//
+//        });
+//        add(jobGrid);
     }
 
-    private List<Stelle> createDummyStellenanzeigen() {
-        List<Stelle> dummyStellenanzeigen = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
-            Stelle stelle = new Stelle();
-            stelle.setStelleId(i);
-            stelle.setStelleTitel("Job " + i);
-            stelle.setStelleBeschreibung("Description " + i);
-            stelle.setStelleOrt("Location " + i);
-            dummyStellenanzeigen.add(stelle);
-        }
-        return dummyStellenanzeigen;
-    }
+//    private List<Stelle> createDummyStellenanzeigen() {
+//        List<Stelle> dummyStellenanzeigen = new ArrayList<>();
+//        for (int i = 1; i <= 5; i++) {
+//            Stelle stelle = new Stelle();
+//            stelle.setStelleId(i);
+//            stelle.setStelleTitel("Job " + i);
+//            stelle.setStelleBeschreibung("Description " + i);
+//            stelle.setStelleOrt("Location " + i);
+//            dummyStellenanzeigen.add(stelle);
+//        }
+//        return dummyStellenanzeigen;
+//    }
 }

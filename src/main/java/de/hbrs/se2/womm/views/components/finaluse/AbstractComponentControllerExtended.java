@@ -24,7 +24,8 @@ public abstract class AbstractComponentControllerExtended<ExtendAbstractDTO exte
         this.controller = controller;
         this.filterByItemsFromDTO = getFilterByItemsFromDTO();
         setUpFilter();
-        setUpGrid(getItemsWithFilter("all"));
+        List<ExtendAbstractDTO> list = getItemsWithFilter();
+        setUpGrid(list);
         setUpToolbarAndAddGrid();
     }
 
@@ -34,21 +35,16 @@ public abstract class AbstractComponentControllerExtended<ExtendAbstractDTO exte
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
 
-    abstract protected List<?> getItemsWithFilter(String filterBy);
+    abstract protected List<ExtendAbstractDTO> getItemsWithFilter();
+//    abstract protected List<ExtendAbstractDTO> getItemsWithFilter(String filterBy);
 
-    protected List<?> getAllItemsFromController() {
-        if (controller != null) return controller.getAll().getBody();
-        return null;
-    }
-
-    private <T extends AbstractDTO> void setUpGrid(List<?> itemsForGrid) {
+    private void setUpGrid(List<ExtendAbstractDTO> itemsForGrid) {
         addClassName("list-view");
         setSizeFull();
         configureGrid();
-        List<ExtendAbstractDTO> list = (List<ExtendAbstractDTO>) itemsForGrid;
-        grid.setItems(list);
+        List<ExtendAbstractDTO> list = itemsForGrid;
+        if (list!= null) grid.setItems(list);
     }
-
 
     protected abstract void configureGrid();
 

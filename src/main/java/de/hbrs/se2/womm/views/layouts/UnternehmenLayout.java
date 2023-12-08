@@ -7,9 +7,12 @@ import com.vaadin.flow.router.RouterLink;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.*;
 public class UnternehmenLayout extends AbstractLayoutLoggedIn {
-
+   public String getme = "getme";
     protected UnternehmenLayout(SecurityService securityService) {
         super(securityService);
+    }
+    static public String getme(UnternehmenLayout unternehmenLayout) {
+        return unternehmenLayout.getme;
     }
 
     @Override

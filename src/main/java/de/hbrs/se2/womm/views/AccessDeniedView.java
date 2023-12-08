@@ -25,10 +25,17 @@ public class AccessDeniedView extends VerticalLayout implements BeforeEnterObser
         Text accessDeniedText = new Text("Access Denied!");
         add(accessDeniedText);
         if (CONFIGS.DEVMODE) {
-            add(new RouterLink("login ", LoginView.class));
+            Button buttonLogin = new Button("login");
+            buttonLogin.addClickListener(e -> UI.getCurrent().navigate(new RouterLink("login ", LoginView.class).getHref()));
+            buttonLogin.addClickListener(
+                    e -> UI.getCurrent().getPage().open(
+                            (new RouterLink("", LoginView.class).getHref()),
+                            "_blank")
+            );
             History history = UI.getCurrent().getPage().getHistory();
             Button button = new Button("Go back");
             button.addClickListener(e -> history.back());
+            add(buttonLogin);
             add(button);
         }
     }

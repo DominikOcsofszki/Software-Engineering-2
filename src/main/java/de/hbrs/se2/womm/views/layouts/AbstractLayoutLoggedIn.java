@@ -8,19 +8,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 abstract class AbstractLayoutLoggedIn extends AbstractLayout {
     protected final SecurityService securityService;
     protected final UserDetails userDetails;
-    protected final long nutzerId;
+//    protected final long nutzerId;
     protected final String username;
 
     AbstractLayoutLoggedIn(SecurityService securityService) {
         this.securityService = securityService;
         this.userDetails = securityService.getAuthenticatedUser();
         System.out.println("userDetails: " + userDetails);
-        this.nutzerId  = userDetails == null ? -1 : ((NutzerDTO) userDetails).getNutzerId();
+//        this.nutzerId  = userDetails == null ? -1 : ((NutzerDTO) userDetails).getNutzerId();
         this.username = userDetails == null ? null : userDetails.getUsername();
         super.createHeaderWithLogoutButton(new Button("Log out: " + this.username,
                         e -> securityService.logout()), true);
     }
     public long getNutzerId() {
-        return nutzerId;
+        return userDetails == null ? -1 : ((NutzerDTO) userDetails).getNutzerId();
     }
 }

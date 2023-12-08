@@ -16,7 +16,8 @@ import jakarta.annotation.security.RolesAllowed;
 public class UApplicationsView extends VerticalLayout {
     private long id;
     public UApplicationsView(BewerbungController controller, SecurityService securityService) {
-        this.id = Long.parseLong(securityService.getLoggedInNutzerID());
+//        this.id = Long.parseLong(securityService.getLoggedInNutzerID());//ToDo changed
+        this.id = 1;
         add(new ComponentFilterGridControllerBewerbung(controller,this.id));
     }
 }

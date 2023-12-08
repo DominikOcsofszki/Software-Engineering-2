@@ -9,6 +9,7 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+import de.hbrs.se2.womm.config.CONFIGS;
 import de.hbrs.se2.womm.views.components.refactoring.VaadinBuilderWomm;
 import org.atmosphere.interceptor.AtmosphereResourceStateRecovery;
 
@@ -25,7 +26,7 @@ abstract class AbstractLayout extends AppLayout {
         configName();
         configHeader();
         createDrawer();
-        if(CONFIGS.DEVMODE || CONFIGS.ADMIN) {
+        if(CONFIGS.DEVMODE ) {
             ifAdminOrDevModeAddButton();
         }
     }

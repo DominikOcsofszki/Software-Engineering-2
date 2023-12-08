@@ -5,19 +5,18 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
+import de.hbrs.se2.womm.entities.NutzerLogin;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @AnonymousAllowed
 @Route(value = "test", layout = StudentLayout.class)
 public class TestView extends AbstractViewDTObyNutzerID<StelleController, StelleDTO> {
-    @Override
-    String setPrimaryKey() {
-    return "1";
-    }
+
 
     protected TestView(StelleController stelleController, SecurityService securityService) {
         super(stelleController, securityService);
-        add(new FilterGridStelle(stelleController));
+        add(new FilterGridStelle(stelleController, selectNutzerIDforDB()));
     }
 
 }

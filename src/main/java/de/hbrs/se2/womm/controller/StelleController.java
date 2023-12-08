@@ -14,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class StelleController extends AbstractControllerWomm {
+//    public class StelleController extends AbstractControllerWommExtends<StelleDTO> {
 
     StelleService stelleService;
 
@@ -30,12 +31,14 @@ public class StelleController extends AbstractControllerWomm {
     }
 
     @GetMapping("/stellen/{id}")
-    public StelleDTO getById(@PathVariable Long id) throws NotFoundException {
+    public StelleDTO getById(@PathVariable Long id)  {
+//    public StelleDTO getById(@PathVariable Long id) throws NotFoundException {
         Optional<StelleDTO> stelleDTO = stelleService.getById(id);
         if (stelleDTO.isPresent()) {
             return stelleDTO.get();
         } else {
-            throw new NotFoundException("Stelle mit der id: " + id + " nicht gefunden.");
+            return null;
+//            throw new NotFoundException("Stelle mit der id: " + id + " nicht gefunden.");
         }
     }
 
@@ -48,22 +51,15 @@ public class StelleController extends AbstractControllerWomm {
     @GetMapping("all")
     public ResponseEntity<List<? extends AbstractDTO>> getAll() {
         return new ResponseEntity<>(
-                null, //ToDo implement in StelleService
+                stelleService.getAll(),
                 HttpStatus.OK
         );
     }
 
     @Override
-    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKey(String primaryKey) {
-        StelleDTO stelleDTO = null;
-        try {
-             stelleDTO = this.getById(Long.parseLong(primaryKey)); //ToDo implement in StelleService
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+    public ResponseEntity<StelleDTO> getDTObyPrimaryKey(String primaryKey) {
         return new ResponseEntity<>(
-                stelleDTO,
+                getById(Long.parseLong(primaryKey)),
                 HttpStatus.OK
         );
     }

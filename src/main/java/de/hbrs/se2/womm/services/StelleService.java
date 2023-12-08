@@ -36,4 +36,11 @@ public class StelleService {
         Stelle erzeugteStelle = stelleRepository.save(stelle);
         return stelleMapper.stelleToStelleDto(erzeugteStelle);
     }
+
+    public List<StelleDTO> getAll() {
+        return stelleRepository.findAll()
+                .stream()
+                .map(stelleMapper::stelleToStelleDto)
+                .toList();
+    }
 }
