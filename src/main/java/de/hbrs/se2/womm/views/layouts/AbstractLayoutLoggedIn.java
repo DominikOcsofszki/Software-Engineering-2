@@ -8,12 +8,10 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
 
     AbstractLayoutLoggedIn(SecurityService securityService) {
         this.securityService = securityService;
-//        UserDetails userDetails = securityService.getAuthenticatedUser();
-//        System.out.println("userDetails: " + userDetails); //ToDo delete later
-//        String username = userDetails == null ? null : userDetails.getUsername();
         String username = securityService.getAuthenticatedUser() == null ? null :
                 securityService.getAuthenticatedUser().getUsername();
-        super.createHeaderWithLogoutButton(new Button("Log out: " + username,
+        long nutzerId = securityService.getLoggedInNutzerID();
+        super.createHeaderWithLogoutButton(new Button("Log out("+nutzerId+"): " + username,
                         e -> securityService.logout()), true);
     }
 }

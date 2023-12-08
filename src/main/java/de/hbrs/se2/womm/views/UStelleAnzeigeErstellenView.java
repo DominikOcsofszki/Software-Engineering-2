@@ -14,6 +14,7 @@ import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.views.components.finaluse.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -21,7 +22,8 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.UNTERNEHMEN.UStelleAnzeigeErstellenView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN","ADMIN"})
 @PageTitle("StelleAnzeigeErstellenView")
-public class UStelleAnzeigeErstellenView extends VerticalLayout implements HasUrlParameter<String> {
+public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO>
+        implements HasUrlParameter<String> {
 
     TextField stelleTitel = new TextField();
     TextField stelleOrt = new TextField();
@@ -48,6 +50,7 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout implements HasUr
     }
 
     public UStelleAnzeigeErstellenView(StelleController stelleController, UnternehmenController unternehmenController, SecurityService securityService) {
+        super(unternehmenController, securityService);
         this.stelleController = stelleController;
         this.unternehmenController = unternehmenController;
         this.securityService = securityService;
@@ -120,9 +123,11 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout implements HasUr
 
     private long stelleDTO(){
 
-        long stelleId = 3l;
-        long getUserId = 1l;
-        UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(getUserId).getBody();
+//        long stelleId = 3l;
+//        long getUserId = 1l;
+//        UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(getUserId).getBody();
+        UnternehmenDTO unternehmenDTO = getDto();
+        System.out.println("UnternehmenDTO: " + unternehmenDTO);
 //        Unternehmen unternehmen = UnternehmenMapper.INSTANCE.dtoZuUnternehmen(unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()
                 .stelleTitel(stelleTitel.getValue())
@@ -131,9 +136,9 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout implements HasUr
                 .stelleBeschreibung(stelleBeschreibung.getValue())
                 .stelleUnternehmen(unternehmenDTO)
                 .build();
-        stelleController.saveStelle(erzeugDTO);
-        System.out.println(erzeugDTO);
-        return stelleId;
+        StelleDTO stelleDTO = stelleController.saveStelle(erzeugDTO).getBody();
+        System.out.println(stelleDTO.getStelleId());
+        return stelleDTO.getStelleId();
     }
 
 

@@ -7,18 +7,14 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
-import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Stelle;
 import de.hbrs.se2.womm.views.components.finaluse.AbstractViewDTObyNutzerID;
-import de.hbrs.se2.womm.views.components.finaluse.FilterGridStelleByLoggedInNutzerId;
 import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
@@ -56,7 +52,7 @@ public class UFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unternehm
         Button editButton = new Button("Edit firm profile");
         editButton.addClickListener(e -> {
             // Logic to navigate to the edit profile view
-            UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
+            UI.getCurrent().navigate(UEditFirmProfileDisplayViewOld.class);
         });
 
 //        // Subscribe Button

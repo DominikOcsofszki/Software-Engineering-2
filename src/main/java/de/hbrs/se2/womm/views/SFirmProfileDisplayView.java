@@ -132,7 +132,7 @@ public class SFirmProfileDisplayView extends VerticalLayout implements HasUrlPar
         jobGrid.addItemClickListener(event -> {
             Stelle selectedStelle = event.getItem();
             if (selectedStelle != null) {
-                UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
+                UI.getCurrent().navigate(UEditFirmProfileDisplayViewOld.class);
             }
         });
 
