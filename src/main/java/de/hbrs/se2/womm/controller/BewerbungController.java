@@ -33,16 +33,10 @@ public class BewerbungController extends AbstractControllerWomm {
                 .map((bewerbungDTO) -> new ResponseEntity<>(bewerbungDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
-        return new ResponseEntity<>(
-                bewerbungService.getAll(),
-                HttpStatus.OK
-        );
-    }
 
     @Override
-    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKey(String primaryKey) {
-        return null; //ToDo
+    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
+        //    return primaryKey < 0 ? xService.getAll() : xService.getDTObyPrimaryKey(primaryKey);
+        return null; //ToDo implement me
     }
 }

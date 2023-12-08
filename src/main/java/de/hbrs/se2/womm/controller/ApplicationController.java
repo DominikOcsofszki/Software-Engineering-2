@@ -2,6 +2,7 @@ package de.hbrs.se2.womm.controller;
 
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
+import de.hbrs.se2.womm.services.BewerbungService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,18 +18,20 @@ public class ApplicationController extends AbstractControllerWomm {
 
     // TODO add logic to methods and suitable return types for ResponseEntities
 
+    BewerbungService bewerbungService;
+
+    public ApplicationController(BewerbungService bewerbungService) {
+        this.bewerbungService = bewerbungService;
+    }
+
     @PostMapping("/")
     public ResponseEntity<Void> createApplication(@RequestBody BewerbungDTO request) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKey(String primaryKey) {
-        return null; //ToDo
+    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
+        //    return primaryKey < 0 ? xService.getAll() : xService.getDTObyPrimaryKey(primaryKey);
+        return null;//ToDo implement me
     }
 }

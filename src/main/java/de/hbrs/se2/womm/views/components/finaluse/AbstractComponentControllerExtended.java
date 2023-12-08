@@ -36,7 +36,6 @@ public abstract class AbstractComponentControllerExtended<ExtendAbstractDTO exte
     }
 
     abstract protected List<ExtendAbstractDTO> getItemsWithFilter();
-//    abstract protected List<ExtendAbstractDTO> getItemsWithFilter(String filterBy);
 
     private void setUpGrid(List<ExtendAbstractDTO> itemsForGrid) {
         addClassName("list-view");

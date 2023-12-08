@@ -2,18 +2,14 @@ package de.hbrs.se2.womm.views;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.MultiSelectComboBox;
-import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.views.components.done.ComponentFilterStelle;
-import de.hbrs.se2.womm.views.components.using.ComponentFilterGridControllerStellen;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -33,7 +29,7 @@ public class UHomepageUnternehmenView extends VerticalLayout {
 
     private void setUpComponentFilterGridControllerStellen(){ //ToDo: this was added
 //        add(new ComponentFilterGridControllerStellen(controller));
-        add(new ComponentFilterStelle(controller));
+//        add(new ComponentFilterStelle(controller));
     }
 
 

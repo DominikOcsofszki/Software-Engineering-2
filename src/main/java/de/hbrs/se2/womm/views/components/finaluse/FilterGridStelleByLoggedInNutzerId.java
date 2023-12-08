@@ -5,16 +5,16 @@ import de.hbrs.se2.womm.dtos.StelleDTO;
 
 import java.util.List;
 
-public class FilterGridStelle extends AbstractComponentControllerExtended<StelleDTO, StelleController>{
-    String filterBy;
-    public FilterGridStelle(StelleController stelleController, String filterBy) {
+public class FilterGridStelleByLoggedInNutzerId extends AbstractComponentControllerExtended<StelleDTO, StelleController>{
+    long filterBy;
+    public FilterGridStelleByLoggedInNutzerId(StelleController stelleController, long filterBy) {
         super(stelleController);
         this.filterBy = filterBy;
     }
 
     @Override
     protected List<StelleDTO> getItemsWithFilter() {
-        if(filterBy == null || filterBy.isEmpty())
+        if (filterBy < 0)
             return null;
         return controller.getStelleByUnternehmenId(Long.valueOf(filterBy)).getBody();
     }

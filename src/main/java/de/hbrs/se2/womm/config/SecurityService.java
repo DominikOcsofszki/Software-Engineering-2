@@ -2,7 +2,6 @@ package de.hbrs.se2.womm.config;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
-import de.hbrs.se2.womm.dtos.NutzerDTO;
 import de.hbrs.se2.womm.entities.NutzerLogin;
 import de.hbrs.se2.womm.model.Roles;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -47,11 +46,10 @@ public class SecurityService {
         return getAuthenticatedUser().getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_" + Roles.STUDENT.name()));
     }
 
-    public String getLoggedInNutzerID() {
+    public long getLoggedInNutzerID() {
         long nutzerId = getAuthenticatedUser() == null ? -1 :
                 ((NutzerLogin) getAuthenticatedUser()).getNutzerId();
-//        long nutzerId = ((NutzerLogin) getAuthenticatedUser()).getNutzerId();
-        return String.valueOf(nutzerId);
+        return nutzerId;
     }
 
 }

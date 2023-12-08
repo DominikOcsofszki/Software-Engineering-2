@@ -1,42 +1,39 @@
 package de.hbrs.se2.womm.views;
 
 
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StudentController;
-import de.hbrs.se2.womm.views.components.refactoring.AbstractView;
-import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
+import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.views.components.finaluse.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 
 
 @Route(value = ROUTING.STUDENT.SCreateChangeStudentProfileView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
-public class SCreateChangeStudentProfileView extends AbstractView {
-    public SCreateChangeStudentProfileView(StudentController controller) {
-        super(controller);
+//public class SCreateChangeStudentProfileView extends AbstractView {
+public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+    public SCreateChangeStudentProfileView(StudentController controller, SecurityService securityService) {
+        super(controller,securityService);
+        System.out.println(getDto());
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
         Header();

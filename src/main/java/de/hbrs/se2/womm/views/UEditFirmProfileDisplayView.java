@@ -1,8 +1,6 @@
 package de.hbrs.se2.womm.views;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
@@ -10,7 +8,6 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
@@ -19,16 +16,12 @@ import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
-import de.hbrs.se2.womm.entities.Stelle;
 import de.hbrs.se2.womm.views.components.finaluse.AbstractViewDTObyNutzerID;
-import de.hbrs.se2.womm.views.components.finaluse.FilterGridStelle;
+import de.hbrs.se2.womm.views.components.finaluse.FilterGridStelleByLoggedInNutzerId;
 import de.hbrs.se2.womm.views.layouts.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Route(value = ROUTING.UNTERNEHMEN.UEditFirmProfileDisplayView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN","ADMIN"})
@@ -40,7 +33,7 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Stell
     protected UEditFirmProfileDisplayView(StelleController stelleController, SecurityService securityService) {
         super(stelleController, securityService);
         setUp();
-        add(new FilterGridStelle(stelleController, selectNutzerIDforDB()));
+//        add(new FilterGridStelleByLoggedInNutzerId(stelleController, selectNutzerIDfromLoggedInForDB()));
     }
 //    public UEditFirmProfileDisplayView(StelleController stelleController, SecurityService securityService) {
 //        setUp();

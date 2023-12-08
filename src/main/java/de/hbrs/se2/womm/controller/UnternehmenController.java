@@ -41,18 +41,9 @@ public class UnternehmenController extends AbstractControllerWomm {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-        @Override
-        @GetMapping("all")
-        public ResponseEntity<List<? extends AbstractDTO>> getAll() {
-            return new ResponseEntity<>(
-                    unternehmenService.getAll(),
-                    HttpStatus.OK
-            );
-        }
-
     @Override
-    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKey(String primaryKey) {
-        return null;//ToDo
+    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
+        //    return primaryKey < 0 ? xService.getAll() : xService.getDTObyPrimaryKey(primaryKey);
+        return null; //ToDo implement me
     }
 }

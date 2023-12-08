@@ -34,12 +34,8 @@ public class OfferController extends AbstractControllerWomm {
     }
 
     @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
-        return null;
+    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
+        return null;//ToDo implement me
     }
 
-    @Override
-    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKey(String primaryKey) {
-        return null;//ToDo
-    }
 }

@@ -47,20 +47,18 @@ public class StelleController extends AbstractControllerWomm {
         return new ResponseEntity<>(stelleService.saveStelle(stelleDTO), HttpStatus.OK);
     }
 
-    @Override
-    @GetMapping("all")
-    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
-        return new ResponseEntity<>(
-                stelleService.getAll(),
-                HttpStatus.OK
-        );
-    }
+//    @Override
+//    @GetMapping("all")
+//    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
+//        return new ResponseEntity<>(
+//                stelleService.getAll(),
+//                HttpStatus.OK
+//        );
+//    }
+
 
     @Override
-    public ResponseEntity<StelleDTO> getDTObyPrimaryKey(String primaryKey) {
-        return new ResponseEntity<>(
-                getById(Long.parseLong(primaryKey)),
-                HttpStatus.OK
-        );
+    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
+        return null;
     }
 }
