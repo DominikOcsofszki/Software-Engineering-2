@@ -12,13 +12,15 @@ public abstract class AbstractViewDTObyNutzerID
         extends AbstractViewNoController {
 
     private final ExtendsAbstractController controller;
-    protected final List<ExtendsAbstractDTO> dto;
+    protected final List<? extends AbstractDTO> dto;
+//    protected final List<ExtendsAbstractDTO> dto;
     SecurityService securityService;
     protected long selectNutzerIDfromLoggedInForDB(){
         return securityService.getLoggedInNutzerID();
     }
 
-    public ExtendsAbstractDTO getDto() {
+    public AbstractDTO getDto() {
+//    public ExtendsAbstractDTO getDto() {
         return dto.get(0);
     }
 
@@ -37,7 +39,7 @@ public abstract class AbstractViewDTObyNutzerID
 //        dto = controller.getDTObyPrimaryKeyIfNegativeAll(primaryKey) == null ? null :
 //                (ExtendsAbstractDTO) controller.getDTObyPrimaryKeyIfNegativeAll(primaryKey).getBody();
         dto = controller.getDTObyPrimaryKeyIfNegativeAll(primaryKey) == null ? null :
-                (List<ExtendsAbstractDTO>) controller.getDTObyPrimaryKeyIfNegativeAll(primaryKey).getBody();
+                controller.getDTObyPrimaryKeyIfNegativeAll(primaryKey).getBody();
         System.out.println(dto);
     }
 

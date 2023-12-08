@@ -28,22 +28,18 @@ import jakarta.annotation.security.RolesAllowed;
 @RolesAllowed({"UNTERNEHMEN", "ADMIN"})
 @PageTitle("EditFirmProfileDisplayView")
 public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO> {
+    UnternehmenDTO unternehmenDTO;
 
-
-    protected UEditFirmProfileDisplayView(UnternehmenController unternehmenController,
-                                          StelleController stelleController,
+    protected UEditFirmProfileDisplayView(UnternehmenController unternehmenController, StelleController stelleController,
                                           SecurityService securityService) {
 
         super(unternehmenController, securityService);
         setUp();
-        add(new FilterGridStelleByLoggedInNutzerId(stelleController, selectNutzerIDfromLoggedInForDB()));
+        this.unternehmenDTO = (UnternehmenDTO) getDto();
+        add(new FilterGridStelleByLoggedInNutzerId(stelleController, unternehmenDTO.getUnternehmenId()));
+//        add(new FilterGridStelleByLoggedInNutzerId(stelleController, ((UnternehmenDTO)getDto()).getUnternehmenId()));
         System.out.println(getDto());
     }
-//    public UEditFirmProfileDisplayView(StelleController stelleController, SecurityService securityService) {
-//        setUp();
-//        add(new FilterGridStelle(stelleController, securityService.getLoggedInNutzerID()));
-//    }
-
     private void setUp() {
 
         // Logo Upload

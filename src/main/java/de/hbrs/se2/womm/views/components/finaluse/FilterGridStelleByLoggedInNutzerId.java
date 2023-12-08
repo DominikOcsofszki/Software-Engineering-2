@@ -14,7 +14,10 @@ public class FilterGridStelleByLoggedInNutzerId extends AbstractComponentControl
 
     @Override
     protected List<StelleDTO> getItemsWithFilter() {
-        return controller.getStelleByUnternehmenId(filterBy).getBody();
+        List<StelleDTO> list = (List<StelleDTO>) controller.getDTObyPrimaryKeyIfNegativeAll(filterBy).getBody();
+        System.out.println("list:" + list);
+        return list;
+//        return controller.getStelleByUnternehmenId(filterBy).getBody();
     }
 
     @Override

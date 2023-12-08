@@ -126,7 +126,7 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
 //        long stelleId = 3l;
 //        long getUserId = 1l;
 //        UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(getUserId).getBody();
-        UnternehmenDTO unternehmenDTO = getDto();
+        UnternehmenDTO unternehmenDTO = (UnternehmenDTO) getDto();
         System.out.println("UnternehmenDTO: " + unternehmenDTO);
 //        Unternehmen unternehmen = UnternehmenMapper.INSTANCE.dtoZuUnternehmen(unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()
