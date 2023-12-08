@@ -11,23 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UnternehmenLayout extends AbstractLayoutLoggedIn {
 
-    private final SecurityService securityService;
-    public final String primaryKey;
     protected UnternehmenLayout(SecurityService securityService) {
-        primaryKey = securityService.getAuthenticatedUser().getUsername();
-        this.securityService = securityService;
-//        UserDetails getUser = securityService.getAuthenticatedUser();
-//        String username = getUser == null ? null : getUser.getUsername();
-        String username = securityService.getAuthenticatedUser() == null ?
-                 null: securityService.getAuthenticatedUser().getUsername();
-        super.createHeaderWithLogoutButton(
-                new Button("Log out: " + username,
-                        e -> securityService.logout()), true
-        );
-//        super.createHeaderWithLogoutButton(
-//                new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
-//                        e -> securityService.logout()), true
-//        );
+        super(securityService);
     }
 
     @Override
