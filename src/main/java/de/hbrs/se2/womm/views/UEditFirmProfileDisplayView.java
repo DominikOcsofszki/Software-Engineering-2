@@ -37,6 +37,7 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unter
         super(unternehmenController, securityService);
         setUp();
         add(new FilterGridStelleByLoggedInNutzerId(stelleController, selectNutzerIDfromLoggedInForDB()));
+        System.out.println(getDto());
     }
 //    public UEditFirmProfileDisplayView(StelleController stelleController, SecurityService securityService) {
 //        setUp();

@@ -3,7 +3,6 @@ package de.hbrs.se2.womm.controller;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.services.StelleService;
-import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,18 +46,10 @@ public class StelleController extends AbstractControllerWomm {
         return new ResponseEntity<>(stelleService.saveStelle(stelleDTO), HttpStatus.OK);
     }
 
-//    @Override
-//    @GetMapping("all")
-//    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
-//        return new ResponseEntity<>(
-//                stelleService.getAll(),
-//                HttpStatus.OK
-//        );
-//    }
-
-
     @Override
-    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        return null;
+    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
+        return new ResponseEntity<>(
+                primaryKey < 0 ? stelleService.getAll() : stelleService.getByUnternehmenId(primaryKey),
+                HttpStatus.OK);
     }
 }

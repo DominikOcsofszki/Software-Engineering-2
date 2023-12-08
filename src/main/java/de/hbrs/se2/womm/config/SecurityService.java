@@ -49,6 +49,7 @@ public class SecurityService {
     public long getLoggedInNutzerID() {
         long nutzerId = getAuthenticatedUser() == null ? -1 :
                 ((NutzerLogin) getAuthenticatedUser()).getNutzerId();
+        System.out.println("nutzerId: " + nutzerId);
         return nutzerId;
     }
 

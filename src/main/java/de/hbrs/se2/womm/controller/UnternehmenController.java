@@ -11,7 +11,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-public class UnternehmenController extends AbstractControllerWomm {
+public class UnternehmenController
+        extends AbstractControllerWomm{
+//        extends AbstractControllerWomm<UnternehmenDTO>{
     UnternehmenService unternehmenService;
 
     public UnternehmenController(UnternehmenService unternehmenService){
@@ -42,8 +44,10 @@ public class UnternehmenController extends AbstractControllerWomm {
     }
 
     @Override
-    public ResponseEntity<? extends AbstractDTO> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        //    return primaryKey < 0 ? xService.getAll() : xService.getDTObyPrimaryKey(primaryKey);
-        return null; //ToDo implement me
+    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
+        return new ResponseEntity<>(
+                primaryKey < 0 ? unternehmenService.getAll() :
+                        unternehmenService.getDTOListbyPrimaryKey(primaryKey),
+                HttpStatus.OK);
     }
 }
