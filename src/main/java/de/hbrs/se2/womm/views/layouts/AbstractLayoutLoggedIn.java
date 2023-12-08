@@ -18,7 +18,9 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
         this.nutzerId  = userDetails == null ? -1 : ((NutzerDTO) userDetails).getNutzerId();
         this.username = userDetails == null ? null : userDetails.getUsername();
         super.createHeaderWithLogoutButton(new Button("Log out: " + this.username,
-                        e -> securityService.logout()),
-                true);
+                        e -> securityService.logout()), true);
+    }
+    public long getNutzerId() {
+        return nutzerId;
     }
 }

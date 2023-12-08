@@ -5,27 +5,25 @@ import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.views.components.refactoring.AbstractViewNoController;
 
-public abstract class AbstractViewDTOgetPrimaryFromSecurityService<ExtendsAbstractController extends AbstractControllerWomm,
-        ExtendsAbstractDTO extends AbstractDTO>
+public abstract class AbstractViewDTObyNutzerID
+        <ExtendsAbstractController extends AbstractControllerWomm, ExtendsAbstractDTO extends AbstractDTO>
         extends AbstractViewNoController {
 
     private final ExtendsAbstractController controller;
     private ExtendsAbstractDTO dto;
-    protected String primaryKeyFromSecurityServiceWhenStartup;
+    protected String NutzerId;
 
 
     public String getPrimaryKeyAsFromSecurityServiceWhenStartupString() {
-        return primaryKeyFromSecurityServiceWhenStartup;
+        return NutzerId;
     }
 
-    private void setDtoFromControllerWithSetPrimaryKey(){
+    private void setDtoFromControllerWithSetPrimaryKey() {
         String primaryKey = setPrimaryKey();
         dto = (ExtendsAbstractDTO) controller.getDTObyPrimaryKey(primaryKey).getBody();
     }
+
     abstract String setPrimaryKey();
-//    String setPrimaryKey() {
-//        return getPrimaryKeyAsFromSecurityServiceWhenStartupString();
-//    }
 
     public ExtendsAbstractDTO getDto() {
         return dto;
@@ -36,12 +34,11 @@ public abstract class AbstractViewDTOgetPrimaryFromSecurityService<ExtendsAbstra
         return controller;
     }
 
-    protected AbstractViewDTOgetPrimaryFromSecurityService(ExtendsAbstractController controller, SecurityService securityService){
+    protected AbstractViewDTObyNutzerID(ExtendsAbstractController controller, SecurityService securityService) {
         super();
-        this.primaryKeyFromSecurityServiceWhenStartup = securityService.getLoggedInPrimaryKey();
+        this.NutzerId = securityService.getLoggedInNutzerID();
         this.controller = controller;
         setDtoFromControllerWithSetPrimaryKey();
     }
-
 
 }

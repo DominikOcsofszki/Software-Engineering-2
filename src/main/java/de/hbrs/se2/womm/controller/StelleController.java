@@ -22,8 +22,11 @@ public class StelleController extends AbstractControllerWomm {
     }
 
     @GetMapping("/users/unternehmen/{id}/stellen")
-    public List<StelleDTO> getStelleByUnternehmenId(@PathVariable Long id) {
-        return stelleService.getByUnternehmenId(id);
+    public ResponseEntity<List<StelleDTO>> getStelleByUnternehmenId(@PathVariable Long id) {
+        return new ResponseEntity<>(
+                stelleService.getByUnternehmenId(id), //ToDo implement in StelleService
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/stellen/{id}")

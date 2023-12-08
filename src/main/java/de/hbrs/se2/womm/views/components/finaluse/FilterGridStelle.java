@@ -11,9 +11,9 @@ public class FilterGridStelle extends AbstractComponentControllerExtended<Stelle
     }
 
     @Override
-    protected List<?> getItemsFromControllerOrGenerate() {
-//        return controller.getAll().getBody();
-        return getItemsFromController();
+    protected List<?> getItemsWithFilter(String filterBy) {
+        if (filterBy.equals("all"))return controller.getAll().getBody();
+        return controller.getStelleByUnternehmenId(Long.valueOf(filterBy)).getBody();
     }
 
     @Override

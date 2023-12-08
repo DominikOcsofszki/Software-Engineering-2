@@ -37,7 +37,7 @@ public abstract class AbstractViewDTOgetPrimaryFromSecurityServiceLast<ExtendsAb
 
     protected AbstractViewDTOgetPrimaryFromSecurityServiceLast(ExtendsAbstractController controller, SecurityService securityService){
         super();
-        this.primaryKeyFromSecurityServiceWhenStartup = securityService.getLoggedInPrimaryKey();
+        this.primaryKeyFromSecurityServiceWhenStartup = securityService.getLoggedInNutzerID();
         this.controller = controller;
         setDtoFromControllerWithSetPrimaryKey();
     }

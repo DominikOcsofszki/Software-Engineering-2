@@ -9,14 +9,9 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.*;
 
 public class StudentLayout extends AbstractLayoutLoggedIn {
-//    private final SecurityService securityService;
 
     protected StudentLayout(SecurityService securityService) {
         super(securityService);
-//        this.securityService = securityService;
-//        super.createHeaderWithLogoutButton(new Button("Log out: " + this.username,
-//                        e -> securityService.logout()),
-//                true);
     }
 
     @Override
