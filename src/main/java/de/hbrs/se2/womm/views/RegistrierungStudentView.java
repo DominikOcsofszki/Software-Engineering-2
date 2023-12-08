@@ -1,34 +1,64 @@
 package de.hbrs.se2.womm.views;
 
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AuthenticationController;
 import de.hbrs.se2.womm.dtos.StudentRegistrationRequest;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
-import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Route(value = ROUTING.ALL.RegistrierungStudentView, layout = LoggedOutLayout.class)
 @AnonymousAllowed
 @PageTitle("RegistrierungStudentView")
 public class RegistrierungStudentView extends VerticalLayout {
 
-    public RegistrierungStudentView() {
+    SecurityService securityService;
+    AuthenticationController authenticationController;
+
+    private static final String EMAIL_REGEX =
+            "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
+    TextField nameComponent;
+    TextField surnameComponent;
+    TextField usernameComponent;
+    EmailField emailComponent;
+    PasswordField passwordComponent;
+    PasswordField passwordConfirmComponent;
+    DatePicker dateOfBirthComponent;
+    TextField locationComponent;
+    Button registerComponent;
+
+    public RegistrierungStudentView(AuthenticationController authenticationController, SecurityService securityService) {
         super();
+
+        this.securityService = securityService;
+        this.authenticationController = authenticationController;
+
         setSizeFull();
 
         setAlignItems(Alignment.CENTER);
@@ -37,39 +67,39 @@ public class RegistrierungStudentView extends VerticalLayout {
 
         add(new H4("Student/in Registration"));
 
-        var nameComponent = new com.vaadin.flow.component.textfield.TextField("Name");
+        nameComponent = new TextField("Name");
         nameComponent.setTooltipText("Your REAL Name");
         nameComponent.setRequired(true);
         nameComponent.setRequiredIndicatorVisible(true);
         nameComponent.setErrorMessage("Name is required");
 
-        var surnameComponent = new com.vaadin.flow.component.textfield.TextField("Surname");
+        surnameComponent = new TextField("Surname");
         surnameComponent.setTooltipText("Your REAL surname");
         surnameComponent.setClearButtonVisible(true);
         surnameComponent.setRequired(true);
         surnameComponent.setRequiredIndicatorVisible(true);
         surnameComponent.setErrorMessage("Surname is required");
 
-        var usernameComponent = new com.vaadin.flow.component.textfield.TextField("Username");
+        usernameComponent = new TextField("Username");
         usernameComponent.setTooltipText("Your desired username");
         usernameComponent.setRequired(true);
         usernameComponent.setRequiredIndicatorVisible(true);
         usernameComponent.setErrorMessage("Username is required");
 
-        EmailField emailComponent = new EmailField("Email \uD83D\uDE33");
+        emailComponent = new EmailField("Email \uD83D\uDE33");
         emailComponent.setTooltipText("Email connected to your future account");
         emailComponent.setRequired(true);
         emailComponent.setRequiredIndicatorVisible(true);
         emailComponent.setPrefixComponent(VaadinIcon.ENVELOPE.create());
         emailComponent.setErrorMessage("Email is required");
 
-        PasswordField passwordComponent = new PasswordField("Password");
+        passwordComponent = new PasswordField("Password");
         passwordComponent.setTooltipText("The password used for login");
         passwordComponent.setRequired(true);
         passwordComponent.setRequiredIndicatorVisible(true);
         passwordComponent.setErrorMessage("Password is required");
 
-        PasswordField passwordConfirmComponent = new PasswordField("Confirm Password");
+        passwordConfirmComponent = new PasswordField("Confirm Password");
         passwordConfirmComponent.setTooltipText("Repeat your password");
         passwordConfirmComponent.setRequired(true);
         passwordConfirmComponent.setRequiredIndicatorVisible(true);
@@ -77,14 +107,18 @@ public class RegistrierungStudentView extends VerticalLayout {
 
         DatePicker.DatePickerI18n singleFormatI18n = new DatePicker.DatePickerI18n();
         singleFormatI18n.setDateFormat("dd.MM.yyyy");
-        DatePicker dateOfBirthComponent = new DatePicker("Date of Birth");
+        dateOfBirthComponent = new DatePicker("Date of Birth");
         dateOfBirthComponent.setI18n(singleFormatI18n);
         dateOfBirthComponent.setTooltipText("Select your date of birth");
         dateOfBirthComponent.setRequired(true);
         dateOfBirthComponent.setRequiredIndicatorVisible(true);
         dateOfBirthComponent.setErrorMessage("Invalid date given. Dates must follow the 'DD.MM.YYYY' format.");
 
-        var locationComponent = new com.vaadin.flow.component.textfield.TextField("Location");
+        LocalDate today = LocalDate.now();
+
+        dateOfBirthComponent.setValue(today);
+
+        locationComponent = new TextField("Location");
         locationComponent.setTooltipText("Your current living location");
         locationComponent.setRequired(true);
         locationComponent.setRequiredIndicatorVisible(true);
@@ -92,37 +126,26 @@ public class RegistrierungStudentView extends VerticalLayout {
         locationComponent.setErrorMessage("Location is required");
 
 
-        Button registerComponent = new Button("Register", event -> {
-            /*
-            TODO
-            try {
-                StudentRegistrationRequest request = new StudentRegistrationRequest();
-                request.setFirstname(nameComponent.getValue());
-                request.setLastname(surnameComponent.getValue());
-                request.setEmail(emailComponent.getValue());
-                request.setUsername(usernameComponent.getValue());
-                request.setPassword(passwordComponent.getValue());
-
-                //Outputs this date as a String, such as 2007-12-03.
-                //The output will be in the ISO-8601 format yyyy-MM-dd.
-                request.setDob(dateOfBirthComponent.getValue().toString());
-
-                //es gibt kein setLocation????
-                request.setLocation(locationComponent.getValue());
-
-                HttpStatusCode answer = (new AuthenticationController()).registerUser(request).getStatusCode();
-
-                if(answer.is2xxSuccessful()){
-                    UI.getCurrent().navigate(ROUTING.STUDENT.SHomepageStudentView);
-                    add(new H2("Registrirung Erfolgreich"));
-                } else {
-
+        registerComponent = new Button("Register", event -> {
+            if (!nameComponent.isEmpty() && !surnameComponent.isEmpty() &&
+            !usernameComponent.isEmpty() && !emailComponent.isEmpty() &&
+            !passwordComponent.isEmpty() && !passwordConfirmComponent.isEmpty() &&
+            !locationComponent.isEmpty()) {
+                if (passwordComponent.getValue().equals(passwordConfirmComponent.getValue())) {
+                    Pattern pattern = Pattern.compile(EMAIL_REGEX);
+                    Matcher matcher = pattern.matcher(emailComponent.getValue());
+                    if (matcher.matches()) {
+                        register();
+                    } else {
+                        createErrorNotification("Bitte eine gültige Email eingeben!");
+                    }
                 }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                else {
+                    createErrorNotification("Passwörter stimmen nicht überein!");
+                }
+            } else {
+                createErrorNotification("Fülle alle Felder aus!");
             }
-
-            */
         });
 
         FormLayout formLayout = new FormLayout();
@@ -142,5 +165,80 @@ public class RegistrierungStudentView extends VerticalLayout {
                 formLayout,
                 registerComponent
         );
+    }
+
+    private void register() {
+        try {
+            StudentRegistrationRequest request = getStudentRegistrationRequest();
+
+            ResponseEntity<Void> response = authenticationController.registerStudent(request);
+
+            if(response.getStatusCode().is2xxSuccessful()) {
+                Notification notification = new Notification();
+                notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+
+                Div text = new Div(new Text("Registrierung erfolgreich!"));
+
+                Button closeButton = new Button(new Icon("lumo", "cross"));
+                closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+                closeButton.setAriaLabel("Close");
+                closeButton.addClickListener(e -> {
+                    notification.close();
+                    UI.getCurrent().navigate(ROUTING.ALL.LandingPageView);
+                });
+
+                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                layout.setAlignItems(Alignment.CENTER);
+
+                notification.add(layout);
+                notification.open();
+            }
+        } catch (Exception e) {
+            createErrorNotification(e.getMessage());
+        }
+    }
+
+    private StudentRegistrationRequest getStudentRegistrationRequest() {
+        StudentRegistrationRequest request = new StudentRegistrationRequest();
+        request.setFirstname(nameComponent.getValue());
+        request.setLastname(surnameComponent.getValue());
+        request.setEmail(emailComponent.getValue());
+        request.setUsername(usernameComponent.getValue());
+        request.setPassword(passwordComponent.getValue());
+
+        //Outputs this date as a String, such as 2007-12-03.
+        //The output will be in the ISO-8601 format yyyy-MM-dd.
+        request.setDob(dateOfBirthComponent.getValue().toString());
+
+        request.setLocation(locationComponent.getValue());
+        return request;
+    }
+
+    private void createErrorNotification(String errorText) {
+        Notification notification = new Notification();
+        notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+        Div text = new Div(new Text(errorText));
+
+        Button closeButton = new Button(new Icon("lumo", "cross"));
+        closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+        closeButton.setAriaLabel("Close");
+        closeButton.addClickListener(e -> notification.close());
+
+        HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+        layout.setAlignItems(Alignment.CENTER);
+
+        notification.add(layout);
+        notification.open();
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        if (securityService.getAuthenticatedUser() != null) {
+            if (securityService.isUserStudent()) UI.getCurrent().navigate(ROUTING.STUDENT.SHomepageStudentView);
+            if (securityService.isUserUnternehmen())
+                UI.getCurrent().navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView);
+        }
     }
 }
