@@ -12,6 +12,11 @@ public class ASSETS {
         placeholderIMG.setHeight(height + "px");
         return placeholderIMG;
     }
+    public static Image buildPlaceholder(int height) {
+        Image placeholderIMG = new Image(ASSETS.IMG.PLACEHOLDER, "placeholder");
+        placeholderIMG.setHeight(height + "px");
+        return placeholderIMG;
+    }
 
     static public class StyleGuide {
         public static final String LogoText = "themes/style_guide/LogoText.png"; //ToDo

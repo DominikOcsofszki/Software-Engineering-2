@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
@@ -136,6 +137,7 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unter
         saveButton.addClickListener(e -> {
             UnternehmenDTO newUnternehmenDTO = newUnternehmenDTOFromFields();
             getController().saveUnternehmen(newUnternehmenDTO);
+            UI.getCurrent().getPage().reload();
             // Logic to save changes made to the firm profile
             // Implement your saving logic here
         });

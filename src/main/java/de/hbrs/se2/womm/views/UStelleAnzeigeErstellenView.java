@@ -107,8 +107,9 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
         Button erstellenButton = new Button("Erstellen");
         erstellenButton.addClickListener(e -> {
             String stelleIdFromFunction = String.valueOf(stelleDTO());
-            UI.getCurrent().navigate(UStelleAnzeigeErstellenView.class,stelleIdFromFunction);
-            //getUI().ifPresent(ui -> stelleDTO());
+//            UI.getCurrent().navigate(UStelleAnzeigeErstellenView.class,stelleIdFromFunction);//ToDo refactored
+//            UI.getCurrent().navigate(UFirmProfileDisplayView.class,stelleIdFromFunction);
+            UI.getCurrent().navigate(UFirmProfileDisplayView.class);
 
         });
 

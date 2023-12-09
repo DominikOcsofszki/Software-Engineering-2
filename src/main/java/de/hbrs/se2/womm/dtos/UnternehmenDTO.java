@@ -1,14 +1,11 @@
 package de.hbrs.se2.womm.dtos;
 
 import com.vaadin.flow.component.Unit;
-import de.hbrs.se2.womm.entities.Nutzer;
+import com.vaadin.flow.component.html.Image;
 import de.hbrs.se2.womm.views.layouts.ASSETS;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
-
-//import java.awt.*;
-import com.vaadin.flow.component.html.Image;
 
 @Data
 @Builder
@@ -20,7 +17,7 @@ public class UnternehmenDTO extends AbstractDTO{
     private String gruendung;
     private NutzerDTO nutzer;
     public Image PlaceholderOrImage(){
-        return ASSETS.buildPlaceholder(50,50);
+        return ASSETS.buildPlaceholder(50);
 
 //        if(nutzer == null || nutzer.getNutzerProfilbild() == null) {
 //            return ASSETS.buildPlaceholder(50,50);
