@@ -58,11 +58,11 @@ abstract class AbstractLayout extends AppLayout {
     void createDrawer() {
     }
     void AddDevModeButtons() {
-        Button buttonToShowMissingTranslated = new Button("click for console put");
+        Button buttonToShowMissingTranslated = new Button("console");
         buttonToShowMissingTranslated.addClickListener(
                 e -> VaadinBuilderWomm.printAllTextNotTranslatedToConsole()
         );
-        Button buttonToggleDevMode = new Button( "buttonToggleDevMode-Selenium-Selector");
+        Button buttonToggleDevMode = new Button( "toggle-id-Selector");
         buttonToggleDevMode.addClickListener(
                 e -> {
                     VaadinBuilderWomm.toggleDevMode();

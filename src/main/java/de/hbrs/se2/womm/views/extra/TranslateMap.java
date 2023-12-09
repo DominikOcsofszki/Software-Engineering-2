@@ -43,7 +43,7 @@ public class TranslateMap {
         put("SAboStudentView", "Abonnements");
         put("SChatView", "Chat");
         put("Search", "Suche");
-        put("Chat", "Chat?");
+        put("Chat", "Chat");
         put("SFirmProfileDisplayView", "Firmenprofil(delete link)");
         put("View subscriptions", "Abonnements anzeigen");
         put("Notifications", "Benachrichtigungen");
