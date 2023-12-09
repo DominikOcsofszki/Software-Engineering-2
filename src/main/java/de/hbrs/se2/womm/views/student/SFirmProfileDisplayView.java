@@ -8,15 +8,15 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Stelle;
-import de.hbrs.se2.womm.views.unternehmen.UEditFirmProfileDisplayViewOld;
 import de.hbrs.se2.womm.views.extra.ASSETS;
+import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
+import de.hbrs.se2.womm.views.unternehmen.UEditFirmProfileDisplayViewOld;
 import jakarta.annotation.security.RolesAllowed;
 import javassist.NotFoundException;
 import tools.generate.GenerateUnternehmenDTO;
@@ -27,7 +27,7 @@ import java.util.List;
 @Route(value = ROUTING.STUDENT.SFirmProfileDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("FirmProfileDisplayView")
-public class SFirmProfileDisplayView extends VerticalLayout implements HasUrlParameter<String> {
+public class SFirmProfileDisplayView extends AbstractViewWithoutController implements HasUrlParameter<String> {
 
     private String parameter;
     UnternehmenController unternehmenController;

@@ -11,6 +11,7 @@ import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.views.extra.ASSETS;
+import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -21,7 +22,7 @@ import java.util.List;
 @Route(value = ROUTING.STUDENT.SNotificationView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("NotificationView")
-public class SNotificationView extends VerticalLayout {
+public class SNotificationView extends AbstractViewWithoutController {
 
     public SNotificationView() {
         setUpHeader();

@@ -10,6 +10,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import jakarta.annotation.security.RolesAllowed;
@@ -18,7 +19,7 @@ import jakarta.annotation.security.RolesAllowed;
 @RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
 @AnonymousAllowed
 @PageTitle("LandingPageView")
-public class LandingPageViewOld extends VerticalLayout {
+public class LandingPageViewOld extends AbstractViewWithoutController {
 
     public LandingPageViewOld() {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);

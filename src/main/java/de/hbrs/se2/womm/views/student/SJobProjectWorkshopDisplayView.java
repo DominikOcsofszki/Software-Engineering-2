@@ -12,6 +12,7 @@ import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.services.ImageService;
+import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -20,7 +21,7 @@ import org.springframework.http.ResponseEntity;
 @Route(value = ROUTING.STUDENT.SJobProjectWorkshopDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("JobProjectWorkshopDisplayView")
-public class SJobProjectWorkshopDisplayView extends VerticalLayout implements HasUrlParameter<String> {
+public class SJobProjectWorkshopDisplayView extends AbstractViewWithoutController implements HasUrlParameter<String> {
     private String parameter;
     StelleController stelleController;
 

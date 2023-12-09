@@ -12,13 +12,13 @@ import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AuthenticationController;
 import de.hbrs.se2.womm.dtos.LoginRequest;
 import de.hbrs.se2.womm.exceptions.AuthenticationException;
+import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import jakarta.annotation.security.PermitAll;
@@ -30,7 +30,7 @@ import org.springframework.security.core.Authentication;
 @Route(value = "login", layout = LoggedOutLayout.class)
 @PermitAll
 @PageTitle("LoginView")
-public class LoginView extends VerticalLayout {
+public class LoginView extends AbstractViewWithoutController {
 
     SecurityService securityService;
     LoginForm login = new LoginForm();
