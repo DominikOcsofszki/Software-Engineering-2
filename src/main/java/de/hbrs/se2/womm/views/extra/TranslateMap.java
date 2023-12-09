@@ -23,7 +23,33 @@ public class TranslateMap {
         put("Enter keyword","Stichwort eingeben");
         put("Subscriptions", "Abonnements");
 
-        //
+        //Unternehmen Layout
+        put("UChatView", "Chat");
+        put("UEditFirmProfileDisplayView", "Profil editieren");
+        put("UFirmProfileDisplayView", "Profil");
+        put("UHomepageUnternehmenView", "Homepage");
+        put("UStelleAnzeigeErstellenView", "Stellenanzeige erstellen");
+        put("UApplicationView", "Bewerbung");
+        put("UNotificationView", "Benachrichtigungen");
+        put("UApplicationsView", "Bewerbungen");
+
+        // Student Layout
+        put("SJobProjectWorkshopDisplayView", "Stellenanzeigen(delete link)");
+        put("SStudentProfileDisplayView", "Profil");
+        put("SCreateChangeStudentProfileView", "Profil editieren");
+        put("SApplicationView", "Bewerbung (delete link)");
+        put("SHomepageStudentView", "Homepage");
+        put("SNotificationView", "Benachrichtigungen");
+        put("SAboStudentView", "Abonnements");
+        put("SChatView", "Chat");
+        put("Search", "Suche");
+        put("Chat", "Chat?");
+        put("SFirmProfileDisplayView", "Firmenprofil(delete link)");
+        put("View subscriptions", "Abonnements anzeigen");
+        put("Notifications", "Benachrichtigungen");
+        put("Edit profile", "Profil bearbeiten");
+
+
     }};
 
 

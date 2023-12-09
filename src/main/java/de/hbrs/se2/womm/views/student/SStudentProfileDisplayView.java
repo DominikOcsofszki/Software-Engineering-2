@@ -60,7 +60,8 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
 
     private void Header() {
         HorizontalLayout header = new HorizontalLayout();
-        Button b = new Button("Home");
+//        Button b = new Button("Home");
+        Button b = getWommBuilder().Button.create("Home");
         header.add(b);
         b.addClickListener(e -> UI.getCurrent().navigate(SHomepageStudentView.class));//ToDo refactor to homepage
         b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -84,10 +85,12 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         ////////////////////////Name////////////////////////////////////////////////////////////////////////////////////
         VerticalLayout headervert = new VerticalLayout();
         VerticalLayout headervert2 = new VerticalLayout();
-        Span s = new Span("Name");
+//        Span s = new Span("Name");
+        Span s = getWommBuilder().Span.create("Name");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        Span s1 = new Span("Paul Stein");
+//        Span s1 = new Span("Paul Stein");
+        Span s1 = new Span( studentVorname+ " " + studentName);
         s1.getElement().getStyle().set("font-size", "45px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
@@ -112,10 +115,13 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
         ////////////////////////Geburtstag///////////////////////////////////////////////////////////////////////////////
-        s = new Span("Geburtstag");
+//        s = new Span("Geburtstag");
+        s = getWommBuilder().Span.create("Geburtstag");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("01.01.2002");
+//        s1 = new Span("01.01.2002");
+        s1 = new Span(studentGeburtstag);
+
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
@@ -126,10 +132,12 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
         ////////////////////////E-Mail//////////////////////////////////////////////////////////////////////////////////
-        s = new Span("E-Mail");
+//        s = new Span("E-Mail");
+        s = getWommBuilder().Span.create("E-Mail");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("p_stein@email.de");
+//        s1 = new Span("p_stein@email.de");
+        s1 = new Span(studentEmail);
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
