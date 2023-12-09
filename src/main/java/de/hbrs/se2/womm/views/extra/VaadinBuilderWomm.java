@@ -4,6 +4,7 @@ import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
@@ -22,6 +23,7 @@ public class VaadinBuilderWomm {
     public TextFieldBuilder TextField = new TextFieldBuilder();
     public H1Builder H1 = new H1Builder();
     public H2Builder H2 = new H2Builder();
+    public H4Builder H4 = new H4Builder();
     public TextBuilder Text = new TextBuilder();
     public SpanBuilder Span = new SpanBuilder();
     public ParagraphBuilder Paragraph = new ParagraphBuilder();
@@ -62,6 +64,19 @@ public class VaadinBuilderWomm {
             h2.setText(translatedText);
             h2.setId(querryId);
             return h2;
+        }
+    }
+    public class H4Builder {
+        private int countH4 = 0;
+        public H4 create(String text) {
+            String translatedText = translateText(text);
+            countH4++;
+            String querryId = "h4-builder-" + this.countH4;
+            if(devMode) translatedText = querryId;
+            H4 h4 = new H4(translatedText);
+            h4.setText(translatedText);
+            h4.setId(querryId);
+            return h4;
         }
     }
     public class ParagraphBuilder {

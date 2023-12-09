@@ -65,7 +65,9 @@ public class RegistrierungStudentView extends AbstractViewWithoutController {
 
         setJustifyContentMode(JustifyContentMode.CENTER);
 
-        add(new H4("Student/in Registration"));
+//        add(new H4("Student/in Registration"));
+        H4 h4 = getWommBuilder().H4.create("Student/in Registration");
+        add(h4);
 
         nameComponent = new TextField("Name");
         nameComponent.setTooltipText("Your REAL Name");
