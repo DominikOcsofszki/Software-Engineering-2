@@ -25,17 +25,4 @@ public class StudentDTO extends AbstractDTO{
         return new Image("data:image/png;base64,"
                 + nutzer.getProfilbild(), "getImage");
     }
-    public static String[] getAllFilter(){
-        return new String[]{
-                "nutzer",
-                "studentId",
-                "studentVorname",
-                "studentName",
-                "studentGeburtstag",
-                "studentBenachrichtigung",
-                "studentBio",
-                "studentSpezialisierung",
-                "studentSemester"
-        };
-    }
 }

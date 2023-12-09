@@ -15,8 +15,7 @@ import de.hbrs.se2.womm.services.ImageService;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
-import javassist.NotFoundException;
-import tools.generate.GenerateStelleDTO;
+import org.springframework.http.ResponseEntity;
 
 @Route(value = ROUTING.STUDENT.SJobProjectWorkshopDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
@@ -24,37 +23,43 @@ import tools.generate.GenerateStelleDTO;
 public class SJobProjectWorkshopDisplayView extends VerticalLayout implements HasUrlParameter<String> {
     private String parameter;
     StelleController stelleController;
-    StelleDTO stelleDTO = GenerateStelleDTO.generateStelleDTO(1).get(0);
-     long stelleId = 1;
+
+    StelleDTO stelleDTO;
+    long stelleId;
+
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
-        this.parameter = parameter;
-        if(this.parameter != null) this.stelleId = Long.parseLong(this.parameter);
-        System.out.println("Parameter: " + this.parameter);
-        try {
-            this.stelleDTO = setUpStelleDTO(this.stelleId);
-        } catch (NotFoundException e) {
-            throw new RuntimeException(e);
+        if (parameter != null) {
+            this.parameter = parameter;
+            System.out.println("Parameter: " + this.parameter);
+            this.stelleId = Long.parseLong(this.parameter);
+            try {
+                ResponseEntity<StelleDTO> checkStelleDTO = stelleController.getById(this.stelleId);
+                if (checkStelleDTO == null) {
+                    System.out.println("StelleDTO ist null");
+                    add(new H1("Keine Stelle in der DB für ID: "+this.stelleId+" gefunden"));
+                } else {
+                    this.stelleDTO = checkStelleDTO.getBody();
+                    System.out.println("Parameter: " + this.parameter);
+                    setUpBanner();
+                    setUpHeader();
+                    setUpStellenanzeige();
+                    setUpButtons();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                add(new H1("Keine Stelle gefunden"));
+            }
+
+        } else {
+            add(new H1("Keine Stelle gefunden - Parameter ist null"));
         }
-        setUpBanner();
-        setUpHeader();
-        setUpStellenanzeige();
-        setUpButtons();
-    }
-    public SJobProjectWorkshopDisplayView(StelleController stelleController) {
-        this.stelleController = stelleController;
-//        setUpBanner();
-//        setUpHeader();
-//        setUpStellenanzeige();
-//        setUpButtons();
-        //ToDo setUpStelleDTO running after setParameter
-    }
-    private StelleDTO setUpStelleDTO(long id) throws NotFoundException {
-//            StelleDTO stelleDTO = stelleController.getById(Long.parseLong(parameter));
-            StelleDTO stelleDTO = stelleController.getById(id).getBody();
-            return stelleDTO;
+
     }
 
+    public SJobProjectWorkshopDisplayView(StelleController stelleController) {
+        this.stelleController = stelleController;
+    }
     //ToDo Banner anpassen
 
     private void setUpBanner() {

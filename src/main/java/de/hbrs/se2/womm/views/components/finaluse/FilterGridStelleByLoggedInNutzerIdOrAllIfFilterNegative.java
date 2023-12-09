@@ -28,6 +28,7 @@ public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends Abs
         grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader("Stellen Beschreibung");
         grid.addColumn(StelleDTO::getStelleWebsite).setHeader("Stellen Website");
         grid.addColumn(StelleDTO::getStelleUnternehmen).setHeader("Stellen Unternehmen");
+        grid.addColumn(stelleDTO -> stelleDTO.getStelleUnternehmen().getName()).setHeader("Stellen Unternehmen");
     }
 
     @Override
