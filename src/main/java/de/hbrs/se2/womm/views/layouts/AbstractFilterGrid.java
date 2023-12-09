@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.components.finaluse;
+package de.hbrs.se2.womm.views.layouts;
 
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.grid.Grid;
@@ -13,14 +13,14 @@ import de.hbrs.se2.womm.dtos.AbstractDTO;
 
 import java.util.List;
 
-public abstract class AbstractComponentControllerExtended<ExtendAbstractDTO extends AbstractDTO, ExtendAbstractController extends AbstractControllerWomm> extends VerticalLayout {
+public abstract class AbstractFilterGrid<ExtendAbstractDTO extends AbstractDTO, ExtendAbstractController extends AbstractControllerWomm> extends VerticalLayout {
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
     protected Grid<ExtendAbstractDTO> grid = new Grid<>();
     public static String[] filterByItemsFromDTO;
     protected ExtendAbstractController controller;
 
-    public AbstractComponentControllerExtended(ExtendAbstractController controller) {
+    public AbstractFilterGrid(ExtendAbstractController controller) {
         this.controller = controller;
         this.filterByItemsFromDTO = getFilterByItemsFromDTO();
         setUpFilter();

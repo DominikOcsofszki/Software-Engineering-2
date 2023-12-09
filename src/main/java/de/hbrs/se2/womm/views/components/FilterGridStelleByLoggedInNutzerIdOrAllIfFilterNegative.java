@@ -1,11 +1,12 @@
-package de.hbrs.se2.womm.views.components.finaluse;
+package de.hbrs.se2.womm.views.components;
 
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
+import de.hbrs.se2.womm.views.layouts.AbstractFilterGrid;
 
 import java.util.List;
 
-public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends AbstractComponentControllerExtended<StelleDTO, StelleController>{
+public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends AbstractFilterGrid<StelleDTO, StelleController> {
     long filterBy;
     public FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(StelleController stelleController, long filterBy) {
         super(stelleController);

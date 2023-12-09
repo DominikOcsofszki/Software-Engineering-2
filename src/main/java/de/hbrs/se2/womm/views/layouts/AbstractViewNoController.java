@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.components.finaluse;
+package de.hbrs.se2.womm.views.layouts;
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;

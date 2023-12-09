@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.components.using;
+package de.hbrs.se2.womm.views.extra;
 
 public class TEMPLATE {
 

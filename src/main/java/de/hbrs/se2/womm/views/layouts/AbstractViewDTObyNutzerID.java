@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.components.finaluse;
+package de.hbrs.se2.womm.views.layouts;
 
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AbstractControllerWomm;
@@ -12,14 +12,12 @@ public abstract class AbstractViewDTObyNutzerID
 
     private final ExtendsAbstractController controller;
     protected final List<? extends AbstractDTO> dto;
-//    protected final List<ExtendsAbstractDTO> dto;
     SecurityService securityService;
     protected long selectNutzerIDfromLoggedInForDB(){
         return securityService.getLoggedInNutzerID();
     }
 
     public AbstractDTO getDtoAbstractCastNeeded() {
-//    public ExtendsAbstractDTO getDto() {
         return dto.get(0);
     }
 
@@ -34,12 +32,8 @@ public abstract class AbstractViewDTObyNutzerID
         this.securityService = securityService;
         long primaryKey = selectNutzerIDfromLoggedInForDB();
 
-//        dto = (ExtendsAbstractDTO) controller.getDTObyPrimaryKey(primaryKey).getBody();
-//        dto = controller.getDTObyPrimaryKeyIfNegativeAll(primaryKey) == null ? null :
-//                (ExtendsAbstractDTO) controller.getDTObyPrimaryKeyIfNegativeAll(primaryKey).getBody();
         dto = controller.getDTObyPrimaryKeyIfNegativeAll(primaryKey) == null ? null :
                 controller.getDTObyPrimaryKeyIfNegativeAll(primaryKey).getBody();
-        System.out.println(dto);
     }
 
 }
