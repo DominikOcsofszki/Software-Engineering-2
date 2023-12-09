@@ -33,7 +33,7 @@ import java.time.LocalDate;
 public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
     public SCreateChangeStudentProfileView(StudentController controller, SecurityService securityService) {
         super(controller,securityService);
-        System.out.println(getDto());
+        System.out.println(getDtoAbstractCastNeeded());
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
         Header();

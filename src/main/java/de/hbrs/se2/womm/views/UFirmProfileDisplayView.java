@@ -34,7 +34,7 @@ public class UFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unternehm
 //        add(new FilterGridStelleByLoggedInNutzerId(stelleController, selectNutzerIDfromLoggedInForDB()));
     }
         private void setUp(){
-            System.out.println(getDto());
+            System.out.println(getDtoAbstractCastNeeded());
         // Logo, Company Name, Subscribe and Chat Button
         HorizontalLayout buttonsLayout = new HorizontalLayout();
 

@@ -19,7 +19,7 @@ public abstract class AbstractViewDTObyNutzerID
         return securityService.getLoggedInNutzerID();
     }
 
-    public AbstractDTO getDto() {
+    public AbstractDTO getDtoAbstractCastNeeded() {
 //    public ExtendsAbstractDTO getDto() {
         return dto.get(0);
     }
