@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views;
 
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -9,18 +10,17 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-import de.hbrs.se2.womm.views.components.finaluse.AbstractViewNoController;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import jakarta.annotation.security.RolesAllowed;
 
-@Route(value = ROUTING.ALL.LandingPageView, layout = LoggedOutLayout.class)
+@Route(value = ROUTING.ALL.LandingPageView+"old", layout = LoggedOutLayout.class)
 @RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
 @AnonymousAllowed
 @PageTitle("LandingPageView")
-public class LandingPageView extends AbstractViewNoController {
+public class LandingPageViewOld extends VerticalLayout {
 
-    public LandingPageView() {
+    public LandingPageViewOld() {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
         // Header-Bereich
@@ -101,13 +101,11 @@ public class LandingPageView extends AbstractViewNoController {
     private VerticalLayout createDescriptionSection() {
         VerticalLayout descriptionSection = new VerticalLayout();
         descriptionSection.setAlignItems(Alignment.CENTER);
-//        H1 title = new H1("Find your dream job on w.o.m.m.");
-        H1 title = getVaadinBuilderWomm().H1.create("Find your dream job on w.o.m.m.");
+        H1 title = new H1("Find your dream job on w.o.m.m.");
         title.getStyle().set("color", "#044FA3"); // HEX-Farbcode
         descriptionSection.add(title);
 
-//        Paragraph description = new Paragraph("Your job search portal. Discover thousands of job opportunities and more.");
-        Paragraph description = getVaadinBuilderWomm().Paragraph.create("Your job search portal. Discover thousands of job opportunities and more.");
+        Paragraph description = new Paragraph("Your job search portal. Discover thousands of job opportunities and more.");
         description.getStyle().set("color", "#044FA3"); // HEX-Farbcode
         descriptionSection.add(description);
 
@@ -117,19 +115,17 @@ public class LandingPageView extends AbstractViewNoController {
     private HorizontalLayout createRegistrationSection() {
         HorizontalLayout registrationSection = new HorizontalLayout();
 
-//            Button buttonReg = new Button("SignUp");
-        Button buttonReg = getVaadinBuilderWomm().Button.create("SignUp");
-        buttonReg.addClickListener( e -> UI.getCurrent().navigate(RegistrierungStudentView.class));
-        buttonReg.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
-        buttonReg.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        registrationSection.add(buttonReg);
+            Button buttonReg = new Button("SignUp");
+            buttonReg.addClickListener( e -> UI.getCurrent().navigate(RegistrierungStudentView.class));
+            buttonReg.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
+            buttonReg.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+            registrationSection.add(buttonReg);
 
-//            Button buttonLog = new Button("LogIn");
-        Button buttonLog = getVaadinBuilderWomm().Button.create("LogIn");
-        buttonLog.addClickListener( e -> UI.getCurrent().navigate(LoginView.class));
-        buttonLog.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
-        buttonLog.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        registrationSection.add(buttonLog);
+            Button buttonLog = new Button("LogIn");
+            buttonLog.addClickListener( e -> UI.getCurrent().navigate(LoginView.class));
+            buttonLog.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
+            buttonLog.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+            registrationSection.add(buttonLog);
 
         registrationSection.add(buttonReg);
         registrationSection.add(buttonLog);
@@ -139,9 +135,7 @@ public class LandingPageView extends AbstractViewNoController {
 
     private Div createContactInfo() {
         Div contactInfo = new Div();
-        contactInfo.add(
-                getVaadinBuilderWomm().Text.create("Want to create company profile? Contact us at kontakt@womm.de.")
-        );
+        contactInfo.add(new Text("Want to create company profile? Contact us at kontakt@womm.de."));
         return contactInfo;
     }
 

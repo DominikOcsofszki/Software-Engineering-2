@@ -10,7 +10,7 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import de.hbrs.se2.womm.config.CONFIGS;
-import de.hbrs.se2.womm.views.components.refactoring.VaadinBuilderWomm;
+import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 
 abstract class AbstractLayout extends AppLayout {
     HorizontalLayout header = new HorizontalLayout();

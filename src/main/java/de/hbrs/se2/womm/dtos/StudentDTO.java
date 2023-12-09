@@ -1,8 +1,7 @@
 package de.hbrs.se2.womm.dtos;
 
 import com.vaadin.flow.component.html.Image;
-import de.hbrs.se2.womm.entities.Nutzer;
-import de.hbrs.se2.womm.views.layouts.ASSETS;
+import de.hbrs.se2.womm.views.extra.ASSETS;
 import lombok.Builder;
 import lombok.Data;
 

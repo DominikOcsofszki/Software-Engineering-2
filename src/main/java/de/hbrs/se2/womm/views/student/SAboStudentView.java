@@ -1,0 +1,131 @@
+package de.hbrs.se2.womm.views.student;
+
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.views.layouts.ROUTING;
+import de.hbrs.se2.womm.views.layouts.StudentLayout;
+import jakarta.annotation.security.RolesAllowed;
+
+@Route(value = ROUTING.STUDENT.SAboStudentView, layout = StudentLayout.class)
+@RolesAllowed({"STUDENT","ADMIN"})
+@PageTitle("AboStudentView")
+public class SAboStudentView extends VerticalLayout {
+
+    public SAboStudentView() {
+        setUpSearchFields();
+        //setUpSubscription();
+//        add(new ComponentFilterGridControllerAbo());
+
+    }
+
+    private void setUpSearchFields() {
+        HorizontalLayout searchFields = new HorizontalLayout();
+
+        //Suchfeld
+        searchFields.add(new H1("Abonnements"));
+        TextField textField = new TextField();
+        textField.focus();
+        textField.setPlaceholder("Stichwort eingeben");
+        textField.setPrefixComponent(VaadinIcon.SEARCH.create());
+        textField.setWidth("20%");
+        //textField.setHeight(50, Unit.PIXELS);
+        searchFields.add(textField);
+
+        // Suche-Button
+        Button b = new Button("Search", new Icon(VaadinIcon.SEARCH));
+        searchFields.add(b);
+        textField.getElement().getStyle().set("margin-left", "auto");
+        searchFields.setWidthFull();
+        add(searchFields);
+    }
+
+    /*
+    private static final String LIT_TEMPLATE_HTML = """
+            <vaadin-button title="Go to ..."
+                           @click="${clickHandler}"
+                           theme="tertiary-inline small link">
+                ${item.id}
+            </vaadin-button>""";
+
+
+    private void setUpSubscription() {
+        VerticalLayout notification = new VerticalLayout();
+
+        //Todo Für Studenten zugehörige Benachrichtigungen anzeigen
+        //ToDo demoInhalte ersetzen
+
+        TextField searchField = new TextField();
+        searchField.setWidth("50%");
+        searchField.setPlaceholder("Suche");
+        searchField.setPrefixComponent(new Icon(VaadinIcon.SEARCH));
+        searchField.setValueChangeMode(ValueChangeMode.EAGER);
+
+        Image image1 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
+        Image image2 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
+        Image image3 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
+        Image image4 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
+
+        image1.setHeight(20, Unit.PIXELS);
+        image2.setHeight(20, Unit.PIXELS);
+        image3.setHeight(20, Unit.PIXELS);
+        image4.setHeight(20, Unit.PIXELS);
+
+        List<demoInhaltSubscription> inhalt = Arrays.asList(
+                new demoInhaltSubscription(image1,"Apple", "Small Tech Companyar!"),
+                new demoInhaltSubscription(image2,"Microsoft", "Another Small Tech Company"),
+                new demoInhaltSubscription(image3,"HBRS", "Organisatorisches Wunder"),
+                new demoInhaltSubscription(image4,"W.O.M.M", "Software Engineering 2 Team"));
+
+        Grid<demoInhaltSubscription> grid = new Grid<>(demoInhaltSubscription.class, false);
+
+        grid.setItems(inhalt);
+
+        //ToDo Verlinkung zum entsprechenden Unternehmen anpassen
+
+        grid.addComponentColumn(demoInhaltSubscription::getImage).setHeader("Logo").setWidth("5%");
+        grid.addColumn(LitRenderer.<demoInhaltSubscription>of(LIT_TEMPLATE_HTML)
+                .withProperty("id", demoInhaltSubscription::getName)
+                .withFunction("clickHandler", person -> {
+                    UI.getCurrent().navigate(SFirmProfileDisplayView.class);
+                })).setHeader("Name").setWidth("25%").setSortable(true);
+        grid.addColumn(demoInhaltSubscription::getMessage).setHeader("Beschreibung").setWidth("70%").getStyle().setFont("OpenSanse");
+        notification.add(grid);
+        grid.recalculateColumnWidths();
+
+        notification.setWidth("100%");
+
+        add(notification);
+    }
+
+    private class demoInhaltSubscription{
+        Image image;
+        String name;
+        String message;
+
+        Image getImage(){
+            return image;
+        }
+        String getName(){
+            return name;
+        }
+        String getMessage(){
+            return message;
+        }
+
+        demoInhaltSubscription(Image image,String name, String message){
+            this.image = image;
+            this.name = name;
+            this.message = message;
+        }
+    }
+
+     */
+
+}

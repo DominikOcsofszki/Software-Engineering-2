@@ -2,14 +2,9 @@ package de.hbrs.se2.womm.services;
 
 import com.vaadin.flow.component.html.Image;
 import de.hbrs.se2.womm.dtos.NutzerDTO;
-import de.hbrs.se2.womm.views.layouts.ASSETS;
+import de.hbrs.se2.womm.views.extra.ASSETS;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.Base64;
 
 public class ImageService {
     private com.vaadin.flow.component.html.Image getPlaceholderImage(){

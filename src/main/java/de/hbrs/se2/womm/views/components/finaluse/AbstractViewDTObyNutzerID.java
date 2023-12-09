@@ -3,7 +3,6 @@ package de.hbrs.se2.womm.views.components.finaluse;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
-import de.hbrs.se2.womm.views.components.refactoring.AbstractViewNoController;
 
 import java.util.List;
 
