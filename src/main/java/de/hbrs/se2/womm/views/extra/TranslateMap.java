@@ -49,6 +49,9 @@ public class TranslateMap {
         put("Notifications", "Benachrichtigungen");
         put("Edit profile", "Profil bearbeiten");
 
+        //AccessDeniedView
+        put("Access Denied!", "Zugriff verweigert!");
+
 
     }};
 
