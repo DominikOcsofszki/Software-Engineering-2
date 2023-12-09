@@ -10,38 +10,73 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import de.hbrs.se2.womm.views.LandingPageView;
+import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.controller.StudentController;
+import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.views.components.finaluse.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = ROUTING.STUDENT.SStudentProfileDisplayView, layout = StudentLayout.class)
-@RolesAllowed({"STUDENT","ADMIN"})
+@RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("StudentProfileDisplayView")
-public class SStudentProfileDisplayView extends VerticalLayout {
-    public SStudentProfileDisplayView() {
+public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+    StudentDTO studentDTO;
 
+    //SetUp Data
+    String studentName;
+    String studentVorname;
+    String studentAlias = "do we need this???"; //ToDo in DTO?
+    String studentGeburtstag;
+    String studentEmail;
+    String studentOrt;
+    String studentBiographie;
+    String studentSpezialisierungen;
+    String studentSemester;
+    Image studentProfilbild;
+
+    private void setUpDataFromDTO() {
+        studentName = studentDTO.getStudentName();
+        studentVorname = studentDTO.getStudentVorname();
+//        studentAlias = studentDTO.getStudentAlias(); //ToDo in DTO?
+        studentGeburtstag = studentDTO.getStudentGeburtstag();
+        studentEmail = studentDTO.getNutzer().getEmail();
+        studentOrt = studentDTO.getNutzer().getOrt();
+        studentBiographie = studentDTO.getStudentBio();
+        studentSpezialisierungen = studentDTO.getStudentSpezialisierung();
+        studentSemester = String.valueOf(studentDTO.getStudentSemester());
+        studentProfilbild = studentDTO.PlaceholderOrImage();
+    }
+
+    public SStudentProfileDisplayView(StudentController studentController, SecurityService securityService) {
+        super(studentController, securityService);
+        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+        setUpDataFromDTO();
+        //ToDo Work with this!!! this.studentDTO
         Header();
         Profil();
     }
-    private void Header(){
+
+    private void Header() {
         HorizontalLayout header = new HorizontalLayout();
         Button b = new Button("Home");
         header.add(b);
-        b.addClickListener( e -> UI.getCurrent().navigate(LandingPageView.class));
+        b.addClickListener(e -> UI.getCurrent().navigate(SHomepageStudentView.class));//ToDo refactor to homepage
         b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        b = new Button("Start Chatting");
-        b.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
-        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+//        b = new Button("Start Chatting");//ToDo Remove since chat with yourself???
+//        b.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
+//        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         header.add(b);
         b.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
         add(header);
     }
+
     private void Profil() {
         ////////////////////////Profilbild////////////////////////////////////////////////////////////////////////////////
         HorizontalLayout header = new HorizontalLayout();
-        Image i = new Image("themes/theme_1/user.png","Image not found");
+        Image i = new Image("themes/theme_1/user.png", "Image not found");
         i.setWidth("20%");
         i.setHeight("20%");
         //i.setHeight(300, Unit.PIXELS); //for fixed values

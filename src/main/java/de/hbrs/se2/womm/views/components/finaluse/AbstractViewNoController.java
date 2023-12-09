@@ -10,8 +10,8 @@ public abstract class AbstractViewNoController extends VerticalLayout {
         return vaadinBuilderWomm;
     }
     protected AbstractViewNoController( ) {
-        setWidth("100%");
-        setHeight("100%");
+//        setWidth("100%");
+//        setHeight("100%");
         getStyle().set("overflow", "auto");
     }
 

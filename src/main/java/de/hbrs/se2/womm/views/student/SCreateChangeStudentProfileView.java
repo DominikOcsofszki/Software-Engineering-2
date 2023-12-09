@@ -32,9 +32,11 @@ import java.time.LocalDate;
 @PageTitle("CreateChangeStudentProfileView")
 //public class SCreateChangeStudentProfileView extends AbstractView {
 public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+    StudentDTO studentDTO;
     public SCreateChangeStudentProfileView(StudentController controller, SecurityService securityService) {
         super(controller,securityService);
-        System.out.println(getDtoAbstractCastNeeded());
+        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+        System.out.println(studentDTO);
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
         Header();

@@ -21,8 +21,10 @@ public class StudentController extends AbstractControllerWomm {
 
     @Override
     public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        //    return primaryKey < 0 ? xService.getAll() : xService.getDTObyPrimaryKey(primaryKey);
-        return null; //ToDo implement me
+            return new ResponseEntity<>( primaryKey < 0 ? studentService.getAlleStudenten() :
+                    studentService.getDTOListbyPrimaryKey(primaryKey)
+        ,HttpStatus.OK
+        );
     }
 
     @GetMapping("students")

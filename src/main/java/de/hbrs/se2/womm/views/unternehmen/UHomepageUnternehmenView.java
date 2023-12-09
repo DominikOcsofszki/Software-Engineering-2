@@ -9,25 +9,32 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
+import de.hbrs.se2.womm.controller.UnternehmenController;
+import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.views.components.finaluse.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.views.components.finaluse.FilterGridStelleByLoggedInNutzerId;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = ROUTING.UNTERNEHMEN.UHomepageUnternehmenView, layout = UnternehmenLayout.class)
-@RolesAllowed({"UNTERNEHMEN","ADMIN"})
+@RolesAllowed({"UNTERNEHMEN", "ADMIN"})
 @PageTitle("HomepageUnternehmenView")
-public class UHomepageUnternehmenView extends VerticalLayout {
-    StelleController controller;
-    public UHomepageUnternehmenView(StelleController controller) {
-        this.controller = controller;
+public class UHomepageUnternehmenView extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO> {
+    UnternehmenDTO unternehmenDTO;
+    public UHomepageUnternehmenView(UnternehmenController unternehmenController, SecurityService securityService, StelleController stelleController) {
+        super(unternehmenController,securityService);
+        this.unternehmenDTO = (UnternehmenDTO) getDtoAbstractCastNeeded();
         setUpHeader();
         setUpBanner();
 
         setUpSearchFields();
+        add(new FilterGridStelleByLoggedInNutzerId(stelleController, unternehmenDTO.getUnternehmenId()));
     }
 
-    private void setUpComponentFilterGridControllerStellen(){ //ToDo: this was added
+    private void setUpComponentFilterGridControllerStellen() { //ToDo: this was added
 //        add(new ComponentFilterGridControllerStellen(controller));
 //        add(new ComponentFilterStelle(controller));
     }
@@ -37,19 +44,19 @@ public class UHomepageUnternehmenView extends VerticalLayout {
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
         Button b1 = new Button("Create advertisement", new Icon(VaadinIcon.PLUS));
-        b1.addClickListener( e -> UI.getCurrent().navigate(UStelleAnzeigeErstellenView.class));
+        b1.addClickListener(e -> UI.getCurrent().navigate(UStelleAnzeigeErstellenView.class));
         header.add(b1);
         Button b2 = new Button("View applications", new Icon(VaadinIcon.EYE));
-        b2.addClickListener( e -> UI.getCurrent().navigate(UApplicationsView.class));
+        b2.addClickListener(e -> UI.getCurrent().navigate(UApplicationsView.class));
         header.add(b2);
         Button b3 = new Button("Notifications", new Icon(VaadinIcon.BELL));
-        b3.addClickListener( e -> UI.getCurrent().navigate(UNotificationView.class));
+        b3.addClickListener(e -> UI.getCurrent().navigate(UNotificationView.class));
         header.add(b3);
         Button b4 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
-        b4.addClickListener( e -> UI.getCurrent().navigate(UChatView.class));
+        b4.addClickListener(e -> UI.getCurrent().navigate(UChatView.class));
         header.add(b4);
         Button b5 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
-        b5.addClickListener( e -> UI.getCurrent().navigate(UEditFirmProfileDisplayViewOld.class));
+        b5.addClickListener(e -> UI.getCurrent().navigate(UEditFirmProfileDisplayView.class));
         header.add(b5);
         //header.add(new Button("Logout Firmname", new Icon(VaadinIcon.EXIT_O)));
         add(header);
@@ -60,7 +67,7 @@ public class UHomepageUnternehmenView extends VerticalLayout {
 
     private void setUpBanner() {
         VerticalLayout banner = new VerticalLayout();
-        Image i = new Image("themes/theme_1/banner.jpg","https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
+        Image i = new Image("themes/theme_1/banner.jpg", "https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
         i.setWidth("100%");
         banner.add(i);
         add(banner);
