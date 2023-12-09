@@ -7,18 +7,16 @@ import de.hbrs.se2.womm.views.layouts.AbstractFilterGrid;
 import java.util.List;
 
 public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends AbstractFilterGrid<StelleDTO, StelleController> {
-    long filterBy;
     public FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(StelleController stelleController, long filterBy) {
-        super(stelleController);
-        this.filterBy = filterBy;
+        super(stelleController,filterBy);
     }
 
     @Override
-    protected List<StelleDTO> getItemsWithFilter() {
+    protected List<StelleDTO> getItemsWithFilter(long filterBy) {
+        System.out.println("filterBy:" + filterBy);
         List<StelleDTO> list = (List<StelleDTO>) controller.getDTObyPrimaryKeyIfNegativeAll(filterBy).getBody();
         System.out.println("list:" + list);
         return list;
-//        return controller.getStelleByUnternehmenId(filterBy).getBody();
     }
 
     @Override

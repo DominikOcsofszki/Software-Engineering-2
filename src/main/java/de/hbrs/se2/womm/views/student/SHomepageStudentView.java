@@ -22,13 +22,14 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.STUDENT.SHomepageStudentView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("HomepageStudentView")
-//public class SHomepageStudentView extends VerticalLayout {
 public class SHomepageStudentView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
     StelleController stelleController;
+    StudentDTO studentDTO;
 
     public SHomepageStudentView(StelleController stelleController, StudentController studentController, SecurityService securityService) {
         super(studentController, securityService);
         this.stelleController = stelleController;
+        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
         setUpHeader();
         setUpBanner();
         setUpSearchFields();
@@ -36,23 +37,23 @@ public class SHomepageStudentView extends AbstractViewDTObyNutzerID<StudentContr
 
     }
 
-    private void setUpComponentFilterGridControllerStellen() {
-//        add(new ComponentFilterStelle(controller));
-    }
-
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
-        Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
+//        Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
+        Button b1 = getWommBuilder().Button.create("View subscriptions", new Icon(VaadinIcon.EYE));
         b1.addClickListener(e -> UI.getCurrent().navigate(SAboStudentView.class));
         header.add(b1);
-        Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
+        Button b2 = getWommBuilder().Button.create("Notifications", new Icon(VaadinIcon.BELL));
+//        Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
         b2.addClickListener(e -> UI.getCurrent().navigate(SNotificationView.class));
         header.add(b2);
-        Button b3 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
+//        Button b3 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
+        Button b3 = getWommBuilder().Button.create("Chat", new Icon(VaadinIcon.COMMENTS_O));
         b3.addClickListener(e -> UI.getCurrent().navigate(SChatView.class));
         header.add(b3);
-        Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
+        Button b4 = getWommBuilder().Button.create("Edit profile", new Icon(VaadinIcon.PENCIL));
+//        Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
         b4.addClickListener(e -> UI.getCurrent().navigate(SCreateChangeStudentProfileView.class));
         header.add(b4);
 

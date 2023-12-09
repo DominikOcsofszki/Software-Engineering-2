@@ -46,7 +46,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         HorizontalLayout header = new HorizontalLayout();
 //        Button b = new Button("Home");
 //        getVaadinBuilderWomm().H1.create
-        Button b = getVaadinBuilderWomm().Button.create("Home");
+        Button b = getWommBuilder().Button.create("Home");
         b.addThemeVariants(ButtonVariant.LUMO_PRIMARY   );
         b.getElement().getStyle().set("margin-right", "0%");
         b.addClickListener( e -> UI.getCurrent().navigate(LandingPageView.class));
@@ -101,7 +101,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         VerticalLayout headervert2 = new VerticalLayout();
         ////////////////////Name//////////////////////////////////////////////////////////////////////////////////////////
 //        Span s = new Span("Name");
-        Span s = getVaadinBuilderWomm().Span.create("Name");
+        Span s = getWommBuilder().Span.create("Name");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");       //color grey
         Span s1 = new Span("Paul Stein");

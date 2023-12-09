@@ -1,15 +1,13 @@
 package de.hbrs.se2.womm.views.extra;
 
 import com.vaadin.flow.component.Text;
-//import com.vaadin.flow.component.Span;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.html.Span;
-import de.hbrs.se2.womm.views.extra.TranslateMap;
-
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.textfield.TextField;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -112,9 +110,7 @@ public class VaadinBuilderWomm {
 
     public class ButtonBuilder {
         private int countButtonOnView = 0;
-
         public Button create(String text) {
-
             String translatedText = translateText(text);
             this.countButtonOnView++;
             String querryId = "button-builder-" + this.countButtonOnView;
@@ -124,6 +120,12 @@ public class VaadinBuilderWomm {
             button.setId(querryId);
             return button;
         }
+        public Button create(String text, Icon icon) {
+            Button button = create(text);
+            button.setIcon(icon);
+            return button;
+        }
+
     }
 
     public class TextFieldBuilder {

@@ -22,7 +22,7 @@ public class StudentController extends AbstractControllerWomm {
     @Override
     public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
             return new ResponseEntity<>( primaryKey < 0 ? studentService.getAlleStudenten() :
-                    studentService.getDTOListbyPrimaryKey(primaryKey)
+                    studentService.getDTOListbyPrimaryKeyService(primaryKey)
         ,HttpStatus.OK
         );
     }

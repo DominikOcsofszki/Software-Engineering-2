@@ -45,7 +45,7 @@ public class UnternehmenController extends AbstractControllerWomm {
     public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
         return new ResponseEntity<>(
                 primaryKey < 0 ? unternehmenService.getAll() :
-                        unternehmenService.getDTOListbyPrimaryKey(primaryKey),
+                        unternehmenService.getDTOListbyPrimaryKeyService(primaryKey),
                 HttpStatus.OK);
     }
 }

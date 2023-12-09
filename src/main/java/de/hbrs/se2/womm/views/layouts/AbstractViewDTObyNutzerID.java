@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class AbstractViewDTObyNutzerID
         <ExtendsAbstractController extends AbstractControllerWomm, ExtendsAbstractDTO extends AbstractDTO>
-        extends AbstractViewNoController {
+        extends AbstractViewWithoutController {
 
     private final ExtendsAbstractController controller;
     protected final List<? extends AbstractDTO> dto;

@@ -7,6 +7,7 @@ import java.util.Map;
 //Generated from
 public class TranslateMap {
     public static Map<String, String> translateMap = new HashMap<>() {{
+        put("", "");
         // RegisterView
         put("Your job search portal. Discover thousands of job opportunities and more.", "Dein Jobportal. Entdecke tausende Jobangebote und mehr.");
         put("SignUp", "Registrieren");
@@ -17,6 +18,12 @@ public class TranslateMap {
         // SCreateChangeStudentProfileView
         put("Home", "Startseite");
         put("Name", "Name");
+
+        // SAboStudentView
+        put("Enter keyword","Stichwort eingeben");
+        put("Subscriptions", "Abonnements");
+
+        //
     }};
 
 

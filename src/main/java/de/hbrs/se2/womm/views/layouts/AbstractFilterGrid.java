@@ -20,11 +20,11 @@ public abstract class AbstractFilterGrid<ExtendAbstractDTO extends AbstractDTO, 
     public static String[] filterByItemsFromDTO;
     protected ExtendAbstractController controller;
 
-    public AbstractFilterGrid(ExtendAbstractController controller) {
+    public AbstractFilterGrid(ExtendAbstractController controller, long primaryKey) {
         this.controller = controller;
         this.filterByItemsFromDTO = getFilterByItemsFromDTO();
         setUpFilter();
-        List<ExtendAbstractDTO> list = getItemsWithFilter();
+        List<ExtendAbstractDTO> list = getItemsWithFilter(primaryKey);
         setUpGrid(list);
         setUpToolbarAndAddGrid();
     }
@@ -35,7 +35,7 @@ public abstract class AbstractFilterGrid<ExtendAbstractDTO extends AbstractDTO, 
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
 
-    abstract protected List<ExtendAbstractDTO> getItemsWithFilter();
+    abstract protected List<ExtendAbstractDTO> getItemsWithFilter(long filterLong);
 
     private void setUpGrid(List<ExtendAbstractDTO> itemsForGrid) {
         addClassName("list-view");
