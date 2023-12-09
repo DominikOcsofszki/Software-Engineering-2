@@ -13,7 +13,6 @@ import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.services.ImageService;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
-import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 import javassist.NotFoundException;
@@ -52,7 +51,7 @@ public class UJobProjectWorkshopDisplayView extends VerticalLayout implements Ha
     }
     private StelleDTO setUpStelleDTO(long id) throws NotFoundException {
 //            StelleDTO stelleDTO = stelleController.getById(Long.parseLong(parameter));
-            StelleDTO stelleDTO = stelleController.getById(id);
+            StelleDTO stelleDTO = stelleController.getById(id).getBody();
             return stelleDTO;
     }
 

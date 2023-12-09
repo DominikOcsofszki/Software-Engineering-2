@@ -13,7 +13,7 @@ public class TestView extends AbstractViewDTObyNutzerID<StelleController, Stelle
 
     protected TestView(StelleController stelleController, SecurityService securityService) {
         super(stelleController, securityService);
-        add(new FilterGridStelleByLoggedInNutzerId(stelleController, selectNutzerIDfromLoggedInForDB()));
+        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, selectNutzerIDfromLoggedInForDB()));
     }
 
 }

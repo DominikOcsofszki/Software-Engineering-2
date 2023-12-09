@@ -13,7 +13,7 @@ import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.views.components.finaluse.AbstractViewDTObyNutzerID;
-import de.hbrs.se2.womm.views.components.finaluse.FilterGridStelleByLoggedInNutzerId;
+import de.hbrs.se2.womm.views.components.finaluse.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -28,7 +28,7 @@ public class UFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unternehm
         super(unternehmenController, securityService);
         this.unternehmenDTO = (UnternehmenDTO) getDtoAbstractCastNeeded();
         setUp();
-        add(new FilterGridStelleByLoggedInNutzerId(stelleController, unternehmenDTO.getUnternehmenId()));
+        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
     }
     private String checkIfNullShowTextLink(String checkString){
         if(checkString == null) return "go to \"UEditFirmProfileDisplayView\" to add this information";

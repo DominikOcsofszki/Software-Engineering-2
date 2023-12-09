@@ -5,9 +5,9 @@ import de.hbrs.se2.womm.dtos.StelleDTO;
 
 import java.util.List;
 
-public class FilterGridStelleByLoggedInNutzerId extends AbstractComponentControllerExtended<StelleDTO, StelleController>{
+public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends AbstractComponentControllerExtended<StelleDTO, StelleController>{
     long filterBy;
-    public FilterGridStelleByLoggedInNutzerId(StelleController stelleController, long filterBy) {
+    public FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(StelleController stelleController, long filterBy) {
         super(stelleController);
         this.filterBy = filterBy;
     }

@@ -11,7 +11,12 @@ import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.BewerbungController;
 import de.hbrs.se2.womm.controller.StelleController;
+import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
+import de.hbrs.se2.womm.dtos.StelleDTO;
+import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.views.components.finaluse.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.components.using.ComponentImageUpload;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -20,21 +25,39 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.STUDENT.SApplicationView, layout = StudentLayout.class)
 @RolesAllowed({ "ADMIN", "STUDENT"})
 @PageTitle("ApplicationView")
-public class SApplicationView extends VerticalLayout implements HasUrlParameter<String> {
-
+public class SApplicationView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> implements HasUrlParameter<String> {
+//public class SApplicationView extends VerticalLayout implements HasUrlParameter<String> {
+    //Changed
+    StudentDTO studentDTO;
+    StelleDTO stelleDTO;
+    UnternehmenDTO unternehmenDTO;
+    //
     byte[] bewerbungPdf;
     byte[] bewerbungPdf1;
     TextArea bewerbungText = new TextArea();
 
     StelleController stelleController;
-
     UnternehmenController unternehmenController;
-
     BewerbungController bewerbungController;
-
     SecurityService securityService;
-
     String valueFromQuerry;
+
+    public SApplicationView(BewerbungController bewerbungController,
+                            StelleController stelleController,
+                            UnternehmenController unternehmenController,
+                            SecurityService securityService,
+                            StudentController studentController) {
+        super(studentController, securityService);
+        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+        this.bewerbungController = bewerbungController;
+        this.stelleController = stelleController;
+        this.unternehmenController = unternehmenController;
+        this.securityService = securityService;
+        //SetUp:
+        //
+        setUpHeader();
+        setUpBewerbung();
+    }
 
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
@@ -44,17 +67,15 @@ public class SApplicationView extends VerticalLayout implements HasUrlParameter<
             add(String.format("parameter: %s.",
                     parameter));
             valueFromQuerry = parameter;
+            long parameterLong = Long.parseLong(parameter);
+            this.stelleDTO = stelleController.getById(parameterLong) == null ? null :
+                    stelleController.getById(parameterLong).getBody();
+            System.out.println("stelleDTO:" + stelleDTO);
+
         }
     }
 
-    public SApplicationView(BewerbungController bewerbungController,StelleController stelleController, UnternehmenController unternehmenController, SecurityService securityService) {
-        this.bewerbungController = bewerbungController;
-        this.stelleController = stelleController;
-        this.unternehmenController = unternehmenController;
-        this.securityService = securityService;
-        setUpHeader();
-        setUpBewerbung();
-    }
+
 
     private void setUpHeader(){
         HorizontalLayout header = new HorizontalLayout();

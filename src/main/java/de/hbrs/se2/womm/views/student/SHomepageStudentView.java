@@ -9,24 +9,34 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
+import de.hbrs.se2.womm.controller.StudentController;
+import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.views.components.finaluse.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.views.components.finaluse.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = ROUTING.STUDENT.SHomepageStudentView, layout = StudentLayout.class)
-@RolesAllowed({"STUDENT","ADMIN"})
+@RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("HomepageStudentView")
-public class SHomepageStudentView extends VerticalLayout {
-    StelleController controller; //ToDo: this was added
-//    public SHomepageStudentView() { //old
-public SHomepageStudentView(StelleController controller) { //ToDo: this was added
-        this.controller = controller; //ToDo: this was added
+//public class SHomepageStudentView extends VerticalLayout {
+public class SHomepageStudentView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+    StelleController stelleController;
+
+    public SHomepageStudentView(StelleController stelleController, StudentController studentController, SecurityService securityService) {
+        super(studentController, securityService);
+        this.stelleController = stelleController;
         setUpHeader();
         setUpBanner();
         setUpSearchFields();
+        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, -99L)); //ToDo -99L => all
+
     }
-    private void setUpComponentFilterGridControllerStellen(){ //ToDo: this was added
+
+    private void setUpComponentFilterGridControllerStellen() {
 //        add(new ComponentFilterStelle(controller));
     }
 
@@ -34,16 +44,16 @@ public SHomepageStudentView(StelleController controller) { //ToDo: this was adde
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
         Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
-        b1.addClickListener( e -> UI.getCurrent().navigate(SAboStudentView.class));
+        b1.addClickListener(e -> UI.getCurrent().navigate(SAboStudentView.class));
         header.add(b1);
         Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
-        b2.addClickListener( e -> UI.getCurrent().navigate(SNotificationView.class));
+        b2.addClickListener(e -> UI.getCurrent().navigate(SNotificationView.class));
         header.add(b2);
         Button b3 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
-        b3.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
+        b3.addClickListener(e -> UI.getCurrent().navigate(SChatView.class));
         header.add(b3);
         Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
-        b4.addClickListener( e -> UI.getCurrent().navigate(SCreateChangeStudentProfileView.class));
+        b4.addClickListener(e -> UI.getCurrent().navigate(SCreateChangeStudentProfileView.class));
         header.add(b4);
 
         //header.add(new Button("Logout Studentname", new Icon(VaadinIcon.EXIT_O)));
@@ -55,7 +65,7 @@ public SHomepageStudentView(StelleController controller) { //ToDo: this was adde
 
     private void setUpBanner() {
         VerticalLayout banner = new VerticalLayout();
-        Image i = new Image("themes/theme_1/banner.jpg","https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
+        Image i = new Image("themes/theme_1/banner.jpg", "https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
         i.setWidth("100%");
         banner.add(i);
         add(banner);
@@ -95,7 +105,5 @@ public SHomepageStudentView(StelleController controller) { //ToDo: this was adde
 
         add(searchFields);
         */
-        setUpComponentFilterGridControllerStellen(); //ToDo: this was added
-
     }
 }

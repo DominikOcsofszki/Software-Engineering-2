@@ -51,7 +51,7 @@ public class SJobProjectWorkshopDisplayView extends VerticalLayout implements Ha
     }
     private StelleDTO setUpStelleDTO(long id) throws NotFoundException {
 //            StelleDTO stelleDTO = stelleController.getById(Long.parseLong(parameter));
-            StelleDTO stelleDTO = stelleController.getById(id);
+            StelleDTO stelleDTO = stelleController.getById(id).getBody();
             return stelleDTO;
     }
 

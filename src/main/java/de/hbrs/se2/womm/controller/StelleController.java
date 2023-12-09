@@ -30,11 +30,11 @@ public class StelleController extends AbstractControllerWomm {
     }
 
     @GetMapping("/stellen/{id}")
-    public StelleDTO getById(@PathVariable Long id)  {
+    public ResponseEntity<StelleDTO> getById(@PathVariable Long id)  {
 //    public StelleDTO getById(@PathVariable Long id) throws NotFoundException {
         Optional<StelleDTO> stelleDTO = stelleService.getById(id);
         if (stelleDTO.isPresent()) {
-            return stelleDTO.get();
+            return new ResponseEntity<>(stelleDTO.get(), HttpStatus.OK);
         } else {
             return null;
 //            throw new NotFoundException("Stelle mit der id: " + id + " nicht gefunden.");
