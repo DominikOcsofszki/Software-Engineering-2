@@ -13,20 +13,4 @@ public class BewerbungDTO extends AbstractDTO{
     private String bewerbungText;
     private StelleDTO bewerbungStelle;
     private StudentDTO bewerbungStudent;
-
-    public String bewerbungStelleBezeichnung(){
-        return bewerbungStelle.getStelleTitel();
-    }
-    public String bewerbungStudentName(){
-        return bewerbungStudent.getStudentName();
-    }
-    public static String[] getAllFilter(){
-        return new String[]{
-                "bewerbungId",
-                "bewerbungPdf",
-                "bewerbungText",
-                "bewerbungStelle",
-                "bewerbungStudent"
-        };
-    }
 }

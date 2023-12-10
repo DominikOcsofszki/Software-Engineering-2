@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentService{
+public class StudentService implements IgetDTOListbyPrimaryKeyService {
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper = StudentMapper.INSTANCE;
 
@@ -38,4 +38,13 @@ public class StudentService{
         studentRepository.save(student);
     }
 
+    public StudentDTO getStudentByNutzerId(Long id) {
+        Student student =  studentRepository.findStudentByNutzer_NutzerId(id);
+        return studentMapper.studentToStudentDto(student);
+    }
+
+    @Override
+    public List<? extends AbstractDTO> getDTOListbyPrimaryKeyService(long primaryKey) {
+        return (List.of(getStudentByNutzerId(primaryKey)));
+    }
 }

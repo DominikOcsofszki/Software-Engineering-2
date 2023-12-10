@@ -1,16 +1,15 @@
 package de.hbrs.se2.womm.views;
 
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import jakarta.annotation.security.RolesAllowed;
@@ -19,7 +18,7 @@ import jakarta.annotation.security.RolesAllowed;
 @RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
 @AnonymousAllowed
 @PageTitle("LandingPageView")
-public class LandingPageView extends VerticalLayout {
+public class LandingPageView extends AbstractViewWithoutController {
 
     public LandingPageView() {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
@@ -74,7 +73,7 @@ public class LandingPageView extends VerticalLayout {
     }
     private VerticalLayout createHeroSection() {
         VerticalLayout heroSection = new VerticalLayout();
-        heroSection.setAlignItems(FlexComponent.Alignment.CENTER);
+        heroSection.setAlignItems(Alignment.CENTER);
         Image heroImage = new Image("themes/theme_1/Hiring_pic.jpg", "");
         heroImage.setWidth("500px");
         heroImage.setHeight("400px");
@@ -101,12 +100,14 @@ public class LandingPageView extends VerticalLayout {
 
     private VerticalLayout createDescriptionSection() {
         VerticalLayout descriptionSection = new VerticalLayout();
-        descriptionSection.setAlignItems(FlexComponent.Alignment.CENTER);
-        H1 title = new H1("Find your dream job on w.o.m.m.");
+        descriptionSection.setAlignItems(Alignment.CENTER);
+//        H1 title = new H1("Find your dream job on w.o.m.m.");
+        H1 title = getWommBuilder().H1.create("Find your dream job on w.o.m.m.");
         title.getStyle().set("color", "#044FA3"); // HEX-Farbcode
         descriptionSection.add(title);
 
-        Paragraph description = new Paragraph("Your job search portal. Discover thousands of job opportunities and more.");
+//        Paragraph description = new Paragraph("Your job search portal. Discover thousands of job opportunities and more.");
+        Paragraph description = getWommBuilder().Paragraph.create("Your job search portal. Discover thousands of job opportunities and more.");
         description.getStyle().set("color", "#044FA3"); // HEX-Farbcode
         descriptionSection.add(description);
 
@@ -116,17 +117,19 @@ public class LandingPageView extends VerticalLayout {
     private HorizontalLayout createRegistrationSection() {
         HorizontalLayout registrationSection = new HorizontalLayout();
 
-            Button buttonReg = new Button("SignUp");
-            buttonReg.addClickListener( e -> UI.getCurrent().navigate(RegistrierungStudentView.class));
-            buttonReg.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
-            buttonReg.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-            registrationSection.add(buttonReg);
+//            Button buttonReg = new Button("SignUp");
+        Button buttonReg = getWommBuilder().Button.create("SignUp");
+        buttonReg.addClickListener( e -> UI.getCurrent().navigate(RegistrierungStudentView.class));
+        buttonReg.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
+        buttonReg.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        registrationSection.add(buttonReg);
 
-            Button buttonLog = new Button("LogIn");
-            buttonLog.addClickListener( e -> UI.getCurrent().navigate(LoginView.class));
-            buttonLog.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
-            buttonLog.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-            registrationSection.add(buttonLog);
+//            Button buttonLog = new Button("LogIn");
+        Button buttonLog = getWommBuilder().Button.create("LogIn");
+        buttonLog.addClickListener( e -> UI.getCurrent().navigate(LoginView.class));
+        buttonLog.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
+        buttonLog.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        registrationSection.add(buttonLog);
 
         registrationSection.add(buttonReg);
         registrationSection.add(buttonLog);
@@ -136,7 +139,9 @@ public class LandingPageView extends VerticalLayout {
 
     private Div createContactInfo() {
         Div contactInfo = new Div();
-        contactInfo.add(new Text("Want to create company profile? Contact us at kontakt@womm.de."));
+        contactInfo.add(
+                getWommBuilder().Text.create("Want to create company profile? Contact us at kontakt@womm.de.")
+        );
         return contactInfo;
     }
 

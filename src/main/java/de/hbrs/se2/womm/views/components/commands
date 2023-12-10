@@ -1,5 +1,0 @@
-
-%s=\(\w*\) "\(\w\)\(\w*\)",= case \1 "\2\3" -> dto.get\U\2\E\3().toString().toLowerCase();
-
-
-%s=.* "\(\w\)\(\w*\)",=        grid.addColumn(StudentDTO::get\U\1\E\2).setHeader("\U\1\E\2").setSortable(true).setComparator(StudentDTO::get\U\1\E\2);

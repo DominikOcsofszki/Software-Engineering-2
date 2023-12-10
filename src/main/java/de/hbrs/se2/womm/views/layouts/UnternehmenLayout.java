@@ -2,24 +2,15 @@ package de.hbrs.se2.womm.views.layouts;
 
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.views.*;
+import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
+import de.hbrs.se2.womm.views.unternehmen.*;
 
-public class UnternehmenLayout extends AbstractLayout {
-
-    private final SecurityService securityService;
-
+public class UnternehmenLayout extends AbstractLayoutLoggedIn {
     protected UnternehmenLayout(SecurityService securityService) {
-        this.securityService = securityService;
-        if (securityService.getAuthenticatedUser() != null) {
-            super.createHeaderWithLogoutButton(
-                    new Button("Log out: " + securityService.getAuthenticatedUser().getUsername(),
-                            e -> securityService.logout()), true
-            );
-        }
+        super(securityService);
     }
 
     @Override
@@ -30,20 +21,17 @@ public class UnternehmenLayout extends AbstractLayout {
             UI.getCurrent().navigate(ROUTING.ALL.AccessDeniedView);
     }
 
-
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
-
-                new RouterLink("UApplicationView ", UApplicationView.class),
-                new RouterLink("UApplicationsView ", UApplicationsView.class),
-                new RouterLink("UChatView ", UChatView.class),
-                new RouterLink("UEditFirmProfileDisplayView ", UEditFirmProfileDisplayView.class),
-                new RouterLink("UFirmProfileDisplayView ", UFirmProfileDisplayView.class),
-                new RouterLink("UHomepageUnternehmenView ", UHomepageUnternehmenView.class),
-                new RouterLink("UStelleAnzeigeErstellenView ", UStelleAnzeigeErstellenView.class),
-                new RouterLink("UNotificationView", UNotificationView.class)
-
+                new RouterLink(VaadinBuilderWomm.translateText("UApplicationView"), UApplicationView.class),
+                new RouterLink(VaadinBuilderWomm.translateText("UApplicationsView"), UApplicationsView.class),
+                new RouterLink(VaadinBuilderWomm.translateText("UChatView"), UChatView.class),
+                new RouterLink(VaadinBuilderWomm.translateText("UEditFirmProfileDisplayView"), UEditFirmProfileDisplayView.class),
+                new RouterLink(VaadinBuilderWomm.translateText("UFirmProfileDisplayView"), UFirmProfileDisplayView.class),
+                new RouterLink(VaadinBuilderWomm.translateText("UHomepageUnternehmenView"), UHomepageUnternehmenView.class),
+                new RouterLink(VaadinBuilderWomm.translateText("UStelleAnzeigeErstellenView"), UStelleAnzeigeErstellenView.class),
+                new RouterLink(VaadinBuilderWomm.translateText("UNotificationView"), UNotificationView.class)
         ));
     }
 }

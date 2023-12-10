@@ -1,6 +1,5 @@
 package de.hbrs.se2.womm.services;
 
-import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.entities.Stelle;
 import de.hbrs.se2.womm.mapper.StelleMapper;
@@ -19,7 +18,7 @@ public class StelleService {
         this.stelleRepository = stelleRepository;
     }
 
-    public List<StelleDTO> getByUnternehmenId(Long unternehmenId) {
+    public List<StelleDTO> getByUnternehmenId(Long unternehmenId) { //ToDo why not working ????
         return stelleRepository.findByUnternehmen_UnternehmenId(unternehmenId)
                 .stream()
                 .map(stelleMapper::stelleToStelleDto)
@@ -35,5 +34,12 @@ public class StelleService {
         Stelle stelle = stelleMapper.stelleDtoToStelle(stelleDTO);
         Stelle erzeugteStelle = stelleRepository.save(stelle);
         return stelleMapper.stelleToStelleDto(erzeugteStelle);
+    }
+
+    public List<StelleDTO> getAll() {
+        return stelleRepository.findAll()
+                .stream()
+                .map(stelleMapper::stelleToStelleDto)
+                .toList();
     }
 }

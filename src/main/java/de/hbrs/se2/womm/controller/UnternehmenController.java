@@ -14,40 +14,38 @@ import java.util.List;
 public class UnternehmenController extends AbstractControllerWomm {
     UnternehmenService unternehmenService;
 
-    public UnternehmenController(UnternehmenService unternehmenService){
+    public UnternehmenController(UnternehmenService unternehmenService) {
         this.unternehmenService = unternehmenService;
     }
 
     @GetMapping("")
     public ResponseEntity<List<UnternehmenDTO>> getAllUnternehmen() {
-        return new ResponseEntity<>(unternehmenService.getAll(),HttpStatus.OK);
+        return new ResponseEntity<>(unternehmenService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/Unternehmen/{id}")
-    public ResponseEntity<UnternehmenDTO> getUnternehmenById(@PathVariable long id){
+    public ResponseEntity<UnternehmenDTO> getUnternehmenById(@PathVariable long id) {
         UnternehmenDTO gefunden = unternehmenService.getUnternehmenPerID(id);
-        return new ResponseEntity<>(gefunden,HttpStatus.OK);
+        return new ResponseEntity<>(gefunden, HttpStatus.OK);
     }
 
     @GetMapping("/Unternehmen")
     public ResponseEntity<List<UnternehmenDTO>> getUnternehmenByName(@RequestParam(name = "name") String name) {
         List<UnternehmenDTO> gefunden = unternehmenService.getUnternehmenDTOPerName(name);
-        return new ResponseEntity<>(gefunden,HttpStatus.OK);
+        return new ResponseEntity<>(gefunden, HttpStatus.OK);
     }
 
     @PostMapping("/Unternehmen")
-    public ResponseEntity<Void> saveUnternehmen(@RequestBody UnternehmenDTO zuErstellendesUnternehmen){
+    public ResponseEntity<Void> saveUnternehmen(@RequestBody UnternehmenDTO zuErstellendesUnternehmen) {
         unternehmenService.saveUnternehmen(zuErstellendesUnternehmen);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-        @Override
-        @GetMapping("all")
-        public ResponseEntity<List<? extends AbstractDTO>> getAll() {
-            return new ResponseEntity<>(
-                    unternehmenService.getAll(),
-                    HttpStatus.OK
-            );
-        }
+    @Override
+    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
+        return new ResponseEntity<>(
+                primaryKey < 0 ? unternehmenService.getAll() :
+                        unternehmenService.getDTOListbyPrimaryKeyService(primaryKey),
+                HttpStatus.OK);
     }
+}

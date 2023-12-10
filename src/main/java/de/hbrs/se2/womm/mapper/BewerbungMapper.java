@@ -12,7 +12,7 @@ public interface BewerbungMapper {
 
 
     @Mapping(target = "student", source = "bewerbungStudent")
-    @Mapping(target = "stelle", source = "bewerbungStelle")
+    @Mapping(target = "stelle", source =     "bewerbungStelle")
     Bewerbung bewerbungDtoToBewerbung(BewerbungDTO bewerbungDTO);
 
     @Mapping(target = "bewerbungStudent", source = "student")

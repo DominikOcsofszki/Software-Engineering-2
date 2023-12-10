@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public abstract class AbstractControllerWomm {
-    public abstract ResponseEntity<List<? extends AbstractDTO>> getAll();
-
+    public abstract ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey);
+//    return primaryKey < 0 ? xService.getAll() : xService.getDTObyPrimaryKey(primaryKey);
 }
+

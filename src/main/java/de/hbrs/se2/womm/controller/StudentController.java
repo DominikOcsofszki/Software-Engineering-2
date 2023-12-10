@@ -19,6 +19,14 @@ public class StudentController extends AbstractControllerWomm {
         this.studentService = studentService;
     }
 
+    @Override
+    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
+            return new ResponseEntity<>( primaryKey < 0 ? studentService.getAlleStudenten() :
+                    studentService.getDTOListbyPrimaryKeyService(primaryKey)
+        ,HttpStatus.OK
+        );
+    }
+
     @GetMapping("students")
     public ResponseEntity<List<StudentDTO>> getAllStudents() {
         return new ResponseEntity<>(
@@ -40,11 +48,10 @@ public class StudentController extends AbstractControllerWomm {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getAll() {
-        return new ResponseEntity<>(
-                null, //ToDo implement in StudentService
-                HttpStatus.OK
-        );
+    private ResponseEntity<StudentDTO> getStudentByNutzerId(@PathVariable Long id) {
+        return new ResponseEntity<>(studentService.getStudentByNutzerId(id), HttpStatus.OK);
+//                .map(studentDTO -> new ResponseEntity<>(studentDTO, HttpStatus.OK))
+//                .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
+
 }

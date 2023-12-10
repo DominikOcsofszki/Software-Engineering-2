@@ -14,7 +14,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -24,6 +23,7 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AuthenticationController;
 import de.hbrs.se2.womm.dtos.StudentRegistrationRequest;
+import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
 @Route(value = ROUTING.ALL.RegistrierungStudentView, layout = LoggedOutLayout.class)
 @AnonymousAllowed
 @PageTitle("RegistrierungStudentView")
-public class RegistrierungStudentView extends VerticalLayout {
+public class RegistrierungStudentView extends AbstractViewWithoutController {
 
     SecurityService securityService;
     AuthenticationController authenticationController;
@@ -65,7 +65,9 @@ public class RegistrierungStudentView extends VerticalLayout {
 
         setJustifyContentMode(JustifyContentMode.CENTER);
 
-        add(new H4("Student/in Registration"));
+//        add(new H4("Student/in Registration"));
+        H4 h4 = getWommBuilder().H4.create("Student/in Registration");
+        add(h4);
 
         nameComponent = new TextField("Name");
         nameComponent.setTooltipText("Your REAL Name");
