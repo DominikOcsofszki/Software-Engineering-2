@@ -16,16 +16,6 @@ public class LoginTest extends AbstractPrepareTestSelenium {
     }
 
     @Test
-    void testLogin() {
-        // Exercise
-        String title = driver.getTitle();
-        logger.info(title);
-        loginPage.login("student2", "student");
-        // Verify
-        //DoDo
-//        logoutPages.logout();
-    }
-    @Test
     void testTitle() {
         // Exercise
         String title = driver.getTitle();
@@ -33,6 +23,22 @@ public class LoginTest extends AbstractPrepareTestSelenium {
         // Verify
         assert(title.equals("LoginView"));
     }
+
+    @Test
+    void testLogin() {
+        // Exercise
+        String title = driver.getTitle();
+        logger.info(title);
+//        wait.until(d -> d.getTitle().equals("xxx"));
+        assert(title.equals(loginPage.getWebsiteTitle()));
+
+//        loginPage.login("student2", "student");
+        assert (!driver.getTitle().equals(loginPage.getWebsiteTitle()));
+        // Verify
+        //DoDo
+//        logoutPages.logout();
+    }
+
 
 
 }

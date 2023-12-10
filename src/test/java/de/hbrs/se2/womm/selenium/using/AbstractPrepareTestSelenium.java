@@ -30,13 +30,14 @@ public abstract class AbstractPrepareTestSelenium {
     @BeforeEach
     void setupTest() {
         this.driver = new ChromeDriver();
+        driver.manage().deleteAllCookies();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         setupPageBeforeEach();
     }
 
     @AfterEach
     void teardown() {
+//        driver.manage().deleteAllCookies();
         driver.quit();
-        driver.manage().deleteAllCookies();
     }
 }
