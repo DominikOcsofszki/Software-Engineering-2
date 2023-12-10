@@ -19,26 +19,24 @@ public abstract class AbstractPrepareTestSelenium {
     protected Logger logger = Logger.getLogger("");
     protected WebDriverWait wait;
 
-
     @BeforeAll
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-    protected abstract void setupPage();
+
+    protected abstract void setupPageBeforeEach();
+
 
     @BeforeEach
     void setupTest() {
         this.driver = new ChromeDriver();
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        setupPage();
-//        WebElement loginButton = wait.until(ExpectedConditions.presenceOfElementLocated(LandingPage.Locators.LOGIN_BUTTON));
-
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        setupPageBeforeEach();
     }
 
     @AfterEach
     void teardown() {
         driver.quit();
+        driver.manage().deleteAllCookies();
     }
-
-
 }
