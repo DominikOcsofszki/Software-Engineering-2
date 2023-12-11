@@ -11,7 +11,9 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
         String username = securityService.getAuthenticatedUser() == null ? null :
                 securityService.getAuthenticatedUser().getUsername();
         long nutzerId = securityService.getLoggedInNutzerID();
-        super.createHeaderWithLogoutButton(new Button("Log out("+nutzerId+"): " + username,
-                        e -> securityService.logout()), true);
+        Button logoutButton = new Button("Log out("+nutzerId+"): " + username,
+                e -> securityService.logout());
+        logoutButton.setId("womm-logout-button");
+        super.createHeaderWithLogoutButton(logoutButton, true);
     }
 }

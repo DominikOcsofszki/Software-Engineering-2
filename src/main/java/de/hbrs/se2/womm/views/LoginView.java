@@ -42,6 +42,7 @@ public class LoginView extends AbstractViewWithoutController {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
 
+        login.setId("login-button");
         login.setForgotPasswordButtonVisible(false);
         add(
                 new H1("w.o.o.m."),
