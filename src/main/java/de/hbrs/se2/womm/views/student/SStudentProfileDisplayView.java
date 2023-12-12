@@ -42,8 +42,8 @@ public class SStudentProfileDisplayView extends VerticalLayout {
         studentVorname = studentDTO.getStudentVorname();
 //      studentAlias = studentDTO.getStudentAlias(); //ToDo in DTO?
         studentGeburtstag = studentDTO.getStudentGeburtstag();
-        studentEmail = studentDTO.getNutzer().getEmail();
-        studentOrt = studentDTO.getNutzer().getOrt();
+        studentEmail = studentDTO.getNutzer().getNutzerMail();
+        studentOrt = studentDTO.getNutzer().getNutzerOrt();
         studentBiographie = studentDTO.getStudentBio();
         studentSpezialisierungen = studentDTO.getStudentSpezialisierung();
         studentSemester = String.valueOf(studentDTO.getStudentSemester());

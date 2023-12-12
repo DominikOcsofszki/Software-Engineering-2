@@ -73,7 +73,7 @@ public class UFirmProfileDisplayView extends VerticalLayout {
 
             // Company Location with Geo Tag Icon
             HorizontalLayout locationLayout = new HorizontalLayout();
-            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span(unternehmenDTO.getNutzer().getOrt())); // Replace with the actual location
+            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span(unternehmenDTO.getNutzer().getNutzerOrt())); // Replace with the actual location
 //            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span("Company Location")); // Replace with the actual location
             detailsLayout.add(locationLayout);
 

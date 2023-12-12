@@ -78,8 +78,8 @@ public class UEditFirmProfileDisplayView extends VerticalLayout {
 //        int nrOfEmployees = getUnternehmenDTO().getNumberOfEmployees(); //ToDo DTO
 
 //        String companyLocation = "Company Location";
-        String companyLocation = getUnternehmenDTO().getNutzer().getOrt() == null ?
-                "Company Location" : getUnternehmenDTO().getNutzer().getOrt();
+        String companyLocation = getUnternehmenDTO().getNutzer().getNutzerOrt() == null ?
+                "Company Location" : getUnternehmenDTO().getNutzer().getNutzerOrt();
         String companyWebsite = "http://www.companywebsite.com";
 //        String companyWebsite = getUnternehmenDTO().getWebsite();//ToDo DTO
         String reviews = " (" + nrOfReviews + " Reviews)";

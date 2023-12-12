@@ -99,7 +99,7 @@ public class UApplicationView extends VerticalLayout implements HasUrlParameter<
         student = studentController.getById(studentID).getBody();
         studentName = student.getStudentName();
         studentVorname = student.getStudentVorname();
-        studentProfilePicture = student.getNutzer().getProfilbild();
+        studentProfilePicture = student.getNutzer().getNutzerProfilbild();
         setUpTop();
         setUpAnschreiben();
     }

@@ -19,10 +19,10 @@ public class StudentDTO {
     private Integer studentSemester;
 
     public Image PlaceholderOrImage(){
-        if(nutzer == null || nutzer.getProfilbild() == null) {
+        if(nutzer == null || nutzer.getNutzerProfilbild() == null) {
             return ASSETS.buildPlaceholder(50,50);
         }
         return new Image("data:image/png;base64,"
-                + nutzer.getProfilbild(), "getImage");
+                + nutzer.getNutzerProfilbild(), "getImage");
     }
 }
