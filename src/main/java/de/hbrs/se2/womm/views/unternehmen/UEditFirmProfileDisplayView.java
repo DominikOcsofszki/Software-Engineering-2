@@ -136,7 +136,7 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unter
         Button saveButton = new Button("Save Changes");
         saveButton.addClickListener(e -> {
             UnternehmenDTO newUnternehmenDTO = newUnternehmenDTOFromFields();
-            getController().saveUnternehmen(newUnternehmenDTO);
+            getController().save(newUnternehmenDTO);
             UI.getCurrent().getPage().reload();
             // Logic to save changes made to the firm profile
             // Implement your saving logic here
