@@ -23,7 +23,7 @@ public class UnternehmenController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UnternehmenDTO> getById(@PathVariable long id) { //Todo Rename -> getById()
+    public ResponseEntity<UnternehmenDTO> getById(@PathVariable long id) {
         UnternehmenDTO gefunden = unternehmenService.getUnternehmenPerID(id);
         return new ResponseEntity<>(gefunden, HttpStatus.OK);
     }
