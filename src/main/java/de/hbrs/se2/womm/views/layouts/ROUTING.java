@@ -16,6 +16,7 @@ public class ROUTING {
         public static final String SCreateChangeStudentProfileView = "SCreateChangeStudentProfileView";
         public static final String SFirmProfileDisplayView = "SFirmProfileDisplayView";
         public static final String SHomepageStudentView = "SHomepageStudentView";
+        public static final String SHomepageStudentView2 = "SHomepageStudentView2";
         public static final String SJobProjectWorkshopDisplayView = "SJobProjectWorkshopDisplayView";
         public static final String SNotificationView = "SNotificationView";
         public static final String SStudentProfileDisplayView = "SStudentProfileDisplayView";

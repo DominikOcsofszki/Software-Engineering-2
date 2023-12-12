@@ -32,6 +32,7 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
                 new RouterLink(VaadinBuilderWomm.translateText("SCreateChangeStudentProfileView"), SCreateChangeStudentProfileView.class),
                 new RouterLink(VaadinBuilderWomm.translateText("SFirmProfileDisplayView"), SFirmProfileDisplayView.class),
                 new RouterLink(VaadinBuilderWomm.translateText("SHomepageStudentView"), SHomepageStudentView.class),
+                new RouterLink(VaadinBuilderWomm.translateText("SHomepageStudentView2"), SHomepageStudentView2.class),
                 new RouterLink(VaadinBuilderWomm.translateText("SJobProjectWorkshopDisplayView"), SJobProjectWorkshopDisplayView.class),
                 new RouterLink(VaadinBuilderWomm.translateText("SNotificationView"), SNotificationView.class),
                 new RouterLink(VaadinBuilderWomm.translateText("SStudentProfileDisplayView"), SStudentProfileDisplayView.class)
