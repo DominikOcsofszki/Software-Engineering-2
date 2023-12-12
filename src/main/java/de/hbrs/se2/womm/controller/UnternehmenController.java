@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-public class UnternehmenController extends AbstractControllerWomm {
+public class UnternehmenController {
     UnternehmenService unternehmenService;
 
     public UnternehmenController(UnternehmenService unternehmenService) {
@@ -19,12 +19,12 @@ public class UnternehmenController extends AbstractControllerWomm {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<UnternehmenDTO>> getAllUnternehmen() {
+    public ResponseEntity<List<UnternehmenDTO>> getAllUnternehmen() { //Todo Rename -> getAll()
         return new ResponseEntity<>(unternehmenService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/Unternehmen/{id}")
-    public ResponseEntity<UnternehmenDTO> getUnternehmenById(@PathVariable long id) {
+    public ResponseEntity<UnternehmenDTO> getUnternehmenById(@PathVariable long id) { //Todo Rename -> getById()
         UnternehmenDTO gefunden = unternehmenService.getUnternehmenPerID(id);
         return new ResponseEntity<>(gefunden, HttpStatus.OK);
     }
@@ -39,13 +39,5 @@ public class UnternehmenController extends AbstractControllerWomm {
     public ResponseEntity<Void> saveUnternehmen(@RequestBody UnternehmenDTO zuErstellendesUnternehmen) {
         unternehmenService.saveUnternehmen(zuErstellendesUnternehmen);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        return new ResponseEntity<>(
-                primaryKey < 0 ? unternehmenService.getAll() :
-                        unternehmenService.getDTOListbyPrimaryKeyService(primaryKey),
-                HttpStatus.OK);
     }
 }

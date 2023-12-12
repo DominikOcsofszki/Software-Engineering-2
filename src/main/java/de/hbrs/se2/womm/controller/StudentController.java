@@ -11,20 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users/")
-public class StudentController extends AbstractControllerWomm {
+public class StudentController {
 
     StudentService studentService;
 
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
-    }
-
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-            return new ResponseEntity<>( primaryKey < 0 ? studentService.getAlleStudenten() :
-                    studentService.getDTOListbyPrimaryKeyService(primaryKey)
-        ,HttpStatus.OK
-        );
     }
 
     @GetMapping("students")
@@ -48,10 +40,10 @@ public class StudentController extends AbstractControllerWomm {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private ResponseEntity<StudentDTO> getStudentByNutzerId(@PathVariable Long id) {
-        return new ResponseEntity<>(studentService.getStudentByNutzerId(id), HttpStatus.OK);
+//    private ResponseEntity<StudentDTO> getStudentByNutzerId(@PathVariable Long id) {
+//        return new ResponseEntity<>(studentService.getStudentByNutzerId(id), HttpStatus.OK);
 //                .map(studentDTO -> new ResponseEntity<>(studentDTO, HttpStatus.OK))
 //                .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
-    }
+//    }
 
 }

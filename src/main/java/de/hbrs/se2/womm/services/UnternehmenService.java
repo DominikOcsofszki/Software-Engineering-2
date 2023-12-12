@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UnternehmenService implements IgetDTOListbyPrimaryKeyService {
+public class UnternehmenService {
 
 
     private final UnternehmenRepository unternehmenRepository;
@@ -39,11 +39,5 @@ public class UnternehmenService implements IgetDTOListbyPrimaryKeyService {
     public void saveUnternehmen(UnternehmenDTO unternehmenDTO){
         Unternehmen unternehmen = unternehmenMapper.dtoZuUnternehmen(unternehmenDTO);
         unternehmenRepository.save(unternehmen);
-    }
-
-    @Override
-    public List<UnternehmenDTO> getDTOListbyPrimaryKeyService(long primaryKey) {
-        return unternehmenRepository.findUnternehmenByUnternehmenId(primaryKey)
-                .map(unternehmenMapper::unternehmenZuDTO).stream().toList();
     }
 }

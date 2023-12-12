@@ -12,10 +12,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class StelleController extends AbstractControllerWomm {
-//    public class StelleController extends AbstractControllerWommExtends<StelleDTO> {
-
-    StelleService stelleService;
+public class StelleController {
+    private StelleService stelleService;
 
     public StelleController(StelleService stelleService) {
         this.stelleService = stelleService;
@@ -46,7 +44,6 @@ public class StelleController extends AbstractControllerWomm {
         return new ResponseEntity<>(stelleService.saveStelle(stelleDTO), HttpStatus.OK);
     }
 
-    @Override
     public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
         System.out.println("primaryKey:" + primaryKey);
         List<StelleDTO> stelleDTOList = primaryKey < 0 ? stelleService.getAll() : stelleService.getByUnternehmenId(primaryKey);

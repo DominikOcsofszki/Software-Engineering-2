@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bewerbung")
-public class BewerbungController extends AbstractControllerWomm {
+public class BewerbungController{
 
     BewerbungService bewerbungService;
 
@@ -23,7 +23,7 @@ public class BewerbungController extends AbstractControllerWomm {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<BewerbungDTO>> getAllBewerbung() {
+    public ResponseEntity<List<BewerbungDTO>> getAllBewerbung() { // Todo Rename -> getAll()
         return new ResponseEntity<>(bewerbungService.getAll(), HttpStatus.OK);
     }
 
@@ -34,9 +34,5 @@ public class BewerbungController extends AbstractControllerWomm {
                 .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        //    return primaryKey < 0 ? xService.getAll() : xService.getDTObyPrimaryKey(primaryKey);
-        return null; //ToDo implement me
-    }
+    // Todo save()
 }

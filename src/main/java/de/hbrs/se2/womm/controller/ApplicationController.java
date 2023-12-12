@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/application")
-public class ApplicationController extends AbstractControllerWomm {
+public class ApplicationController {
 
     // TODO add logic to methods and suitable return types for ResponseEntities
 
@@ -29,8 +29,4 @@ public class ApplicationController extends AbstractControllerWomm {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        return null; //ToDo
-    }
 }

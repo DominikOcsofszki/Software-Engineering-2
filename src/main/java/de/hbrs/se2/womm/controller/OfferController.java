@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/offers")
-public class OfferController extends AbstractControllerWomm {
+public class OfferController{
 
     // TODO add logic to methods and suitable return types for ResponseEntities
 
@@ -31,11 +31,5 @@ public class OfferController extends AbstractControllerWomm {
     @GetMapping("/offer/{offerId}/application/{appId}")
     public ResponseEntity<Void> getApplicationForOffer(@PathVariable String offerId, @PathVariable String appId) {
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        //    return primaryKey < 0 ? xService.getAll() : xService.getDTObyPrimaryKey(primaryKey);
-        return null; //ToDo implement method
     }
 }

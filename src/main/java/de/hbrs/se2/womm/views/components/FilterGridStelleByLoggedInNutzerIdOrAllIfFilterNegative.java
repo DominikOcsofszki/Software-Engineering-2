@@ -2,19 +2,19 @@ package de.hbrs.se2.womm.views.components;
 
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
-import de.hbrs.se2.womm.views.layouts.AbstractFilterGrid;
 
-import java.util.List;
+public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends AbstractFilterGrid<StelleDTO> {
+    private final StelleController stelleController;
 
-public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends AbstractFilterGrid<StelleDTO, StelleController> {
     public FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(StelleController stelleController, long filterBy) {
-        super(stelleController,filterBy);
+        super(filterBy);
+        this.stelleController = stelleController;
     }
 
     @Override
-    protected List<StelleDTO> getItemsWithFilter(long filterBy) {
+    protected StelleDTO getItemsWithFilter(long filterBy) {
         System.out.println("filterBy:" + filterBy);
-        List<StelleDTO> list = (List<StelleDTO>) controller.getDTObyPrimaryKeyIfNegativeAll(filterBy).getBody();
+        StelleDTO list = stelleController.getById(filterBy).getBody();
         System.out.println("list:" + list);
         return list;
     }

@@ -1,7 +1,6 @@
 package de.hbrs.se2.womm.views.layouts;
 
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 
 import java.util.List;
