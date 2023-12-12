@@ -26,7 +26,7 @@ public class UHomepageUnternehmenView extends VerticalLayout {
     UnternehmenDTO unternehmenDTO;
     public UHomepageUnternehmenView(UnternehmenController unternehmenController, SecurityService securityService, StelleController stelleController) {
         long id = securityService.getLoggedInNutzerID();
-        this.unternehmenDTO = unternehmenController.getUnternehmenById(id).getBody();
+        this.unternehmenDTO = unternehmenController.getById(id).getBody();
         setUpHeader();
         setUpBanner();
 

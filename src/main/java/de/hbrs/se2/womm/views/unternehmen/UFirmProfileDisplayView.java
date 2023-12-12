@@ -26,7 +26,7 @@ public class UFirmProfileDisplayView extends VerticalLayout {
 
     public UFirmProfileDisplayView(UnternehmenController unternehmenController, StelleController stelleController, SecurityService securityService) {
         long id = securityService.getLoggedInNutzerID();
-        this.unternehmenDTO = unternehmenController.getUnternehmenById(id).getBody();
+        this.unternehmenDTO = unternehmenController.getById(id).getBody();
         setUp();
         add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
     }

@@ -33,7 +33,7 @@ public class SHomepageStudentView extends VerticalLayout {
 
     public SHomepageStudentView(StelleController stelleController, StudentController studentController, SecurityService securityService) {
         this.stelleController = stelleController;
-        this.studentDTO = (StudentDTO) studentController.getStudentById(securityService.getLoggedInNutzerID()).getBody();
+        this.studentDTO = studentController.getById(securityService.getLoggedInNutzerID()).getBody();
         setUpHeader();
         setUpBanner();
         setUpSearchFields();
@@ -44,20 +44,20 @@ public class SHomepageStudentView extends VerticalLayout {
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
-//        Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
-        Button b1 = vaadinBuilderWomm.Button.create("View subscriptions", new Icon(VaadinIcon.EYE));
+       Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
+//        Button b1 = vaadinBuilderWomm.Button.create("View subscriptions", new Icon(VaadinIcon.EYE));
         b1.addClickListener(e -> UI.getCurrent().navigate(SAboStudentView.class));
         header.add(b1);
-        Button b2 = vaadinBuilderWomm.Button.create("Notifications", new Icon(VaadinIcon.BELL));
-//        Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
+//        Button b2 = vaadinBuilderWomm.Button.create("Notifications", new Icon(VaadinIcon.BELL));
+        Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
         b2.addClickListener(e -> UI.getCurrent().navigate(SNotificationView.class));
         header.add(b2);
-//        Button b3 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
-        Button b3 = vaadinBuilderWomm.Button.create("Chat", new Icon(VaadinIcon.COMMENTS_O));
+        Button b3 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
+//        Button b3 = vaadinBuilderWomm.Button.create("Chat", new Icon(VaadinIcon.COMMENTS_O));
         b3.addClickListener(e -> UI.getCurrent().navigate(SChatView.class));
         header.add(b3);
-        Button b4 = vaadinBuilderWomm.Button.create("Edit profile", new Icon(VaadinIcon.PENCIL));
-//        Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
+//        Button b4 = vaadinBuilderWomm.Button.create("Edit profile", new Icon(VaadinIcon.PENCIL));
+        Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
         b4.addClickListener(e -> UI.getCurrent().navigate(SCreateChangeStudentProfileView.class));
         header.add(b4);
 

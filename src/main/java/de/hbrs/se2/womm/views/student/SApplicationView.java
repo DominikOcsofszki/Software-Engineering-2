@@ -46,7 +46,7 @@ public class SApplicationView extends VerticalLayout implements HasUrlParameter<
                             UnternehmenController unternehmenController,
                             SecurityService securityService,
                             StudentController studentController){
-        this.studentDTO = studentController.getStudentById(securityService.getLoggedInNutzerID()).getBody();
+        this.studentDTO = studentController.getById(securityService.getLoggedInNutzerID()).getBody();
         this.bewerbungController = bewerbungController;
         this.stelleController = stelleController;
         this.unternehmenController = unternehmenController;

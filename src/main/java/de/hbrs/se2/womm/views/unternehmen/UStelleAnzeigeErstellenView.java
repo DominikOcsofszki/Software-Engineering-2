@@ -126,7 +126,7 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout
 //        long getUserId = 1l;
 //        UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(getUserId).getBody();
         long id = securityService.getLoggedInNutzerID();
-        UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(id).getBody();
+        UnternehmenDTO unternehmenDTO = unternehmenController.getById(id).getBody();
         System.out.println("UnternehmenDTO: " + unternehmenDTO);
 //        Unternehmen unternehmen = UnternehmenMapper.INSTANCE.dtoZuUnternehmen(unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()

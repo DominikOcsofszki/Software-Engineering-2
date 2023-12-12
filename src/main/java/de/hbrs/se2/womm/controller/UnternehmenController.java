@@ -28,7 +28,7 @@ public class UnternehmenController {
         return new ResponseEntity<>(gefunden, HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/name")
     public ResponseEntity<List<UnternehmenDTO>> getByName(@RequestParam(name = "name") String name) {
         List<UnternehmenDTO> gefunden = unternehmenService.getUnternehmenDTOPerName(name);
         return new ResponseEntity<>(gefunden, HttpStatus.OK);

@@ -41,7 +41,7 @@ public class UEditFirmProfileDisplayView extends VerticalLayout {
     }
 
     protected UEditFirmProfileDisplayView(UnternehmenController unternehmenController, StelleController stelleController, SecurityService securityService) {
-        this.unternehmenDTO = (UnternehmenDTO) unternehmenController.getUnternehmenById(securityService.getLoggedInNutzerID()).getBody();
+        this.unternehmenDTO = (UnternehmenDTO) unternehmenController.getById(securityService.getLoggedInNutzerID()).getBody();
         setUp();
         add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
         this.unternehmenController = unternehmenController;

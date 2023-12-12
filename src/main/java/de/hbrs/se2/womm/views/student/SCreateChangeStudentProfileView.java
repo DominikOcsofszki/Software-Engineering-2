@@ -35,8 +35,8 @@ public class SCreateChangeStudentProfileView extends VerticalLayout{
     StudentDTO studentDTO;
     protected VaadinBuilderWomm vaadinBuilderWomm = new VaadinBuilderWomm();
     
-    public SCreateChangeStudentProfileView(StudentController controller, SecurityService securityService) {
-        this.studentDTO = controller.getStudentById(securityService.getLoggedInNutzerID()).getBody();
+    public SCreateChangeStudentProfileView(StudentController studentController, SecurityService securityService) {
+        this.studentDTO = studentController.getById(securityService.getLoggedInNutzerID()).getBody();
         System.out.println(studentDTO);
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
