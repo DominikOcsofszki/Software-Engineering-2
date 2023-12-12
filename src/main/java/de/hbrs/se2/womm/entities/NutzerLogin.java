@@ -20,7 +20,7 @@ public class NutzerLogin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "nutzer_login_id")
-    private Integer nutzerId;
+    private Integer id;
 
     @Column(name = "nutzer_login_name", nullable = false)
     private String nutzerName;
