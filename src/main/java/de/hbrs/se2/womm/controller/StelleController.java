@@ -8,10 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/stellen")
 public class StelleController {
     private StelleService stelleService;
 
@@ -19,35 +18,29 @@ public class StelleController {
         this.stelleService = stelleService;
     }
 
-    @GetMapping("/users/unternehmen/{id}/stellen")
-    public ResponseEntity<List<StelleDTO>> getStelleByUnternehmenId(@PathVariable Long id) {
+    @GetMapping
+    public ResponseEntity<List<StelleDTO>> getByUnternehmenId(@RequestParam(name = "unternehmenId") Long unternehmenId) {
         return new ResponseEntity<>(
-                stelleService.getByUnternehmenId(id), //ToDo implement in StelleService
+                stelleService.getByUnternehmenId(unternehmenId),
                 HttpStatus.OK
         );
     }
 
-    @GetMapping("/stellen/{id}")
-    public ResponseEntity<StelleDTO> getById(@PathVariable Long id)  {
-//    public StelleDTO getById(@PathVariable Long id) throws NotFoundException {
-        Optional<StelleDTO> stelleDTO = stelleService.getById(id);
-        if (stelleDTO.isPresent()) {
-            return new ResponseEntity<>(stelleDTO.get(), HttpStatus.OK);
-        } else {
-            return null;
-//            throw new NotFoundException("Stelle mit der id: " + id + " nicht gefunden.");
-        }
+    @GetMapping("/{id}")
+    public ResponseEntity<StelleDTO> getById(@PathVariable Long id) {
+        return stelleService.getById(id)
+                .map((stelleDTO) -> new ResponseEntity<>(stelleDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/stellen")
-    public ResponseEntity<StelleDTO> saveStelle(@RequestBody StelleDTO stelleDTO) {
+    public ResponseEntity<StelleDTO> save(@RequestBody StelleDTO stelleDTO) {
         return new ResponseEntity<>(stelleService.saveStelle(stelleDTO), HttpStatus.OK);
     }
 
     public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
         System.out.println("primaryKey:" + primaryKey);
         List<StelleDTO> stelleDTOList = primaryKey < 0 ? stelleService.getAll() : stelleService.getByUnternehmenId(primaryKey);
-//        List<StelleDTO> stelleDTOList = stelleService.getByUnternehmenId(2l);
 
         return new ResponseEntity<>(
 //                stelleService.getAll(),
