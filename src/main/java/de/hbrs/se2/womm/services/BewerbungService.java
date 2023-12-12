@@ -1,6 +1,5 @@
 package de.hbrs.se2.womm.services;
 
-import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.mapper.BewerbungMapper;
 import de.hbrs.se2.womm.repositories.BewerbungRepository;

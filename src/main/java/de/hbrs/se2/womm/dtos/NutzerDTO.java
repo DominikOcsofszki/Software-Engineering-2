@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NutzerDTO extends AbstractDTO {
+public class NutzerDTO {
     @JsonProperty("nutzerId")
     private Long nutzerId;
 

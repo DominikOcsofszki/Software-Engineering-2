@@ -1,6 +1,5 @@
 package de.hbrs.se2.womm.controller;
 
-import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.services.BewerbungService;
 import org.springframework.http.HttpStatus;
@@ -9,8 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/application")

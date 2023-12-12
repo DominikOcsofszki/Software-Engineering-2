@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class StudentDTO extends AbstractDTO{
+public class StudentDTO {
     private NutzerDTO nutzer;
     private Long studentId;
     private String studentVorname;

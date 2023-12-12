@@ -1,6 +1,5 @@
 package de.hbrs.se2.womm.services;
 
-import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.entities.Student;
 import de.hbrs.se2.womm.mapper.StudentMapper;
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentService implements IgetDTOListbyPrimaryKeyService {
+public class StudentService{
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper = StudentMapper.INSTANCE;
 
@@ -41,10 +40,5 @@ public class StudentService implements IgetDTOListbyPrimaryKeyService {
     public StudentDTO getStudentByNutzerId(Long id) {
         Student student =  studentRepository.findStudentByNutzer_NutzerId(id);
         return studentMapper.studentToStudentDto(student);
-    }
-
-    @Override
-    public List<? extends AbstractDTO> getDTOListbyPrimaryKeyService(long primaryKey) {
-        return (List.of(getStudentByNutzerId(primaryKey)));
     }
 }
