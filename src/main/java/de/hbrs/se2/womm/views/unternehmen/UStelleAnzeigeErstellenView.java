@@ -136,7 +136,7 @@ public class UStelleAnzeigeErstellenView extends VerticalLayout
                 .stelleBeschreibung(stelleBeschreibung.getValue())
                 .stelleUnternehmen(unternehmenDTO)
                 .build();
-        StelleDTO stelleDTO = stelleController.saveStelle(erzeugDTO).getBody();
+        StelleDTO stelleDTO = stelleController.save(erzeugDTO).getBody();
         System.out.println(stelleDTO.getStelleId());
         return stelleDTO.getStelleId();
     }

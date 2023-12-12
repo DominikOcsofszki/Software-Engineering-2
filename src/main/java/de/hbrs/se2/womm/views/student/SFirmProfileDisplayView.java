@@ -45,7 +45,7 @@ public class SFirmProfileDisplayView extends AbstractViewWithoutController imple
         }
     }
     private UnternehmenDTO setUpUnternehmenDTO(long id) throws NotFoundException {
-        return unternehmenController.getUnternehmenById(id).getBody();
+        return unternehmenController.getById(id).getBody();
     }
 
     public SFirmProfileDisplayView(UnternehmenController unternehmenController) {

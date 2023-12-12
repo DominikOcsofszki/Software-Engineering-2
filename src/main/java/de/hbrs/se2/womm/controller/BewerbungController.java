@@ -1,6 +1,5 @@
 package de.hbrs.se2.womm.controller;
 
-import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.services.BewerbungService;
 import org.springframework.http.HttpStatus;
@@ -23,7 +22,7 @@ public class BewerbungController{
     }
 
     @GetMapping("")
-    public ResponseEntity<List<BewerbungDTO>> getAllBewerbung() { // Todo Rename -> getAll()
+    public ResponseEntity<List<BewerbungDTO>> getAll() {
         return new ResponseEntity<>(bewerbungService.getAll(), HttpStatus.OK);
     }
 
@@ -33,6 +32,4 @@ public class BewerbungController{
                 .map((bewerbungDTO) -> new ResponseEntity<>(bewerbungDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
-
-    // Todo save()
 }

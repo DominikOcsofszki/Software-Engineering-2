@@ -96,7 +96,7 @@ public class UApplicationView extends VerticalLayout implements HasUrlParameter<
     void setUpApplication() {
         bewerbungText = bewerbung.getBewerbungText();
         studentID = bewerbung.getBewerbungStudent().getStudentId();
-        student = studentController.getStudentById(studentID).getBody();
+        student = studentController.getById(studentID).getBody();
         studentName = student.getStudentName();
         studentVorname = student.getStudentVorname();
         studentProfilePicture = student.getNutzer().getProfilbild();

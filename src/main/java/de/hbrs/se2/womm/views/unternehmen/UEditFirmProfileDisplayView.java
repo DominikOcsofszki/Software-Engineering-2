@@ -136,7 +136,7 @@ public class UEditFirmProfileDisplayView extends VerticalLayout {
         Button saveButton = new Button("Save Changes");
         saveButton.addClickListener(e -> {
             UnternehmenDTO newUnternehmenDTO = newUnternehmenDTOFromFields();
-            unternehmenController.saveUnternehmen(newUnternehmenDTO);
+            unternehmenController.save(newUnternehmenDTO);
             UI.getCurrent().getPage().reload();
             // Logic to save changes made to the firm profile
             // Implement your saving logic here
