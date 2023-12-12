@@ -18,7 +18,7 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.views.LandingPageView;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -31,11 +31,12 @@ import java.time.LocalDate;
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
 //public class SCreateChangeStudentProfileView extends AbstractView {
-public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+public class SCreateChangeStudentProfileView extends VerticalLayout{
     StudentDTO studentDTO;
+    protected VaadinBuilderWomm vaadinBuilderWomm = new VaadinBuilderWomm();
+    
     public SCreateChangeStudentProfileView(StudentController controller, SecurityService securityService) {
-        super(controller,securityService);
-        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+        this.studentDTO = controller.getStudentById(securityService.getLoggedInNutzerID()).getBody();
         System.out.println(studentDTO);
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
@@ -46,7 +47,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         HorizontalLayout header = new HorizontalLayout();
 //        Button b = new Button("Home");
 //        getVaadinBuilderWomm().H1.create
-        Button b = getWommBuilder().Button.create("Home");
+        Button b = vaadinBuilderWomm.Button.create("Home");
         b.addThemeVariants(ButtonVariant.LUMO_PRIMARY   );
         b.getElement().getStyle().set("margin-right", "0%");
         b.addClickListener( e -> UI.getCurrent().navigate(LandingPageView.class));
@@ -101,7 +102,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         VerticalLayout headervert2 = new VerticalLayout();
         ////////////////////Name//////////////////////////////////////////////////////////////////////////////////////////
 //        Span s = new Span("Name");
-        Span s = getWommBuilder().Span.create("Name");
+        Span s = vaadinBuilderWomm.Span.create("Name");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");       //color grey
         Span s1 = new Span("Paul Stein");

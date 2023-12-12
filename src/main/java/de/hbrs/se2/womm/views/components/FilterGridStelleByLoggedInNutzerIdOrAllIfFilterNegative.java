@@ -1,17 +1,17 @@
 package de.hbrs.se2.womm.views.components;
 
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 
-public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends AbstractFilterGrid<StelleDTO> {
+public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends VerticalLayout {
     private final StelleController stelleController;
-
+    protected Grid<StelleDTO> grid = new Grid<>();
     public FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(StelleController stelleController, long filterBy) {
-        super(filterBy);
         this.stelleController = stelleController;
     }
 
-    @Override
     protected StelleDTO getItemsWithFilter(long filterBy) {
         System.out.println("filterBy:" + filterBy);
         StelleDTO list = stelleController.getById(filterBy).getBody();
@@ -19,7 +19,6 @@ public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends Abs
         return list;
     }
 
-    @Override
     protected void configureGrid() {
         grid.addColumn(StelleDTO::getStelleId).setHeader("Stellen ID");
         grid.addColumn(StelleDTO::getStelleTitel).setHeader("Stellen Titel");
@@ -30,7 +29,7 @@ public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends Abs
         grid.addColumn(stelleDTO -> stelleDTO.getStelleUnternehmen().getName()).setHeader("Stellen Unternehmen");
     }
 
-    @Override
+
     protected String[] getFilterByItemsFromDTO() {
         return new String[]{
                 "stelleId",
@@ -42,7 +41,7 @@ public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends Abs
         };
     }
 
-    @Override
+
     protected String checkItem(StelleDTO dto, String searchBy) {
         return switch (searchBy) {
             case "stelleId" -> dto.getStelleId().toString();

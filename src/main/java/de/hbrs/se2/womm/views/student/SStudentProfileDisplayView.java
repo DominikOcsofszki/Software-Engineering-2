@@ -13,7 +13,7 @@ import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.StudentDTO;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -21,7 +21,7 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.STUDENT.SStudentProfileDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("StudentProfileDisplayView")
-public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+public class SStudentProfileDisplayView extends VerticalLayout {
     StudentDTO studentDTO;
 
     //SetUp Data
@@ -35,11 +35,12 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
     String studentSpezialisierungen;
     String studentSemester;
     Image studentProfilbild;
+    protected VaadinBuilderWomm vaadinBuilderWomm = new VaadinBuilderWomm();
 
     private void setUpDataFromDTO() {
         studentName = studentDTO.getStudentName();
         studentVorname = studentDTO.getStudentVorname();
-//        studentAlias = studentDTO.getStudentAlias(); //ToDo in DTO?
+//      studentAlias = studentDTO.getStudentAlias(); //ToDo in DTO?
         studentGeburtstag = studentDTO.getStudentGeburtstag();
         studentEmail = studentDTO.getNutzer().getEmail();
         studentOrt = studentDTO.getNutzer().getOrt();
@@ -50,8 +51,7 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
     }
 
     public SStudentProfileDisplayView(StudentController studentController, SecurityService securityService) {
-        super(studentController, securityService);
-        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+        this.studentDTO = studentController.getByNutzerId(securityService.getLoggedInNutzerID()).getBody();
         setUpDataFromDTO();
         //ToDo Work with this!!! this.studentDTO
         Header();
@@ -61,7 +61,7 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
     private void Header() {
         HorizontalLayout header = new HorizontalLayout();
 //        Button b = new Button("Home");
-        Button b = getWommBuilder().Button.create("Home");
+        Button b = vaadinBuilderWomm.Button.create("Home");
         header.add(b);
         b.addClickListener(e -> UI.getCurrent().navigate(SHomepageStudentView.class));//ToDo refactor to homepage
         b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -86,7 +86,7 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         VerticalLayout headervert = new VerticalLayout();
         VerticalLayout headervert2 = new VerticalLayout();
 //        Span s = new Span("Name");
-        Span s = getWommBuilder().Span.create("Name");
+        Span s = vaadinBuilderWomm.Span.create("Name");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
 //        Span s1 = new Span("Paul Stein");
@@ -116,7 +116,7 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert2 = new VerticalLayout();
         ////////////////////////Geburtstag///////////////////////////////////////////////////////////////////////////////
 //        s = new Span("Geburtstag");
-        s = getWommBuilder().Span.create("Geburtstag");
+        s = vaadinBuilderWomm.Span.create("Geburtstag");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
 //        s1 = new Span("01.01.2002");
@@ -133,7 +133,7 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert2 = new VerticalLayout();
         ////////////////////////E-Mail//////////////////////////////////////////////////////////////////////////////////
 //        s = new Span("E-Mail");
-        s = getWommBuilder().Span.create("E-Mail");
+        s = vaadinBuilderWomm.Span.create("E-Mail");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
 //        s1 = new Span("p_stein@email.de");

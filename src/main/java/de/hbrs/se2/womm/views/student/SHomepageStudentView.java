@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.student;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
@@ -14,23 +15,25 @@ import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.views.extra.ASSETS;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
+import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
+import java.util.Collection;
+
 @Route(value = ROUTING.STUDENT.SHomepageStudentView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("HomepageStudentView")
-public class SHomepageStudentView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+public class SHomepageStudentView extends VerticalLayout {
     StelleController stelleController;
     StudentDTO studentDTO;
+    protected VaadinBuilderWomm vaadinBuilderWomm = new VaadinBuilderWomm();
 
     public SHomepageStudentView(StelleController stelleController, StudentController studentController, SecurityService securityService) {
-        super(studentController, securityService);
         this.stelleController = stelleController;
-        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+        this.studentDTO = (StudentDTO) studentController.getStudentById(securityService.getLoggedInNutzerID()).getBody();
         setUpHeader();
         setUpBanner();
         setUpSearchFields();
@@ -42,18 +45,18 @@ public class SHomepageStudentView extends AbstractViewDTObyNutzerID<StudentContr
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
 //        Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
-        Button b1 = getWommBuilder().Button.create("View subscriptions", new Icon(VaadinIcon.EYE));
+        Button b1 = vaadinBuilderWomm.Button.create("View subscriptions", new Icon(VaadinIcon.EYE));
         b1.addClickListener(e -> UI.getCurrent().navigate(SAboStudentView.class));
         header.add(b1);
-        Button b2 = getWommBuilder().Button.create("Notifications", new Icon(VaadinIcon.BELL));
+        Button b2 = vaadinBuilderWomm.Button.create("Notifications", new Icon(VaadinIcon.BELL));
 //        Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
         b2.addClickListener(e -> UI.getCurrent().navigate(SNotificationView.class));
         header.add(b2);
 //        Button b3 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
-        Button b3 = getWommBuilder().Button.create("Chat", new Icon(VaadinIcon.COMMENTS_O));
+        Button b3 = vaadinBuilderWomm.Button.create("Chat", new Icon(VaadinIcon.COMMENTS_O));
         b3.addClickListener(e -> UI.getCurrent().navigate(SChatView.class));
         header.add(b3);
-        Button b4 = getWommBuilder().Button.create("Edit profile", new Icon(VaadinIcon.PENCIL));
+        Button b4 = vaadinBuilderWomm.Button.create("Edit profile", new Icon(VaadinIcon.PENCIL));
 //        Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
         b4.addClickListener(e -> UI.getCurrent().navigate(SCreateChangeStudentProfileView.class));
         header.add(b4);

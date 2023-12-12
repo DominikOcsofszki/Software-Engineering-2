@@ -9,6 +9,7 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
@@ -18,7 +19,6 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
@@ -27,12 +27,13 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.UNTERNEHMEN.UEditFirmProfileDisplayView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN", "ADMIN"})
 @PageTitle("EditFirmProfileDisplayView")
-public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO> {
+public class UEditFirmProfileDisplayView extends VerticalLayout {
 
 
     UnternehmenDTO unternehmenDTO;
     TextArea descriptionTextArea = new TextArea("Company Description");
     TextArea gruendung  = new TextArea("Since");
+    UnternehmenController unternehmenController;
 
 
     public UnternehmenDTO getUnternehmenDTO() {
@@ -40,11 +41,10 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unter
     }
 
     protected UEditFirmProfileDisplayView(UnternehmenController unternehmenController, StelleController stelleController, SecurityService securityService) {
-        super(unternehmenController, securityService);
-        this.unternehmenDTO = (UnternehmenDTO) getDtoAbstractCastNeeded();
+        this.unternehmenDTO = (UnternehmenDTO) unternehmenController.getUnternehmenById(securityService.getLoggedInNutzerID()).getBody();
         setUp();
         add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
-        System.out.println(getDtoAbstractCastNeeded());
+        this.unternehmenController = unternehmenController;
     }
 
     void setupStars(int stars, HorizontalLayout ratingLayout) {
@@ -136,7 +136,7 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unter
         Button saveButton = new Button("Save Changes");
         saveButton.addClickListener(e -> {
             UnternehmenDTO newUnternehmenDTO = newUnternehmenDTOFromFields();
-            getController().saveUnternehmen(newUnternehmenDTO);
+            unternehmenController.saveUnternehmen(newUnternehmenDTO);
             UI.getCurrent().getPage().reload();
             // Logic to save changes made to the firm profile
             // Implement your saving logic here

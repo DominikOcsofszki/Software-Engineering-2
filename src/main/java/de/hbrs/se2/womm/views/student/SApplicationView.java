@@ -16,7 +16,6 @@ import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.extra.ComponentImageUpload;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -25,7 +24,7 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.STUDENT.SApplicationView, layout = StudentLayout.class)
 @RolesAllowed({ "ADMIN", "STUDENT"})
 @PageTitle("ApplicationView")
-public class SApplicationView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> implements HasUrlParameter<String> {
+public class SApplicationView extends VerticalLayout implements HasUrlParameter<String> {
 //public class SApplicationView extends VerticalLayout implements HasUrlParameter<String> {
     //Changed
     StudentDTO studentDTO;
@@ -46,9 +45,8 @@ public class SApplicationView extends AbstractViewDTObyNutzerID<StudentControlle
                             StelleController stelleController,
                             UnternehmenController unternehmenController,
                             SecurityService securityService,
-                            StudentController studentController) {
-        super(studentController, securityService);
-        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+                            StudentController studentController){
+        this.studentDTO = studentController.getStudentById(securityService.getLoggedInNutzerID()).getBody();
         this.bewerbungController = bewerbungController;
         this.stelleController = stelleController;
         this.unternehmenController = unternehmenController;

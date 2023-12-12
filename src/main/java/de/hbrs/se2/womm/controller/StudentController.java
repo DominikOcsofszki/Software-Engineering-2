@@ -27,6 +27,11 @@ public class StudentController {
         );
     }
 
+    @GetMapping("students/nutzer/id")
+    public ResponseEntity<StudentDTO> getByNutzerId(@PathVariable Long id){
+        return new ResponseEntity<StudentDTO>(studentService.getStudentByNutzerId(id),HttpStatus.OK);
+    }
+
     @GetMapping("students/{id}")
     public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
         return studentService.getById(id)
