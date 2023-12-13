@@ -60,7 +60,20 @@ public class TranslateMap {
         put("Current semester", "Aktuelles Semester");
         put("Specializations", "Spezialisierungen");
         put("Biography", "Biographie");
-
+        //CreateChangeStudentProfileView
+        put("Enter your old password", "Altes Passwort");
+        put("Save Changes", "Änderungen Speichern");
+        put("Please enter a valid e-mail address", "Bitte eine gültige E-Mail angeben");
+        put("Upload", "Hochladen");
+        put("The name can only be changed with the agreement of an admin", "Der Name kann nur mit Absprache eines Admins geändert werden");
+        put("Confirm e-mail", "E-Mail bestätigen");
+        put("I am in semester:", "Ich bin in Semester:");
+        put("Repeat your new password", "Neues Passwort wiederholen");
+        put("Push Notifications", "Benachrichtigungen");
+        put("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported.", "Das neue Passwort muss eine Länge von 6 bis 12 Zeichen haben und darf nur Buchstaben von A bis Z und Zahlen beeinhalten");
+        put("I would like to receive notifications", "Ich möchte Benachrichtigungen erhalten");
+        put("Enter your new password", "Neues Passwort");
+        put("Password", "Passwort");
 
     }};
 
