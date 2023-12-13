@@ -77,7 +77,8 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
     private void Profil() {
         ////////////////////////Profilbild////////////////////////////////////////////////////////////////////////////////
         HorizontalLayout header = new HorizontalLayout();
-        Image i = new Image("themes/theme_1/user.png", "Image not found");
+        //Image i = new Image("themes/theme_1/user.png", "Image not found");
+        Image i = studentProfilbild;
         i.setWidth("20%");
         i.setHeight("20%");
         //i.setHeight(300, Unit.PIXELS); //for fixed values
@@ -101,10 +102,11 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
         ////////////////////////Alias////////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Alias");
+        s = getWommBuilder().Span.create("alias");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
         s1 = new Span("psteins2");
+        //s1 = new Span(studentAlias);
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
@@ -116,7 +118,7 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert2 = new VerticalLayout();
         ////////////////////////Geburtstag///////////////////////////////////////////////////////////////////////////////
 //        s = new Span("Geburtstag");
-        s = getWommBuilder().Span.create("Geburtstag");
+        s = getWommBuilder().Span.create("Date of Birth");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
 //        s1 = new Span("01.01.2002");
@@ -133,7 +135,7 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert2 = new VerticalLayout();
         ////////////////////////E-Mail//////////////////////////////////////////////////////////////////////////////////
 //        s = new Span("E-Mail");
-        s = getWommBuilder().Span.create("E-Mail");
+        s = getWommBuilder().Span.create("e-mail");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
 //        s1 = new Span("p_stein@email.de");
@@ -148,10 +150,10 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
         ////////////////////////Ort/////////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Ort");
+        s = getWommBuilder().Span.create("Location");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("Bonn");
+        s1 = new Span(studentOrt);
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
@@ -163,10 +165,11 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert2 = new VerticalLayout();
         headervert.setWidth("50%");
         ////////////////////////Biographie///////////////////////////////////////////////////////////////////////////////
-        s = new Span("Biographie");
+        s = getWommBuilder().Span.create("Biography");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("2018 nach dem Abitur, Ausbildung als Einzelhandeskaufmann, 2021 nach der Ausbildung angestellt als Einzelhandelskaufmann, Seit 2022 Vollzeit-Informatikstudent.");
+        //s1 = new Span("2018 nach dem Abitur, Ausbildung als Einzelhandeskaufmann, 2021 nach der Ausbildung angestellt als Einzelhandelskaufmann, Seit 2022 Vollzeit-Informatikstudent.");
+        s1 = new Span(studentBiographie);
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
@@ -177,10 +180,11 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
         ////////////////////////Spezialisierungen////////////////////////////////////////////////////////////////////////
-        s = new Span("Spezialisierungen");
+        s = getWommBuilder().Span.create("Specializations");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("Windows-User, Social-Media-Plattformen, Officeprogramme, diverse IDEs: viel Java-Coding Erfahrung, mäßige C-Coding  Erfahrung");
+        //s1 = new Span("Windows-User, Social-Media-Plattformen, Officeprogramme, diverse IDEs: viel Java-Coding Erfahrung, mäßige C-Coding  Erfahrung");
+        s1 = new Span(studentSpezialisierungen);
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);
@@ -191,10 +195,11 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
         headervert.add(new Hr());
         headervert2 = new VerticalLayout();
         ////////////////////////Semester////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Akutelles Semester");
+        s = getWommBuilder().Span.create("Current semester");
         s.getElement().getStyle().set("font-size", "20px");
         s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("3.");
+        //s1 = new Span("3.");
+        s1 = new Span(studentSemester);
         s1.getElement().getStyle().set("font-size", "25px");
         s1.getElement().getStyle().set("color", "#192434");     //color black
         headervert2.add(s);

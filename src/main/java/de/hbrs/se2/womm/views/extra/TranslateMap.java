@@ -52,6 +52,15 @@ public class TranslateMap {
         //AccessDeniedView
         put("Access Denied!", "Zugriff verweigert!");
 
+        //StudentProfileDisplayView
+        put("Location", "Ort");
+        put("Date of Birth", "Geburtstag");
+        put("e-mail", "E-Mail");
+        put("alias", "Alias");
+        put("Current semester", "Aktuelles Semester");
+        put("Specializations", "Spezialisierungen");
+        put("Biography", "Biographie");
+
 
     }};
 
