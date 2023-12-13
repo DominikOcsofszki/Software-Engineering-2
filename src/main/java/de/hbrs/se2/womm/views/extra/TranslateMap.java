@@ -85,6 +85,14 @@ public class TranslateMap {
         put("Surname", "Nachname");
         put("Location", "Standort");
 
+        //StudentProfileDisplayView
+        put("Location", "Ort");
+        put("Date of Birth", "Geburtstag");
+        put("e-mail", "E-Mail");
+        put("alias", "Alias");
+        put("Current semester", "Aktuelles Semester");
+        put("Specializations", "Spezialisierungen");
+        put("Biography", "Biographie");
     }};
 
 
