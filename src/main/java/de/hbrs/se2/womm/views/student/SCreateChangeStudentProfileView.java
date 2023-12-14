@@ -16,6 +16,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StudentController;
+import de.hbrs.se2.womm.dtos.NutzerDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.views.LandingPageView;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
@@ -32,6 +33,7 @@ import java.util.Objects;
 //public class SCreateChangeStudentProfileView extends AbstractView {
 public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
     StudentDTO studentDTO;
+    NutzerDTO nutzerDTO;
 
     //SetUp Data
     String studentName;
@@ -58,6 +60,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         studentSemester = String.valueOf(studentDTO.getStudentSemester());
         studentProfilbild = studentDTO.PlaceholderOrImage();
         studentBenachrichtigungen = studentDTO.isStudentBenachrichtigung();
+        studentPasswort = studentDTO.getNutzer().getPasswort();
     }
     public SCreateChangeStudentProfileView(StudentController controller, SecurityService securityService) {
         super(controller,securityService);
@@ -74,8 +77,14 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         //studentDTO.setStudentVorname();   nicht nötig
         //studentDTO.setStudentAlias();     nicht nötig ?
         studentDTO.setStudentGeburtstag(studentGeburtstag);
-        //studentDTO.setNutzer().setEmail();    nicht implementiert
+        //studentDTO.setEmail();    //nicht implementiert
         //studentDTO.setNutzer().setOrt();      nicht implementiert
+        nutzerDTO.setEmail(studentEmail);
+        nutzerDTO.setPasswort(studentPasswort);
+        nutzerDTO.setOrt(studentOrt);
+
+        studentDTO.setNutzer(nutzerDTO);
+
         studentDTO.setStudentBio(studentBiographie);
         studentDTO.setStudentSpezialisierung(studentSpezialisierungen);
         System.out.println(studentSemester);
