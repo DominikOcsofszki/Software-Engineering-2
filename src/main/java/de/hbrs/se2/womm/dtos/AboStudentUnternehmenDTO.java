@@ -15,7 +15,7 @@ public class AboStudentUnternehmenDTO {
 
     private Boolean aboBenachrichtigungen;
 
-    private Student student;
+    private StudentDTO student;
 
-    private Unternehmen unternehmen;
+    private UnternehmenDTO unternehmen;
 }
