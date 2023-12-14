@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface UnternehmenRepository extends JpaRepository<Unternehmen, Long> {
     Optional<Unternehmen> findUnternehmenByUnternehmenId(long unternehmenID);
 
-    Unternehmen findUnternehmenByNutzer_NutzerId(long nutzerID);
+    Optional<Unternehmen> findUnternehmenByNutzer_NutzerId(long nutzerID);
 
     List<Unternehmen> findUnternehmenByNameIgnoreCaseContaining(String unternehmenName);
 }

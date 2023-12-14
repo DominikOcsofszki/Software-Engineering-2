@@ -25,6 +25,12 @@ public class UnternehmenService {
                 .orElse(null);
     }
 
+    public UnternehmenDTO getByNutzerID(long id){
+        return unternehmenRepository.findUnternehmenByNutzer_NutzerId(id)
+                .map(unternehmenMapper::unternehmenZuDTO)
+                .orElse(null);
+    }
+
     public List<UnternehmenDTO> getUnternehmenDTOPerName(String unternehmenName) {
         return unternehmenRepository.findUnternehmenByNameIgnoreCaseContaining(unternehmenName)
                 .stream()

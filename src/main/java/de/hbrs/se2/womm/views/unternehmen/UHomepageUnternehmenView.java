@@ -11,8 +11,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -24,9 +24,9 @@ import jakarta.annotation.security.RolesAllowed;
 @PageTitle("HomepageUnternehmenView")
 public class UHomepageUnternehmenView extends VerticalLayout {
     UnternehmenDTO unternehmenDTO;
-    public UHomepageUnternehmenView(UnternehmenController unternehmenController, SecurityService securityService, StelleController stelleController) {
+    public UHomepageUnternehmenView(UnternehmenService unternehmenController, SecurityService securityService, StelleController stelleController) {
         long id = securityService.getLoggedInNutzerID();
-        this.unternehmenDTO = unternehmenController.getById(id).getBody();
+        this.unternehmenDTO = unternehmenController.getByNutzerID(id);
         setUpHeader();
         setUpBanner();
 
