@@ -53,19 +53,24 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         studentVorname = studentDTO.getStudentVorname();
 //        studentAlias = studentDTO.getStudentAlias(); //ToDo in DTO?
         studentGeburtstag = studentDTO.getStudentGeburtstag();
-        studentEmail = studentDTO.getNutzer().getEmail();
-        studentOrt = studentDTO.getNutzer().getOrt();
+
         studentBiographie = studentDTO.getStudentBio();
         studentSpezialisierungen = studentDTO.getStudentSpezialisierung();
         studentSemester = String.valueOf(studentDTO.getStudentSemester());
         studentProfilbild = studentDTO.PlaceholderOrImage();
         studentBenachrichtigungen = studentDTO.isStudentBenachrichtigung();
-        studentPasswort = studentDTO.getNutzer().getPasswort();
+        nutzerDTO = studentDTO.getNutzer();
+        studentPasswort = nutzerDTO.getPasswort();
+        studentEmail = nutzerDTO.getEmail();
+        studentOrt = nutzerDTO.getOrt();
+
     }
     public SCreateChangeStudentProfileView(StudentController controller, SecurityService securityService) {
         super(controller,securityService);
         this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
         setUpDataFromDTO();
+        System.out.println(studentDTO);
+        System.out.println(nutzerDTO + " NUTZER");
         //System.out.println(studentDTO);
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
@@ -82,7 +87,6 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         nutzerDTO.setEmail(studentEmail);
         nutzerDTO.setPasswort(studentPasswort);
         nutzerDTO.setOrt(studentOrt);
-
         studentDTO.setNutzer(nutzerDTO);
 
         studentDTO.setStudentBio(studentBiographie);
@@ -92,6 +96,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         studentDTO.setStudentBenachrichtigung(studentBenachrichtigungen);
         getController().updateStudent(studentDTO);
         System.out.println(studentDTO);
+        System.out.println(studentOrt + " ORT " + studentEmail + " EMAIL " + studentPasswort +" PASSWORT");
         //UI.getCurrent().navigate(LandingPageView.class);
     }
     private void saveChanges(){
