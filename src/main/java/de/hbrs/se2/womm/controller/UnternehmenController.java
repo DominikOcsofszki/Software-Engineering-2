@@ -23,6 +23,10 @@ public class UnternehmenController extends AbstractControllerWomm {
         return new ResponseEntity<>(unternehmenService.getAll(), HttpStatus.OK);
     }
 
+    public UnternehmenDTO getByNutzerID(long id){
+        return unternehmenService.getUnternehmenByNutzerID(id);
+    }
+
     @GetMapping("/Unternehmen/{id}")
     public ResponseEntity<UnternehmenDTO> getUnternehmenById(@PathVariable long id) {
         UnternehmenDTO gefunden = unternehmenService.getUnternehmenPerID(id);
