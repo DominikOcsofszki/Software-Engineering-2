@@ -14,9 +14,12 @@ public class UnternehmenService implements IgetDTOListbyPrimaryKeyService {
 
     private final UnternehmenRepository unternehmenRepository;
     private final UnternehmenMapper unternehmenMapper = UnternehmenMapper.INSTANCE;
-
     public UnternehmenService(UnternehmenRepository unternehmenRepository) {
         this.unternehmenRepository = unternehmenRepository;
+    }
+
+    public UnternehmenDTO getUnternehmenByNutzerID(long id){
+        return unternehmenRepository.findUnternehmenByNutzer_NutzerId(id).map(unternehmenMapper::unternehmenZuDTO).orElse(null);
     }
 
     public UnternehmenDTO getUnternehmenPerID(long id){
@@ -43,7 +46,7 @@ public class UnternehmenService implements IgetDTOListbyPrimaryKeyService {
 
     @Override
     public List<UnternehmenDTO> getDTOListbyPrimaryKeyService(long primaryKey) {
-        return unternehmenRepository.findUnternehmenByUnternehmenId(primaryKey)
+        return unternehmenRepository.findUnternehmenByNutzer_NutzerId(primaryKey)
                 .map(unternehmenMapper::unternehmenZuDTO).stream().toList();
     }
 }
