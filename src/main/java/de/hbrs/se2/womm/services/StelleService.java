@@ -42,4 +42,32 @@ public class StelleService {
                 .map(stelleMapper::stelleToStelleDto)
                 .toList();
     }
+
+    public List<StelleDTO> getAllByFilter(String filter, String attribute) {
+        attribute = attribute.toLowerCase();
+        List<Stelle> result;
+
+        switch (attribute) {
+            case "titel":
+                result = stelleRepository.findByStelleTitelIsContainingIgnoreCase(filter);
+                break;
+            case "ort":
+                result = stelleRepository.findByStelleOrtIsContainingIgnoreCase(filter);
+                break;
+            case "beschreibung":
+                result = stelleRepository.findByStelleBeschreibungIsContainingIgnoreCase(filter);
+                break;
+            case "website":
+                result = stelleRepository.findByStelleWebsiteIsContainingIgnoreCase(filter);
+                break;
+            case "unternehmen":
+                result = stelleRepository.findByUnternehmen_NameIsContainingIgnoreCase(filter);
+                break;
+            default:
+                result = stelleRepository.findAll();
+        }
+        return result.stream()
+                .map(stelleMapper::stelleToStelleDto)
+                .toList();
+    }
 }
