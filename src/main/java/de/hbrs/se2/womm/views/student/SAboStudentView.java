@@ -17,7 +17,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.extra.TEMPLATE;
-import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -28,7 +28,7 @@ import java.util.List;
 @Route(value = ROUTING.STUDENT.SAboStudentView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("AboStudentView")
-public class SAboStudentView extends AbstractViewWithoutController {
+public class SAboStudentView extends AViewWomm {
 
     public SAboStudentView() {
         setUpSearchFields();

@@ -10,11 +10,11 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import de.hbrs.se2.womm.config.CONFIGS;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
-import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 
 @Route(value = ROUTING.ALL.AccessDeniedView)
-public class AccessDeniedView extends AbstractViewWithoutController implements BeforeEnterObserver {
+public class AccessDeniedView extends AViewWomm implements BeforeEnterObserver {
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {

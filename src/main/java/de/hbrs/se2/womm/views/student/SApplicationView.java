@@ -9,14 +9,13 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.controller.BewerbungController;
-import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.BewerbungService;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
+import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.extra.ComponentImageUpload;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -38,24 +37,24 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Strin
     TextArea bewerbungText = new TextArea();
 
     StelleService stelleService;
-    UnternehmenController unternehmenController;
-    BewerbungController bewerbungController;
+    UnternehmenService unternehmenService;
+    BewerbungService bewerbungService;
     SecurityService securityService;
     String valueFromQuerry;
 
     private long aktuelleNutzerID;
 
-    public SApplicationView(BewerbungController bewerbungController,
+    public SApplicationView(BewerbungService bewerbungService,
                             StelleService stelleService,
-                            UnternehmenController unternehmenController,
+                            UnternehmenService unternehmenService,
                             SecurityService securityService,
                             StudentService studentService) {
         super();
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
-        this.bewerbungController = bewerbungController;
+        this.bewerbungService = bewerbungService;
         this.stelleService = stelleService;
-        this.unternehmenController = unternehmenController;
+        this.unternehmenService = unternehmenService;
         this.securityService = securityService;
         //SetUp:
         //

@@ -11,11 +11,10 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Stelle;
 import de.hbrs.se2.womm.services.UnternehmenService;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
@@ -28,7 +27,7 @@ import java.util.List;
 @RolesAllowed({"UNTERNEHMEN", "ADMIN"})
 @PageTitle("FirmProfileDisplayView")
 //public class UFirmProfileDisplayView extends VerticalLayout {
-public class UFirmProfileDisplayViewOld extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO> {
+public class UFirmProfileDisplayViewOld extends AViewWomm {
     private long aktuelleNutzerID;
     private UnternehmenDTO unternehmenDTO;
     public UFirmProfileDisplayViewOld(UnternehmenService unternehmenService, StelleController stelleController, SecurityService securityService) {

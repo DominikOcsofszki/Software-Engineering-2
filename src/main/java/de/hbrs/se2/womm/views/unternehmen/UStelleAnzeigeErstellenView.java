@@ -11,11 +11,10 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.services.UnternehmenService;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -23,7 +22,7 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.UNTERNEHMEN.UStelleAnzeigeErstellenView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN","ADMIN"})
 @PageTitle("StelleAnzeigeErstellenView")
-public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO>
+public class UStelleAnzeigeErstellenView extends AViewWomm
         implements HasUrlParameter<String> {
 
     TextField stelleTitel = new TextField();
@@ -33,7 +32,7 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
 
     StelleController stelleController;
 
-    UnternehmenController unternehmenController;
+    UnternehmenService unternehmenService;
 
     SecurityService securityService;
 
@@ -52,12 +51,14 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
         }
     }
 
-    public UStelleAnzeigeErstellenView(StelleController stelleController, UnternehmenController unternehmenController, UnternehmenService unternehmenService, SecurityService securityService) {
+    public UStelleAnzeigeErstellenView(StelleController stelleController,
+                                       UnternehmenService unternehmenService,
+                                       SecurityService securityService) {
         super();
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         this.stelleController = stelleController;
-        this.unternehmenController = unternehmenController;
+        this.unternehmenService = unternehmenService;
         this.securityService = securityService;
         setUpHeader();
         setUpStellenanzeige();

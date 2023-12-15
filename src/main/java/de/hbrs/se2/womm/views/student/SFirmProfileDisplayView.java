@@ -9,17 +9,16 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.*;
-import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Stelle;
+import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.extra.ASSETS;
-import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import de.hbrs.se2.womm.views.unternehmen.UEditFirmProfileDisplayViewOld;
 import jakarta.annotation.security.RolesAllowed;
 import javassist.NotFoundException;
-import tools.generate.GenerateUnternehmenDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +26,12 @@ import java.util.List;
 @Route(value = ROUTING.STUDENT.SFirmProfileDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("FirmProfileDisplayView")
-public class SFirmProfileDisplayView extends AbstractViewWithoutController implements HasUrlParameter<String> {
+public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParameter<String> {
 
     private String parameter;
-    UnternehmenController unternehmenController;
-    UnternehmenDTO unternehmenDTO = GenerateUnternehmenDTO.generateUnternehmenDTO(1).get(0);
+    UnternehmenService unternehmenService;
+    UnternehmenDTO unternehmenDTO;
+//    UnternehmenDTO unternehmenDTO = GenerateUnternehmenDTO.generateUnternehmenDTO(1).get(0);
     long unternehmenId = 1;
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
@@ -45,11 +45,11 @@ public class SFirmProfileDisplayView extends AbstractViewWithoutController imple
         }
     }
     private UnternehmenDTO setUpUnternehmenDTO(long id) throws NotFoundException {
-        return unternehmenController.getUnternehmenById(id).getBody();
+        return unternehmenService.getByNutzerId(id);
     }
 
-    public SFirmProfileDisplayView(UnternehmenController unternehmenController) {
-        this.unternehmenController=unternehmenController;
+    public SFirmProfileDisplayView(UnternehmenService unternehmenService) {
+        this.unternehmenService = unternehmenService;
         // Logo, Company Name, Subscribe and Chat Button
         HorizontalLayout buttonsLayout = new HorizontalLayout();
 
