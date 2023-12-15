@@ -3,6 +3,7 @@ package de.hbrs.se2.womm.services;
 import de.hbrs.se2.womm.dtos.AboStudentUnternehmenDTO;
 import de.hbrs.se2.womm.entities.AboStudentUnternehmen;
 import de.hbrs.se2.womm.mapper.AboStudentUnternehmenMapper;
+import de.hbrs.se2.womm.mapper.UnternehmenMapper;
 import de.hbrs.se2.womm.repositories.AboStudentUnternehmenRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +12,10 @@ import java.util.List;
 @Service
 public class AboStudentUnternehmenService {
     AboStudentUnternehmenRepository aboStudentUnternehmenRepository;
-    AboStudentUnternehmenMapper aboStudentUnternehmenMapper;
+    AboStudentUnternehmenMapper aboStudentUnternehmenMapper = AboStudentUnternehmenMapper.INSTANCE;
 
-    public AboStudentUnternehmenService(AboStudentUnternehmenRepository aboStudentUnternehmenRepository,
-                                        AboStudentUnternehmenMapper aboStudentUnternehmenMapper){
+    public AboStudentUnternehmenService(AboStudentUnternehmenRepository aboStudentUnternehmenRepository){
         this.aboStudentUnternehmenRepository =  aboStudentUnternehmenRepository;
-        this.aboStudentUnternehmenMapper = aboStudentUnternehmenMapper;
     }
 
     public AboStudentUnternehmenDTO getById(long id){

@@ -7,7 +7,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface AboStudentUnternehmenMapper {
-    AboStudentUnternehmenMapper INSTNACE = Mappers.getMapper(AboStudentUnternehmenMapper.class);
+    AboStudentUnternehmenMapper INSTANCE = Mappers.getMapper(AboStudentUnternehmenMapper.class);
 
     AboStudentUnternehmen aboStudentUnternehmenDTOToAboStudentUnternehmen(AboStudentUnternehmenDTO aboStudentUnternehmenDTO);
     AboStudentUnternehmenDTO aboStudentUnternehmenToaboStudentUnternehmenDTO(AboStudentUnternehmen aboStudentUnternehmen);

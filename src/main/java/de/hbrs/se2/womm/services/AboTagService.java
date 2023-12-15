@@ -3,6 +3,7 @@ package de.hbrs.se2.womm.services;
 import de.hbrs.se2.womm.dtos.AboTagDTO;
 import de.hbrs.se2.womm.entities.AboTag;
 import de.hbrs.se2.womm.mapper.AboTagMapper;
+import de.hbrs.se2.womm.mapper.UnternehmenMapper;
 import de.hbrs.se2.womm.repositories.AboTagRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +11,10 @@ import java.util.List;
 
 @Service
 public class AboTagService {
-    AboTagMapper aboTagMapper;
+    AboTagMapper aboTagMapper = AboTagMapper.INSTANCE;
     AboTagRepository aboTagRepository;
 
-    public AboTagService(AboTagMapper aboTagMapper, AboTagRepository aboTagRepository){
-        this.aboTagMapper = aboTagMapper;
+    public AboTagService(AboTagRepository aboTagRepository){
         this.aboTagRepository = aboTagRepository;
     }
 
