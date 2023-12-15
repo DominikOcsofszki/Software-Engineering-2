@@ -24,14 +24,14 @@ public class UnternehmenLayout extends AbstractLayoutLoggedIn {
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
-                new RouterLink(VaadinBuilderWomm.translateText("UApplicationView"), UApplicationView.class),
-                new RouterLink(VaadinBuilderWomm.translateText("UApplicationsView"), UApplicationsView.class),
-                new RouterLink(VaadinBuilderWomm.translateText("UChatView"), UChatView.class),
-                new RouterLink(VaadinBuilderWomm.translateText("UEditFirmProfileDisplayView"), UEditFirmProfileDisplayView.class),
-                new RouterLink(VaadinBuilderWomm.translateText("UFirmProfileDisplayView"), UFirmProfileDisplayView.class),
-                new RouterLink(VaadinBuilderWomm.translateText("UHomepageUnternehmenView"), UHomepageUnternehmenView.class),
-                new RouterLink(VaadinBuilderWomm.translateText("UStelleAnzeigeErstellenView"), UStelleAnzeigeErstellenView.class),
-                new RouterLink(VaadinBuilderWomm.translateText("UNotificationView"), UNotificationView.class)
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("UApplicationView"), UApplicationView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("UApplicationsView"), UApplicationsView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("UChatView"), UChatView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("UEditFirmProfileDisplayView"), UEditFirmProfileDisplayView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("UFirmProfileDisplayView"), UFirmProfileDisplayView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("UHomepageUnternehmenView"), UHomepageUnternehmenView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("UStelleAnzeigeErstellenView"), UStelleAnzeigeErstellenView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("UNotificationView"), UNotificationView.class)
         ));
     }
 }
