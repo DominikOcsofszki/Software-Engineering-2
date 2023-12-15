@@ -20,11 +20,15 @@ public class RegisterPage extends AbstractPage {
     WebElement confirmPassword;
     WebElement bday;
     WebElement location;
+    WebElement buttonRegister;
 
     public RegisterPage(WebDriver driver, WebDriverWait wait) {
         super("RegistrierungStudentView", ROUTING.ALL.RegistrierungStudentView);
         this.driver = driver;
         this.wait = wait;
+        goToWebsiteAndWaitUntilTitlePresent();
+        setUp();
+
     }
 
     public void goToWebsiteAndWaitUntilTitlePresent() {
@@ -36,18 +40,35 @@ public class RegisterPage extends AbstractPage {
 //        passwordField = driver.findElement(By.id("input-vaadin-password-field-7"));
 //        loginButton = driver.findElement(By.id("login-button")); //ToDo: ID ändern
 //    }
-//    private void setUp() {
+    private void setUp() {
 //        name = driver.findElement(By.id("text-field-builder-1"));
-//
-//        name = driver.findElement(By.id(LOCATORS.));
-//        surname = driver.findElement(By.id(LOCATORS.));
-//        username = driver.findElement(By.id(LOCATORS.));
-//        email = driver.findElement(By.id(LOCATORS.));
-//        password = driver.findElement(By.id(LOCATORS.));
-//        confirmPassword = driver.findElement(By.id(LOCATORS.));
-//        bday = driver.findElement(By.id(LOCATORS.));
-//        location = driver.findElement(By.id(LOCATORS.));
-//    }
+
+        name = driver.findElement(LOCATORS.TEXT_FIELD_BUILDER_1);
+        surname = driver.findElement(LOCATORS.TEXT_FIELD_BUILDER_2);
+        username = driver.findElement(LOCATORS.TEXT_FIELD_BUILDER_3);
+        email = driver.findElement(LOCATORS.EMAILFIELD_BUILDER_1);
+        password = driver.findElement(LOCATORS.PASSWORDFIELD_BUILDER_1);
+        confirmPassword = driver.findElement(LOCATORS.PASSWORDFIELD_BUILDER_2);
+        bday = driver.findElement(LOCATORS.DATEPICKER_BUILDER_1);
+        location = driver.findElement(LOCATORS.TEXT_FIELD_BUILDER_4);
+        buttonRegister = driver.findElement(LOCATORS.BUTTON_BUILDER_1);
+
+
+    }
+
+    public void register(String name, String surname, String username, String email, String password, String confirmPassword, String bday, String location) {
+        setUp();
+        this.name.sendKeys(name);
+        this.surname.sendKeys(surname);
+        this.username.sendKeys(username);
+        this.email.sendKeys(email);
+        this.password.sendKeys(password);
+        this.confirmPassword.sendKeys(confirmPassword);
+        this.bday.sendKeys(bday);
+        this.location.sendKeys(location);
+        this.buttonRegister.click();
+        wait.until(webDriver -> !(webDriver.getTitle().equals(getWebsiteTitle())));
+    }
 
 //
 //    public void login(String username, String password) {
