@@ -1,0 +1,16 @@
+/*public static final String Avenir = "Avenir Next LT Pro";*/
+/*public static final String Primary = StyleGuide.PrimaryFormats.blue;*/
+/*public static final String Success = StyleGuide.PrimaryFormats.green;*/
+/*public static final String Error = StyleGuide.PrimaryFormats.red;*/
+/*public static final String Font = StyleGuide.OpenSanse.Avenir;*/
+/*public static final String black = "#192434";*/
+/*public static final String grey = "#C4CBD3";*/
+/*public static final String blue = "1676F3";*/
+/*public static final String green = "15C15D";*/
+/*public static final String red = "FF4338";*/
+
+html {
+    --lumo-primary-color: #1676F3;
+    --lumo-primary-text-color: #1676F3;
+
+}
