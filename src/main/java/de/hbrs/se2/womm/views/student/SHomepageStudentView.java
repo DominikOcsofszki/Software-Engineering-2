@@ -11,13 +11,13 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
+import de.hbrs.se2.womm.views.components.GridFilterStelle;
 import de.hbrs.se2.womm.views.extra.ASSETS;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
-import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -25,22 +25,24 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.STUDENT.SHomepageStudentView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("HomepageStudentView")
-public class SHomepageStudentView extends AbstractViewWithoutController {
-    StelleController stelleController;
+public class SHomepageStudentView extends AViewWomm {
+    StelleService stelleService;
     StudentDTO studentDTO;
     private long aktuelleNutzerID;
+    private GridFilterStelle gridFilterStelle;
 
-
-    public SHomepageStudentView(StelleController stelleController, StudentService studentService, SecurityService securityService) {
+    public SHomepageStudentView(StelleService stelleService, StudentService studentService, SecurityService securityService) {
         super();
-        this.stelleController = stelleController;
+        this.stelleService = stelleService;
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
+        this.gridFilterStelle = new GridFilterStelle();
+        this.gridFilterStelle.setUpFromOutside(stelleService.getAllByFilter("",""));
         setUpHeader();
         setUpBanner();
         setUpSearchFields();
-        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, -99L)); //ToDo -99L => all
-
+//        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleService, -99L)); //ToDo -99L => all
+        add(this.gridFilterStelle);
     }
 
     private void setUpHeader() {
