@@ -55,7 +55,7 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
     public UStelleAnzeigeErstellenView(StelleController stelleController, UnternehmenController unternehmenController, UnternehmenService unternehmenService, SecurityService securityService) {
         super();
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
-        this.unternehmenDTO = unternehmenService.getByNutzerID(aktuelleNutzerID);
+        this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         this.stelleController = stelleController;
         this.unternehmenController = unternehmenController;
         this.securityService = securityService;

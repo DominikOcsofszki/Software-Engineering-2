@@ -30,7 +30,7 @@ public class UHomepageUnternehmenView extends AbstractViewDTObyNutzerID<Unterneh
     public UHomepageUnternehmenView(UnternehmenService unternehmenService, SecurityService securityService, StelleController stelleController) {
         super();
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
-        this.unternehmenDTO = unternehmenService.getByNutzerID(aktuelleNutzerID);
+        this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         setUpHeader();
         setUpBanner();
 

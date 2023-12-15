@@ -17,6 +17,7 @@ import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
+import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -24,7 +25,7 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.STUDENT.SHomepageStudentView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("HomepageStudentView")
-public class SHomepageStudentView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+public class SHomepageStudentView extends AbstractViewWithoutController {
     StelleController stelleController;
     StudentDTO studentDTO;
     private long aktuelleNutzerID;

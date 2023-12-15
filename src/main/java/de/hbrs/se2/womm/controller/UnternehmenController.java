@@ -1,6 +1,5 @@
 package de.hbrs.se2.womm.controller;
 
-import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.services.UnternehmenService;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,7 @@ public class UnternehmenController extends AbstractControllerWomm {
     }
 
     public UnternehmenDTO getByNutzerID(long id){
-        return unternehmenService.getByNutzerID(id);
+        return unternehmenService.getByNutzerId(id);
     }
 
     @GetMapping("/Unternehmen/{id}")

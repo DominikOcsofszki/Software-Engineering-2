@@ -9,6 +9,8 @@ import java.util.List;
 public interface StelleRepository extends JpaRepository<Stelle, Long> {
     List<Stelle> findByUnternehmen_UnternehmenId(long stelleID);
 
+    List<Stelle> findByUnternehmen_Nutzer_NutzerId(long id);
+
     List<Stelle> findByStelleTitelIsContainingIgnoreCase(String titel);
 
     List<Stelle> findByStelleOrtIsContainingIgnoreCase(String ort);

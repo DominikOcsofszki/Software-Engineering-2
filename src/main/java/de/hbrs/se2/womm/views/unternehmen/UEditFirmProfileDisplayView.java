@@ -46,7 +46,7 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unter
     protected UEditFirmProfileDisplayView( UnternehmenService unternehmenService, StelleController stelleController, SecurityService securityService) {
         super();
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
-        this.unternehmenDTO = unternehmenService.getByNutzerID(aktuelleNutzerID);
+        this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         this.unternehmenService = unternehmenService;
         setUp();
         add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));

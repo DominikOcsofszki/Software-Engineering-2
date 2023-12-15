@@ -25,7 +25,7 @@ public class UnternehmenService {
                 .orElse(null);
     }
 
-    public UnternehmenDTO getByNutzerID(long id){
+    public UnternehmenDTO getByNutzerId(long id){
         return unternehmenRepository.findUnternehmenByNutzer_NutzerId(id)
                 .map(unternehmenMapper::unternehmenZuDTO)
                 .orElse(null);

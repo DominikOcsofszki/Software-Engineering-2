@@ -25,6 +25,13 @@ public class StelleService {
                 .toList();
     }
 
+    public List<StelleDTO> getByNutzerId(Long nutzerID) { //ToDo why not working ????
+        return stelleRepository.findByUnternehmen_Nutzer_NutzerId(nutzerID)
+                .stream()
+                .map(stelleMapper::stelleToStelleDto)
+                .toList();
+    }
+
     public Optional<StelleDTO> getById(Long id) {
         return stelleRepository.findById(id)
                 .map(stelleMapper::stelleToStelleDto);
