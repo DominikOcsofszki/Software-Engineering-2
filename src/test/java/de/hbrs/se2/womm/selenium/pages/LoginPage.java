@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-class LoginPage extends AbstractPage {
+public class LoginPage extends AbstractPage {
     private WebDriver driver;
     private WebDriverWait wait;
     WebElement usernameField;

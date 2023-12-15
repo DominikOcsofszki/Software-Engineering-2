@@ -52,6 +52,32 @@ public class TranslateMap {
         //AccessDeniedView
         put("Access Denied!", "Zugriff verweigert!");
 
+        //registerview
+        put("Confirm Password", "Passwort bestätigen");
+        put("Password is required", "Passwort ist erforderlich");
+        put("Email connected to your future account", "Email, die mit Ihrem zukünftigen Konto verbunden ist");
+        put("Invalid date given. Dates must follow the 'DD.MM.YYYY' format.", "Ungültiges Datum angegeben. Daten müssen dem Format 'TT.MM.JJJJ' folgen.");
+        put("Password Confirmation is required", "Passwortbestätigung ist erforderlich");
+        put("Repeat your password", "Wiederholen Sie Ihr Passwort");
+        put("Email is required", "Email ist erforderlich");
+        put("Select your date of birth", "Wählen Sie Ihr Geburtsdatum");
+        put("Your desired username", "Ihr gewünschter Benutzername");
+        put("Password", "Passwort");
+        put("Username is required", "Benutzername ist erforderlich");
+        put("Your REAL surname", "Ihr ECHTER Nachname");
+        put("Email 😳", "Email 😳");
+        put("Location is required", "Standort ist erforderlich");
+        put("Your REAL Name", "Ihr ECHTER Name");
+        put("The password used for login", "Das Passwort für die Anmeldung");
+        put("Surname is required", "Nachname ist erforderlich");
+        put("Student/in Registration", "Student/in Registrierung");
+        put("Your current living location", "Ihr aktueller Wohnort");
+        put("Name is required", "Name ist erforderlich");
+        put("Username", "Benutzername");
+        put("Register", "Registrieren");
+        put("Date of Birth", "Geburtsdatum");
+        put("Surname", "Nachname");
+        put("Location", "Standort");
 
     }};
 
