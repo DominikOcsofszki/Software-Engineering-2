@@ -23,7 +23,7 @@ public class AccessDeniedView extends AViewWomm implements BeforeEnterObserver {
         // If not, redirect or display an access denied message
 
         // Here's a simple example showing an access denied message
-        Text accessDeniedText = new Text(VaadinBuilderWomm.translateText("Access Denied!"));
+        Text accessDeniedText = new Text(VaadinBuilderWomm.translateTextStatic("Access Denied!"));
         add(accessDeniedText);
         if (CONFIGS.DEVMODE) {
             Button buttonLogin = new Button("login");
