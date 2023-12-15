@@ -19,6 +19,7 @@ import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.NutzerDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.views.LandingPageView;
+import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -231,7 +232,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         singleFormatI18n.setDateFormat("dd.MM.yyyy");
         datePicker.setI18n(singleFormatI18n);
         datePicker.setTooltipText("Select your date of birth");
-        datePicker.setErrorMessage("Invalid date given. Dates must follow the 'DD.MM.YYYY' format.");
+        datePicker.setErrorMessage(VaadinBuilderWomm.translateText("Invalid date given. Dates must follow the 'DD.MM.YYYY' format."));
         datePicker.setValue(datum);
         datePicker.setValue(studentGeburtstag==null ? datum : LocalDate.parse(studentGeburtstag));
         headervert2.add(datePicker);
@@ -284,7 +285,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         validEmailField1.getStyle().set("flex-grow","1");
         validEmailField1.setValue(studentEmail==null ? "" : studentEmail);
         validEmailField1.setClearButtonVisible(true);
-        validEmailField1.setErrorMessage("Please enter a valid e-mail address");
+        validEmailField1.setErrorMessage(VaadinBuilderWomm.translateText("Please enter a valid e-mail address"));
         validEmailField2.setWidth("50%");
         validEmailField2.getStyle().set("flex-grow","1");
         validEmailField2.setValue("");
