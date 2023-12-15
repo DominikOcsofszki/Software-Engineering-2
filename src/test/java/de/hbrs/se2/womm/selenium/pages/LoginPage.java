@@ -1,6 +1,6 @@
-package de.hbrs.se2.womm.selenium;
+package de.hbrs.se2.womm.selenium.pages;
 
-import de.hbrs.se2.womm.selenium.using.AbstractPage;
+import de.hbrs.se2.womm.selenium.extra.AbstractPage;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

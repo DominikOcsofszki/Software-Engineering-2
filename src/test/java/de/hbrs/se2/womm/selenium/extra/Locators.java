@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.selenium.using;
+package de.hbrs.se2.womm.selenium.extra;
 
 import org.openqa.selenium.By;
 

@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.selenium.using;
+package de.hbrs.se2.womm.selenium.extra;
 
 public abstract class AbstractPage {
     protected static final String BASE_URL = "http://localhost:8080/vaadin/";
