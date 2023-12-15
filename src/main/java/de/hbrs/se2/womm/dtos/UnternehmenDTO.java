@@ -9,7 +9,7 @@ import lombok.Getter;
 @Data
 @Builder
 @Getter
-public class UnternehmenDTO extends AbstractDTO{
+public class UnternehmenDTO implements AbstractDTO {
     private Long unternehmenId;
     private String name;
     private String beschreibung;

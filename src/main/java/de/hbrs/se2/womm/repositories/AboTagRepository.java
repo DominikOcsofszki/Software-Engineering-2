@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AboTagRepository extends JpaRepository<AboTag,Long> {
     AboTag findAboTagByStudent_StudentIdAndTag_TagId(long studentID, long tagID);
-    List<AboTag> findAboTagByStudent_StudentId(long studentID);
+    List<AboTag> findAboTagByStudent_Nutzer_NutzerId(long id);
 }

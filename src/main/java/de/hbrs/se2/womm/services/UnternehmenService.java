@@ -9,21 +9,24 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UnternehmenService implements IgetDTOListbyPrimaryKeyService {
+public class UnternehmenService {
 
 
     private final UnternehmenRepository unternehmenRepository;
     private final UnternehmenMapper unternehmenMapper = UnternehmenMapper.INSTANCE;
+
     public UnternehmenService(UnternehmenRepository unternehmenRepository) {
         this.unternehmenRepository = unternehmenRepository;
     }
 
-    public UnternehmenDTO getUnternehmenByNutzerID(long id){
-        return unternehmenRepository.findUnternehmenByNutzer_NutzerId(id).map(unternehmenMapper::unternehmenZuDTO).orElse(null);
-    }
-
     public UnternehmenDTO getUnternehmenPerID(long id){
         return unternehmenRepository.findUnternehmenByUnternehmenId(id)
+                .map(unternehmenMapper::unternehmenZuDTO)
+                .orElse(null);
+    }
+
+    public UnternehmenDTO getByNutzerId(long id){
+        return unternehmenRepository.findUnternehmenByNutzer_NutzerId(id)
                 .map(unternehmenMapper::unternehmenZuDTO)
                 .orElse(null);
     }
@@ -42,11 +45,5 @@ public class UnternehmenService implements IgetDTOListbyPrimaryKeyService {
     public void saveUnternehmen(UnternehmenDTO unternehmenDTO){
         Unternehmen unternehmen = unternehmenMapper.dtoZuUnternehmen(unternehmenDTO);
         unternehmenRepository.save(unternehmen);
-    }
-
-    @Override
-    public List<UnternehmenDTO> getDTOListbyPrimaryKeyService(long primaryKey) {
-        return unternehmenRepository.findUnternehmenByNutzer_NutzerId(primaryKey)
-                .map(unternehmenMapper::unternehmenZuDTO).stream().toList();
     }
 }

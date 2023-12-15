@@ -9,26 +9,34 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.UnternehmenController;
+import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
-import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
+import de.hbrs.se2.womm.services.StelleService;
+import de.hbrs.se2.womm.services.UnternehmenService;
+import de.hbrs.se2.womm.views.components.GridFilterStelle;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
+import java.util.List;
+
 @Route(value = ROUTING.UNTERNEHMEN.UFirmProfileDisplayView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN", "ADMIN"})
 @PageTitle("FirmProfileDisplayView")
-public class UFirmProfileDisplayView extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO> {
+public class UFirmProfileDisplayView extends AViewWomm {
     private UnternehmenDTO unternehmenDTO;
+    private long aktuelleNutzerID;
+    GridFilterStelle gridFilterStelle;
 
-    public UFirmProfileDisplayView(UnternehmenController unternehmenController, StelleController stelleController, SecurityService securityService) {
-        super(unternehmenController, securityService);
-        this.unternehmenDTO = (UnternehmenDTO) getDtoAbstractCastNeeded();
+    public UFirmProfileDisplayView(UnternehmenService unternehmenService, StelleService stelleService, SecurityService securityService) {
+        super();
+        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
+        this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         setUp();
-        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
+        this.gridFilterStelle = new GridFilterStelle();
+        List<StelleDTO> stelleDTOList = stelleService.getByNutzerId(aktuelleNutzerID);
+        this.gridFilterStelle.setUpFromOutside(stelleDTOList);
     }
     private String checkIfNullShowTextLink(String checkString){
         if(checkString == null) return "go to \"UEditFirmProfileDisplayView\" to add this information";
@@ -73,7 +81,7 @@ public class UFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unternehm
 
             // Company Location with Geo Tag Icon
             HorizontalLayout locationLayout = new HorizontalLayout();
-            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span(unternehmenDTO.getNutzer().getOrt())); // Replace with the actual location
+            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span(unternehmenDTO.getNutzer().getNutzerOrt())); // Replace with the actual location
 //            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span("Company Location")); // Replace with the actual location
             detailsLayout.add(locationLayout);
 

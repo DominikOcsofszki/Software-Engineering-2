@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class StudentDTO extends AbstractDTO{
+public class StudentDTO implements AbstractDTO {
     private NutzerDTO nutzer;
     private Long studentId;
     private String studentVorname;
@@ -19,10 +19,10 @@ public class StudentDTO extends AbstractDTO{
     private Integer studentSemester;
 
     public Image PlaceholderOrImage(){
-        if(nutzer == null || nutzer.getProfilbild() == null) {
+        if(nutzer == null || nutzer.getNutzerProfilbild() == null) {
             return ASSETS.buildPlaceholder(50,50);
         }
         return new Image("data:image/png;base64,"
-                + nutzer.getProfilbild(), "getImage");
+                + nutzer.getNutzerProfilbild(), "getImage");
     }
 }

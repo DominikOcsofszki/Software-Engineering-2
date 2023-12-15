@@ -18,7 +18,7 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AuthenticationController;
 import de.hbrs.se2.womm.dtos.LoginRequest;
 import de.hbrs.se2.womm.exceptions.AuthenticationException;
-import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import jakarta.annotation.security.PermitAll;
@@ -30,7 +30,7 @@ import org.springframework.security.core.Authentication;
 @Route(value = "login", layout = LoggedOutLayout.class)
 @PermitAll
 @PageTitle("LoginView")
-public class LoginView extends AbstractViewWithoutController {
+public class LoginView extends AViewWomm {
 
     SecurityService securityService;
     LoginForm login = new LoginForm();

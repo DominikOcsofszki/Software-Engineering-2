@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class LoginRequest {
-    private String username;
-    private String password;
+public class TagDto {
+    private Integer tagId;
+    private String tagText;
 }

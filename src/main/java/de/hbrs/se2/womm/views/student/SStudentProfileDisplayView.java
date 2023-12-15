@@ -11,9 +11,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.StudentDTO;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.services.StudentService;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -21,7 +21,7 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.STUDENT.SStudentProfileDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("StudentProfileDisplayView")
-public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+public class SStudentProfileDisplayView extends AViewWomm {
     StudentDTO studentDTO;
 
     //SetUp Data
@@ -35,23 +35,25 @@ public class SStudentProfileDisplayView extends AbstractViewDTObyNutzerID<Studen
     String studentSpezialisierungen;
     String studentSemester;
     Image studentProfilbild;
+    private long aktuelleNutzerID;
 
     private void setUpDataFromDTO() {
         studentName = studentDTO.getStudentName();
         studentVorname = studentDTO.getStudentVorname();
 //        studentAlias = studentDTO.getStudentAlias(); //ToDo in DTO?
         studentGeburtstag = studentDTO.getStudentGeburtstag();
-        studentEmail = studentDTO.getNutzer().getEmail();
-        studentOrt = studentDTO.getNutzer().getOrt();
+        studentEmail = studentDTO.getNutzer().getNutzerMail();
+        studentOrt = studentDTO.getNutzer().getNutzerOrt();
         studentBiographie = studentDTO.getStudentBio();
         studentSpezialisierungen = studentDTO.getStudentSpezialisierung();
         studentSemester = String.valueOf(studentDTO.getStudentSemester());
         studentProfilbild = studentDTO.PlaceholderOrImage();
     }
 
-    public SStudentProfileDisplayView(StudentController studentController, SecurityService securityService) {
-        super(studentController, securityService);
-        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+    public SStudentProfileDisplayView(StudentService studentService, SecurityService securityService) {
+        super();
+        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
+        this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
         setUpDataFromDTO();
         //ToDo Work with this!!! this.studentDTO
         Header();

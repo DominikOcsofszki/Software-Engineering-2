@@ -13,10 +13,10 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.StreamResource;
-import de.hbrs.se2.womm.controller.BewerbungController;
-import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.services.BewerbungService;
+import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -27,8 +27,8 @@ import java.io.ByteArrayInputStream;
 @PageTitle("ApplicationView")
 public class UApplicationView extends VerticalLayout implements HasUrlParameter<String> {
 
-    private BewerbungController bewerbungController;
-    private StudentController studentController;
+    private BewerbungService bewerbungService;
+    private StudentService studentService;
 
     private BewerbungDTO bewerbung;
     private Long bewerbungID;
@@ -40,10 +40,10 @@ public class UApplicationView extends VerticalLayout implements HasUrlParameter<
     private String studentVorname;
     private byte[] studentProfilePicture;
 
-    public UApplicationView(BewerbungController bewerbungController, StudentController studentController) throws InterruptedException {
+    public UApplicationView(BewerbungService bewerbungService, StudentService studentService) throws InterruptedException {
         super();
-        this.bewerbungController = bewerbungController;
-        this.studentController = studentController;
+        this.bewerbungService = bewerbungService;
+        this.studentService = studentService;
     }
 
 
@@ -54,7 +54,7 @@ public class UApplicationView extends VerticalLayout implements HasUrlParameter<
         } else {
             try {
                 this.bewerbungID = Long.parseLong(bewerbungID);
-                bewerbung = bewerbungController.getById(this.bewerbungID).getBody();
+                bewerbung = bewerbungService.getById(this.bewerbungID).get();
                 if (bewerbung == null) {
                     setUpNotFound(bewerbungID);
                 } else {
@@ -96,10 +96,10 @@ public class UApplicationView extends VerticalLayout implements HasUrlParameter<
     void setUpApplication() {
         bewerbungText = bewerbung.getBewerbungText();
         studentID = bewerbung.getBewerbungStudent().getStudentId();
-        student = studentController.getStudentById(studentID).getBody();
+        student = studentService.getById(studentID).get();
         studentName = student.getStudentName();
         studentVorname = student.getStudentVorname();
-        studentProfilePicture = student.getNutzer().getProfilbild();
+        studentProfilePicture = student.getNutzer().getNutzerProfilbild();
         setUpTop();
         setUpAnschreiben();
     }

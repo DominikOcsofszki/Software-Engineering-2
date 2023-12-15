@@ -15,10 +15,10 @@ import com.vaadin.flow.component.textfield.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.LandingPageView;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -31,11 +31,13 @@ import java.time.LocalDate;
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
 //public class SCreateChangeStudentProfileView extends AbstractView {
-public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+public class SCreateChangeStudentProfileView extends AViewWomm {
     StudentDTO studentDTO;
-    public SCreateChangeStudentProfileView(StudentController controller, SecurityService securityService) {
-        super(controller,securityService);
-        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+    private long aktuelleNutzerID;
+    public SCreateChangeStudentProfileView(StudentService studentService, SecurityService securityService) {
+        super();
+        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
+        this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
         System.out.println(studentDTO);
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");

@@ -23,7 +23,7 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.AuthenticationController;
 import de.hbrs.se2.womm.dtos.StudentRegistrationRequest;
-import de.hbrs.se2.womm.views.layouts.AbstractViewWithoutController;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
 @Route(value = ROUTING.ALL.RegistrierungStudentView, layout = LoggedOutLayout.class)
 @AnonymousAllowed
 @PageTitle("RegistrierungStudentView")
-public class RegistrierungStudentView extends AbstractViewWithoutController {
+public class RegistrierungStudentView extends AViewWomm {
 
     SecurityService securityService;
     AuthenticationController authenticationController;

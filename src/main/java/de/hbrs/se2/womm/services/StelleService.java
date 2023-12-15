@@ -25,6 +25,13 @@ public class StelleService {
                 .toList();
     }
 
+    public List<StelleDTO> getByNutzerId(Long nutzerID) { //ToDo why not working ????
+        return stelleRepository.findByUnternehmen_Nutzer_NutzerId(nutzerID)
+                .stream()
+                .map(stelleMapper::stelleToStelleDto)
+                .toList();
+    }
+
     public Optional<StelleDTO> getById(Long id) {
         return stelleRepository.findById(id)
                 .map(stelleMapper::stelleToStelleDto);
@@ -39,6 +46,34 @@ public class StelleService {
     public List<StelleDTO> getAll() {
         return stelleRepository.findAll()
                 .stream()
+                .map(stelleMapper::stelleToStelleDto)
+                .toList();
+    }
+
+    public List<StelleDTO> getAllByFilter(String filter, String attribute) {
+        attribute = attribute.toLowerCase();
+        List<Stelle> result;
+
+        switch (attribute) {
+            case "titel":
+                result = stelleRepository.findByStelleTitelIsContainingIgnoreCase(filter);
+                break;
+            case "ort":
+                result = stelleRepository.findByStelleOrtIsContainingIgnoreCase(filter);
+                break;
+            case "beschreibung":
+                result = stelleRepository.findByStelleBeschreibungIsContainingIgnoreCase(filter);
+                break;
+            case "website":
+                result = stelleRepository.findByStelleWebsiteIsContainingIgnoreCase(filter);
+                break;
+            case "unternehmen":
+                result = stelleRepository.findByUnternehmen_NameIsContainingIgnoreCase(filter);
+                break;
+            default:
+                result = stelleRepository.findAll();
+        }
+        return result.stream()
                 .map(stelleMapper::stelleToStelleDto)
                 .toList();
     }
