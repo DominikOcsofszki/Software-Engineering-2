@@ -10,12 +10,11 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.UnternehmenService;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -23,7 +22,7 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.UNTERNEHMEN.UStelleAnzeigeErstellenView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN","ADMIN"})
 @PageTitle("StelleAnzeigeErstellenView")
-public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO>
+public class UStelleAnzeigeErstellenView extends AViewWomm
         implements HasUrlParameter<String> {
 
     TextField stelleTitel = new TextField();
@@ -31,9 +30,9 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
     TextField stelleWebsite = new TextField();
     TextArea stelleBeschreibung = new TextArea();
 
-    StelleController stelleController;
+    StelleService stelleService;
 
-    UnternehmenController unternehmenController;
+    UnternehmenService unternehmenService;
 
     SecurityService securityService;
 
@@ -52,12 +51,14 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
         }
     }
 
-    public UStelleAnzeigeErstellenView(StelleController stelleController, UnternehmenController unternehmenController, UnternehmenService unternehmenService, SecurityService securityService) {
+    public UStelleAnzeigeErstellenView(StelleService stelleService,
+                                       UnternehmenService unternehmenService,
+                                       SecurityService securityService) {
         super();
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
-        this.stelleController = stelleController;
-        this.unternehmenController = unternehmenController;
+        this.stelleService = stelleService;
+        this.unternehmenService = unternehmenService;
         this.securityService = securityService;
         setUpHeader();
         setUpStellenanzeige();
@@ -141,7 +142,7 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
                 .stelleBeschreibung(stelleBeschreibung.getValue())
                 .stelleUnternehmen(unternehmenDTO)
                 .build();
-        StelleDTO stelleDTO = stelleController.saveStelle(erzeugDTO).getBody();
+        StelleDTO stelleDTO = stelleService.saveStelle(erzeugDTO);
         System.out.println(stelleDTO.getStelleId());
         return stelleDTO.getStelleId();
     }

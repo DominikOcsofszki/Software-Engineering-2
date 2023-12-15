@@ -15,20 +15,22 @@ import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.UnternehmenController;
+import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.UnternehmenService;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
-import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
+import de.hbrs.se2.womm.views.components.GridFilterStelle;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
+import java.util.List;
+
 @Route(value = ROUTING.UNTERNEHMEN.UEditFirmProfileDisplayView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN", "ADMIN"})
 @PageTitle("EditFirmProfileDisplayView")
-public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO> {
+public class UEditFirmProfileDisplayView extends AViewWomm {
 
 
     UnternehmenDTO unternehmenDTO;
@@ -37,19 +39,24 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unter
 
     private long aktuelleNutzerID;
     private UnternehmenService unternehmenService;
+    GridFilterStelle gridFilterStelle;
 
 
     public UnternehmenDTO getUnternehmenDTO() {
         return unternehmenDTO;
     }
 
-    protected UEditFirmProfileDisplayView( UnternehmenService unternehmenService, StelleController stelleController, SecurityService securityService) {
+    protected UEditFirmProfileDisplayView(UnternehmenService unternehmenService, StelleService stelleService, SecurityService securityService) {
         super();
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         this.unternehmenService = unternehmenService;
         setUp();
-        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
+        this.gridFilterStelle = new GridFilterStelle();
+        List<StelleDTO> stelleDTOList = stelleService.getByNutzerId(aktuelleNutzerID);
+        this.gridFilterStelle.setUpFromOutside(stelleDTOList);
+        add(gridFilterStelle);
+//        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
     }
 
     void setupStars(int stars, HorizontalLayout ratingLayout) {

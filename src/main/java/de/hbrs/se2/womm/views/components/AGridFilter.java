@@ -1,4 +1,4 @@
-package de.hbrs.se2.womm.views.layouts;
+package de.hbrs.se2.womm.views.components;
 
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.grid.Grid;
@@ -12,18 +12,19 @@ import de.hbrs.se2.womm.dtos.AbstractDTO;
 
 import java.util.List;
 
-public abstract class AbstractFilterGrid<ExtendAbstractDTO extends AbstractDTO, ExtendAbstractController> extends VerticalLayout {
+public abstract class AGridFilter<ExtendAbstractDTO extends AbstractDTO>
+        extends VerticalLayout {
+
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
     protected Grid<ExtendAbstractDTO> grid = new Grid<>();
     public static String[] filterByItemsFromDTO;
-    protected ExtendAbstractController controller;
 
-    public AbstractFilterGrid(ExtendAbstractController controller, long primaryKey) {
-        this.controller = controller;
+    public AGridFilter() {
         this.filterByItemsFromDTO = getFilterByItemsFromDTO();
         setUpFilter();
-        List<ExtendAbstractDTO> list = getItemsWithFilter(primaryKey);
+    }
+    public void setUpFromOutside(List<ExtendAbstractDTO> list) {
         setUpGrid(list);
         setUpToolbarAndAddGrid();
     }
@@ -33,8 +34,6 @@ public abstract class AbstractFilterGrid<ExtendAbstractDTO extends AbstractDTO, 
         setFilterBy(filterByItemsFromDTO[0]);
         select.addValueChangeListener(event -> setFilterBy(event.getValue()));
     }
-
-    abstract protected List<ExtendAbstractDTO> getItemsWithFilter(long filterLong);
 
     private void setUpGrid(List<ExtendAbstractDTO> itemsForGrid) {
         addClassName("list-view");
@@ -79,7 +78,6 @@ public abstract class AbstractFilterGrid<ExtendAbstractDTO extends AbstractDTO, 
         String checkItem = checkItem(dto, searchBy);
         return compareFilteringToLowerCase(checkItem, inputSearchNameFilter);
     }
-
 
     protected abstract String[] getFilterByItemsFromDTO();
 
