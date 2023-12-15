@@ -1,6 +1,5 @@
 package de.hbrs.se2.womm.controller;
 
-import de.hbrs.se2.womm.dtos.AbstractDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.services.StudentService;
 import org.springframework.http.HttpStatus;
@@ -19,13 +18,6 @@ public class StudentController extends AbstractControllerWomm {
         this.studentService = studentService;
     }
 
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-            return new ResponseEntity<>( primaryKey < 0 ? studentService.getAlleStudenten() :
-                    studentService.getDTOListbyPrimaryKeyService(primaryKey)
-        ,HttpStatus.OK
-        );
-    }
 
     @GetMapping("students")
     public ResponseEntity<List<StudentDTO>> getAllStudents() {
@@ -49,7 +41,7 @@ public class StudentController extends AbstractControllerWomm {
     }
 
     private ResponseEntity<StudentDTO> getStudentByNutzerId(@PathVariable Long id) {
-        return new ResponseEntity<>(studentService.getStudentByNutzerId(id), HttpStatus.OK);
+        return new ResponseEntity<>(studentService.getByNutzerId(id), HttpStatus.OK);
 //                .map(studentDTO -> new ResponseEntity<>(studentDTO, HttpStatus.OK))
 //                .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }

@@ -45,16 +45,4 @@ public class StelleController extends AbstractControllerWomm {
     public ResponseEntity<StelleDTO> saveStelle(@RequestBody StelleDTO stelleDTO) {
         return new ResponseEntity<>(stelleService.saveStelle(stelleDTO), HttpStatus.OK);
     }
-
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        System.out.println("primaryKey:" + primaryKey);
-        List<StelleDTO> stelleDTOList = primaryKey < 0 ? stelleService.getAll() : stelleService.getByUnternehmenId(primaryKey);
-//        List<StelleDTO> stelleDTOList = stelleService.getByUnternehmenId(2l);
-
-        return new ResponseEntity<>(
-//                stelleService.getAll(),
-                stelleDTOList,
-                HttpStatus.OK);
-    }
 }

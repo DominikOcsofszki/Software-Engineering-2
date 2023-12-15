@@ -29,7 +29,7 @@ public class UEditFirmProfileDisplayViewOld extends AbstractViewDTObyNutzerID<St
 
 
     protected UEditFirmProfileDisplayViewOld(StelleController stelleController, SecurityService securityService) {
-        super(stelleController, securityService);
+        super();
         setUp();
 //        add(new FilterGridStelleByLoggedInNutzerId(stelleController, selectNutzerIDfromLoggedInForDB()));
 //        add(new FilterGridStelleByLoggedInNutzerId(stelleController, selectNutzerIDfromLoggedInForDB()));

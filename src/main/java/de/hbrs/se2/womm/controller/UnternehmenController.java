@@ -24,7 +24,7 @@ public class UnternehmenController extends AbstractControllerWomm {
     }
 
     public UnternehmenDTO getByNutzerID(long id){
-        return unternehmenService.getUnternehmenByNutzerID(id);
+        return unternehmenService.getByNutzerID(id);
     }
 
     @GetMapping("/Unternehmen/{id}")
@@ -43,13 +43,5 @@ public class UnternehmenController extends AbstractControllerWomm {
     public ResponseEntity<Void> saveUnternehmen(@RequestBody UnternehmenDTO zuErstellendesUnternehmen) {
         unternehmenService.saveUnternehmen(zuErstellendesUnternehmen);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        return new ResponseEntity<>(
-                primaryKey < 0 ? unternehmenService.getAll() :
-                        unternehmenService.getDTOListbyPrimaryKeyService(primaryKey),
-                HttpStatus.OK);
     }
 }

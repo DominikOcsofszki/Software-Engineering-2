@@ -13,6 +13,7 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
@@ -25,9 +26,11 @@ import jakarta.annotation.security.RolesAllowed;
 @PageTitle("HomepageUnternehmenView")
 public class UHomepageUnternehmenView extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO> {
     UnternehmenDTO unternehmenDTO;
-    public UHomepageUnternehmenView(UnternehmenController unternehmenController, SecurityService securityService, StelleController stelleController) {
-        super(unternehmenController,securityService);
-        this.unternehmenDTO = (UnternehmenDTO) getDtoAbstractCastNeeded();
+    private long aktuelleNutzerID;
+    public UHomepageUnternehmenView(UnternehmenService unternehmenService, SecurityService securityService, StelleController stelleController) {
+        super();
+        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
+        this.unternehmenDTO = unternehmenService.getByNutzerID(aktuelleNutzerID);
         setUpHeader();
         setUpBanner();
 

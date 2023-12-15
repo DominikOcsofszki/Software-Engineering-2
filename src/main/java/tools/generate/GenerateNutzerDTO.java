@@ -18,10 +18,10 @@ public class GenerateNutzerDTO {
         for (int i = 0; i < howManyStellen; i++) {
             NutzerDTO dto = NutzerDTO.builder()
                     .nutzerId(Long.parseLong(getValueAsString("nutzerId")))
-                    .email(getValueAsString("email"))
-                    .aktiv(Boolean.getBoolean(getValueAsString("aktiv")))
-                    .ort(getValueAsString("ort"))
-                    .profilbild(getProfilbildBytes())
+                    .nutzerMail(getValueAsString("email"))
+                    .nutzerAktiv(Boolean.getBoolean(getValueAsString("aktiv")))
+                    .nutzerOrt(getValueAsString("ort"))
+                    .nutzerProfilbild(getProfilbildBytes())
                     .build();
             stelleDtoList.add(dto);
         }

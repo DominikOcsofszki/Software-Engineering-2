@@ -29,8 +29,4 @@ public class ApplicationController extends AbstractControllerWomm {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        return null; //ToDo
-    }
 }

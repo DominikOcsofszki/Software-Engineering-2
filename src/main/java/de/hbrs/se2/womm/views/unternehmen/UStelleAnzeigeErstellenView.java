@@ -14,6 +14,7 @@ import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
@@ -37,6 +38,8 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
     SecurityService securityService;
 
     String valueFromQuerry;
+    private long aktuelleNutzerID;
+    private UnternehmenDTO unternehmenDTO;
 
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
@@ -49,8 +52,10 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
         }
     }
 
-    public UStelleAnzeigeErstellenView(StelleController stelleController, UnternehmenController unternehmenController, SecurityService securityService) {
-        super(unternehmenController, securityService);
+    public UStelleAnzeigeErstellenView(StelleController stelleController, UnternehmenController unternehmenController, UnternehmenService unternehmenService, SecurityService securityService) {
+        super();
+        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
+        this.unternehmenDTO = unternehmenService.getByNutzerID(aktuelleNutzerID);
         this.stelleController = stelleController;
         this.unternehmenController = unternehmenController;
         this.securityService = securityService;
@@ -127,7 +132,6 @@ public class UStelleAnzeigeErstellenView extends AbstractViewDTObyNutzerID<Unter
 //        long stelleId = 3l;
 //        long getUserId = 1l;
 //        UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(getUserId).getBody();
-        UnternehmenDTO unternehmenDTO = (UnternehmenDTO) getDtoAbstractCastNeeded();
         System.out.println("UnternehmenDTO: " + unternehmenDTO);
 //        Unternehmen unternehmen = UnternehmenMapper.INSTANCE.dtoZuUnternehmen(unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()

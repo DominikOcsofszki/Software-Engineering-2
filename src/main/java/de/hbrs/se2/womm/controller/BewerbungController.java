@@ -34,9 +34,4 @@ public class BewerbungController extends AbstractControllerWomm {
                 .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        //    return primaryKey < 0 ? xService.getAll() : xService.getDTObyPrimaryKey(primaryKey);
-        return null; //ToDo implement me
-    }
 }

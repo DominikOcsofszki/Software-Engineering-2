@@ -18,6 +18,7 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -34,17 +35,21 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unter
     TextArea descriptionTextArea = new TextArea("Company Description");
     TextArea gruendung  = new TextArea("Since");
 
+    private long aktuelleNutzerID;
+    private UnternehmenService unternehmenService;
+
 
     public UnternehmenDTO getUnternehmenDTO() {
         return unternehmenDTO;
     }
 
-    protected UEditFirmProfileDisplayView(UnternehmenController unternehmenController, StelleController stelleController, SecurityService securityService) {
-        super(unternehmenController, securityService);
-        this.unternehmenDTO = (UnternehmenDTO) getDtoAbstractCastNeeded();
+    protected UEditFirmProfileDisplayView( UnternehmenService unternehmenService, StelleController stelleController, SecurityService securityService) {
+        super();
+        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
+        this.unternehmenDTO = unternehmenService.getByNutzerID(aktuelleNutzerID);
+        this.unternehmenService = unternehmenService;
         setUp();
         add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
-        System.out.println(getDtoAbstractCastNeeded());
     }
 
     void setupStars(int stars, HorizontalLayout ratingLayout) {
@@ -78,8 +83,8 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unter
 //        int nrOfEmployees = getUnternehmenDTO().getNumberOfEmployees(); //ToDo DTO
 
 //        String companyLocation = "Company Location";
-        String companyLocation = getUnternehmenDTO().getNutzer().getOrt() == null ?
-                "Company Location" : getUnternehmenDTO().getNutzer().getOrt();
+        String companyLocation = getUnternehmenDTO().getNutzer().getNutzerOrt() == null ?
+                "Company Location" : getUnternehmenDTO().getNutzer().getNutzerOrt();
         String companyWebsite = "http://www.companywebsite.com";
 //        String companyWebsite = getUnternehmenDTO().getWebsite();//ToDo DTO
         String reviews = " (" + nrOfReviews + " Reviews)";
@@ -136,7 +141,7 @@ public class UEditFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unter
         Button saveButton = new Button("Save Changes");
         saveButton.addClickListener(e -> {
             UnternehmenDTO newUnternehmenDTO = newUnternehmenDTOFromFields();
-            getController().saveUnternehmen(newUnternehmenDTO);
+            unternehmenService.saveUnternehmen(newUnternehmenDTO);
             UI.getCurrent().getPage().reload();
             // Logic to save changes made to the firm profile
             // Implement your saving logic here

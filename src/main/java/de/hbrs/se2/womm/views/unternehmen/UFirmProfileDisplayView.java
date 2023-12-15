@@ -12,6 +12,7 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -23,10 +24,12 @@ import jakarta.annotation.security.RolesAllowed;
 @PageTitle("FirmProfileDisplayView")
 public class UFirmProfileDisplayView extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO> {
     private UnternehmenDTO unternehmenDTO;
+    private long aktuelleNutzerID;
 
-    public UFirmProfileDisplayView(UnternehmenController unternehmenController, StelleController stelleController, SecurityService securityService) {
-        super(unternehmenController, securityService);
-        this.unternehmenDTO = (UnternehmenDTO) getDtoAbstractCastNeeded();
+    public UFirmProfileDisplayView(UnternehmenService unternehmenService, StelleController stelleController, SecurityService securityService) {
+        super();
+        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
+        this.unternehmenDTO = unternehmenService.getByNutzerID(aktuelleNutzerID);
         setUp();
         add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
     }
@@ -73,7 +76,7 @@ public class UFirmProfileDisplayView extends AbstractViewDTObyNutzerID<Unternehm
 
             // Company Location with Geo Tag Icon
             HorizontalLayout locationLayout = new HorizontalLayout();
-            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span(unternehmenDTO.getNutzer().getOrt())); // Replace with the actual location
+            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span(unternehmenDTO.getNutzer().getNutzerOrt())); // Replace with the actual location
 //            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span("Company Location")); // Replace with the actual location
             detailsLayout.add(locationLayout);
 

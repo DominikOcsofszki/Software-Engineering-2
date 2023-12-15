@@ -14,6 +14,7 @@ import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Stelle;
+import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -28,13 +29,17 @@ import java.util.List;
 @PageTitle("FirmProfileDisplayView")
 //public class UFirmProfileDisplayView extends VerticalLayout {
 public class UFirmProfileDisplayViewOld extends AbstractViewDTObyNutzerID<UnternehmenController, UnternehmenDTO> {
-    public UFirmProfileDisplayViewOld(UnternehmenController unternehmenController, StelleController stelleController, SecurityService securityService) {
-        super(unternehmenController, securityService);
+    private long aktuelleNutzerID;
+    private UnternehmenDTO unternehmenDTO;
+    public UFirmProfileDisplayViewOld(UnternehmenService unternehmenService, StelleController stelleController, SecurityService securityService) {
+        super();
+        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
+        this.unternehmenDTO = unternehmenService.getByNutzerID(aktuelleNutzerID);
         setUp();
 //        add(new FilterGridStelleByLoggedInNutzerId(stelleController, selectNutzerIDfromLoggedInForDB()));
     }
         private void setUp(){
-            System.out.println(getDtoAbstractCastNeeded());
+
         // Logo, Company Name, Subscribe and Chat Button
         HorizontalLayout buttonsLayout = new HorizontalLayout();
 

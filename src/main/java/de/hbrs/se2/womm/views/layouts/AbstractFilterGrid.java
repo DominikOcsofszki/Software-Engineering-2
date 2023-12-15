@@ -81,6 +81,7 @@ public abstract class AbstractFilterGrid<ExtendAbstractDTO extends AbstractDTO, 
         return compareFilteringToLowerCase(checkItem, inputSearchNameFilter);
     }
 
+
     protected abstract String[] getFilterByItemsFromDTO();
 
     protected abstract String checkItem(ExtendAbstractDTO dto, String searchBy);

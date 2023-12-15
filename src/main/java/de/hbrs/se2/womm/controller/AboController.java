@@ -6,8 +6,4 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public class AboController extends AbstractControllerWomm{
-    @Override
-    public ResponseEntity<List<? extends AbstractDTO>> getDTObyPrimaryKeyIfNegativeAll(long primaryKey) {
-        return null;
-    }
 }

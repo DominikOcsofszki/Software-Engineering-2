@@ -4,6 +4,7 @@ import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.views.layouts.AbstractFilterGrid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends AbstractFilterGrid<StelleDTO, StelleController> {
@@ -11,14 +12,12 @@ public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends Abs
         super(stelleController,filterBy);
     }
 
+
     @Override
     protected List<StelleDTO> getItemsWithFilter(long filterBy) {
-        System.out.println("filterBy:" + filterBy);
-        List<StelleDTO> list = (List<StelleDTO>) controller.getDTObyPrimaryKeyIfNegativeAll(filterBy).getBody();
-        System.out.println("list:" + list);
-        return list;
+        //todo
+        return new ArrayList<StelleDTO>();
     }
-
     @Override
     protected void configureGrid() {
         grid.addColumn(StelleDTO::getStelleId).setHeader("Stellen ID");
@@ -30,7 +29,7 @@ public class FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative extends Abs
         grid.addColumn(stelleDTO -> stelleDTO.getStelleUnternehmen().getName()).setHeader("Stellen Unternehmen");
     }
 
-    @Override
+
     protected String[] getFilterByItemsFromDTO() {
         return new String[]{
                 "stelleId",

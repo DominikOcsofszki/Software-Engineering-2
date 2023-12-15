@@ -13,6 +13,7 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.components.FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative;
@@ -26,11 +27,14 @@ import jakarta.annotation.security.RolesAllowed;
 public class SHomepageStudentView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
     StelleController stelleController;
     StudentDTO studentDTO;
+    private long aktuelleNutzerID;
 
-    public SHomepageStudentView(StelleController stelleController, StudentController studentController, SecurityService securityService) {
-        super(studentController, securityService);
+
+    public SHomepageStudentView(StelleController stelleController, StudentService studentService, SecurityService securityService) {
+        super();
         this.stelleController = stelleController;
-        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
+        this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
         setUpHeader();
         setUpBanner();
         setUpSearchFields();

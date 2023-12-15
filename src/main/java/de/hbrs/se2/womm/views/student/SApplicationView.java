@@ -16,6 +16,7 @@ import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.extra.ComponentImageUpload;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -42,13 +43,16 @@ public class SApplicationView extends AbstractViewDTObyNutzerID<StudentControlle
     SecurityService securityService;
     String valueFromQuerry;
 
+    private long aktuelleNutzerID;
+
     public SApplicationView(BewerbungController bewerbungController,
                             StelleController stelleController,
                             UnternehmenController unternehmenController,
                             SecurityService securityService,
-                            StudentController studentController) {
-        super(studentController, securityService);
-        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+                            StudentService studentService) {
+        super();
+        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
+        this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
         this.bewerbungController = bewerbungController;
         this.stelleController = stelleController;
         this.unternehmenController = unternehmenController;
