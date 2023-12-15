@@ -11,13 +11,13 @@ import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.controller.BewerbungController;
 import de.hbrs.se2.womm.controller.StelleController;
-import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.controller.UnternehmenController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.extra.ComponentImageUpload;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -26,7 +26,7 @@ import jakarta.annotation.security.RolesAllowed;
 @Route(value = ROUTING.STUDENT.SApplicationView, layout = StudentLayout.class)
 @RolesAllowed({ "ADMIN", "STUDENT"})
 @PageTitle("ApplicationView")
-public class SApplicationView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> implements HasUrlParameter<String> {
+public class SApplicationView extends AViewWomm implements HasUrlParameter<String> {
 //public class SApplicationView extends VerticalLayout implements HasUrlParameter<String> {
     //Changed
     StudentDTO studentDTO;
@@ -37,7 +37,7 @@ public class SApplicationView extends AbstractViewDTObyNutzerID<StudentControlle
     byte[] bewerbungPdf1;
     TextArea bewerbungText = new TextArea();
 
-    StelleController stelleController;
+    StelleService stelleService;
     UnternehmenController unternehmenController;
     BewerbungController bewerbungController;
     SecurityService securityService;
@@ -46,7 +46,7 @@ public class SApplicationView extends AbstractViewDTObyNutzerID<StudentControlle
     private long aktuelleNutzerID;
 
     public SApplicationView(BewerbungController bewerbungController,
-                            StelleController stelleController,
+                            StelleService stelleService,
                             UnternehmenController unternehmenController,
                             SecurityService securityService,
                             StudentService studentService) {
@@ -54,7 +54,7 @@ public class SApplicationView extends AbstractViewDTObyNutzerID<StudentControlle
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
         this.bewerbungController = bewerbungController;
-        this.stelleController = stelleController;
+        this.stelleService = stelleService;
         this.unternehmenController = unternehmenController;
         this.securityService = securityService;
         //SetUp:
@@ -72,8 +72,10 @@ public class SApplicationView extends AbstractViewDTObyNutzerID<StudentControlle
                     parameter));
             valueFromQuerry = parameter;
             long parameterLong = Long.parseLong(parameter);
-            this.stelleDTO = stelleController.getById(parameterLong) == null ? null :
-                    stelleController.getById(parameterLong).getBody();
+//            this.stelleDTO = stelleService.getById(parameterLong) == null ? null :
+//                    stelleService.getById(parameterLong);
+            this.stelleDTO = stelleService.getById(parameterLong).isPresent() ?
+                    stelleService.getById(parameterLong).get() : null;
             System.out.println("stelleDTO:" + stelleDTO);
 
         }
@@ -84,7 +86,8 @@ public class SApplicationView extends AbstractViewDTObyNutzerID<StudentControlle
     private void setUpHeader(){
         HorizontalLayout header = new HorizontalLayout();
         //Ueberschrift
-        header.add(new H1("Bewerbung erstellen:"));
+        H1 h1 = getWommBuilder().H1.create("Bewerbung erstellen:");
+        header.add(h1);
 
         add(header);
     }
