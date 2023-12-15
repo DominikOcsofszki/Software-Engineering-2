@@ -16,7 +16,7 @@ import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
-import de.hbrs.se2.womm.views.unternehmen.UEditFirmProfileDisplayViewOld;
+import de.hbrs.se2.womm.views.unternehmen.UEditFirmProfileDisplayView;
 import jakarta.annotation.security.RolesAllowed;
 import javassist.NotFoundException;
 
@@ -133,7 +133,7 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         jobGrid.addItemClickListener(event -> {
             Stelle selectedStelle = event.getItem();
             if (selectedStelle != null) {
-                UI.getCurrent().navigate(UEditFirmProfileDisplayViewOld.class);
+                UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
             }
         });
 

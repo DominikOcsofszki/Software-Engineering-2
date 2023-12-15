@@ -8,12 +8,11 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import de.hbrs.se2.womm.controller.AbstractControllerWomm;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
 
 import java.util.List;
 
-public abstract class AbstractFilterGrid<ExtendAbstractDTO extends AbstractDTO, ExtendAbstractController extends AbstractControllerWomm> extends VerticalLayout {
+public abstract class AbstractFilterGrid<ExtendAbstractDTO extends AbstractDTO, ExtendAbstractController> extends VerticalLayout {
     TextField filterText = new TextField();
     Select<String> select = new Select<>();
     protected Grid<ExtendAbstractDTO> grid = new Grid<>();

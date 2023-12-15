@@ -9,9 +9,9 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
-import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.services.ImageService;
+import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -23,7 +23,7 @@ import tools.generate.GenerateStelleDTO;
 @PageTitle("JobProjectWorkshopDisplayView")
 public class UJobProjectWorkshopDisplayView extends VerticalLayout implements HasUrlParameter<String> {
     private String parameter;
-    StelleController stelleController;
+    StelleService stelleService;
     StelleDTO stelleDTO = GenerateStelleDTO.generateStelleDTO(1).get(0);
      long stelleId = 1;
     @Override
@@ -41,8 +41,8 @@ public class UJobProjectWorkshopDisplayView extends VerticalLayout implements Ha
         setUpStellenanzeige();
         setUpButtons();
     }
-    public UJobProjectWorkshopDisplayView(StelleController stelleController) {
-        this.stelleController = stelleController;
+    public UJobProjectWorkshopDisplayView(StelleService stelleService) {
+        this.stelleService = stelleService;
 //        setUpBanner();
 //        setUpHeader();
 //        setUpStellenanzeige();
@@ -51,7 +51,7 @@ public class UJobProjectWorkshopDisplayView extends VerticalLayout implements Ha
     }
     private StelleDTO setUpStelleDTO(long id) throws NotFoundException {
 //            StelleDTO stelleDTO = stelleController.getById(Long.parseLong(parameter));
-            StelleDTO stelleDTO = stelleController.getById(id).getBody();
+            StelleDTO stelleDTO = stelleService.getById(id).get();
             return stelleDTO;
     }
 

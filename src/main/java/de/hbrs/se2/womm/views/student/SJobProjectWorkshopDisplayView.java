@@ -9,21 +9,22 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
-import de.hbrs.se2.womm.controller.StelleController;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.services.ImageService;
+import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
-import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
 
 @Route(value = ROUTING.STUDENT.SJobProjectWorkshopDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("JobProjectWorkshopDisplayView")
 public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlParameter<String> {
     private String parameter;
-    StelleController stelleController;
+    StelleService stelleService;
 
     StelleDTO stelleDTO;
     long stelleId;
@@ -35,12 +36,12 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
             System.out.println("Parameter: " + this.parameter);
             this.stelleId = Long.parseLong(this.parameter);
             try {
-                ResponseEntity<StelleDTO> checkStelleDTO = stelleController.getById(this.stelleId);
-                if (checkStelleDTO == null) {
+                Optional<StelleDTO> checkStelleDTO = stelleService.getById(this.stelleId);
+                if (!checkStelleDTO.isPresent()) {
                     System.out.println("StelleDTO ist null");
                     add(new H1("Keine Stelle in der DB für ID: "+this.stelleId+" gefunden"));
                 } else {
-                    this.stelleDTO = checkStelleDTO.getBody();
+                    this.stelleDTO = checkStelleDTO.get();
                     System.out.println("Parameter: " + this.parameter);
                     setUpBanner();
                     setUpHeader();
@@ -58,8 +59,8 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
 
     }
 
-    public SJobProjectWorkshopDisplayView(StelleController stelleController) {
-        this.stelleController = stelleController;
+    public SJobProjectWorkshopDisplayView(StelleService stelleService) {
+        this.stelleService = stelleService;
     }
     //ToDo Banner anpassen
 
