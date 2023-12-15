@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.selenium;
 
 import de.hbrs.se2.womm.selenium.using.AbstractPage;
+import de.hbrs.se2.womm.views.layouts.ROUTING;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +15,7 @@ class LoginPage extends AbstractPage {
     WebElement loginButton;
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
-        super("LoginView", "http://localhost:8080/vaadin/login");
+        super("LoginView", ROUTING.ALL.LoginView);
         this.driver = driver;
         this.wait = wait;
     }

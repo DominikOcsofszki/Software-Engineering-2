@@ -3,7 +3,8 @@ package de.hbrs.se2.womm.views.layouts;
 public class ROUTING {
     static public class ALL {
         public static final String LandingPageView = "LandingPageView";
-        public static final String LoginView = "LoginView";
+        public static final String LoginView = "login";
+
         public static final String RegistrierungStudentView = "RegistrierungStudentView";
         public static final String AccessDeniedView = "AccessDeniedView";
     }

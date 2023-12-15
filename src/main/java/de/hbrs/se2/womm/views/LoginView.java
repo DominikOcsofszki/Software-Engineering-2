@@ -27,7 +27,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 
 
-@Route(value = "login", layout = LoggedOutLayout.class)
+@Route(value = ROUTING.ALL.LoginView, layout = LoggedOutLayout.class)
 @PermitAll
 @PageTitle("LoginView")
 public class LoginView extends AViewWomm {

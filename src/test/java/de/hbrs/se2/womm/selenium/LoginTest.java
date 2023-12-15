@@ -32,8 +32,8 @@ public class LoginTest extends AbstractPrepareTestSelenium {
 //        wait.until(d -> d.getTitle().equals("xxx"));
         assert(title.equals(loginPage.getWebsiteTitle()));
 
-//        loginPage.login("student2", "student");
-//        assert (!driver.getTitle().equals(loginPage.getWebsiteTitle()));
+        loginPage.login("test", "test");
+        assert (!driver.getTitle().equals(loginPage.getWebsiteTitle()));
         // Verify
         //DoDo
 //        logoutPages.logout();
