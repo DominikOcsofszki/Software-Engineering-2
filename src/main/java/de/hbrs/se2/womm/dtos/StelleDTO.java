@@ -7,7 +7,7 @@ import lombok.Getter;
 @Builder
 @Data
 @Getter
-public class StelleDTO extends AbstractDTO {
+public class StelleDTO implements AbstractDTO {
     private Long stelleId;
     private String stelleTitel;
     private String stelleOrt;
