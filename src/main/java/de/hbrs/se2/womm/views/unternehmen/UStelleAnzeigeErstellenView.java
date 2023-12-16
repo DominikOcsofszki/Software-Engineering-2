@@ -127,6 +127,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                 Notification notification = new Notification();
                 notification.setText("Bitte überprüfen Sie ihre Eingaben!");
                 notification.open();
+                notification.setDuration(3000);
             }
 
         });
