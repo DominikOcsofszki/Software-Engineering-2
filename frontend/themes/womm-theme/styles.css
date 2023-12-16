@@ -1,3 +1,5 @@
+/*Path: frontend/themes/womm-theme/styles.css*/
+
 /*public static final String Avenir = "Avenir Next LT Pro";*/
 /*public static final String Primary = StyleGuide.PrimaryFormats.blue;*/
 /*public static final String Success = StyleGuide.PrimaryFormats.green;*/
@@ -10,7 +12,26 @@
 /*public static final String red = "FF4338";*/
 
 html {
-    --lumo-primary-color: #1676F3;
-    --lumo-primary-text-color: #1676F3;
+    /*Has to be in this format, else not working with var:--womm-primary-color: 22,177,243;*/
+    --womm-primary-font: "Avenir Next LT Pro";   /*#16b1f3*/
+    --womm-primary-color: 22,118,243;   /*#0ACCFFFF blue*/
+    --womm-success-color: 22,177,243;   /*#15C15D green*/
+    --womm-error-color: 255,67,58;     /*#FF4338 red*/
+    /*--this-ir-for-testing: #1676F3;*/
+    --womm-base-color: 22,118,243;
+
+    --lumo-font-family: var(--womm-primary-font);
+
+    --lumo-success-color: rgba(var(--womm-success-color), 1);
+    --lumo-error-color: rgba(var(--womm-error-color), 1);
+    --lumo-primary-text-color: rgba(var(--womm-primary-color),1);
+
+    /*--lumo-base-color: rgba(var(--womm-base-color), 0.005);*/
+
+    /*--lumo-primary-color-50pct: rgba(var(--womm-primary-color), 0.5);*/
+    /*--lumo-primary-color-10pct: rgba(var(--womm-primary-color), 0.1);*/
+    /*--lumo-primary-color: rgba(var(--womm-primary-color), 1);*/
+
+
 
 }
