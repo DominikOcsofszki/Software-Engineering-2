@@ -29,4 +29,8 @@ public class BewerbungService {
                 .map(bewerbungMapper::bewerbungToBewerbungDto);
     }
 
+    public List<BewerbungDTO> getByNutzerId(Long id){
+        return bewerbungRepository.findBewerbungByStudent_Nutzer_NutzerId(id).stream().map(bewerbungMapper::bewerbungToBewerbungDto).toList();
+    }
+
 }
