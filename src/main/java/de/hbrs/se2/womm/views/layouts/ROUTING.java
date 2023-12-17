@@ -12,6 +12,7 @@ public class ROUTING {
 
         public static final String SAboStudentView = "SAboStudentView";
         public static final String SApplicationView = "SApplicationView";
+        public static final String SApplicationsView = "SApplicationsView";
         public static final String SChatView = "SChatView";
         public static final String SCreateChangeStudentProfileView = "SCreateChangeStudentProfileView";
         public static final String SFirmProfileDisplayView = "SFirmProfileDisplayView";
