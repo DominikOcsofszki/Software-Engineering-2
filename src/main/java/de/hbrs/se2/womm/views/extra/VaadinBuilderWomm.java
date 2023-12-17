@@ -5,11 +5,7 @@ import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.H4;
-import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -30,6 +26,7 @@ public class VaadinBuilderWomm {
     public TextFieldBuilder TextField = new TextFieldBuilder();
     public H1Builder H1 = new H1Builder();
     public H2Builder H2 = new H2Builder();
+//    public H3Builder H3 = new H3Builder();
     public H4Builder H4 = new H4Builder();
     public TextBuilder Text = new TextBuilder();
     public SpanBuilder Span = new SpanBuilder();
@@ -94,6 +91,18 @@ public class VaadinBuilderWomm {
             h2.setText(translatedText);
             h2.setId(querryId);
             return h2;
+        }
+    } public class H3Builder {
+        private int countH3 = 0;
+        public H3 create(String text) {
+            String translatedText = translateText(text);
+            countH3++;
+            String querryId = "h3-builder-" + this.countH3;
+            if (devMode) translatedText = querryId;
+            H3 h3 = new H3(translatedText);
+            h3.setText(translatedText);
+            h3.setId(querryId);
+            return h3;
         }
     }
 
