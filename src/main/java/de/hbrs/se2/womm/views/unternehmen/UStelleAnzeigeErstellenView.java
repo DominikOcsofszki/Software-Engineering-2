@@ -4,6 +4,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -39,6 +40,8 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     String valueFromQuerry;
     private long aktuelleNutzerID;
     private UnternehmenDTO unternehmenDTO;
+
+    private static final String URL_REGEX = "(https://www.)|(www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
@@ -98,6 +101,9 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stelleWebsite.setPlaceholder("URL");
         stelleWebsite.setClearButtonVisible(true);
 
+        stelleWebsite.setPattern(URL_REGEX);
+        stelleWebsite.setRequiredIndicatorVisible(true);
+
         stellenanzeige.add(stelleWebsite);
 
         //Textfeld StelleBeschreibung
@@ -112,10 +118,17 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         //Erstellen-Button
         Button erstellenButton = new Button("Erstellen");
         erstellenButton.addClickListener(e -> {
-            String stelleIdFromFunction = String.valueOf(stelleDTO());
+            if(stelleWebsite.getValue().matches(URL_REGEX)) {
+                String stelleIdFromFunction = String.valueOf(stelleDTO());
 //            UI.getCurrent().navigate(UStelleAnzeigeErstellenView.class,stelleIdFromFunction);//ToDo refactored
 //            UI.getCurrent().navigate(UFirmProfileDisplayView.class,stelleIdFromFunction);
-            UI.getCurrent().navigate(UFirmProfileDisplayView.class);
+                UI.getCurrent().navigate(UFirmProfileDisplayView.class);
+            }else{
+                Notification notification = new Notification();
+                notification.setText("Bitte überprüfen Sie ihre Eingaben!");
+                notification.open();
+                notification.setDuration(3000);
+            }
 
         });
 
@@ -129,7 +142,6 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     }
 
     private long stelleDTO(){
-
 //        long stelleId = 3l;
 //        long getUserId = 1l;
 //        UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(getUserId).getBody();
