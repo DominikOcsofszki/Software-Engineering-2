@@ -20,7 +20,7 @@ public class TranslateMap {
         put("Name", "Name");
 
         // SAboStudentView
-        put("Enter keyword","Stichwort eingeben");
+        put("Enter keyword", "Stichwort eingeben");
         put("Subscriptions", "Abonnements");
 
         //Unternehmen Layout
@@ -48,6 +48,12 @@ public class TranslateMap {
         put("View subscriptions", "Abonnements anzeigen");
         put("Notifications", "Benachrichtigungen");
         put("Edit profile", "Profil bearbeiten");
+
+        // UApplicationView
+        put("%s is not a valid ID.", "%s ist keine gültige ID.");
+        put("Surname, Name", "Name, Vorname");
+        put("Motivational letter", "Anschreiben");
+        put("The application with the ID '%s' could not be found.", "Die Bewerbung mit der ID '%s' konnte nicht gefunden werden.");
 
         //AccessDeniedView
         put("Access Denied!", "Zugriff verweigert!");
