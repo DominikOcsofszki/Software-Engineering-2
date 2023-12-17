@@ -1,6 +1,7 @@
-package de.hbrs.se2.womm.selenium.using;
+package de.hbrs.se2.womm.selenium.extra;
 
 public abstract class AbstractPage {
+    protected static final String BASE_URL = "http://localhost:8080/vaadin/";
     protected String websiteTitle;
     protected String websiteUrl;
     protected AbstractPage(String websiteTitle, String websiteUrl) {
@@ -11,7 +12,7 @@ public abstract class AbstractPage {
         return websiteTitle;
     }
     public String getWebsiteUrl() {
-        return websiteUrl;
+        return BASE_URL + ""+websiteUrl;
     }
 
 }

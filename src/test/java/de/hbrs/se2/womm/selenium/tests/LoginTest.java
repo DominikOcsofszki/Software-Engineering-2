@@ -1,7 +1,8 @@
-package de.hbrs.se2.womm.selenium;
+package de.hbrs.se2.womm.selenium.tests;
 
-import de.hbrs.se2.womm.selenium.using.AbstractPrepareTestSelenium;
-import de.hbrs.se2.womm.selenium.using.LogoutPage;
+import de.hbrs.se2.womm.selenium.extra.AbstractPrepareTestSelenium;
+import de.hbrs.se2.womm.selenium.extra.LogoutPage;
+import de.hbrs.se2.womm.selenium.pages.LoginPage;
 import org.junit.jupiter.api.Test;
 
 public class LoginTest extends AbstractPrepareTestSelenium {
@@ -32,8 +33,8 @@ public class LoginTest extends AbstractPrepareTestSelenium {
 //        wait.until(d -> d.getTitle().equals("xxx"));
         assert(title.equals(loginPage.getWebsiteTitle()));
 
-//        loginPage.login("student2", "student");
-//        assert (!driver.getTitle().equals(loginPage.getWebsiteTitle()));
+        loginPage.login("test", "test");
+        assert (!driver.getTitle().equals(loginPage.getWebsiteTitle()));
         // Verify
         //DoDo
 //        logoutPages.logout();
