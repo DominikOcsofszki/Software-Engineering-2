@@ -32,4 +32,7 @@ public class Bewerbung {
     @JoinColumn(name = "student_id")
     private Student student;
 
+    @Column(name = "bewerbung_status", columnDefinition = "text", nullable = false)
+    private String bewerbungStatus;
+
 }
