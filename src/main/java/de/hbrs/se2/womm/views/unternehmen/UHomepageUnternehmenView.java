@@ -55,19 +55,24 @@ public class UHomepageUnternehmenView extends AViewWomm {
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
-        Button b1 = new Button("Create advertisement", new Icon(VaadinIcon.PLUS));
+        String button1 = getWommBuilder().translateText("Create advertisement");
+        Button b1 = new Button(button1, new Icon(VaadinIcon.PLUS));
         b1.addClickListener(e -> UI.getCurrent().navigate(UStelleAnzeigeErstellenView.class));
         header.add(b1);
-        Button b2 = new Button("View applications", new Icon(VaadinIcon.EYE));
+        String button2 = getWommBuilder().translateText("View applications");
+        Button b2 = new Button(button2, new Icon(VaadinIcon.EYE));
         b2.addClickListener(e -> UI.getCurrent().navigate(UApplicationsView.class));
         header.add(b2);
-        Button b3 = new Button("Notifications", new Icon(VaadinIcon.BELL));
+        String button3 = getWommBuilder().translateText("Notifications");
+        Button b3 = new Button(button3, new Icon(VaadinIcon.BELL));
         b3.addClickListener(e -> UI.getCurrent().navigate(UNotificationView.class));
         header.add(b3);
-        Button b4 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
+        String button4 = getWommBuilder().translateText("Chat");
+        Button b4 = new Button(button4, new Icon(VaadinIcon.COMMENTS_O));
         b4.addClickListener(e -> UI.getCurrent().navigate(UChatView.class));
         header.add(b4);
-        Button b5 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
+        String button5 = getWommBuilder().translateText("Edit profile");
+        Button b5 = new Button(button5, new Icon(VaadinIcon.PENCIL));
         b5.addClickListener(e -> UI.getCurrent().navigate(UEditFirmProfileDisplayView.class));
         header.add(b5);
         //header.add(new Button("Logout Firmname", new Icon(VaadinIcon.EXIT_O)));
