@@ -85,10 +85,13 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         studentDTO.setStudentGeburtstag(studentGeburtstag);
         //studentDTO.setEmail();    //nicht implementiert
         //studentDTO.setNutzer().setOrt();      nicht implementiert
-        nutzerDTO.setEmail(studentEmail);
-        nutzerDTO.setPasswort(studentPasswort);
-        nutzerDTO.setOrt(studentOrt);
+        //nutzerDTO.setEmail(studentEmail); --
+        //nutzerDTO.setPasswort(studentPasswort); --
+        //nutzerDTO.setOrt(studentOrt); --
         studentDTO.setNutzer(nutzerDTO);
+        studentDTO.getNutzer().setEmail(studentEmail);
+        studentDTO.getNutzer().setOrt(studentOrt);
+        studentDTO.getNutzer().setPasswort(studentPasswort);
 
         studentDTO.setStudentBio(studentBiographie);
         studentDTO.setStudentSpezialisierung(studentSpezialisierungen);
@@ -96,6 +99,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         studentDTO.setStudentSemester(Objects.equals(studentSemester, "null") ? null : Integer.parseInt(studentSemester));
         studentDTO.setStudentBenachrichtigung(studentBenachrichtigungen);
         getController().updateStudent(studentDTO);
+        //studentService.saveStudent(studentDTO);
         System.out.println(studentDTO);
         System.out.println(studentOrt + " ORT " + studentEmail + " EMAIL " + studentPasswort +" PASSWORT");
         //UI.getCurrent().navigate(LandingPageView.class);
