@@ -47,19 +47,23 @@ public class SHomepageStudentView extends AViewWomm {
         HorizontalLayout header = new HorizontalLayout();
         //Buttons
 //        Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
-        Button b1 = getWommBuilder().Button.create("View subscriptions", new Icon(VaadinIcon.EYE));
+        String button1 = getWommBuilder().translateText("View subscriptions");
+        Button b1 = new Button(button1, new Icon(VaadinIcon.EYE));
         b1.addClickListener(e -> UI.getCurrent().navigate(SAboStudentView.class));
         header.add(b1);
-        Button b2 = getWommBuilder().Button.create("Notifications", new Icon(VaadinIcon.BELL));
 //        Button b2 = new Button("Notifications", new Icon(VaadinIcon.BELL));
+        String button2 = getWommBuilder().translateText("Notifications");
+        Button b2 = new Button(button2, new Icon(VaadinIcon.BELL));
         b2.addClickListener(e -> UI.getCurrent().navigate(SNotificationView.class));
         header.add(b2);
 //        Button b3 = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
-        Button b3 = getWommBuilder().Button.create("Chat", new Icon(VaadinIcon.COMMENTS_O));
+        String button3 = getWommBuilder().translateText("Chat");
+        Button b3 = new Button(button3, new Icon(VaadinIcon.COMMENTS_O));
         b3.addClickListener(e -> UI.getCurrent().navigate(SChatView.class));
         header.add(b3);
-        Button b4 = getWommBuilder().Button.create("Edit profile", new Icon(VaadinIcon.PENCIL));
 //        Button b4 = new Button("Edit profile", new Icon(VaadinIcon.PENCIL));
+        String button4 = getWommBuilder().translateText("Edit profile");
+        Button b4 = new Button(button4, new Icon(VaadinIcon.PENCIL));
         b4.addClickListener(e -> UI.getCurrent().navigate(SCreateChangeStudentProfileView.class));
         header.add(b4);
 

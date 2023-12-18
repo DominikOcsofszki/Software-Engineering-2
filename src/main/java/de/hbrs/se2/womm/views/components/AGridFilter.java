@@ -9,6 +9,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
+import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public abstract class AGridFilter<ExtendAbstractDTO extends AbstractDTO>
     protected abstract void configureGrid();
 
     private void setUpToolbarAndAddGrid() {
-        filterText.setPlaceholder("Filter by...");
+        filterText.setPlaceholder(VaadinBuilderWomm.translateTextStatic("Filter by..."));
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.setValueChangeTimeout(300);
