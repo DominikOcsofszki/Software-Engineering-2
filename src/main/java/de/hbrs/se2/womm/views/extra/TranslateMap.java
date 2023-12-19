@@ -1,5 +1,8 @@
 package de.hbrs.se2.womm.views.extra;
 
+import de.hbrs.se2.womm.entities.Unternehmen;
+import de.hbrs.se2.womm.views.unternehmen.UHomepageUnternehmenView;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +17,17 @@ public class TranslateMap {
         put("Find your dream job on w.o.m.m.", "Finde deinen Traumjob auf w.o.m.m.");
         put("Want to create company profile? Contact us at kontakt@womm.de.", "Möchtest du ein Firmenprofil erstellen? Kontaktiere uns unter kontakt@womm.de.");
         put("LogIn", "Anmelden");
+
+        //UHomepageUnternehmenView
+        put("Create advertisement","Stellenanzeige erstellen");
+        put("View applications", "Bewerbungen anschauen");
+
+        //AGridFilter
+        put("Filter by...","Filter nach...");
+
+        //GridFilterStelle (filter by)
+        put("Advertisement title", "Name Stellenanzeige"); // dont change!!
+        put("Firm name", "Name Unternehmen"); // dont change!!
 
         // SCreateChangeStudentProfileView
         put("Home", "Startseite");
