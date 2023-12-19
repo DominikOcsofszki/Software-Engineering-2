@@ -15,11 +15,12 @@ import com.vaadin.flow.component.textfield.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.controller.StudentController;
 import de.hbrs.se2.womm.dtos.NutzerDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.LandingPageView;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
+import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -32,7 +33,8 @@ import java.util.Objects;
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
 //public class SCreateChangeStudentProfileView extends AbstractView {
-public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<StudentController, StudentDTO> {
+public class SCreateChangeStudentProfileView extends AViewWomm {
+    StudentService studentService;
     StudentDTO studentDTO;
     NutzerDTO nutzerDTO;
 
@@ -61,14 +63,14 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         studentProfilbild = studentDTO.PlaceholderOrImage();
         studentBenachrichtigungen = studentDTO.isStudentBenachrichtigung();
         nutzerDTO = studentDTO.getNutzer();
-        studentPasswort = nutzerDTO.getPasswort();
-        studentEmail = nutzerDTO.getEmail();
-        studentOrt = nutzerDTO.getOrt();
+        //studentPasswort = nutzerDTO.getPasswort();
+        studentEmail = nutzerDTO.getNutzerMail();
+        studentOrt = nutzerDTO.getNutzerOrt();
 
     }
-    public SCreateChangeStudentProfileView(StudentController controller, SecurityService securityService) {
-        super(controller,securityService);
-        this.studentDTO = (StudentDTO) getDtoAbstractCastNeeded();
+    public SCreateChangeStudentProfileView(StudentService studentService,SecurityService securityService) {
+        this.studentService = studentService;
+        this.studentDTO = studentService.getByNutzerId(securityService.getLoggedInNutzerID());
         setUpDataFromDTO();
         System.out.println(studentDTO);
         System.out.println(nutzerDTO + " NUTZER");
@@ -89,17 +91,19 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         //nutzerDTO.setPasswort(studentPasswort); --
         //nutzerDTO.setOrt(studentOrt); --
         studentDTO.setNutzer(nutzerDTO);
-        studentDTO.getNutzer().setEmail(studentEmail);
-        studentDTO.getNutzer().setOrt(studentOrt);
-        studentDTO.getNutzer().setPasswort(studentPasswort);
+        //studentDTO.getNutzer().setEmail(studentEmail);
+        studentDTO.getNutzer().setNutzerMail(studentEmail);
+        //studentDTO.getNutzer().setOrt(studentOrt);
+        studentDTO.getNutzer().setNutzerOrt(studentOrt);
+        //studentDTO.getNutzer().setPasswort(studentPasswort);
+        //Passwort muss noch gemacht werden
 
         studentDTO.setStudentBio(studentBiographie);
         studentDTO.setStudentSpezialisierung(studentSpezialisierungen);
         System.out.println(studentSemester);
         studentDTO.setStudentSemester(Objects.equals(studentSemester, "null") ? null : Integer.parseInt(studentSemester));
         studentDTO.setStudentBenachrichtigung(studentBenachrichtigungen);
-        getController().updateStudent(studentDTO);
-        //studentService.saveStudent(studentDTO);
+        studentService.saveStudent(studentDTO);
         System.out.println(studentDTO);
         System.out.println(studentOrt + " ORT " + studentEmail + " EMAIL " + studentPasswort +" PASSWORT");
         //UI.getCurrent().navigate(LandingPageView.class);
@@ -236,7 +240,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         singleFormatI18n.setDateFormat("dd.MM.yyyy");
         datePicker.setI18n(singleFormatI18n);
         datePicker.setTooltipText("Select your date of birth");
-        datePicker.setErrorMessage(VaadinBuilderWomm.translateText("Invalid date given. Dates must follow the 'DD.MM.YYYY' format."));
+        datePicker.setErrorMessage(getWommBuilder().translateText("Invalid date given. Dates must follow the 'DD.MM.YYYY' format."));
         datePicker.setValue(datum);
         datePicker.setValue(studentGeburtstag==null ? datum : LocalDate.parse(studentGeburtstag));
         headervert2.add(datePicker);
@@ -289,7 +293,7 @@ public class SCreateChangeStudentProfileView extends AbstractViewDTObyNutzerID<S
         validEmailField1.getStyle().set("flex-grow","1");
         validEmailField1.setValue(studentEmail==null ? "" : studentEmail);
         validEmailField1.setClearButtonVisible(true);
-        validEmailField1.setErrorMessage(VaadinBuilderWomm.translateText("Please enter a valid e-mail address"));
+        validEmailField1.setErrorMessage(getWommBuilder().translateText("Please enter a valid e-mail address"));
         validEmailField2.setWidth("50%");
         validEmailField2.getStyle().set("flex-grow","1");
         validEmailField2.setValue("");
