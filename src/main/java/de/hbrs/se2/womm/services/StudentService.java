@@ -1,8 +1,11 @@
 package de.hbrs.se2.womm.services;
 
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.entities.Nutzer;
 import de.hbrs.se2.womm.entities.Student;
+import de.hbrs.se2.womm.mapper.NutzerMapper;
 import de.hbrs.se2.womm.mapper.StudentMapper;
+import de.hbrs.se2.womm.repositories.NutzerRepository;
 import de.hbrs.se2.womm.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +16,11 @@ import java.util.Optional;
 public class StudentService{
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper = StudentMapper.INSTANCE;
+    private final NutzerRepository nutzerRepository;
+    private  final NutzerMapper nutzerMapper = NutzerMapper.INSTANCE;
 
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, NutzerRepository nutzerRepository) {
+        this.nutzerRepository = nutzerRepository;
         this.studentRepository = studentRepository;
     }
 
@@ -33,7 +39,9 @@ public class StudentService{
     }
 
     public void saveStudent(StudentDTO studentDTO) {
+        Nutzer nutzer = nutzerMapper.nutzerDTOToNutzer(studentDTO.getNutzer());
         Student student = studentMapper.studentDtoToStudent(studentDTO);
+        nutzerRepository.save(nutzer);
         studentRepository.save(student);
     }
 
