@@ -41,13 +41,13 @@ public class SApplicationsView extends VerticalLayout {
 
 
     public SApplicationsView(BewerbungService bewerbungService, StelleService stelleService, StudentService studentService, SecurityService securityService) {
-    /*    this.stelleService = stelleService;
+        this.stelleService = stelleService;
         this.bewerbungService = bewerbungService;
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
-        this.listOfBewerbungDTO = bewerbungService.getByNutzerId(studentDTO.getStudentId());
+        System.out.println(aktuelleNutzerID);
+        this.listOfBewerbungDTO = bewerbungService.getByNutzerId(aktuelleNutzerID);
         this.gridFilterBewerbung = new GridFilterBewerbung();
-        System.out.println(listOfBewerbungDTO);
         this.gridFilterBewerbung.setUpFromOutside(listOfBewerbungDTO);
 
 
@@ -55,7 +55,7 @@ public class SApplicationsView extends VerticalLayout {
         //setUpApplications();
 
         add(gridFilterBewerbung);
-     */
+
     }
 
 

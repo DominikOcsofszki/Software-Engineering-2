@@ -152,7 +152,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                 .stelleOrt(stelleOrt.getValue())
                 .stelleWebsite(stelleWebsite.getValue())
                 .stelleBeschreibung(stelleBeschreibung.getValue())
-                .stelleUnternehmen(unternehmenDTO)
+                .unternehmen(unternehmenDTO)
                 .build();
         StelleDTO stelleDTO = stelleService.saveStelle(erzeugDTO);
         System.out.println(stelleDTO.getStelleId());

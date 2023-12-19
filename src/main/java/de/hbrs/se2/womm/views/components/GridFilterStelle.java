@@ -1,11 +1,7 @@
 package de.hbrs.se2.womm.views.components;
 
 import de.hbrs.se2.womm.dtos.StelleDTO;
-import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
-import de.hbrs.se2.womm.views.layouts.AbstractFilterGrid;
-
-import java.util.List;
 
 public class GridFilterStelle extends AGridFilter<StelleDTO>{
     public GridFilterStelle() {
@@ -17,7 +13,7 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
         String header1 = VaadinBuilderWomm.translateTextStatic("Advertisement title");
         grid.addColumn(StelleDTO::getStelleTitel).setHeader(header1);
         String header2 = VaadinBuilderWomm.translateTextStatic("Firm name");
-        grid.addColumn(stelleDTO -> stelleDTO.getStelleUnternehmen().getName()).setHeader(header2);
+        grid.addColumn(stelleDTO -> stelleDTO.getUnternehmen().getName()).setHeader(header2);
     }
 
     @Override
@@ -35,9 +31,9 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
 
         return switch (searchBy) {
             case "Name Stellenanzeige" -> dto.getStelleTitel();
-            case "Name Unternehmen" -> dto.getStelleUnternehmen().toString();
+            case "Name Unternehmen" -> dto.getUnternehmen().toString();
             case "Advertisement title" -> dto.getStelleTitel();
-            case "Firm name" -> dto.getStelleUnternehmen().toString();
+            case "Firm name" -> dto.getUnternehmen().toString();
             default -> null;
         };
     }

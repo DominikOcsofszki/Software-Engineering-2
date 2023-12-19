@@ -90,7 +90,7 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
 
         //Ueberschrift
 //        header.add(new H1("Unternehmenname"));
-        String unternehmenName = this.stelleDTO.getStelleUnternehmen().getName(); //ToDo Changed
+        String unternehmenName = this.stelleDTO.getUnternehmen().getName(); //ToDo Changed
         header.add(new H1(unternehmenName));
 //        header.add(new H1("Unternehmenname"));
         add(header);

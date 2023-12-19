@@ -6,8 +6,8 @@ public class GridFilterBewerbung extends AGridFilter<BewerbungDTO> {
 
     @Override
     protected void configureGrid() {
-        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getStelleUnternehmen().getName()).setHeader("Unternehmen");
-        grid.addColumn(BewerbungDTO::getBewerbungStelle).setHeader("Stelle");
+        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getUnternehmen().getName()).setHeader("Unternehmen");
+        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getStelleTitel()).setHeader("Stelle");
         grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader("Status");
     }
 
@@ -23,7 +23,7 @@ public class GridFilterBewerbung extends AGridFilter<BewerbungDTO> {
     @Override
     protected String checkItem(BewerbungDTO dto, String searchBy) {
         return switch (searchBy) {
-            case "bewerbungUnternehmen" -> dto.getBewerbungStelle().getStelleUnternehmen().getName();
+            case "bewerbungUnternehmen" -> dto.getBewerbungStelle().getUnternehmen().getName();
             case "bewerbungStelle" -> dto.getBewerbungStelle().getStelleTitel();
             case "bewerbungStatus" -> dto.getBewerbungStatus();
             default -> null;

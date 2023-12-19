@@ -29,7 +29,7 @@ public class GenerateStelleDTO {
                     .stelleOrt(getValueAsString("stelleOrt"))
                     .stelleBeschreibung(getValueAsString("stelleBeschreibung"))
                     .stelleWebsite(getValueAsString("stelleWebsite"))
-                    .stelleUnternehmen(getUnternehmen()).
+                    .unternehmen(getUnternehmen()).
                     build();
 
 //            StelleDTO stelleDTO = StelleDTO.builder().build();
