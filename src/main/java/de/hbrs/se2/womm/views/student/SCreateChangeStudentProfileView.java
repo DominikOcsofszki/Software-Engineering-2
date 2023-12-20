@@ -16,7 +16,9 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.NutzerDTO;
+import de.hbrs.se2.womm.dtos.NutzerLoginDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.services.AuthenticationService;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.LandingPageView;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
@@ -25,6 +27,10 @@ import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -34,6 +40,9 @@ import java.util.Objects;
 @PageTitle("CreateChangeStudentProfileView")
 //public class SCreateChangeStudentProfileView extends AbstractView {
 public class SCreateChangeStudentProfileView extends AViewWomm {
+    //NutzerLoginDTO neuerNutzerfuerUpdate;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     StudentService studentService;
     StudentDTO studentDTO;
     NutzerDTO nutzerDTO;
@@ -49,7 +58,8 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
     String studentSpezialisierungen;
     String studentSemester;
     Image studentProfilbild;
-    String studentPasswort = "test";
+    String studentPasswort;
+
     boolean studentBenachrichtigungen;
     private void setUpDataFromDTO() {
         studentName = studentDTO.getStudentName();
@@ -63,18 +73,17 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         studentProfilbild = studentDTO.PlaceholderOrImage();
         studentBenachrichtigungen = studentDTO.isStudentBenachrichtigung();
         nutzerDTO = studentDTO.getNutzer();
-        //studentPasswort = nutzerDTO.getPasswort();
         studentEmail = nutzerDTO.getNutzerMail();
         studentOrt = nutzerDTO.getNutzerOrt();
+
 
     }
     public SCreateChangeStudentProfileView(StudentService studentService,SecurityService securityService) {
         this.studentService = studentService;
         this.studentDTO = studentService.getByNutzerId(securityService.getLoggedInNutzerID());
+        //System.out.println(securityService.getAuthenticatedUser().getPassword());
+        studentPasswort = securityService.getAuthenticatedUser().getPassword();
         setUpDataFromDTO();
-        System.out.println(studentDTO);
-        System.out.println(nutzerDTO + " NUTZER");
-        //System.out.println(studentDTO);
         //this.getStyle().set("font-family","Open Sans");
         //this.getStyle().set("font-style","normal");
         Header();
@@ -85,27 +94,20 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         //studentDTO.setStudentVorname();   nicht nötig
         //studentDTO.setStudentAlias();     nicht nötig ?
         studentDTO.setStudentGeburtstag(studentGeburtstag);
-        //studentDTO.setEmail();    //nicht implementiert
-        //studentDTO.setNutzer().setOrt();      nicht implementiert
-        //nutzerDTO.setEmail(studentEmail); --
-        //nutzerDTO.setPasswort(studentPasswort); --
-        //nutzerDTO.setOrt(studentOrt); --
         studentDTO.setNutzer(nutzerDTO);
-        //studentDTO.getNutzer().setEmail(studentEmail);
         studentDTO.getNutzer().setNutzerMail(studentEmail);
-        //studentDTO.getNutzer().setOrt(studentOrt);
         studentDTO.getNutzer().setNutzerOrt(studentOrt);
-        //studentDTO.getNutzer().setPasswort(studentPasswort);
-        //Passwort muss noch gemacht werden
+
 
         studentDTO.setStudentBio(studentBiographie);
         studentDTO.setStudentSpezialisierung(studentSpezialisierungen);
-        System.out.println(studentSemester);
         studentDTO.setStudentSemester(Objects.equals(studentSemester, "null") ? null : Integer.parseInt(studentSemester));
         studentDTO.setStudentBenachrichtigung(studentBenachrichtigungen);
+        //studentDTO.getNutzer().getNutzerLoginDTO().setNutzerPasswort(studentPasswort);
+        //neuerNutzerfuerUpdate.setNutzerName(studentDTO.getNutzer().set);
+        //System.out.println(studentDTO + "Student");
+        //System.out.println(nutzerDTO + "Nutzer");
         studentService.saveStudent(studentDTO);
-        System.out.println(studentDTO);
-        System.out.println(studentOrt + " ORT " + studentEmail + " EMAIL " + studentPasswort +" PASSWORT");
         //UI.getCurrent().navigate(LandingPageView.class);
     }
     private void saveChanges(){
@@ -122,8 +124,8 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         if((!((validEmailField1.getValue().equals(studentAlias))))&&(!((validEmailField2.getValue().equals(studentAlias))))&&(((validEmailField1.getValue().equals(validEmailField2.getValue())))) && validEmailField2!=null && !validEmailField2.isInvalid()){             //E-Mail
             studentEmail = validEmailField1.getValue();
         }
-        if((passwordField1.getValue().equals(studentPasswort)) && (passwordField2.getValue().equals(passwordField3.getValue())) && passwordField2!=null && !passwordField2.isInvalid()){             //Passwort
-            studentPasswort = passwordField2.getValue();
+        if((passwordEncoder.matches(passwordField1.getValue(),(studentPasswort))) && (passwordField2.getValue().equals(passwordField3.getValue())) && passwordField2!=null && !passwordField2.isInvalid()){             //Passwort
+            studentPasswort = passwordEncoder.encode(passwordField2.getValue());
         }
         //System.out.println("1 " + passwordField1.getValue()+" 2 "+passwordField2.getValue()+" 3 "+ passwordField3.getValue()+" 4 " + studentPasswort +" "+ passwordField2.isInvalid());
         if(!((textField1.getValue().equals(studentOrt)))){                          //Ort
@@ -138,7 +140,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         if(!numberField.isInvalid() && (!((numberField.getValue() == (Objects.equals(studentSemester, "null") ? 0 : Double.parseDouble(studentSemester)))))){                    //Semester
             int i = numberField.getValue().intValue();
             studentSemester = Integer.toString(i);
-            System.out.println(studentSemester +"inter");
+            //System.out.println(studentSemester +"inter");
         }
         //System.out.println("1 " + (Objects.equals(studentSemester, "null") ? 0 : Double.parseDouble(studentSemester))+" 2 "+studentSemester+" 3 "+ numberField.getValue()+" 4 " + !numberField.isInvalid() +" "+ !numberField.isInvalid());
         //System.out.println("1 " +  validEmailField1.getValue()+" 2 "+studentEmail+" 3 "+ passwordField3.getValue()+" 4 " + studentPasswort +" "+ passwordField2.isInvalid());

@@ -14,6 +14,7 @@ import lombok.Getter;
 @Data
 @Getter
 public class NutzerDTO {
+    private NutzerLoginDTO nutzerLoginDTO;
     private long nutzerId;
     private String nutzerMail;
     private Boolean nutzerAktiv;
