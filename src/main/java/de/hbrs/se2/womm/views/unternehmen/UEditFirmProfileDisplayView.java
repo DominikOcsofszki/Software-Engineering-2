@@ -81,10 +81,10 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         Image companyLogo = getUnternehmenDTO().PlaceholderOrImage();
         H2 firmName = new H2(getUnternehmenDTO().getName());
         String companyDescription = getUnternehmenDTO().getBeschreibung();
-        long nrOfReviews = 123;
-//        long nrOfReviews = getUnternehmenDTO().getNrOfRatings(); //ToDo DTO
+        long nrOfReviews = 123;//ToDo DTO Reviews ---> Anzahl von Bewertungen
+//        long nrOfReviews = getUnternehmenDTO().getNrOfRatings(); //ToDo DTO Reviews ---> Anzahl von Bewertungen
         HorizontalLayout ratingLayout = new HorizontalLayout();//ToDo refactored
-        int starsRating = 2;
+        int starsRating = 5;
 //        int starsRating = getUnternehmenDTO().getStars(); //ToDo DTO
         int nrOfEmployees = 999;
 //        int nrOfEmployees = getUnternehmenDTO().getNumberOfEmployees(); //ToDo DTO
@@ -131,7 +131,7 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         HorizontalLayout logoAndEditLayout = new HorizontalLayout();
         Div logoAndName = new Div();
 //        Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");//ToDo put at top
-        companyLogo.setWidth("150px");
+        //companyLogo.setWidth("150px");
         logoAndName.add(companyLogo);
 //        logoAndName.add(new H2("Firm Name"));//ToDo put at top, refactored
         logoAndName.add(firmName);//ToDo put at top, refactored

@@ -35,7 +35,7 @@ public class UHomepageUnternehmenView extends AViewWomm {
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         setUpHeader();
-        setUpBanner();
+       // setUpBanner();
 
         setUpSearchFields();
         this.gridFilterStelle = new GridFilterStelle();
@@ -82,16 +82,16 @@ public class UHomepageUnternehmenView extends AViewWomm {
         header.setWidth("100%");
     }
 
-    private void setUpBanner() {
+/*    private void setUpBanner() {
         VerticalLayout banner = new VerticalLayout();
 //        Image i = new Image("themes/theme_1/banner.jpg", "https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
-        Image i = new Image(ASSETS.BANNER.BANNER2, "alt text");
+       Image i = new Image(ASSETS.BANNER.BANNER2, "alt text");
 
         i.setWidth("100%");
         banner.add(i);
         add(banner);
     }
-
+*/
     private void setUpSearchFields() {
         /*
         HorizontalLayout searchFields = new HorizontalLayout();
