@@ -10,28 +10,55 @@
 /*public static final String blue = "1676F3";*/
 /*public static final String green = "15C15D";*/
 /*public static final String red = "FF4338";*/
-
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap');
 html {
     /*Has to be in this format, else not working with var:--womm-primary-color: 22,177,243;*/
-    --womm-primary-font: "Avenir Next LT Pro";   /*#16b1f3*/
+    /*--womm-primary-font: 'frontend\themes\theme_1\SourceSans3';   /*#16b1f3*/
+
+    /*background: linear-gradient(to right, #b6d7f8,#e7efff, #ffe8eb);*/
     --womm-primary-color: 22,118,243;   /*#0ACCFFFF blue*/
-    --womm-success-color: 22,177,243;   /*#15C15D green*/
+    --womm-success-color: 21, 193, 93;   /*#15C15D green*/
     --womm-error-color: 255,67,58;     /*#FF4338 red*/
+    --womm-primary-text-colour: 0, 0, 0; /* black*/
+    --womm-text-colour: 10,10,10; /*dark grey*/
+    --womm-contrast-colour: 255,255,255; /*white*/
     /*--this-ir-for-testing: #1676F3;*/
     --womm-base-color: 22,118,243;
+    --lumo-space: l;
 
-    --lumo-font-family: var(--womm-primary-font);
-
+    --lumo-font-family: 'Source Sans 3', sans-serif;
+    --lumo-font-size-m: 1rem;
     --lumo-success-color: rgba(var(--womm-success-color), 1);
-    --lumo-error-color: rgba(var(--womm-error-color), 1);
-    --lumo-primary-text-color: rgba(var(--womm-primary-color),1);
+    --lumo-error-color: rgba(var(--womm-error-color), 0.75);
+
+    --lumo-primary-text-color: rgba(var(--womm-primary-text-colour),1);
+    --lumo-secondary-text-color: rgba(var(--womm-primary-text-colour),0.9);
+    --lumo-tertiary-text-colour: rgba(var(--womm-text-colour),0.75);
+    --lumo-primary-contrast-color:rgba(var(--womm-contrast-colour),1);
+
 
     /*--lumo-base-color: rgba(var(--womm-base-color), 0.005);*/
-
     /*--lumo-primary-color-50pct: rgba(var(--womm-primary-color), 0.5);*/
     /*--lumo-primary-color-10pct: rgba(var(--womm-primary-color), 0.1);*/
     /*--lumo-primary-color: rgba(var(--womm-primary-color), 1);*/
+}
 
-
-
+vaadin-grid{
+    background-color: rgba(0, 0, 0, 0.0);
+}
+vaadin-grid::part(body-cell){
+    background-color: rgba(0, 0, 0, 0.0);
+    padding: 15px;
+    /*cursor: var(--lumo-clickable-cursor);*/
+}
+vaadin-grid::part(header-cell){
+    background-color: rgba(0, 0, 0, 0.0);
+    font-size: 50px; /* funktioniert nicht*/
+    padding: 15px;
+}
+vaadin-app-layout::part(navbar) {
+    background: linear-gradient(to right, #b6d7f8,#e7efff, #ffe8eb);
+}
+vaadin-app-layout::part(drawer) {
+    background-color: rgba(182, 215, 248);
 }
