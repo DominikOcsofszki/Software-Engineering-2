@@ -19,9 +19,7 @@ import de.hbrs.se2.womm.dtos.NutzerDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.LandingPageView;
-import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
-import de.hbrs.se2.womm.views.layouts.AbstractViewDTObyNutzerID;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -32,7 +30,6 @@ import java.util.Objects;
 @Route(value = ROUTING.STUDENT.SCreateChangeStudentProfileView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT","ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
-//public class SCreateChangeStudentProfileView extends AbstractView {
 public class SCreateChangeStudentProfileView extends AViewWomm {
     StudentService studentService;
     StudentDTO studentDTO;
@@ -56,14 +53,12 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         studentVorname = studentDTO.getStudentVorname();
 //        studentAlias = studentDTO.getStudentAlias(); //ToDo in DTO?
         studentGeburtstag = studentDTO.getStudentGeburtstag();
-
         studentBiographie = studentDTO.getStudentBio();
         studentSpezialisierungen = studentDTO.getStudentSpezialisierung();
         studentSemester = String.valueOf(studentDTO.getStudentSemester());
         studentProfilbild = studentDTO.PlaceholderOrImage();
         studentBenachrichtigungen = studentDTO.isStudentBenachrichtigung();
         nutzerDTO = studentDTO.getNutzer();
-        //studentPasswort = nutzerDTO.getPasswort();
         studentEmail = nutzerDTO.getNutzerMail();
         studentOrt = nutzerDTO.getNutzerOrt();
 
@@ -74,39 +69,21 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         setUpDataFromDTO();
         System.out.println(studentDTO);
         System.out.println(nutzerDTO + " NUTZER");
-        //System.out.println(studentDTO);
-        //this.getStyle().set("font-family","Open Sans");
-        //this.getStyle().set("font-style","normal");
         Header();
         Profil();
     }
     private void saveDTO(){
-        //studentDTO.setStudentName();      nicht nötig
-        //studentDTO.setStudentVorname();   nicht nötig
         //studentDTO.setStudentAlias();     nicht nötig ?
         studentDTO.setStudentGeburtstag(studentGeburtstag);
-        //studentDTO.setEmail();    //nicht implementiert
-        //studentDTO.setNutzer().setOrt();      nicht implementiert
-        //nutzerDTO.setEmail(studentEmail); --
-        //nutzerDTO.setPasswort(studentPasswort); --
-        //nutzerDTO.setOrt(studentOrt); --
         studentDTO.setNutzer(nutzerDTO);
-        //studentDTO.getNutzer().setEmail(studentEmail);
         studentDTO.getNutzer().setNutzerMail(studentEmail);
-        //studentDTO.getNutzer().setOrt(studentOrt);
         studentDTO.getNutzer().setNutzerOrt(studentOrt);
-        //studentDTO.getNutzer().setPasswort(studentPasswort);
         //Passwort muss noch gemacht werden
-
         studentDTO.setStudentBio(studentBiographie);
         studentDTO.setStudentSpezialisierung(studentSpezialisierungen);
-        System.out.println(studentSemester);
         studentDTO.setStudentSemester(Objects.equals(studentSemester, "null") ? null : Integer.parseInt(studentSemester));
         studentDTO.setStudentBenachrichtigung(studentBenachrichtigungen);
         studentService.saveStudent(studentDTO);
-        System.out.println(studentDTO);
-        System.out.println(studentOrt + " ORT " + studentEmail + " EMAIL " + studentPasswort +" PASSWORT");
-        //UI.getCurrent().navigate(LandingPageView.class);
     }
     private void saveChanges(){
         /*if(!((datePicker.toString()).equals(studentGeburtstag))){
@@ -142,7 +119,6 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         }
         //System.out.println("1 " + (Objects.equals(studentSemester, "null") ? 0 : Double.parseDouble(studentSemester))+" 2 "+studentSemester+" 3 "+ numberField.getValue()+" 4 " + !numberField.isInvalid() +" "+ !numberField.isInvalid());
         //System.out.println("1 " +  validEmailField1.getValue()+" 2 "+studentEmail+" 3 "+ passwordField3.getValue()+" 4 " + studentPasswort +" "+ passwordField2.isInvalid());
-
 
 
         saveDTO();
@@ -423,7 +399,6 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         headervert.add(b);
         header.add(headervert);
         add(header);
-
     }
 }
 
