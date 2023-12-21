@@ -6,6 +6,7 @@ public class ROUTING {
         public static final String LoginView = "login";
 
         public static final String RegistrierungStudentView = "RegistrierungStudentView";
+        public static final String RegistrierungUnternehmenView = "RegistrierungUnternehmenView";
         public static final String AccessDeniedView = "AccessDeniedView";
     }
 
