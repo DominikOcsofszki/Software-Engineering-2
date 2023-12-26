@@ -37,7 +37,7 @@ public class SHomepageStudentView extends AViewWomm {
         this.gridFilterStelle = new GridFilterStelle();
         this.gridFilterStelle.setUpFromOutside(stelleService.getAllByFilter("",""));
         setUpHeader();
-        setUpBanner();
+//        setUpBanner();
         setUpSearchFields();
 //        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleService, -99L)); //ToDo -99L => all
         add(this.gridFilterStelle);
@@ -73,7 +73,7 @@ public class SHomepageStudentView extends AViewWomm {
         b4.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
     }
-
+/*
     private void setUpBanner() {
         VerticalLayout banner = new VerticalLayout();
 //        Image i = new Image("themes/theme_1/banner.jpg", "https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
@@ -83,7 +83,7 @@ public class SHomepageStudentView extends AViewWomm {
         banner.add(i);
         add(banner);
     }
-
+*/
     private void setUpSearchFields() {
     /*
         VerticalLayout searchResults = new VerticalLayout();
