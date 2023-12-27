@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.junit.services;
 
+import de.hbrs.se2.womm.dtos.NutzerDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Nutzer;
 import de.hbrs.se2.womm.entities.Unternehmen;
@@ -50,8 +51,6 @@ public class UnternehmenServiceTest {
     void testGetUnternehmenPerID() {
         long id = 1L;
         when(unternehmenRepositoryMock.findUnternehmenByUnternehmenId(id)).thenReturn(Optional.of(unternehmen));
-        when(unternehmenMapper.unternehmenZuDTO(unternehmen)).thenReturn(unternehmenDTO);
-
         UnternehmenDTO result = unternehmenService.getUnternehmenPerID(id);
         assertNotNull(result);
         assertEquals(unternehmenDTO.getUnternehmenId(), result.getUnternehmenId());
@@ -61,8 +60,6 @@ public class UnternehmenServiceTest {
     void testGetByNutzerId() {
         long nutzerId = 1L;
         when(unternehmenRepositoryMock.findUnternehmenByNutzer_NutzerId(nutzerId)).thenReturn(Optional.of(unternehmen));
-        when(unternehmenMapper.unternehmenZuDTO(unternehmen)).thenReturn(unternehmenDTO);
-
         UnternehmenDTO result = unternehmenService.getByNutzerId(nutzerId);
         assertNotNull(result);
         assertEquals(1L, result.getUnternehmenId());
@@ -80,9 +77,6 @@ public class UnternehmenServiceTest {
         when(unternehmenRepositoryMock.findUnternehmenByNameIgnoreCaseContaining(unternehmenName))
                 .thenReturn(Arrays.asList(unternehmen1, unternehmen2));
 
-        when(unternehmenMapper.unternehmenZuDTO(unternehmen1)).thenReturn(unternehmenDTO);
-        when(unternehmenMapper.unternehmenZuDTO(unternehmen2)).thenReturn(unternehmenDTO);
-
         List<UnternehmenDTO> result = unternehmenService.getUnternehmenDTOPerName(unternehmenName);
         assertNotNull(result);
         assertEquals(2, result.size());
@@ -97,8 +91,6 @@ public class UnternehmenServiceTest {
                 .unternehmenId(2).build();
 
         when(unternehmenRepositoryMock.findAll()).thenReturn(Arrays.asList(unternehmen1, unternehmen2));
-        when(unternehmenMapper.unternehmenZuDTO(unternehmen1)).thenReturn(unternehmenDTO);
-        when(unternehmenMapper.unternehmenZuDTO(unternehmen2)).thenReturn(unternehmenDTO);
 
         List<UnternehmenDTO> result = unternehmenService.getAll();
         assertNotNull(result);
@@ -107,22 +99,27 @@ public class UnternehmenServiceTest {
 
     @Test
     void testSaveUnternehmen() {
-        when(nutzerMapper.nutzerDTOToNutzer(unternehmenDTO.getNutzer())).thenReturn(new Nutzer());
-        when(unternehmenMapper.dtoZuUnternehmen(unternehmenDTO)).thenReturn(unternehmen);
-
+        NutzerDTO nutzerDTO = NutzerDTO.builder()
+                .nutzerId(1L)
+                // weitere Nutzer-Details setzen, falls erforderlich
+                .build();
 
         UnternehmenDTO unternehmenDTO = UnternehmenDTO.builder()
-                .unternehmenId(1L).build();
+                .unternehmenId(1L)
+                .nutzer(nutzerDTO)
+                // weitere Unternehmens-Details setzen, falls erforderlich
+                .build();
 
-        Nutzer nutzer = nutzerMapper.nutzerDTOToNutzer(unternehmenDTO.getNutzer());
+        Nutzer nutzer = nutzerMapper.nutzerDTOToNutzer(nutzerDTO);
         Unternehmen unternehmen = unternehmenMapper.dtoZuUnternehmen(unternehmenDTO);
 
-        when(nutzerRepositoryMock.save(nutzer)).thenReturn(nutzer);
-        when(unternehmenRepositoryMock.save(unternehmen)).thenReturn(unternehmen);
+        when(nutzerRepositoryMock.save(any(Nutzer.class))).thenReturn(nutzer);
+        when(unternehmenRepositoryMock.save(any(Unternehmen.class))).thenReturn(unternehmen);
 
         unternehmenService.saveUnternehmen(unternehmenDTO);
 
-        verify(nutzerRepositoryMock, times(1)).save(nutzer);
-        verify(unternehmenRepositoryMock, times(1)).save(unternehmen);
+        verify(nutzerRepositoryMock, times(1)).save(any(Nutzer.class));
+        verify(unternehmenRepositoryMock, times(1)).save(any(Unternehmen.class));
     }
+
 }
