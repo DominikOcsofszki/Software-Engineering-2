@@ -100,6 +100,86 @@ public class StelleServiceTest {
 
     @Test
     void testGetAllByFilter() {
+        //--------Mocking----------
+        when(repo.findByStelleTitelIsContainingIgnoreCase(any(String.class))).thenAnswer(
+                i -> {
+                    return listEntity
+                            .stream()
+                            .filter(p -> containsIgnoreCase(p.getStelleTitel(), i.getArgument(0).toString()))
+                            .toList();
+                }
+        );
+        when(repo.findByStelleOrtIsContainingIgnoreCase(any(String.class))).thenAnswer(
+                i -> {
+                    return listEntity
+                            .stream()
+                            .filter(p -> containsIgnoreCase(p.getStelleOrt(), i.getArgument(0).toString()))
+                            .toList();
+                }
+        );
+        when(repo.findByStelleBeschreibungIsContainingIgnoreCase(any(String.class))).thenAnswer(
+                i -> {
+                    return listEntity
+                            .stream()
+                            .filter(p -> containsIgnoreCase(p.getStelleBeschreibung(), i.getArgument(0).toString()))
+                            .toList();
+                }
+        );
+        when(repo.findByStelleWebsiteIsContainingIgnoreCase(any(String.class))).thenAnswer(
+                i -> {
+                    return listEntity
+                            .stream()
+                            .filter(p -> containsIgnoreCase(p.getStelleWebsite(), i.getArgument(0).toString()))
+                            .toList();
+                }
+        );
+        when(repo.findByUnternehmen_NameIsContainingIgnoreCase(any(String.class))).thenAnswer(
+                i -> {
+                    return listEntity
+                            .stream()
+                            .filter(p -> containsIgnoreCase(p.getUnternehmen().getName(), i.getArgument(0).toString()))
+                            .toList();
+                }
+        );
+        //--------Testing----------
+        listDTO = service.getAllByFilter("2023", "Geburtsjahr");
+        assertEquals(0, listDTO.size());
+
+        listEntity.add(stelle);
+        listDTO = service.getAllByFilter("2023", "Geburtsjahr");
+        assertEquals(1, listDTO.size());
+
+        listDTO = service.getAllByFilter("ite", "titel");
+        assertEquals(1, listDTO.size());
+
+        listDTO = service.getAllByFilter("le", "titel");
+        assertEquals(0, listDTO.size());
+
+        listDTO = service.getAllByFilter("or", "ort");
+        assertEquals(1, listDTO.size());
+
+        listDTO = service.getAllByFilter("Oettershagen", "ort");
+        assertEquals(0, listDTO.size());
+
+        listDTO = service.getAllByFilter("beschrei", "beschreibung");
+        assertEquals(1, listDTO.size());
+
+        listDTO = service.getAllByFilter("descr", "beschreibung");
+        assertEquals(0, listDTO.size());
+
+        listDTO = service.getAllByFilter("url", "website");
+        assertEquals(1, listDTO.size());
+
+        listDTO = service.getAllByFilter("seite", "website");
+        assertEquals(0, listDTO.size());
+
+        /*
+        listDTO = service.getAllByFilter("unter","unternehmen");
+        assertEquals(1,listDTO.size());
+
+        listDTO = service.getAllByFilter("le","unternehmen");
+        assertEquals(0,listDTO.size());
+         */
 
     }
 
@@ -162,5 +242,9 @@ public class StelleServiceTest {
         assertEquals(stelleDTO.getStelleWebsite(), stelle.getStelleWebsite());
         assertEquals(stelleDTO.getStelleBeschreibung(), stelle.getStelleBeschreibung());
 
+    }
+
+    private boolean containsIgnoreCase(String base, String search) {
+        return base.toLowerCase().contains(search.toLowerCase());
     }
 }
