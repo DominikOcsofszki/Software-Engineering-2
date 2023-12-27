@@ -1,12 +1,5 @@
 package de.hbrs.se2.womm.junit.services;
 
-import static com.helger.commons.functional.Predicates.notNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import com.helger.commons.traits.IPrimitiveConverterTo;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.entities.Stelle;
 import de.hbrs.se2.womm.repositories.StelleRepository;
@@ -16,9 +9,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class StelleServiceTest {
 
