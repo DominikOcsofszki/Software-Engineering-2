@@ -31,16 +31,14 @@ public class BewerbungServiceTest {
                 .student(null)
                 .bewerbungStatus("angenommen")
                 .build();
-        //bewerbungRepositoryMock.save(be);
     }
 
     @Test
     void testGetAll() {
         // Mocking the behavior of bewerbungRepository
         when(bewerbungRepositoryMock.findAll()).thenReturn(Arrays.asList(be));
-        // Calling the method to be tested
+        // Test
         List<BewerbungDTO> bewerbungDTOList = bewerbungService.getAll();
-        // Assertions
         assertNotNull(bewerbungDTOList);
         assertEquals(1,bewerbungDTOList.size());
     }
@@ -50,13 +48,10 @@ public class BewerbungServiceTest {
         Long bewerbungId = 1L;
         // Mocking the behavior of bewerbungRepository
         when(bewerbungRepositoryMock.findById(bewerbungId)).thenReturn(Optional.of(be));
-
-        // Calling the method to be tested
+        // Test
         Optional<BewerbungDTO> bewerbungDTO = bewerbungService.getById(bewerbungId);
-
-        // Assertions
         assertTrue(bewerbungDTO.isPresent());
-        // Add more assertions based on your specific use case
+        assertEquals(bewerbungDTO.get().getBewerbungId(),(long)be.getBewerbungId());
     }
 
     @Test
@@ -65,12 +60,8 @@ public class BewerbungServiceTest {
         // Mocking the behavior of bewerbungRepository
         when(bewerbungRepositoryMock.findBewerbungByStudent_Nutzer_NutzerId(nutzerId))
                 .thenReturn(Arrays.asList(be));
-
-        // Calling the method to be tested
+        // Test
         List<BewerbungDTO> bewerbungDTOList = bewerbungService.getByNutzerId(nutzerId);
-
-        // Assertions
         assertNotNull(bewerbungDTOList);
-        // Add more assertions based on your specific use case
     }
 }

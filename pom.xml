@@ -26,6 +26,11 @@
         <checkstyle-validation.var>none</checkstyle-validation.var> <!-- off<- none/validate -> on-->
         <checkstyle-version.var>3.3.1</checkstyle-version.var> <!-- off<- none/validate -> on-->
         <sonar.host.url>https://sepp-sonar.inf.h-brs.de/</sonar.host.url>
+        <!--Sonar -->
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.language>java</sonar.language>
     </properties>
     <reporting>
         <plugins>
@@ -199,6 +204,22 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.0.201403182114</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <destFile>${sonar.jacoco.reportPath}</destFile>
                 </configuration>
             </plugin>
 

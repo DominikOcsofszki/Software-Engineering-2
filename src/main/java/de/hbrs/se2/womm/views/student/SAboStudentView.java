@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.student;
 
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
@@ -96,13 +97,13 @@ public class SAboStudentView extends AViewWomm {
 
         //ToDo Verlinkung zum entsprechenden Unternehmen anpassen
 
-        grid.addComponentColumn(demoInhaltSubscription::getImage).setHeader("Logo").setWidth("5%");
+        grid.addComponentColumn(demoInhaltSubscription::getImage).setHeader(new Html("<b>Logo</b>")).setWidth("5%");
         grid.addColumn(LitRenderer.<demoInhaltSubscription>of(TEMPLATE.LIT_TEMPLATE_HTML)
                 .withProperty("id", demoInhaltSubscription::getName)
                 .withFunction("clickHandler", person -> {
                     UI.getCurrent().navigate(SFirmProfileDisplayView.class);
-                })).setHeader("Name").setWidth("25%").setSortable(true);
-        grid.addColumn(demoInhaltSubscription::getMessage).setHeader("Beschreibung").setWidth("70%").getStyle().setFont("OpenSanse");
+                })).setHeader(new Html("<b>Name</b>")).setWidth("25%").setSortable(true);
+        grid.addColumn(demoInhaltSubscription::getMessage).setHeader(new Html("<b>Beschreibung</b>")).setWidth("70%").getStyle().setFont("OpenSanse");
         notification.add(grid);
         grid.recalculateColumnWidths();
 
