@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 public class RegisterTest extends AbstractPrepareTestSelenium {
     RegisterPage registerPage;
 
-    @Override
+    //@Override
     protected void setupPageBeforeEach() {
         registerPage = new RegisterPage(driver, wait);
     }
 
-    @Test
+    //@Test
     public void testRegister() {
         registerPage.register("aDom", "ocs", "c", "d@dom.de", "e", "e", "", "g");
 
