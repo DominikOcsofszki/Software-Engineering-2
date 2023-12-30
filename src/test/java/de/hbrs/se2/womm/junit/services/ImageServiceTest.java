@@ -109,7 +109,7 @@ public class ImageServiceTest {
 
     }
 
-    private byte[] getRandomByteArray() {
+    public static byte[] getRandomByteArray() {
         Random r = new Random();
         byte[] result = new byte[r.nextInt(1, 10) * 8];
         r.nextBytes(result);
