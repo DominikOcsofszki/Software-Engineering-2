@@ -1,7 +1,10 @@
 package de.hbrs.se2.womm.junit.services;
 
 import de.hbrs.se2.womm.dtos.StelleDTO;
+import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.entities.Nutzer;
 import de.hbrs.se2.womm.entities.Stelle;
+import de.hbrs.se2.womm.entities.Unternehmen;
 import de.hbrs.se2.womm.repositories.StelleRepository;
 import de.hbrs.se2.womm.services.StelleService;
 import org.junit.jupiter.api.AfterEach;
@@ -69,12 +72,97 @@ public class StelleServiceTest {
 
     @Test
     void testGetByUnternehmenId() {
-        //TODO
+        when(repo.findByUnternehmen_UnternehmenId(any(Long.class))).thenAnswer(
+                i -> {
+                    return listEntity
+                            .stream()
+                            .filter(p -> (long) p.getUnternehmen().getUnternehmenId() == (long) i.getArgument(0))
+                            .toList();
+                }
+        );
+
+        List<StelleDTO> actual = service.getByUnternehmenId(101L);
+        assertNotNull(actual);
+        assertEquals(0, actual.size());
+
+        listEntity.add(Stelle.builder()
+                .stelleId(100)
+                .stelleTitel("titel")
+                .stelleOrt("ort")
+                .stelleBeschreibung("beschreibung")
+                .stelleWebsite("url")
+                .unternehmen(Unternehmen.builder().unternehmenId(101).name("unternehmen").build())
+                .build());
+
+        actual = service.getByUnternehmenId(101L);
+        assertEquals(1, actual.size());
+
+        listEntity.add(Stelle.builder()
+                .stelleId(999)
+                .stelleTitel("titellll")
+                .stelleOrt("ortttt")
+                .stelleBeschreibung("beschreibunggggggg")
+                .stelleWebsite("urlllllll")
+                .unternehmen(Unternehmen.builder().unternehmenId(997).name("unternehmennnnnnnn").build())
+                .build());
+
+        actual = service.getByUnternehmenId(101L);
+        assertEquals(1, actual.size());
+
+        listEntity.add(Stelle.builder()
+                .unternehmen(Unternehmen.builder().unternehmenId(101).build())
+                .build());
+
+        actual = service.getByUnternehmenId(101L);
+        assertEquals(2, actual.size());
     }
 
     @Test
-    void testgetByNutzerId() {
-        //TODO
+    void testGetByNutzerId() {
+        when(repo.findByUnternehmen_Nutzer_NutzerId(any(Long.class))).thenAnswer(
+                i -> {
+                    return listEntity
+                            .stream()
+                            .filter(p -> (long) p.getUnternehmen().getNutzer().getNutzerId() == (long) i.getArgument(0))
+                            .toList();
+                }
+        );
+
+        List<StelleDTO> actual = service.getByNutzerId(102L);
+        assertNotNull(actual);
+        assertEquals(0, actual.size());
+
+        Nutzer nutzer = Nutzer.builder().nutzerId(102L).build();
+
+        listEntity.add(Stelle.builder()
+                .unternehmen(
+                        Unternehmen.builder().nutzer(nutzer).build()
+                )
+                .build());
+
+
+        actual = service.getByNutzerId(102L);
+        assertEquals(1, actual.size());
+
+        listEntity.add(Stelle.builder()
+                .unternehmen(
+                        Unternehmen.builder().nutzer(
+                                Nutzer.builder().nutzerId(999L).build()
+                        ).build()
+                )
+                .build());
+
+        actual = service.getByNutzerId(102L);
+        assertEquals(1, actual.size());
+
+        listEntity.add(Stelle.builder()
+                .unternehmen(
+                        Unternehmen.builder().nutzer(nutzer).build()
+                )
+                .build());
+
+        actual = service.getByNutzerId(102L);
+        assertEquals(2, actual.size());
     }
 
     @Test
@@ -142,7 +230,14 @@ public class StelleServiceTest {
         listDTO = service.getAllByFilter("2023", "Geburtsjahr");
         assertEquals(0, listDTO.size());
 
-        listEntity.add(stelle);
+        listEntity.add(Stelle.builder()
+                .stelleId(100)
+                .stelleTitel("titel")
+                .stelleOrt("ort")
+                .stelleBeschreibung("beschreibung")
+                .stelleWebsite("url")
+                .unternehmen(Unternehmen.builder().unternehmenId(101).name("unternehmen").build())
+                .build());
         listDTO = service.getAllByFilter("2023", "Geburtsjahr");
         assertEquals(1, listDTO.size());
 
@@ -170,14 +265,11 @@ public class StelleServiceTest {
         listDTO = service.getAllByFilter("seite", "website");
         assertEquals(0, listDTO.size());
 
-        /*
-        listDTO = service.getAllByFilter("unter","unternehmen");
-        assertEquals(1,listDTO.size());
+        listDTO = service.getAllByFilter("unter", "unternehmen");
+        assertEquals(1, listDTO.size());
 
-        listDTO = service.getAllByFilter("le","unternehmen");
-        assertEquals(0,listDTO.size());
-         */
-
+        listDTO = service.getAllByFilter("le", "unternehmen");
+        assertEquals(0, listDTO.size());
     }
 
     @Test
