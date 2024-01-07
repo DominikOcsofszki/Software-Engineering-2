@@ -112,7 +112,7 @@ public class TranslateMap {
         //CreateChangeStudentProfileView
         put("Enter your old password", "Altes Passwort");
         put("Save Changes", "Änderungen Speichern");
-        put("Please enter a valid e-mail address", "Bitte eine gültige E-Mail angeben");
+        put("Please enter a valid e-mail address", "Bitte eine gültige E-Mail-Adresse angeben");
         put("Upload", "Hochladen");
         put("The name can only be changed with the agreement of an admin", "Der Name kann nur mit Absprache eines Admins geändert werden");
         put("Confirm e-mail", "E-Mail bestätigen");
@@ -123,7 +123,11 @@ public class TranslateMap {
         put("I would like to receive notifications", "Ich möchte Benachrichtigungen erhalten");
         put("Enter your new password", "Neues Passwort");
         put("Password", "Passwort");
-
+        put("Please enter your current valid Password", "Bitte gib dein aktuelles Passwort ein");
+        put("Please enter your new valid Password", "Bitte gib dein neues, gültiges Passwort ein");
+        put("Please re-enter your new valid Password", "Bitte wiederhole dein neues, gültiges Passwort");
+        put("Please enter your current semester", "Bitte gib dein aktuelles Semester ein");
+        put("Please re-enter your valid e-mail address", "Bitte wiederhole deine gültige E-Mail-Adresse");
     }};
 
 
