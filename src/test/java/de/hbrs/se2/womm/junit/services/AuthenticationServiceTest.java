@@ -20,7 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class AuthenticationServiceTest {
@@ -104,5 +104,60 @@ public class AuthenticationServiceTest {
         verify(authenticationManager, times(1))
                 .authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(authenticationManager, times(1))
-                .authenticate(any(UsernamePasswordAuthenticationToken.class));    }
+                .authenticate(any(UsernamePasswordAuthenticationToken.class));
+    }
+    @Test
+    void testRegisterStudent_UsernameAlreadyTakenException() {
+        // Mock-Objekt für StudentRegistrationRequest erstellen
+        StudentRegistrationRequest request = mock(StudentRegistrationRequest.class);
+        when(request.getUsername()).thenReturn("existingUsername"); // Existing username in the repository
+
+        // Mock UsernameAlreadyTakenException behavior
+        when(nutzerRepository.findNutzerByNutzerMail(anyString())).thenReturn(null);
+        when(nutzerLoginRepository.existsNutzerByNutzerName("existingUsername")).thenReturn(true);
+
+        // Test
+        assertThrows(UsernameAlreadyTakenException.class, () -> authenticationService.registerStudent(request));
+    }
+
+    @Test
+    void testRegisterCompany_UsernameAlreadyTakenException() {
+        // Mock-Objekt für CompanyRegistrationRequest erstellen
+        CompanyRegistrationRequest request = mock(CompanyRegistrationRequest.class);
+        when(request.getUsername()).thenReturn("existingUsername"); // Existing username in the repository
+
+        // Mock UsernameAlreadyTakenException behavior
+        when(nutzerRepository.findNutzerByNutzerMail(anyString())).thenReturn(null);
+        when(nutzerLoginRepository.existsNutzerByNutzerName("existingUsername")).thenReturn(true);
+
+        // Test
+        assertThrows(UsernameAlreadyTakenException.class, () -> authenticationService.registerCompany(request));
+    }
+
+    @Test
+    void testLoginUser_InvalidUsername() {
+        // Mock-Objekt für LoginRequest erstellen
+        LoginRequest request = LoginRequest.builder().username("nonExistingUser").password("testPassword").build();
+
+        // Mock behavior
+        when(nutzerLoginRepository.findNutzerByNutzerName("nonExistingUser")).thenReturn(null);
+
+        // Test
+        assertThrows(AuthenticationException.class, () -> authenticationService.loginUser(request));
+    }
+
+    @Test
+    void testLoginUser_InvalidPassword() {
+        // Mock-Objekt für LoginRequest erstellen
+        LoginRequest request = LoginRequest.builder().username("existingUser").password("incorrectPassword").build();
+
+        // Mock behavior
+        NutzerLogin user = new NutzerLogin();
+        when(nutzerLoginRepository.findNutzerByNutzerName("existingUser")).thenReturn(user);
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+                .thenThrow(new RuntimeException("Invalid password"));
+
+        // Test
+        assertThrows(AuthenticationException.class, () -> authenticationService.loginUser(request));
+    }
 }
