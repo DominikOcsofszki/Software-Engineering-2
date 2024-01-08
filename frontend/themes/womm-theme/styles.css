@@ -73,6 +73,6 @@ vaadin-app-layout::part(navbar){
 vaadin-app-layout::part(drawer) {
    /* background-color:rgba(0, 0, 0, 0.05);
     */
-    background-color: #E7F1FD;
+    background:linear-gradient(to right,#E7F1FD, #EAF2FC);
 
 }
