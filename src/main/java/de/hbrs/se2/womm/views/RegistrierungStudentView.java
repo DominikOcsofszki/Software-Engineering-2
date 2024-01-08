@@ -204,7 +204,7 @@ public class RegistrierungStudentView extends AViewWomm {
                 closeButton.setAriaLabel(close);
                 closeButton.addClickListener(e -> {
                     notification.close();
-                    UI.getCurrent().navigate(ROUTING.ALL.LandingPageView);
+                    UI.getCurrent().navigate(ROUTING.ALL.LoginView);
                 });
 
                 HorizontalLayout layout = new HorizontalLayout(text, closeButton);
