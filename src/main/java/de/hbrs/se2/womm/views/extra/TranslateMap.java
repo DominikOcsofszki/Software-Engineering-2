@@ -96,9 +96,7 @@ public class TranslateMap {
         put("Name is required", "Name ist erforderlich");
         put("Username", "Benutzername");
         put("Register", "Registrieren");
-        put("Date of Birth", "Geburtsdatum");
         put("Surname", "Nachname");
-        put("Location", "Standort");
         put("Company Name", "Name Ihres Unternehmens");
 
         //StudentProfileDisplayView
@@ -109,6 +107,7 @@ public class TranslateMap {
         put("Current semester", "Aktuelles Semester");
         put("Specializations", "Spezialisierungen");
         put("Biography", "Biographie");
+
         //CreateChangeStudentProfileView
         put("Enter your old password", "Altes Passwort");
         put("Save Changes", "Änderungen Speichern");
@@ -122,12 +121,19 @@ public class TranslateMap {
         put("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported.", "Das neue Passwort muss eine Länge von 6 bis 12 Zeichen haben und darf nur Buchstaben von A bis Z und Zahlen beeinhalten");
         put("I would like to receive notifications", "Ich möchte Benachrichtigungen erhalten");
         put("Enter your new password", "Neues Passwort");
-        put("Password", "Passwort");
         put("Please enter your current valid Password", "Bitte gib dein aktuelles Passwort ein");
         put("Please enter your new valid Password", "Bitte gib dein neues, gültiges Passwort ein");
         put("Please re-enter your new valid Password", "Bitte wiederhole dein neues, gültiges Passwort");
         put("Please enter your current semester", "Bitte gib dein aktuelles Semester ein");
         put("Please re-enter your valid e-mail address", "Bitte wiederhole deine gültige E-Mail-Adresse");
+
+        //SJobProjectWorkshopDisplayView
+        put("The job offer is not available anymore :(", "Das Stellenangebot existiert nicht mehr :(");
+        put("Please enter your application into the text field!", "Trage bitte dein Anschreiben in das Feld ein!");
+        put("Send", "Abschicken");
+        put("Write a short application here", "Schreibe ein kurzes Anschreiben für deine Bewerbung");
+        put("Apply now", "Jetzt bewerben");
+        put("Apply later", "Später bewerben");
     }};
 
 

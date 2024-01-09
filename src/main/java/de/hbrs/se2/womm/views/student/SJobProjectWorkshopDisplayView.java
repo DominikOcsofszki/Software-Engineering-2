@@ -1,17 +1,27 @@
 package de.hbrs.se2.womm.views.student;
 
+import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.*;
+import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
-import de.hbrs.se2.womm.services.ImageService;
-import de.hbrs.se2.womm.services.StelleService;
+import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.model.ApplicationStatus;
+import de.hbrs.se2.womm.services.*;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -22,27 +32,29 @@ import java.util.Optional;
 @Route(value = ROUTING.STUDENT.SJobProjectWorkshopDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("JobProjectWorkshopDisplayView")
-public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlParameter<String> {
-    private String parameter;
+public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlParameter<Long> {
+    SecurityService securityService;
     StelleService stelleService;
-
+    BewerbungService bewerbungService;
+    StudentService studentService;
     StelleDTO stelleDTO;
     long stelleId;
+    VerticalLayout applicationForm;
+    boolean formToggle = false;
 
     @Override
-    public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
+    public void setParameter(BeforeEvent event, @OptionalParameter Long parameter) {
         if (parameter != null) {
-            this.parameter = parameter;
-            System.out.println("Parameter: " + this.parameter);
-            this.stelleId = Long.parseLong(this.parameter);
+            System.out.println("Parameter: " + parameter);
+            this.stelleId = parameter;
             try {
                 Optional<StelleDTO> checkStelleDTO = stelleService.getById(this.stelleId);
-                if (!checkStelleDTO.isPresent()) {
+                if (checkStelleDTO.isEmpty()) {
                     System.out.println("StelleDTO ist null");
                     add(new H1("Keine Stelle in der DB für ID: "+this.stelleId+" gefunden"));
                 } else {
                     this.stelleDTO = checkStelleDTO.get();
-                    System.out.println("Parameter: " + this.parameter);
+                    System.out.println("Parameter: " + parameter);
                     setUpBanner();
                     setUpHeader();
                     setUpStellenanzeige();
@@ -59,8 +71,16 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
 
     }
 
-    public SJobProjectWorkshopDisplayView(StelleService stelleService) {
+    public SJobProjectWorkshopDisplayView(StelleService stelleService,
+                                          SecurityService securityService,
+                                          BewerbungService bewerbungService,
+                                          StudentService studentService) {
+
+        this.securityService = securityService;
+        this.bewerbungService = bewerbungService;
+        this.studentService = studentService;
         this.stelleService = stelleService;
+        this.applicationForm = new VerticalLayout();
     }
     //ToDo Banner anpassen
 
@@ -148,21 +168,100 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
 
         //ToDo Bewerbung für bestimmten Studenten öffnen
         //Erstellen-Button
-        Button bewerbungButton = new Button("Bewerbung", new Icon(VaadinIcon.PENCIL));
+        Button bewerbungButton = new Button(getWommBuilder().translateText("Apply now"), new Icon(VaadinIcon.PENCIL));
         bewerbungButton.addClickListener(e -> {
-            getUI().ifPresent(ui -> ui.navigate(ROUTING.STUDENT.SApplicationView));
+            if (formToggle) {
+                applicationForm.removeAll();
+                remove(applicationForm);
+                bewerbungButton.setText(getWommBuilder().translateText("Apply now"));
+                bewerbungButton.setIcon(new Icon(VaadinIcon.PENCIL));
+                setFormToggle(!formToggle);
+            } else {
+                displayApplicationForm();
+                bewerbungButton.setText(getWommBuilder().translateText("Apply later"));
+                bewerbungButton.setIcon(new Icon(VaadinIcon.ANGLE_UP));
+                setFormToggle(!formToggle);
+            }
         });
         buttons.add(bewerbungButton);
 
-        //ToDo Chat für bestimmete Studenten-Unternehmen Kombination öffnen
-        //Chat-Button
-        Button chatButton = new Button("Chat", new Icon(VaadinIcon.COMMENTS_O));
-        chatButton.addClickListener(e -> {
-            getUI().ifPresent(ui -> ui.navigate(ROUTING.STUDENT.SChatView));
-        });
-        buttons.add(chatButton);
         add(buttons);
     }
 
+    private void displayApplicationForm() {
+        applicationForm.setPadding(false);
 
+        TextArea textArea = new TextArea();
+        textArea.setPlaceholder(getWommBuilder().translateText("Write a short application here"));
+        textArea.setWidthFull();
+        textArea.setMinHeight("200px");
+
+        applicationForm.add(textArea);
+
+        //Erstellen-Button
+        Button erstellenButton = new Button(getWommBuilder().translateText("Send"));
+        erstellenButton.addClickListener(e -> {
+            if (textArea.getValue().trim().isEmpty()) createErrorNotification(getWommBuilder().translateText("Please enter your application into the text field!"));
+            else if (stelleService.getById(stelleId).isPresent()) {
+                StelleDTO currentStelle = stelleService.getById(stelleId).get();
+                long studentId = securityService.getLoggedInNutzerID();
+                StudentDTO currentUser = studentService.getByNutzerId(studentId);
+                var returned = bewerbungService.saveBewerbung(BewerbungDTO.builder()
+                        .bewerbungStelle(currentStelle)
+                        .bewerbungStudent(currentUser)
+                        .bewerbungStatus(ApplicationStatus.PENDING.toString())
+                        .bewerbungText(textArea.getValue()).build());
+                if (returned != null) {
+                    createSuccessNotification();
+                }
+            } else {
+                createErrorNotification(getWommBuilder().translateText("The job offer is not available anymore :("));
+            }
+        });
+
+        applicationForm.add(erstellenButton);
+
+        add(applicationForm);
+    }
+
+    private void setFormToggle(boolean formToggle) {
+        this.formToggle = formToggle;
+    }
+
+    private void createErrorNotification(String errorText) {
+        Notification notification = new Notification();
+        notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+        Div text = new Div(new Text(errorText));
+
+        Button closeButton = new Button(new Icon("lumo", "cross"));
+        closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+        closeButton.addClickListener(e -> notification.close());
+
+        HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+        layout.setAlignItems(Alignment.CENTER);
+
+        notification.add(layout);
+        notification.open();
+    }
+
+    private void createSuccessNotification() {
+        Notification notification = new Notification();
+        notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+
+        Div text = new Div(getWommBuilder().Text.create(getWommBuilder().translateText("Deine Bewerbung wurde erfolgreich versendet")));
+
+        Button closeButton = new Button(new Icon("lumo", "cross"));
+        closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+        closeButton.addClickListener(e -> {
+            notification.close();
+            UI.getCurrent().navigate(ROUTING.STUDENT.SHomepageStudentView);
+        });
+
+        HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+        layout.setAlignItems(Alignment.CENTER);
+
+        notification.add(layout);
+        notification.open();
+    }
 }

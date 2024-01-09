@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.services;
 
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
+import de.hbrs.se2.womm.entities.Bewerbung;
 import de.hbrs.se2.womm.mapper.BewerbungMapper;
 import de.hbrs.se2.womm.repositories.BewerbungRepository;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,12 @@ public class BewerbungService {
 
     public List<BewerbungDTO> getByNutzerId(Long id){
         return bewerbungRepository.findBewerbungByStudent_Nutzer_NutzerId(id).stream().map(bewerbungMapper::bewerbungToBewerbungDto).toList();
+    }
+
+    public BewerbungDTO saveBewerbung(BewerbungDTO bewerbungDTO) {
+        Bewerbung bewerbung = BewerbungMapper.INSTNACE.bewerbungDtoToBewerbung(bewerbungDTO);
+        Bewerbung erzeugteBewerbung = bewerbungRepository.save(bewerbung);
+        return BewerbungMapper.INSTNACE.bewerbungToBewerbungDto(erzeugteBewerbung);
     }
 
 }
