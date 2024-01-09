@@ -17,10 +17,6 @@ public class Bewerbung {
     @Column(name = "bewerbung_id")
     private Integer bewerbungId;
 
-    @Lob
-    @Column(name = "bewerbung_pdf", columnDefinition = "bytea")
-    private byte[] bewerbungPdf;
-
     @Column(name = "bewerbung_text", columnDefinition = "text")
     private String bewerbungText;
 

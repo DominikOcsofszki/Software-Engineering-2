@@ -25,7 +25,6 @@ public class BewerbungServiceTest {
         bewerbungService = new BewerbungService(bewerbungRepositoryMock);
         be = Bewerbung.builder()
                 .bewerbungId(18)
-                .bewerbungPdf(null)
                 .bewerbungText("text")
                 .stelle(null)
                 .student(null)
