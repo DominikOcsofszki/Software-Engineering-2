@@ -1,13 +1,11 @@
 package de.hbrs.se2.womm.views.student;
 
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
@@ -27,6 +25,7 @@ import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
+import java.util.List;
 import java.util.Optional;
 
 @Route(value = ROUTING.STUDENT.SJobProjectWorkshopDisplayView, layout = StudentLayout.class)
@@ -47,22 +46,17 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
         if (parameter != null) {
             System.out.println("Parameter: " + parameter);
             this.stelleId = parameter;
-            try {
-                Optional<StelleDTO> checkStelleDTO = stelleService.getById(this.stelleId);
-                if (checkStelleDTO.isEmpty()) {
-                    System.out.println("StelleDTO ist null");
-                    add(new H1("Keine Stelle in der DB für ID: "+this.stelleId+" gefunden"));
-                } else {
-                    this.stelleDTO = checkStelleDTO.get();
-                    System.out.println("Parameter: " + parameter);
-                    setUpBanner();
-                    setUpHeader();
-                    setUpStellenanzeige();
-                    setUpButtons();
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-                add(new H1("Keine Stelle gefunden"));
+            Optional<StelleDTO> checkStelleDTO = stelleService.getById(this.stelleId);
+            if (checkStelleDTO.isEmpty()) {
+                System.out.println("StelleDTO ist null");
+                add(new H1("Keine Stelle in der DB für ID: "+this.stelleId+" gefunden"));
+            } else {
+                this.stelleDTO = checkStelleDTO.get();
+                System.out.println("Parameter: " + parameter);
+                setUpBanner();
+                setUpHeader();
+                setUpStellenanzeige();
+                setUpButtons();
             }
 
         } else {
@@ -120,42 +114,56 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
     private void setUpStellenanzeige() {
         VerticalLayout stellenanzeige = new VerticalLayout();
 
+        // Ort
 
-        //ToDo bestimmete StelleTitel anzeigen
-        //Textfeld StelleTitel
-//        Paragraph titel = new Paragraph();
-        Paragraph titel = new Paragraph();
-        String stelleTitel = this.stelleDTO.getStelleTitel(); //ToDo Changed
+        HorizontalLayout ortLayout = new HorizontalLayout();
+        Icon ortsIcon = VaadinIcon.PIN.create();
+        ortLayout.add(ortsIcon);
+
+        Text ort = new Text(this.stelleDTO.getStelleOrt());
+        ortLayout.add(ort);
+
+        stellenanzeige.add(ortLayout);
+
+        // Hyperlink
+
+        HorizontalLayout linkLayout = new HorizontalLayout();
+        Icon linkIcon = VaadinIcon.LINK.create();
+        linkLayout.add(linkIcon);
+
+        Anchor website = new Anchor();
+        String url = this.stelleDTO.getStelleWebsite();
+        website.setText(url);
+
+        linkLayout.add(website);
+
+        stellenanzeige.add(linkLayout);
+
+
+        // Beschreibung + Header
+
+        Div beschreibung = new Div();
+
+        beschreibung.getStyle().set("margin-top", "20px");
+
+        H3 titel = new H3();
+        String stelleTitel = this.stelleDTO.getStelleTitel();
         titel.setText(stelleTitel);
-//        titel.setText("Werksstudenten-Stelle");
 
-        stellenanzeige.add(titel);
+        beschreibung.add(titel);
 
-        //ToDo bestimmete StelleOrt anzeigen
-        //Textfeld StelleOrt
-        Paragraph ort = new Paragraph();
-        String stelleOrt = this.stelleDTO.getStelleOrt(); //ToDo Changed
-        ort.setText(stelleOrt);
-//        ort.setText("Bonn");
-
-        stellenanzeige.add(ort);
-
-        //ToDo bestimmete StelleOrt anzeigen
-        //Textfeld StelleWebsite
-        Paragraph website = new Paragraph();
-        String stelleWebsite = this.stelleDTO.getStelleWebsite(); //ToDo Changed
-        website.setText(stelleWebsite);
-//        website.setText("https://www.google.com/");
-
-        stellenanzeige.add(website);
-
-        //ToDo bestimmte StelleBeschreibung anzeigen
-        //Textfeld StelleBeschreibung
-        Paragraph beschreibung = new Paragraph();
-        beschreibung.setWidthFull();
-        String stelleBeschreibung = this.stelleDTO.getStelleBeschreibung(); //ToDo Changed
-        beschreibung.setText(stelleBeschreibung);
-//        beschreibung.setText("Hier könnte ihre Werbung für einen ausbeutenden Job stehen.");
+        List<String> paragraphs = List.of(this.stelleDTO.getStelleBeschreibung().split("\n\n"));
+        paragraphs.forEach(paragraph -> {
+            List.of(paragraph.split("\n")).forEach(subParagraph -> {
+                Paragraph newParagraph = new Paragraph();
+                newParagraph.setWidthFull();
+                newParagraph.setText(subParagraph);
+                beschreibung.add(newParagraph);
+            });
+            String linebreak = "<br>";
+            Html html = new Html(linebreak);
+            beschreibung.add(html);
+        });
 
         stellenanzeige.add(beschreibung);
 
@@ -166,7 +174,6 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
     private void setUpButtons() {
         HorizontalLayout buttons = new HorizontalLayout();
 
-        //ToDo Bewerbung für bestimmten Studenten öffnen
         //Erstellen-Button
         Button bewerbungButton = new Button(getWommBuilder().translateText("Apply now"), new Icon(VaadinIcon.PENCIL));
         bewerbungButton.addClickListener(e -> {
