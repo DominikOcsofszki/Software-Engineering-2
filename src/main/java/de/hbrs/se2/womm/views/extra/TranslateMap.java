@@ -103,6 +103,7 @@ public class TranslateMap {
         put("Location", "Ort");
         put("Date of Birth", "Geburtstag");
         put("e-mail", "E-Mail");
+        put("E-Mail Address", "E-Mail-Adresse");
         put("alias", "Alias");
         put("Current semester", "Aktuelles Semester");
         put("Specializations", "Spezialisierungen");
