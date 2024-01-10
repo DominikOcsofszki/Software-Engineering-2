@@ -64,25 +64,25 @@ public class SStudentProfileDisplayView extends AViewWomm {
         profilBild.add(bild);
 
         VerticalLayout rowName = generateProfileDetailsRow(
-                "Name", studentDTO.getStudentVorname() + " " + studentDTO.getStudentName()
+                "Name", studentDTO.getStudentVorname() + " " + studentDTO.getStudentName(), "45"
         );
         VerticalLayout rowGeburtstag = generateProfileDetailsRow(
-                "Date of Birth", studentDTO.getStudentGeburtstag()
+                "Date of Birth", studentDTO.getStudentGeburtstag(), "20"
         );
         VerticalLayout rowEmail = generateProfileDetailsRow(
-                "E-Mail Address", studentDTO.getNutzer().getNutzerMail()
+                "E-Mail Address", studentDTO.getNutzer().getNutzerMail(),"20"
         );
         VerticalLayout rowLocation = generateProfileDetailsRow(
-                "Location", studentDTO.getNutzer().getNutzerOrt()
+                "Location", studentDTO.getNutzer().getNutzerOrt(),"20"
         );
         VerticalLayout rowBiography = generateProfileDetailsRow(
-                "Biography", studentDTO.getStudentBio()
+                "Biography", studentDTO.getStudentBio(),"20"
         );
         VerticalLayout rowSpec = generateProfileDetailsRow(
-                "Specializations", studentDTO.getStudentSpezialisierung()
+                "Specializations", studentDTO.getStudentSpezialisierung(),"20"
         );
         VerticalLayout rowSemester = generateProfileDetailsRow(
-                "Semester", String.valueOf(studentDTO.getStudentSemester())
+                "Semester", String.valueOf(studentDTO.getStudentSemester()),"20"
         );
 
         // Hr() sind horizontale HTML-Trennlinien (<hr>)
@@ -110,16 +110,18 @@ public class SStudentProfileDisplayView extends AViewWomm {
      * @param _content Der Inhalt der Zeile
      * @return Die fertige Zeile
      */
-    private VerticalLayout generateProfileDetailsRow(String _header, String _content) {
+    private VerticalLayout generateProfileDetailsRow(String _header, String _content, String fontsize) {
         VerticalLayout row = new VerticalLayout();
 
         Span header = getWommBuilder().Span.create(_header);
         Span content = new Span(_content);
 
         header.getElement().getStyle().set("font-size", "20px");
-        content.getElement().getStyle().set("font-size", "25px");
+        content.getElement().getStyle().set("font-size", fontsize+"px");
 
         row.add(header);
+        row.setSpacing(false);
+        row.setPadding(false);
         row.add(content);
 
         return row;
