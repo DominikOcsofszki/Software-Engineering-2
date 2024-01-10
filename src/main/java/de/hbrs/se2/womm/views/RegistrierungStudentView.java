@@ -65,7 +65,6 @@ public class RegistrierungStudentView extends AViewWomm {
 
         setJustifyContentMode(JustifyContentMode.CENTER);
 
-//        add(new H4("Student/in Registration"));
         H4 h4 = getWommBuilder().H4.create("Student/in Registration");
         add(h4);
 
@@ -200,22 +199,24 @@ public class RegistrierungStudentView extends AViewWomm {
 
                 Button closeButton = new Button(new Icon("lumo", "cross"));
                 closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-                String close = getWommBuilder().translateText("Close");
-                closeButton.setAriaLabel(close);
-                closeButton.addClickListener(e -> {
-                    notification.close();
-                    UI.getCurrent().navigate(ROUTING.ALL.LoginView);
-                });
-
-                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-                layout.setAlignItems(Alignment.CENTER);
-
-                notification.add(layout);
-                notification.open();
+                createClickListener(notification, text, closeButton);
             }
         } catch (Exception e) {
             createErrorNotification(e.getMessage());
         }
+    }
+
+    static void createClickListener(Notification notification, Div text, Button closeButton) {
+        closeButton.addClickListener(e -> {
+            notification.close();
+            UI.getCurrent().navigate(ROUTING.ALL.LoginView);
+        });
+
+        HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+        layout.setAlignItems(Alignment.CENTER);
+
+        notification.add(layout);
+        notification.open();
     }
 
     private StudentRegistrationRequest getStudentRegistrationRequest() {
@@ -242,8 +243,6 @@ public class RegistrierungStudentView extends AViewWomm {
 
         Button closeButton = new Button(new Icon("lumo", "cross"));
         closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-        String close = getWommBuilder().translateText("Close");
-        closeButton.setAriaLabel(close);
         closeButton.addClickListener(e -> notification.close());
 
         HorizontalLayout layout = new HorizontalLayout(text, closeButton);

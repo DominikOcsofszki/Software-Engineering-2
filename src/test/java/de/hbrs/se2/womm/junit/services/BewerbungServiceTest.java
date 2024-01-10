@@ -60,7 +60,7 @@ public class BewerbungServiceTest {
         when(bewerbungRepositoryMock.findBewerbungByStudent_Nutzer_NutzerId(nutzerId))
                 .thenReturn(Arrays.asList(be));
         // Test
-        List<BewerbungDTO> bewerbungDTOList = bewerbungService.getByNutzerId(nutzerId);
+        List<BewerbungDTO> bewerbungDTOList = bewerbungService.getByStudentNutzerId(nutzerId);
         assertNotNull(bewerbungDTOList);
     }
 }

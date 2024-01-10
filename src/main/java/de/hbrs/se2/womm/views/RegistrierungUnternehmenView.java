@@ -170,16 +170,7 @@ public class RegistrierungUnternehmenView extends AViewWomm {
                 closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
                 String close = getWommBuilder().translateText("Close");
                 closeButton.setAriaLabel(close);
-                closeButton.addClickListener(e -> {
-                    notification.close();
-                    UI.getCurrent().navigate(ROUTING.ALL.LoginView);
-                });
-
-                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-                layout.setAlignItems(Alignment.CENTER);
-
-                notification.add(layout);
-                notification.open();
+                RegistrierungStudentView.createClickListener(notification, text, closeButton);
             }
         } catch (Exception e) {
             createErrorNotification(e.getMessage());
