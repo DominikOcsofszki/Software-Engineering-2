@@ -18,6 +18,7 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.model.ApplicationStatus;
 import de.hbrs.se2.womm.services.*;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
@@ -36,6 +37,7 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
     StelleService stelleService;
     BewerbungService bewerbungService;
     StudentService studentService;
+    UnternehmenService unternehmenService;
     StelleDTO stelleDTO;
     long stelleId;
     VerticalLayout applicationForm;
@@ -213,9 +215,11 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
                 StelleDTO currentStelle = stelleService.getById(stelleId).get();
                 long studentId = securityService.getLoggedInNutzerID();
                 StudentDTO currentUser = studentService.getByNutzerId(studentId);
+                UnternehmenDTO unternehmen = currentStelle.getStelleUnternehmen();
                 var returned = bewerbungService.saveBewerbung(BewerbungDTO.builder()
                         .bewerbungStelle(currentStelle)
                         .bewerbungStudent(currentUser)
+                        .bewerbungUnternehmen(unternehmen)
                         .bewerbungStatus(ApplicationStatus.PENDING.toString())
                         .bewerbungText(textArea.getValue()).build());
                 if (returned != null) {
@@ -256,7 +260,7 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
         Notification notification = new Notification();
         notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 
-        Div text = new Div(getWommBuilder().Text.create(getWommBuilder().translateText("Deine Bewerbung wurde erfolgreich versendet")));
+        Div text = new Div(getWommBuilder().Text.create(getWommBuilder().translateText("Your application has been sent successfully")));
 
         Button closeButton = new Button(new Icon("lumo", "cross"));
         closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);

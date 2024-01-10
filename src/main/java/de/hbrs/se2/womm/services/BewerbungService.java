@@ -30,8 +30,10 @@ public class BewerbungService {
                 .map(bewerbungMapper::bewerbungToBewerbungDto);
     }
 
-    public List<BewerbungDTO> getByNutzerId(Long id){
-        return bewerbungRepository.findBewerbungByStudent_Nutzer_NutzerId(id).stream().map(bewerbungMapper::bewerbungToBewerbungDto).toList();
+    public List<BewerbungDTO> getByStudentNutzerId(Long id){
+        return bewerbungRepository.findBewerbungByStudent_Nutzer_NutzerId(id)
+                .stream()
+                .map(bewerbungMapper::bewerbungToBewerbungDto).toList();
     }
 
     public BewerbungDTO saveBewerbung(BewerbungDTO bewerbungDTO) {
@@ -40,4 +42,9 @@ public class BewerbungService {
         return BewerbungMapper.INSTNACE.bewerbungToBewerbungDto(erzeugteBewerbung);
     }
 
+    public List<BewerbungDTO> getByUnternehmenNutzerId(Long id) {
+        return bewerbungRepository.findBewerbungByUnternehmen_UnternehmenId(id)
+                .stream()
+                .map(bewerbungMapper::bewerbungToBewerbungDto).toList();
+    }
 }

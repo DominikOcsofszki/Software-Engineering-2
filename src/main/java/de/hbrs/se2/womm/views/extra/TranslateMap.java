@@ -134,6 +134,7 @@ public class TranslateMap {
         put("Write a short application here", "Schreibe ein kurzes Anschreiben für deine Bewerbung");
         put("Apply now", "Jetzt bewerben");
         put("Apply later", "Später bewerben");
+        put("Your application has been sent successfully", "Deine Bewerbung wurde erfolgreich versendet");
     }};
 
 

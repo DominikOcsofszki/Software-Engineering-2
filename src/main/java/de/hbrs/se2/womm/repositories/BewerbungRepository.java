@@ -9,5 +9,6 @@ public interface BewerbungRepository extends JpaRepository<Bewerbung,Long> {
     Bewerbung findBewerbungByBewerbungId(long bewerbungID);
     List<Bewerbung> findBewerbungByStudent_StudentId(long studentID);
     List<Bewerbung> findBewerbungByStelle_StelleId(long stelleID);
-    List<Bewerbung> findBewerbungByStudent_Nutzer_NutzerId(long nutzerID);
+    List<Bewerbung> findBewerbungByStudent_Nutzer_NutzerId(long studentId);
+    List<Bewerbung> findBewerbungByUnternehmen_UnternehmenId(long unternehmenId);
 }

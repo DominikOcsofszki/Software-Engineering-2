@@ -28,6 +28,10 @@ public class Bewerbung {
     @JoinColumn(name = "student_id")
     private Student student;
 
+    @ManyToOne
+    @JoinColumn(name = "unternehmen_id")
+    private Unternehmen unternehmen;
+
     @Column(name = "bewerbung_status", columnDefinition = "text", nullable = false)
     private String bewerbungStatus;
 
