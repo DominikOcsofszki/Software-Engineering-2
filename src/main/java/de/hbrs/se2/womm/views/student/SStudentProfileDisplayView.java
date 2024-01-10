@@ -84,6 +84,9 @@ public class SStudentProfileDisplayView extends AViewWomm {
         VerticalLayout rowSemester = generateProfileDetailsRow(
                 "Semester", String.valueOf(studentDTO.getStudentSemester()),"20"
         );
+        VerticalLayout rowCV = generateProfileDetailsRow(
+                "Curriculum Vitae", String.valueOf(studentDTO.getStudentSpezialisierung()),"20"
+        );
 
         // Hr() sind horizontale HTML-Trennlinien (<hr>)
         profilDetails.add(
@@ -93,7 +96,8 @@ public class SStudentProfileDisplayView extends AViewWomm {
                 new Hr(), rowLocation,
                 new Hr(), rowBiography,
                 new Hr(), rowSpec,
-                new Hr(), rowSemester
+                new Hr(), rowSemester,
+                new Hr(), rowCV
         );
 
         profilPage.setWidth("50%");
@@ -116,7 +120,7 @@ public class SStudentProfileDisplayView extends AViewWomm {
         Span header = getWommBuilder().Span.create(_header);
         Span content = new Span(_content);
 
-        header.getElement().getStyle().set("font-size", "20px");
+        header.getElement().getStyle().set("font-size", "30px");
         content.getElement().getStyle().set("font-size", fontsize+"px");
 
         row.add(header);

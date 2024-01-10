@@ -8,6 +8,8 @@ import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.*;
@@ -40,6 +42,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
     String studentEmail;
     String studentOrt;
     String studentBiographie;
+    String studentLebenslauf;
     String studentSpezialisierungen;
     String studentSemester;
     Image studentProfilbild;
@@ -112,6 +115,9 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
             int i = numberField.getValue().intValue();
             studentSemester = Integer.toString(i);
         }
+        Notification notification = Notification
+                .show(getWommBuilder().translateText("Changes saved!"));
+        notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
         //System.out.println("1 " + (Objects.equals(studentSemester, "null") ? 0 : Double.parseDouble(studentSemester))+" 2 "+studentSemester+" 3 "+ numberField.getValue()+" 4 " + !numberField.isInvalid() +" "+ !numberField.isInvalid());
         //System.out.println("1 " +  validEmailField1.getValue()+" 2 "+studentEmail+" 3 "+ passwordField3.getValue()+" 4 " + studentPasswort +" "+ passwordField2.isInvalid());
         saveDTO();
@@ -126,6 +132,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
     PasswordField passwordField3 = new PasswordField();                 //Passwort
     TextArea textArea = new TextArea();                                 //Biographie
     TextArea textArea2 = new TextArea();                                //Spezialisierungen
+    TextArea textArea3 = new TextArea();                                //Lebenslauf
     DatePicker datePicker = new DatePicker("");                     //Datum
     Checkbox checkbox1 = new Checkbox();                                //Benachrichtugnen
     NumberField numberField = new NumberField();                        //akutelles Semester
@@ -194,7 +201,6 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         datePicker.setI18n(singleFormatI18n);
         datePicker.setTooltipText(getWommBuilder().translateText("Select your date of birth"));
         datePicker.setErrorMessage(getWommBuilder().translateText("Invalid date given. Dates must follow the 'DD.MM.YYYY' format."));
-        datePicker.setValue(datum);
         datePicker.setValue(studentGeburtstag==null ? datum : LocalDate.parse(studentGeburtstag));
         datePicker.setWidth("50%");
         headervert2.add(datePicker);
@@ -350,6 +356,18 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         numberField.setTooltipText(getWommBuilder().translateText("Please enter your current semester"));
         headervert2.add(s);
         headervert2.add(numberField);
+        headervert2.setSpacing(false);
+        headervert2.setPadding(false);
+        headervert.add(headervert2);
+        headervert.add(new Hr());
+        headervert2 = new VerticalLayout();
+        ////////////////////Lebenslauf////////////////////////////////////////////////////////////////////////////
+        s = getWommBuilder().Span.create("Curriculum Vitae");
+        s.getElement().getStyle().set("font-size", "20px");
+        textArea3.setValue((studentLebenslauf==(null) ? "" : studentLebenslauf));
+        textArea3.setWidth("100%");
+        headervert2.add(s);
+        headervert2.add(textArea3);
         headervert2.setSpacing(false);
         headervert2.setPadding(false);
         headervert.add(headervert2);

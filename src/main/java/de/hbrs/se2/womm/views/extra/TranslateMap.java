@@ -127,6 +127,9 @@ public class TranslateMap {
         put("Please re-enter your new valid Password", "Bitte wiederhole dein neues, gültiges Passwort");
         put("Please enter your current semester", "Bitte gib dein aktuelles Semester ein");
         put("Please re-enter your valid e-mail address", "Bitte wiederhole deine gültige E-Mail-Adresse");
+        put("Changes saved!", "Änderungen Gespeichert!");
+        put("Semester", "Semester");
+        put("Curriculum Vitae", "Lebenslauf");
 
         //SJobProjectWorkshopDisplayView
         put("The job offer is not available anymore :(", "Das Stellenangebot existiert nicht mehr :(");
