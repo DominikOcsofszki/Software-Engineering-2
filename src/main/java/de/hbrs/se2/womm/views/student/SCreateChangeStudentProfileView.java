@@ -280,8 +280,9 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         // ----------------- Semester -----------------
 
         NumberField numberFieldSemester = new NumberField();
-        numberFieldSemester.setValue(Double.valueOf(studentDTO.getStudentSemester()));
-        VerticalLayout layoutSemester = generateSinglePropertyField("Semester", numberFieldSemester);
+        Integer semesters = studentDTO.getStudentSemester();
+        numberFieldSemester.setValue(((semesters != null) ? Double.valueOf(semesters) : 0));
+        VerticalLayout layoutSemester = generateSinglePropertyField(getWommBuilder().translateText("Semester"), numberFieldSemester);
 
         // ----------------- Save Changes -----------------
 
