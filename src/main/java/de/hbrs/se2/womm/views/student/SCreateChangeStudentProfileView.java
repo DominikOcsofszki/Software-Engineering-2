@@ -17,6 +17,7 @@ import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.services.StudentService;
+import de.hbrs.se2.womm.services.UserDetailsManagerImpl;
 import de.hbrs.se2.womm.views.LandingPageView;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -32,8 +33,14 @@ import java.time.LocalDate;
 public class SCreateChangeStudentProfileView extends AViewWomm {
     StudentService studentService;
     StudentDTO studentDTO;
+    UserDetailsManagerImpl userDetailsManager;
 
-    public SCreateChangeStudentProfileView(StudentService studentService, SecurityService securityService) {
+    public SCreateChangeStudentProfileView(
+            StudentService studentService,
+            SecurityService securityService,
+            UserDetailsManagerImpl userDetailsManager
+    ) {
+        this.userDetailsManager = userDetailsManager;
         this.studentService = studentService;
         this.studentDTO = studentService.getByNutzerId(securityService.getLoggedInNutzerID());
         add(
@@ -344,7 +351,15 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
     }
 
     private boolean validatePassword(PasswordField oldPassword, PasswordField newPassword, PasswordField newPasswordConfirm) {
-        // ToDo: Password validation
+        if (!newPassword.getValue().equals(newPasswordConfirm.getValue())) {
+            return false;
+        }
+
+        if (oldPassword.getValue().isBlank()) {
+            return false;
+        }
+
+        userDetailsManager.changePassword(oldPassword.getValue(), newPassword.getValue());
         return true;
     }
 }
