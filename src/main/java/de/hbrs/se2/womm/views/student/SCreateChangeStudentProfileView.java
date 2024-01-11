@@ -67,7 +67,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         }
 
         if (validatePassword(oldPassword, newPassword, newPasswordConfirm)) {
-            System.out.println("TODO: Password validation"); // ToDo!
+            System.out.println("TODO: Password validation");
         }
 
         if (!ort.getValue().isBlank()) {
@@ -346,10 +346,6 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
     private boolean validatePassword(PasswordField oldPassword, PasswordField newPassword, PasswordField newPasswordConfirm) {
         // ToDo: Password validation
         return true;
-    }
-
-    private boolean validateSemester(NumberField semester) {
-        return (semester != null && semester.getValue() != null && semester.getValue() >= 1);
     }
 }
 
