@@ -37,7 +37,6 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
     StelleService stelleService;
     BewerbungService bewerbungService;
     StudentService studentService;
-    UnternehmenService unternehmenService;
     StelleDTO stelleDTO;
     long stelleId;
     VerticalLayout applicationForm;
@@ -162,9 +161,7 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
                 newParagraph.setText(subParagraph);
                 beschreibung.add(newParagraph);
             });
-            String linebreak = "<br>";
-            Html html = new Html(linebreak);
-            beschreibung.add(html);
+            beschreibung.add(new Html("<br>"));
         });
 
         stellenanzeige.add(beschreibung);
@@ -220,7 +217,7 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
                         .bewerbungStelle(currentStelle)
                         .bewerbungStudent(currentUser)
                         .bewerbungUnternehmen(unternehmen)
-                        .bewerbungStatus(ApplicationStatus.PENDING.toString())
+                        .bewerbungStatus(ApplicationStatus.AUSSTEHEND.toString())
                         .bewerbungText(textArea.getValue()).build());
                 if (returned != null) {
                     createSuccessNotification();
