@@ -2,7 +2,7 @@ package de.hbrs.se2.womm.views.components;
 
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 
-public class GridFilterBewerbung extends AGridFilter<BewerbungDTO> {
+public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
 
     @Override
     protected void configureGrid() {

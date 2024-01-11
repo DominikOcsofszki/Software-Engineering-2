@@ -18,7 +18,7 @@ import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.services.BewerbungService;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
-import de.hbrs.se2.womm.views.components.GridFilterBewerbung;
+import de.hbrs.se2.womm.views.components.GridFilterBewerbungStudents;
 import de.hbrs.se2.womm.views.extra.TEMPLATE;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -37,7 +37,7 @@ public class SApplicationsView extends VerticalLayout {
     StudentDTO studentDTO;
     List <BewerbungDTO> listOfBewerbungDTO;
     private long aktuelleNutzerID;
-    private GridFilterBewerbung gridFilterBewerbung;
+    private GridFilterBewerbungStudents gridFilterBewerbungStudents;
 
 
     public SApplicationsView(BewerbungService bewerbungService, StelleService stelleService, StudentService studentService, SecurityService securityService) {
@@ -47,14 +47,14 @@ public class SApplicationsView extends VerticalLayout {
         this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
         System.out.println(aktuelleNutzerID);
         this.listOfBewerbungDTO = bewerbungService.getByNutzerId(aktuelleNutzerID);
-        this.gridFilterBewerbung = new GridFilterBewerbung();
-        this.gridFilterBewerbung.setUpFromOutside(listOfBewerbungDTO);
+        this.gridFilterBewerbungStudents = new GridFilterBewerbungStudents();
+        this.gridFilterBewerbungStudents.setUpFromOutside(listOfBewerbungDTO);
 
 
         setUpHeader();
         //setUpApplications();
 
-        add(gridFilterBewerbung);
+        add(gridFilterBewerbungStudents);
 
     }
 
