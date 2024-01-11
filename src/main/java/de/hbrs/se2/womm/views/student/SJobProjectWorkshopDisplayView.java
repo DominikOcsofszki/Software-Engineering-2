@@ -105,7 +105,7 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
 
         //Ueberschrift
 //        header.add(new H1("Unternehmenname"));
-        String unternehmenName = this.stelleDTO.getStelleUnternehmen().getName(); //ToDo Changed
+        String unternehmenName = this.stelleDTO.getUnternehmen().getName(); //ToDo Changed
         header.add(new H1(unternehmenName));
 //        header.add(new H1("Unternehmenname"));
         add(header);
@@ -212,7 +212,7 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
                 StelleDTO currentStelle = stelleService.getById(stelleId).get();
                 long studentId = securityService.getLoggedInNutzerID();
                 StudentDTO currentUser = studentService.getByNutzerId(studentId);
-                UnternehmenDTO unternehmen = currentStelle.getStelleUnternehmen();
+                UnternehmenDTO unternehmen = currentStelle.getUnternehmen();
                 var returned = bewerbungService.saveBewerbung(BewerbungDTO.builder()
                         .bewerbungStelle(currentStelle)
                         .bewerbungStudent(currentUser)

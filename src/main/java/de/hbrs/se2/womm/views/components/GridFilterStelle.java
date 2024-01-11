@@ -16,7 +16,7 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
         String header1 = VaadinBuilderWomm.translateTextStatic("Advertisement title");
         grid.addColumn(StelleDTO::getStelleTitel).setHeader(new Html("<b>" +header1+"</b>"));
         String header2 = VaadinBuilderWomm.translateTextStatic("Firm name");
-        grid.addColumn(stelleDTO -> stelleDTO.getStelleUnternehmen().getName()).setHeader(new Html("<b>" +header2+"</b>"));
+        grid.addColumn(stelleDTO -> stelleDTO.getUnternehmen().getName()).setHeader(new Html("<b>" +header2+"</b>"));
     }
 
     @Override
@@ -34,9 +34,9 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
 
         return switch (searchBy) {
             case "Name Stellenanzeige" -> dto.getStelleTitel();
-            case "Name Unternehmen" -> dto.getStelleUnternehmen().toString();
+            case "Name Unternehmen" -> dto.getUnternehmen().toString();
             case "Advertisement title" -> dto.getStelleTitel();
-            case "Firm name" -> dto.getStelleUnternehmen().toString();
+            case "Firm name" -> dto.getUnternehmen().toString();
             default -> null;
         };
     }

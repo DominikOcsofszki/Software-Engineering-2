@@ -45,7 +45,7 @@ public class StelleServiceTest {
                 .stelleOrt("ort")
                 .stelleBeschreibung("beschreibung")
                 .stelleWebsite("url")
-                .stelleUnternehmen(null)
+                .unternehmen(null)
                 .build();
 
         stelle = Stelle.builder()
@@ -326,7 +326,7 @@ public class StelleServiceTest {
         stelle = listEntity.get(0);
         assertEquals(stelleDTO.getStelleId(), (long) stelle.getStelleId());
         assertEquals(stelleDTO.getStelleTitel(), stelle.getStelleTitel());
-        assertEquals(stelleDTO.getStelleUnternehmen(), stelle.getUnternehmen());
+        assertEquals(stelleDTO.getUnternehmen().getName(), stelle.getUnternehmen().getName());
         assertEquals(stelleDTO.getStelleOrt(), stelle.getStelleOrt());
         assertEquals(stelleDTO.getStelleWebsite(), stelle.getStelleWebsite());
         assertEquals(stelleDTO.getStelleBeschreibung(), stelle.getStelleBeschreibung());
