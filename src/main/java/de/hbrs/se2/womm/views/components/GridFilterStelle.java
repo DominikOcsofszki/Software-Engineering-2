@@ -1,12 +1,10 @@
 package de.hbrs.se2.womm.views.components;
 
 import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.UI;
 import de.hbrs.se2.womm.dtos.StelleDTO;
-import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
-import de.hbrs.se2.womm.views.layouts.AbstractFilterGrid;
-
-import java.util.List;
+import de.hbrs.se2.womm.views.layouts.ROUTING;
 
 public class GridFilterStelle extends AGridFilter<StelleDTO>{
     public GridFilterStelle() {
@@ -41,5 +39,10 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
             case "Firm name" -> dto.getStelleUnternehmen().toString();
             default -> null;
         };
+    }
+
+    public void setColumnClickListener() {
+        this.grid.addItemClickListener(item -> UI.getCurrent()
+                .navigate(ROUTING.STUDENT.SJobProjectWorkshopDisplayView + "/" + item.getItem().getStelleId()));
     }
 }

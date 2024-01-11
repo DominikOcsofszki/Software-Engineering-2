@@ -136,7 +136,11 @@ public class TranslateMap {
         put("Apply now", "Jetzt bewerben");
         put("Apply later", "Später bewerben");
         put("Your application has been sent successfully", "Deine Bewerbung wurde erfolgreich versendet");
+
+        //UApplicationView
+        put("Accept", "Annehmen");
+        put("Decline", "Ablehnen");
+        put("You have accepted the application", "Sie haben die Bewerbung angenommen");
+        put("You have declined the application", "Sie haben die Bewerbung abgelehnt");
     }};
-
-
 }

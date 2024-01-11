@@ -1,10 +1,5 @@
 package de.hbrs.se2.womm.views.unternehmen;
 
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
@@ -17,7 +12,6 @@ import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -43,6 +37,7 @@ public class UApplicationsView extends AViewWomm {
 
         List<BewerbungDTO> bewerbungen = bewerbungService.getByUnternehmenNutzerId(unternehmenId);
         gridFilterBewerbung.setUpFromOutside(bewerbungen);
+        gridFilterBewerbung.setColumnClickListener();
         add(gridFilterBewerbung);
     }
 }

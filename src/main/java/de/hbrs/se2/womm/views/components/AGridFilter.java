@@ -1,7 +1,6 @@
 package de.hbrs.se2.womm.views.components;
 
 import com.vaadin.flow.component.AbstractField;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -10,9 +9,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import de.hbrs.se2.womm.dtos.AbstractDTO;
-import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
-import de.hbrs.se2.womm.views.layouts.ROUTING;
 
 import java.util.List;
 
@@ -86,10 +83,4 @@ public abstract class AGridFilter<ExtendAbstractDTO extends AbstractDTO>
     protected abstract String[] getFilterByItemsFromDTO();
 
     protected abstract String checkItem(ExtendAbstractDTO dto, String searchBy);
-
-    public void setColumnClickListener() {
-        this.grid.addItemClickListener(item -> UI.getCurrent()
-                .navigate(ROUTING.STUDENT.SJobProjectWorkshopDisplayView + "/" + ((StelleDTO)item.getItem()).getStelleId()));
-    }
-
 }
