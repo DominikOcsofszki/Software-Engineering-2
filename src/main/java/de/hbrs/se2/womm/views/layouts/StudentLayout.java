@@ -28,6 +28,7 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
         addToDrawer(new VerticalLayout(
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationView"), SApplicationView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationsView"), SApplicationsView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SChatView"), SChatView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SCreateChangeStudentProfileView"), SCreateChangeStudentProfileView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SFirmProfileDisplayView"), SFirmProfileDisplayView.class),
