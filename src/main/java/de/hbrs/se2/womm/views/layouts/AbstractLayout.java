@@ -19,13 +19,16 @@ abstract class AbstractLayout extends AppLayout {
     Image logo = new Image("themes/theme_1/logo.png", "An image in the theme");
 
     public AbstractLayout() {
+        Button translateToggle = addTranslateToggle();
+        addToNavbar(translateToggle);
         configLogo();
         configName();
         configHeader();
         createDrawer();
-        if(CONFIGS.DEVMODE ) {
+        if (CONFIGS.DEVMODE) {
             AddDevModeButtons();
         }
+
     }
 
     void createHeaderWithLogoutButton(Button logout, boolean withMenu) {
@@ -57,25 +60,32 @@ abstract class AbstractLayout extends AppLayout {
 
     void createDrawer() {
     }
+
     void AddDevModeButtons() {
         Button buttonToShowMissingTranslated = new Button("console");
         buttonToShowMissingTranslated.addClickListener(
                 e -> VaadinBuilderWomm.printAllTextNotTranslatedToConsole()
         );
-        Button buttonToggleDevMode = new Button( "toggle-id-Selector");
+        Button buttonToggleDevMode = new Button("toggle-id-Selector");
         buttonToggleDevMode.addClickListener(
                 e -> {
                     VaadinBuilderWomm.toggleDevMode();
                     UI.getCurrent().getPage().reload();
                 }
         );
-        Button translateToggle = new Button( "EN/DE");
+//        Button translateToggle = addTranslateToggle();
+        addToNavbar(buttonToShowMissingTranslated, buttonToggleDevMode);
+//        addToNavbar(buttonToShowMissingTranslated, buttonToggleDevMode, translateToggle);
+    }
+
+    private static Button addTranslateToggle() {
+        Button translateToggle = new Button("EN/DE");
         translateToggle.addClickListener(
                 e -> {
                     VaadinBuilderWomm.toggleTranslateText();
                     UI.getCurrent().getPage().reload();
                 }
         );
-        addToNavbar(buttonToShowMissingTranslated, buttonToggleDevMode, translateToggle);
+        return translateToggle;
     }
 }

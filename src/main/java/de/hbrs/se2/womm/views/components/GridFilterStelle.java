@@ -1,7 +1,10 @@
 package de.hbrs.se2.womm.views.components;
 
+import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.UI;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
+import de.hbrs.se2.womm.views.layouts.ROUTING;
 
 public class GridFilterStelle extends AGridFilter<StelleDTO>{
     public GridFilterStelle() {
@@ -11,9 +14,9 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
     @Override
     protected void configureGrid() {
         String header1 = VaadinBuilderWomm.translateTextStatic("Advertisement title");
-        grid.addColumn(StelleDTO::getStelleTitel).setHeader(header1);
+        grid.addColumn(StelleDTO::getStelleTitel).setHeader(new Html("<b>" +header1+"</b>"));
         String header2 = VaadinBuilderWomm.translateTextStatic("Firm name");
-        grid.addColumn(stelleDTO -> stelleDTO.getUnternehmen().getName()).setHeader(header2);
+        grid.addColumn(stelleDTO -> stelleDTO.getStelleUnternehmen().getName()).setHeader(new Html("<b>" +header2+"</b>"));
     }
 
     @Override
@@ -36,5 +39,10 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
             case "Firm name" -> dto.getUnternehmen().toString();
             default -> null;
         };
+    }
+
+    public void setColumnClickListener() {
+        this.grid.addItemClickListener(item -> UI.getCurrent()
+                .navigate(ROUTING.STUDENT.SJobProjectWorkshopDisplayView + "/" + item.getItem().getStelleId()));
     }
 }

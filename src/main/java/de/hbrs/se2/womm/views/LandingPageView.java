@@ -117,12 +117,18 @@ public class LandingPageView extends AViewWomm {
     private HorizontalLayout createRegistrationSection() {
         HorizontalLayout registrationSection = new HorizontalLayout();
 
-//            Button buttonReg = new Button("SignUp");
-        Button buttonReg = getWommBuilder().Button.create("SignUp");
-        buttonReg.addClickListener( e -> UI.getCurrent().navigate(RegistrierungStudentView.class));
-        buttonReg.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
-        buttonReg.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        registrationSection.add(buttonReg);
+//            Button buttonRegStd = new Button("SignUp");
+        Button buttonRegStd = getWommBuilder().Button.create("SignUp as Student");
+        buttonRegStd.addClickListener( e -> UI.getCurrent().navigate(RegistrierungStudentView.class));
+        buttonRegStd.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
+        buttonRegStd.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        registrationSection.add(buttonRegStd);
+
+        Button buttonRegCpny = getWommBuilder().Button.create("SignUp as Company");
+        buttonRegCpny.addClickListener( e -> UI.getCurrent().navigate(RegistrierungUnternehmenView.class));
+        buttonRegCpny.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
+        buttonRegCpny.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        registrationSection.add(buttonRegCpny);
 
 //            Button buttonLog = new Button("LogIn");
         Button buttonLog = getWommBuilder().Button.create("LogIn");
@@ -131,7 +137,7 @@ public class LandingPageView extends AViewWomm {
         buttonLog.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         registrationSection.add(buttonLog);
 
-        registrationSection.add(buttonReg);
+        registrationSection.add(buttonRegStd);
         registrationSection.add(buttonLog);
 
         return registrationSection;

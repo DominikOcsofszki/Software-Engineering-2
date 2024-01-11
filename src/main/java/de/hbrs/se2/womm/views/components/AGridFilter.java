@@ -83,5 +83,4 @@ public abstract class AGridFilter<ExtendAbstractDTO extends AbstractDTO>
     protected abstract String[] getFilterByItemsFromDTO();
 
     protected abstract String checkItem(ExtendAbstractDTO dto, String searchBy);
-
 }

@@ -13,9 +13,11 @@ public interface BewerbungMapper {
 
     @Mapping(target = "student", source = "bewerbungStudent")
     @Mapping(target = "stelle", source =     "bewerbungStelle")
+    @Mapping(target = "unternehmen", source = "bewerbungUnternehmen")
     Bewerbung bewerbungDtoToBewerbung(BewerbungDTO bewerbungDTO);
 
     @Mapping(target = "bewerbungStudent", source = "student")
     @Mapping(target = "bewerbungStelle", source = "stelle")
+    @Mapping(target = "bewerbungUnternehmen", source = "unternehmen")
     BewerbungDTO bewerbungToBewerbungDto(Bewerbung bewerbung);
 }

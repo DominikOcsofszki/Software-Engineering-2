@@ -1,9 +1,9 @@
 package de.hbrs.se2.womm.views.student;
 
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Hr;
@@ -17,6 +17,7 @@ import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.services.StudentService;
+import de.hbrs.se2.womm.services.UserDetailsManagerImpl;
 import de.hbrs.se2.womm.views.LandingPageView;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -26,288 +27,341 @@ import jakarta.annotation.security.RolesAllowed;
 import java.time.LocalDate;
 
 
-
 @Route(value = ROUTING.STUDENT.SCreateChangeStudentProfileView, layout = StudentLayout.class)
-@RolesAllowed({"STUDENT","ADMIN"})
+@RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
-//public class SCreateChangeStudentProfileView extends AbstractView {
 public class SCreateChangeStudentProfileView extends AViewWomm {
+    StudentService studentService;
     StudentDTO studentDTO;
-    private long aktuelleNutzerID;
-    public SCreateChangeStudentProfileView(StudentService studentService, SecurityService securityService) {
-        super();
-        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
-        this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
-        System.out.println(studentDTO);
-        //this.getStyle().set("font-family","Open Sans");
-        //this.getStyle().set("font-style","normal");
-        Header();
-        Profil();
+    UserDetailsManagerImpl userDetailsManager;
+
+    public SCreateChangeStudentProfileView(
+            StudentService studentService,
+            SecurityService securityService,
+            UserDetailsManagerImpl userDetailsManager
+    ) {
+        this.userDetailsManager = userDetailsManager;
+        this.studentService = studentService;
+        this.studentDTO = studentService.getByNutzerId(securityService.getLoggedInNutzerID());
+        add(
+                getHeader(),
+                getProfil()
+        );
+
     }
-    private void Header(){
+
+    private void saveChanges(
+            DatePicker geburtstag,
+            Checkbox benachrichtigungen,
+            EmailField email,
+            EmailField confirmEmail,
+            PasswordField oldPassword,
+            PasswordField newPassword,
+            PasswordField newPasswordConfirm,
+            TextField ort,
+            TextArea biographie,
+            TextArea spezialisierungen,
+            NumberField semester
+    ) {
+        if (validateDatepicker(geburtstag)) {
+            studentDTO.setStudentGeburtstag(geburtstag.getValue().toString());
+        }
+
+        studentDTO.setStudentBenachrichtigung(benachrichtigungen.getValue());
+
+        if (validateEmail(email, confirmEmail)) {
+            studentDTO.getNutzer().setNutzerMail(email.getValue());
+        }
+
+        if (validatePassword(oldPassword, newPassword, newPasswordConfirm)) {
+            System.out.println("TODO: Password validation");
+        }
+
+        if (!ort.getValue().isBlank()) {
+            studentDTO.getNutzer().setNutzerOrt(ort.getValue());
+        }
+
+        studentDTO.setStudentBio(biographie.getValue());
+
+        studentDTO.setStudentSpezialisierung(spezialisierungen.getValue());
+
+        studentDTO.setStudentSemester(semester.getValue().intValue());
+
+        studentService.saveStudent(studentDTO);
+    }
+
+    private Component getHeader() {
         HorizontalLayout header = new HorizontalLayout();
-//        Button b = new Button("Home");
-//        getVaadinBuilderWomm().H1.create
-        Button b = getWommBuilder().Button.create("Home");
-        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY   );
-        b.getElement().getStyle().set("margin-right", "0%");
-        b.addClickListener( e -> UI.getCurrent().navigate(LandingPageView.class));
-        header.add(b);
-        b = new Button("Save Changes");
-        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        b.getElement().getStyle().set("margin-right", "auto");
-        //b.getElement().getStyle().set("font-family","Open Sans");
-        //b.getElement().getStyle().set("font-style","normal");
-        header.add(b);
+        Button home = getWommBuilder().Button.create("Home");
+
+        home.getElement().getStyle().set("margin-right", "0");
+        home.addClickListener(e -> UI.getCurrent().navigate(LandingPageView.class));
+
         header.setWidth("100%");
-        add(header);
+        header.add(home);
+
+        return header;
     }
-    private void Profil() {
-        HorizontalLayout header = new HorizontalLayout();
-        TextField textField = new TextField();
-        TextField textField1 = new TextField();
-        EmailField  validEmailField1  = new EmailField();
-        EmailField  validEmailField2  = new EmailField();
-        PasswordField passwordField1 = new PasswordField();
-        PasswordField passwordField2 = new PasswordField();
-        PasswordField passwordField3 = new PasswordField();
-        TextArea textArea = new TextArea();
-        TextArea textArea2 = new TextArea();
-        DatePicker datePicker = new DatePicker("");
-        Checkbox checkbox1 = new Checkbox();
-        NumberField numberField = new NumberField();
-        LocalDate datum = LocalDate.parse("2002-02-20");
-        Span s2;
-        Span s3;
-        Span s4;
-        ////////////////////Profile Picture//////////////////////////////////////////////////////////////////////////////
-        Image i = new Image("themes/theme_1/user.png","Image not found");
-        i.setWidth("100%");
-//        i.setHeight("100%");
-        //i.setHeight(300, Unit.PIXELS); //for fixed values
-        //header.add(i);
-        Button profile = new Button("Upload");
-        profile.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        // profile.getElement().getStyle().set("margin-left", "7%");
-        profile.setWidth("100%");
-        //i.getStyle().set("border", "3px solid #C4CBD3");              //grey
-        VerticalLayout ProfileVert = new VerticalLayout();
-        ProfileVert.add(i);
-        ProfileVert.add(profile);
-        ProfileVert.setSpacing(false);
-        ProfileVert.setPadding(false);
-        ProfileVert.setWidth("30%");
-        ProfileVert.setHeight("30%");
-        header.add(ProfileVert);
-        VerticalLayout headervert = new VerticalLayout();
-        VerticalLayout headervert2 = new VerticalLayout();
-        ////////////////////Name//////////////////////////////////////////////////////////////////////////////////////////
-//        Span s = new Span("Name");
-        Span s = getWommBuilder().Span.create("Name");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");       //color grey
-        Span s1 = new Span("Paul Stein");
-        s1.getElement().getStyle().set("font-size", "45px");
-        s1.getElement().getStyle().set("color", "#192434");       //color black
-        s2 = new Span("Der Name kann nur mit Absprache eines Admins geändert werden");
-        s2.getElement().getStyle().set("font-size", "15px");
-        s2.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        headervert2.add(s);
-        headervert2.add(s1);
-        headervert2.add(s2);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////Geburtstag///////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Geburtstag");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        headervert2.add(s);
+
+    private Component getProfil() {
+        HorizontalLayout layoutProfile = new HorizontalLayout();
+        VerticalLayout layoutPicture = new VerticalLayout();
+        VerticalLayout layoutDetails = new VerticalLayout();
+
+        Image imageProfilePicture = studentDTO.PlaceholderOrImage();
+        imageProfilePicture.getStyle()
+                .set("width", "250px")
+                .set("height", "250px")
+                .set("margin-left", "auto"); // Sodass das Bild rechtsbündig ist
+
+        layoutPicture.add(
+                imageProfilePicture
+        );
+
+        // ----------------- Header (Name) -----------------
+
+        VerticalLayout layoutName = new VerticalLayout();
+        Span spanName = getWommBuilder().Span.create("Name");
+        Span spanNameValue = new Span(studentDTO.getStudentVorname() + " " + studentDTO.getStudentName());
+        Span spanNameInformation = getWommBuilder().Span.create("The name can only be changed with the agreement of an admin");
+
+        spanNameValue.getElement().getStyle()
+                .set("font-size", "35px");
+        spanNameInformation.getElement().getStyle()
+                .set("color", "#5e5e5e");
+
+        layoutName.add(
+                spanName,
+                spanNameValue,
+                spanNameInformation
+        );
+
+        // ----------------- Date of Birth -----------------
+
+        VerticalLayout layoutDob = new VerticalLayout(); // Dob = Date of Birth
+        Span spanDob = getWommBuilder().Span.create("Date of Birth");
+        DatePicker datePickerDob = new DatePicker();
         DatePicker.DatePickerI18n singleFormatI18n = new DatePicker.DatePickerI18n();
         singleFormatI18n.setDateFormat("dd.MM.yyyy");
-        datePicker.setI18n(singleFormatI18n);
-        datePicker.setTooltipText("Select your date of birth");
-        datePicker.setErrorMessage("Invalid date given. Dates must follow the 'DD.MM.YYYY' format.");
-        datePicker.setValue(datum);
-        headervert2.add(datePicker);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////Benachrichtigungen///////////////////////////////////////////////////////////////////////////
-        s = new Span("Benachrichtigungen");
-        s1 = new Span("Ich möchte Benachrichtigungen erhalten");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        s1.getElement().getStyle().set("font-size", "20px");
-        s1.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        checkbox1.setLabelComponent(s1);
-        //headervert2.add(s);
-        headervert2.add(checkbox1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////Alias///////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Alias");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        textField.setWidth("50%");
-        textField.getStyle().set("flex-grow","1");
-        textField.setValue("pstein2s");
-        headervert2.add(s);
-        headervert2.add(textField);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////EMail////////////////////////////////////////////////////////////////////////////////////
-        s = new Span("E-Mail");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        s2 = new Span("E-Mail bestätigen");
-        s3 = new Span("Enter a valid email address");
-        s2.getElement().getStyle().set("font-size", "15px");
-        s2.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        s3.getElement().getStyle().set("font-size", "15px");
-        s3.getElement().getStyle().set("color", "#CBA7A2");          //color error-red
-        validEmailField1.setWidth("50%");
-        validEmailField1.getStyle().set("flex-grow","1");
-        validEmailField1.setValue("p_steinn@email.de");
-        validEmailField1.setClearButtonVisible(true);
-        validEmailField1.setErrorMessage("Enter a valid email address");
-        validEmailField2.setWidth("50%");
-        validEmailField2.getStyle().set("flex-grow","1");
-        validEmailField2.setValue("");
-        validEmailField2.setClearButtonVisible(true);
-        headervert2.add(s);
-        headervert2.add(validEmailField1);
-        headervert2.add(s2);
-        headervert2.add(validEmailField2);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////Passwort/////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Passwort");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        s1 = new Span("Altes Passwort");
-        s2 = new Span("Neues Passwort");
-        s3 = new Span("Neues Passwort wiederholen");
-        s4 = new Span("6 to 12 characters. Only letters A-Z and numbers supported.");
-        s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "#192434");          //color black
-        s2.getElement().getStyle().set("font-size", "15px");
-        s2.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        s3.getElement().getStyle().set("font-size", "15px");
-        s3.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        s4.getElement().getStyle().set("font-size", "15px");
-        s4.getElement().getStyle().set("color", "#CBA7A2");          //color error-red
-        passwordField1.setRequiredIndicatorVisible(true);
-        passwordField1.setAllowedCharPattern("[A-Za-z0-9]");
-        passwordField1.setMinLength(6);
-        passwordField1.setMaxLength(12);
-        passwordField1.setHelperComponent(s4);
-        passwordField1.setClearButtonVisible(true);
-        passwordField2.setRequiredIndicatorVisible(true);
-        passwordField2.setAllowedCharPattern("[A-Za-z0-9]");
-        passwordField2.setMinLength(6);
-        passwordField2.setMaxLength(12);
-        passwordField2.setClearButtonVisible(true);
-        passwordField3.setRequiredIndicatorVisible(true);
-        passwordField3.setAllowedCharPattern("[A-Za-z0-9]");
-        passwordField3.setMinLength(6);
-        passwordField3.setMaxLength(12);
-        passwordField3.setClearButtonVisible(true);
-        passwordField1.setWidth("50%");
-        passwordField1.getStyle().set("flex-grow","1");
-        passwordField1.setValue("");
-        passwordField2.setWidth("50%");
-        passwordField2.getStyle().set("flex-grow","1");
-        passwordField2.setValue("");
-        passwordField3.setWidth("50%");
-        passwordField3.getStyle().set("flex-grow","1");
-        passwordField3.setValue("");
-        headervert2.add(s);
-        headervert2.add(passwordField1);
-        headervert2.add(s2);
-        headervert2.add(passwordField2);
-        headervert2.add(s3);
-        headervert2.add(passwordField3);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////Ort//////////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Ort");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        textField1.setWidth("min-content");
-        textField1.getStyle().set("flex-grow","1");
-        textField1.setValue("Bonn");
-        headervert2.add(s);
-        headervert2.add(textField1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////Biographie///////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Biographie");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        //textArea.setLabel("Text area");
-        textArea.setWidth("100%");
-        textArea.setValue("2018 nach dem Abitur, Ausbildung als Einzelhandeskaufmann, 2021 nach der Ausbildung angestellt als Einzelhandelskaufmann, Seit 2022 Vollzeit-Informatikstudent.");
-        headervert2.add(s);
-        headervert2.add(textArea);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////Spezialisierungen////////////////////////////////////////////////////////////////////////////
-        s = new Span("Spezialisierungen");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        textArea2.setWidth("100%");
-        textArea2.setValue("Windows-User, Social-Media-Plattformen, Officeprogramme, diverse IDEs: viel Java-Coding Erfahrung, mäßige C-Coding  Erfahrung");
-        headervert2.add(s);
-        headervert2.add(textArea2);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        Button b = new Button("Save Changes");
-        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////Semester////////////////////////////////////////////////////////////////////////////
-        s = new Span("Aktuelles Semester");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");          //color grey
-        numberField.setLabel("Ich bin in Semester:");
-        numberField.setValue(3d);
-        numberField.setWidth("min-content");
-        headervert2.add(s);
-        headervert2.add(numberField);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
+        datePickerDob.setI18n(singleFormatI18n);
+        datePickerDob.setTooltipText(getWommBuilder().translateText("Select your date of birth"));
+        datePickerDob.setErrorMessage(getWommBuilder().translateText("Invalid date given. Dates must follow the 'DD.MM.YYYY' format."));
+        try {
+            datePickerDob.setValue(LocalDate.parse(studentDTO.getStudentGeburtstag()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            datePickerDob.setValue(LocalDate.now());
+        }
+        datePickerDob.setWidth("100%");
 
-        headervert.add(b);
-        Image im = new Image();
-        header.add(headervert);
-        add(header);
+        layoutDob.add(
+                spanDob,
+                datePickerDob
+        );
 
+        // ----------------- E-Mail Checkbox -----------------
+
+        Checkbox checkEmailNotifs = new Checkbox();
+
+        Span spanEmailNotifsDescription = getWommBuilder().Span.create("I would like to receive notifications");
+        spanEmailNotifsDescription.getElement().getStyle().set("font-size", "20px");
+
+        checkEmailNotifs.setLabelComponent(spanEmailNotifsDescription);
+        checkEmailNotifs.setValue(studentDTO.isStudentBenachrichtigung());
+
+        // ----------------- E-Mail -----------------
+
+        VerticalLayout layoutEmail = new VerticalLayout();
+        Span emailFieldHeader = getWommBuilder().Span.create("e-mail");
+        EmailField emailField = new EmailField();
+        Span emailFieldConfirmHeader = getWommBuilder().Span.create("Confirm e-mail");
+        EmailField emailFieldConfirm = new EmailField();
+
+        emailFieldHeader.getElement().getStyle()
+                .set("font-size", "20px");
+
+        emailField.getStyle()
+                .set("flex-grow", "1")
+                .set("width", "100%");
+
+        emailFieldConfirm.getStyle()
+                .set("flex-grow", "1")
+                .set("width", "100%");
+
+        emailField.setValue(studentDTO.getNutzer().getNutzerMail() == null ? "" : studentDTO.getNutzer().getNutzerMail());
+        emailField.setClearButtonVisible(true);
+        emailField.setErrorMessage(getWommBuilder().translateText("Please enter a valid e-mail address"));
+        emailField.setTooltipText(getWommBuilder().translateText("Please enter a valid e-mail address"));
+        emailFieldConfirm.setValue("");
+        emailFieldConfirm.setClearButtonVisible(true);
+        emailFieldConfirm.setTooltipText(getWommBuilder().translateText("Please re-enter your valid e-mail address"));
+
+        layoutEmail.add(
+                emailFieldHeader,
+                emailField,
+                emailFieldConfirmHeader,
+                emailFieldConfirm
+        );
+
+        // ----------------- Password -----------------
+
+        VerticalLayout layoutPassword = new VerticalLayout();
+        Span spanPasswordFieldHeader = getWommBuilder().Span.create("Password");
+        Span spanOldPassword = getWommBuilder().Span.create("Enter your old password");
+        Span spanPasswordTooltip = getWommBuilder().Span.create("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported.");
+        PasswordField passwordOld = new PasswordField();
+        Span spanNewPassword = getWommBuilder().Span.create("Enter your new password");
+        PasswordField passwordNew = new PasswordField();
+        Span spanNewPasswordConfirm = getWommBuilder().Span.create("Repeat your new password");
+        PasswordField passwordNewConfirm = new PasswordField();
+
+        spanPasswordFieldHeader.getElement().getStyle().set("font-size", "20px");
+        spanOldPassword.getElement().getStyle().set("font-size", "15px");
+        spanNewPassword.getElement().getStyle().set("font-size", "15px");
+        spanNewPasswordConfirm.getElement().getStyle().set("font-size", "15px");
+
+        passwordOld.setHelperComponent(spanPasswordTooltip);
+        passwordOld.setClearButtonVisible(true);
+        passwordOld.setTooltipText(getWommBuilder().translateText("Please enter your current valid Password"));
+        passwordNew.setRequiredIndicatorVisible(true);
+        passwordNew.setAllowedCharPattern("[A-Za-z0-9]");
+        passwordNew.setMinLength(6);
+        passwordNew.setMaxLength(12);
+        passwordNew.setClearButtonVisible(true);
+        passwordNew.setTooltipText(getWommBuilder().translateText("Please enter your new valid Password"));
+        passwordNewConfirm.setRequiredIndicatorVisible(true);
+        passwordNewConfirm.setAllowedCharPattern("[A-Za-z0-9]");
+        passwordNewConfirm.setMinLength(6);
+        passwordNewConfirm.setMaxLength(12);
+        passwordNewConfirm.setClearButtonVisible(true);
+        passwordNewConfirm.setTooltipText(getWommBuilder().translateText("Please re-enter your new valid Password"));
+
+        passwordOld
+                .getStyle()
+                .set("flex-grow", "1")
+                .set("width", "100%");
+        passwordNew
+                .getStyle()
+                .set("flex-grow", "1")
+                .set("width", "100%");
+        passwordNewConfirm
+                .getStyle()
+                .set("flex-grow", "1")
+                .set("width", "100%");
+
+        layoutPassword.add(
+                spanPasswordFieldHeader,
+                spanOldPassword,
+                passwordOld,
+                spanNewPassword,
+                passwordNew,
+                spanNewPasswordConfirm,
+                passwordNewConfirm
+        );
+
+        // ----------------- Location -----------------
+
+        TextField fieldLocation = new TextField();
+        fieldLocation.setValue(studentDTO.getNutzer().getNutzerOrt() == null ? "" : studentDTO.getNutzer().getNutzerOrt());
+        VerticalLayout layoutLocation = generateSinglePropertyField("Location", fieldLocation);
+
+        // ----------------- Bio -----------------
+
+        TextArea textAreaBio = new TextArea();
+        textAreaBio.setValue(studentDTO.getStudentBio() == null ? "" : studentDTO.getStudentBio());
+        VerticalLayout layoutBio = generateSinglePropertyField("Biography", textAreaBio);
+
+        // ----------------- Specializations -----------------
+
+        TextArea textAreaSpecializations = new TextArea();
+        textAreaSpecializations.setValue(studentDTO.getStudentSpezialisierung() == null ? "" : studentDTO.getStudentSpezialisierung());
+        VerticalLayout layoutSpec = generateSinglePropertyField("Specializations", textAreaSpecializations);
+
+        // ----------------- Semester -----------------
+
+        NumberField numberFieldSemester = new NumberField();
+        Integer semesters = studentDTO.getStudentSemester();
+        numberFieldSemester.setValue(((semesters != null) ? Double.valueOf(semesters) : 0));
+        VerticalLayout layoutSemester = generateSinglePropertyField(getWommBuilder().translateText("Semester"), numberFieldSemester);
+
+        // ----------------- Save Changes -----------------
+
+        Button buttonSaveChanges = getWommBuilder().Button.create("Save Changes");
+        buttonSaveChanges.addClickListener(e -> saveChanges(
+                datePickerDob,
+                checkEmailNotifs,
+                emailField,
+                emailFieldConfirm,
+                passwordOld,
+                passwordNew,
+                passwordNewConfirm,
+                fieldLocation,
+                textAreaBio,
+                textAreaSpecializations,
+                numberFieldSemester
+        ));
+
+        layoutDetails.add(
+                layoutName,
+                new Hr(), layoutDob,
+                new Hr(), checkEmailNotifs,
+                new Hr(), layoutEmail,
+                new Hr(), layoutPassword,
+                new Hr(), layoutLocation,
+                new Hr(), layoutBio,
+                new Hr(), layoutSpec,
+                new Hr(), layoutSemester,
+                new Hr(), buttonSaveChanges
+        );
+
+        layoutProfile.add(
+                layoutDetails,
+                layoutPicture
+        );
+
+        return layoutProfile;
+    }
+
+    private VerticalLayout generateSinglePropertyField(String spanHeader, Component propertyField) {
+        VerticalLayout layoutProperty = new VerticalLayout();
+        Span spanPropertyHeader = getWommBuilder().Span.create(spanHeader);
+
+        spanPropertyHeader.getElement()
+                .getStyle()
+                .set("font-size", "20px")
+                .set("width", "100%");
+
+        propertyField
+                .getStyle()
+                .set("width", "100%");
+
+        layoutProperty.add(
+                spanPropertyHeader,
+                propertyField
+        );
+
+        return layoutProperty;
+    }
+
+    private boolean validateDatepicker(DatePicker geburtstag) {
+        return (geburtstag != null && !geburtstag.toString().isBlank());
+    }
+
+    private boolean validateEmail(EmailField email, EmailField confirmEmail) {
+        return (email != null && confirmEmail != null && email.getValue().equals(confirmEmail.getValue()));
+    }
+
+    private boolean validatePassword(PasswordField oldPassword, PasswordField newPassword, PasswordField newPasswordConfirm) {
+        if (!newPassword.getValue().equals(newPasswordConfirm.getValue())) {
+            return false;
+        }
+
+        if (oldPassword.getValue().isBlank()) {
+            return false;
+        }
+
+        userDetailsManager.changePassword(oldPassword.getValue(), newPassword.getValue());
+        return true;
     }
 }
 

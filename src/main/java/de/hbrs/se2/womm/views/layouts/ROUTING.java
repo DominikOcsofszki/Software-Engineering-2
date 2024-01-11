@@ -4,13 +4,12 @@ public class ROUTING {
     static public class ALL {
         public static final String LandingPageView = "LandingPageView";
         public static final String LoginView = "login";
-
         public static final String RegistrierungStudentView = "RegistrierungStudentView";
+        public static final String RegistrierungUnternehmenView = "RegistrierungUnternehmenView";
         public static final String AccessDeniedView = "AccessDeniedView";
     }
 
     static public class STUDENT {
-
         public static final String SAboStudentView = "SAboStudentView";
         public static final String SApplicationView = "SApplicationView";
         public static final String SApplicationsView = "SApplicationsView";
@@ -21,9 +20,8 @@ public class ROUTING {
         public static final String SJobProjectWorkshopDisplayView = "SJobProjectWorkshopDisplayView";
         public static final String SNotificationView = "SNotificationView";
         public static final String SStudentProfileDisplayView = "SStudentProfileDisplayView";
-
-
     }
+
     public class UNTERNEHMEN {
         public static final String UApplicationView = "UApplicationView";
         public static final String UApplicationsView = "UApplicationsView";
@@ -34,8 +32,8 @@ public class ROUTING {
         public static final String UStelleAnzeigeErstellenView = "UStelleAnzeigeErstellenView";
         public static final String UUnternehmenPreviewView = "UUnternehmenPreviewView";
         public static final String UNotificationView = "UNotificationView";
-
         public static final String UJobProjectWorkshopDisplayView = "UJobProjectWorkshopDisplayView";
+        public static final String UApplicantView = "UApplicantView";
     }
 }
 

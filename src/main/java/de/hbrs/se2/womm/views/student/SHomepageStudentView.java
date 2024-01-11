@@ -2,11 +2,9 @@ package de.hbrs.se2.womm.views.student;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
@@ -14,7 +12,6 @@ import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.components.GridFilterStelle;
-import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -36,8 +33,9 @@ public class SHomepageStudentView extends AViewWomm {
         this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
         this.gridFilterStelle = new GridFilterStelle();
         this.gridFilterStelle.setUpFromOutside(stelleService.getAllByFilter("",""));
+        this.gridFilterStelle.setColumnClickListener();
         setUpHeader();
-        setUpBanner();
+//        setUpBanner();
         setUpSearchFields();
 //        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleService, -99L)); //ToDo -99L => all
         add(this.gridFilterStelle);
@@ -73,7 +71,7 @@ public class SHomepageStudentView extends AViewWomm {
         b4.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
     }
-
+/*
     private void setUpBanner() {
         VerticalLayout banner = new VerticalLayout();
 //        Image i = new Image("themes/theme_1/banner.jpg", "https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
@@ -83,7 +81,7 @@ public class SHomepageStudentView extends AViewWomm {
         banner.add(i);
         add(banner);
     }
-
+*/
     private void setUpSearchFields() {
     /*
         VerticalLayout searchResults = new VerticalLayout();

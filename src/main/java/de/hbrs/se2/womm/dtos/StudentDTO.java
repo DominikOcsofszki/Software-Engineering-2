@@ -23,6 +23,6 @@ public class StudentDTO implements AbstractDTO {
             return ASSETS.buildPlaceholder(50,50);
         }
         return new Image("data:image/png;base64,"
-                + nutzer.getNutzerProfilbild(), "getImage");
+                + new String(nutzer.getNutzerProfilbild()), "getImage");
     }
 }

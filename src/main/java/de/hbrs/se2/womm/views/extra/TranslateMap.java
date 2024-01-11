@@ -1,8 +1,5 @@
 package de.hbrs.se2.womm.views.extra;
 
-import de.hbrs.se2.womm.entities.Unternehmen;
-import de.hbrs.se2.womm.views.unternehmen.UHomepageUnternehmenView;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,9 +8,10 @@ import java.util.Map;
 public class TranslateMap {
     public static Map<String, String> translateMap = new HashMap<>() {{
         put("", "");
-        // RegisterView
+        // LandingPageView
         put("Your job search portal. Discover thousands of job opportunities and more.", "Dein Jobportal. Entdecke tausende Jobangebote und mehr.");
-        put("SignUp", "Registrieren");
+        put("SignUp as Student", "Registriere dich als Student");
+        put("SignUp as Company", "Registriere dich als Unternehmen");
         put("Find your dream job on w.o.m.m.", "Finde deinen Traumjob auf w.o.m.m.");
         put("Want to create company profile? Contact us at kontakt@womm.de.", "Möchtest du ein Firmenprofil erstellen? Kontaktiere uns unter kontakt@womm.de.");
         put("LogIn", "Anmelden");
@@ -34,7 +32,7 @@ public class TranslateMap {
         put("Name", "Name");
 
         // SAboStudentView
-        put("Enter keyword", "Stichwort eingeben");
+        put("Enter keyword","Stichwort eingeben");
         put("Subscriptions", "Abonnements");
 
         //Unternehmen Layout
@@ -88,18 +86,68 @@ public class TranslateMap {
         put("Email 😳", "Email 😳");
         put("Location is required", "Standort ist erforderlich");
         put("Your REAL Name", "Ihr ECHTER Name");
+        put("Your REAL Company Name", "Ihr ECHTER Unternehmensname");
         put("The password used for login", "Das Passwort für die Anmeldung");
         put("Surname is required", "Nachname ist erforderlich");
         put("Student/in Registration", "Student/in Registrierung");
+        put("Company Registration", "Unternehmen Registrierung");
         put("Your current living location", "Ihr aktueller Wohnort");
+        put("Company Name is required", "Name Ihres Unternehmens ist erforderlich");
         put("Name is required", "Name ist erforderlich");
         put("Username", "Benutzername");
         put("Register", "Registrieren");
-        put("Date of Birth", "Geburtsdatum");
         put("Surname", "Nachname");
-        put("Location", "Standort");
+        put("Company Name", "Name Ihres Unternehmens");
+
+        //StudentProfileDisplayView
+        put("Location", "Ort");
+        put("Date of Birth", "Geburtstag");
+        put("e-mail", "E-Mail");
+        put("E-Mail Address", "E-Mail-Adresse");
+        put("alias", "Alias");
+        put("Current semester", "Aktuelles Semester");
+        put("Specializations", "Spezialisierungen");
+        put("Biography", "Biographie");
+
+        //CreateChangeStudentProfileView
+        put("Enter your old password", "Altes Passwort");
+        put("Save Changes", "Änderungen Speichern");
+        put("Please enter a valid e-mail address", "Bitte eine gültige E-Mail-Adresse angeben");
+        put("Upload", "Hochladen");
+        put("The name can only be changed with the agreement of an admin", "Der Name kann nur mit Absprache eines Admins geändert werden");
+        put("Confirm e-mail", "E-Mail bestätigen");
+        put("I am in semester:", "Ich bin in Semester:");
+        put("Repeat your new password", "Neues Passwort wiederholen");
+        put("Push Notifications", "Benachrichtigungen");
+        put("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported.", "Das neue Passwort muss eine Länge von 6 bis 12 Zeichen haben und darf nur Buchstaben von A bis Z und Zahlen beeinhalten");
+        put("I would like to receive notifications", "Ich möchte Benachrichtigungen erhalten");
+        put("Enter your new password", "Neues Passwort");
+        put("Please enter your current valid Password", "Bitte gib dein aktuelles Passwort ein");
+        put("Please enter your new valid Password", "Bitte gib dein neues, gültiges Passwort ein");
+        put("Please re-enter your new valid Password", "Bitte wiederhole dein neues, gültiges Passwort");
+        put("Please enter your current semester", "Bitte gib dein aktuelles Semester ein");
+        put("Please re-enter your valid e-mail address", "Bitte wiederhole deine gültige E-Mail-Adresse");
+        put("Semester", "Semester");
+
+        //SJobProjectWorkshopDisplayView
+        put("The job offer is not available anymore :(", "Das Stellenangebot existiert nicht mehr :(");
+        put("Please enter your application into the text field!", "Trage bitte dein Anschreiben in das Feld ein!");
+        put("Send", "Abschicken");
+        put("Write a short application here", "Schreibe ein kurzes Anschreiben für deine Bewerbung");
+        put("Apply now", "Jetzt bewerben");
+        put("Apply later", "Später bewerben");
+        put("Your application has been sent successfully", "Deine Bewerbung wurde erfolgreich versendet");
+
+        //UApplicationView
+        put("Accept", "Annehmen");
+        put("Decline", "Ablehnen");
+        put("You have accepted the application", "Sie haben die Bewerbung angenommen");
+        put("You have declined the application", "Sie haben die Bewerbung abgelehnt");
+
+
+
+        // StudentLayout
+        put("SApplicationsView", "Bewerbungen");
 
     }};
-
-
 }

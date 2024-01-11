@@ -7,9 +7,9 @@ import lombok.Data;
 @Builder
 public class BewerbungDTO implements AbstractDTO{
     private Long bewerbungId;
-    private byte[] bewerbungPdf;
     private String bewerbungText;
     private StelleDTO bewerbungStelle;
     private StudentDTO bewerbungStudent;
+    private UnternehmenDTO bewerbungUnternehmen;
     private String bewerbungStatus;
 }

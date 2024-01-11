@@ -1,8 +1,8 @@
 package de.hbrs.se2.womm.views.student;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
@@ -24,188 +24,106 @@ import jakarta.annotation.security.RolesAllowed;
 public class SStudentProfileDisplayView extends AViewWomm {
     StudentDTO studentDTO;
 
-    //SetUp Data
-    String studentName;
-    String studentVorname;
-    String studentAlias = "do we need this???"; //ToDo in DTO?
-    String studentGeburtstag;
-    String studentEmail;
-    String studentOrt;
-    String studentBiographie;
-    String studentSpezialisierungen;
-    String studentSemester;
-    Image studentProfilbild;
-    private long aktuelleNutzerID;
-
-    private void setUpDataFromDTO() {
-        studentName = studentDTO.getStudentName();
-        studentVorname = studentDTO.getStudentVorname();
-//        studentAlias = studentDTO.getStudentAlias(); //ToDo in DTO?
-        studentGeburtstag = studentDTO.getStudentGeburtstag();
-        studentEmail = studentDTO.getNutzer().getNutzerMail();
-        studentOrt = studentDTO.getNutzer().getNutzerOrt();
-        studentBiographie = studentDTO.getStudentBio();
-        studentSpezialisierungen = studentDTO.getStudentSpezialisierung();
-        studentSemester = String.valueOf(studentDTO.getStudentSemester());
-        studentProfilbild = studentDTO.PlaceholderOrImage();
-    }
-
     public SStudentProfileDisplayView(StudentService studentService, SecurityService securityService) {
         super();
-        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
-        this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
-        setUpDataFromDTO();
-        //ToDo Work with this!!! this.studentDTO
-        Header();
-        Profil();
+        this.studentDTO = studentService.getByNutzerId(securityService.getLoggedInNutzerID());
+
+        add(
+                getHeader(),
+                getProfil()
+        );
     }
 
-    private void Header() {
+    private Component getHeader() {
         HorizontalLayout header = new HorizontalLayout();
-//        Button b = new Button("Home");
+
         Button b = getWommBuilder().Button.create("Home");
+        b.addClickListener(e -> UI.getCurrent().navigate(SHomepageStudentView.class));
+        b.getElement().getStyle().set("margin-right", "auto");
+
         header.add(b);
-        b.addClickListener(e -> UI.getCurrent().navigate(SHomepageStudentView.class));//ToDo refactor to homepage
-        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-//        b = new Button("Start Chatting");//ToDo Remove since chat with yourself???
-//        b.addClickListener( e -> UI.getCurrent().navigate(SChatView.class));
-//        b.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        header.add(b);
-        b.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
-        add(header);
+        return header;
     }
 
-    private void Profil() {
-        ////////////////////////Profilbild////////////////////////////////////////////////////////////////////////////////
-        HorizontalLayout header = new HorizontalLayout();
-        Image i = new Image("themes/theme_1/user.png", "Image not found");
-        i.setWidth("20%");
-        i.setHeight("20%");
-        //i.setHeight(300, Unit.PIXELS); //for fixed values
-        header.add(i);
-        ////////////////////////Name////////////////////////////////////////////////////////////////////////////////////
-        VerticalLayout headervert = new VerticalLayout();
-        VerticalLayout headervert2 = new VerticalLayout();
-//        Span s = new Span("Name");
-        Span s = getWommBuilder().Span.create("Name");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-//        Span s1 = new Span("Paul Stein");
-        Span s1 = new Span( studentVorname+ " " + studentName);
-        s1.getElement().getStyle().set("font-size", "45px");
-        s1.getElement().getStyle().set("color", "#192434");     //color black
-        headervert2.add(s);
-        headervert2.add(s1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////////Alias////////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Alias");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("psteins2");
-        s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "#192434");     //color black
-        headervert2.add(s);
-        headervert2.add(s1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////////Geburtstag///////////////////////////////////////////////////////////////////////////////
-//        s = new Span("Geburtstag");
-        s = getWommBuilder().Span.create("Geburtstag");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-//        s1 = new Span("01.01.2002");
-        s1 = new Span(studentGeburtstag);
+    /**
+     * Generiert die Profilseite
+     *
+     * @return Die Profilseite
+     */
+    private Component getProfil() {
+        HorizontalLayout profilPage = new HorizontalLayout();
+        VerticalLayout profilDetails = new VerticalLayout();
+        VerticalLayout profilBild = new VerticalLayout();
 
-        s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "#192434");     //color black
-        headervert2.add(s);
-        headervert2.add(s1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////////E-Mail//////////////////////////////////////////////////////////////////////////////////
-//        s = new Span("E-Mail");
-        s = getWommBuilder().Span.create("E-Mail");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-//        s1 = new Span("p_stein@email.de");
-        s1 = new Span(studentEmail);
-        s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "#192434");     //color black
-        headervert2.add(s);
-        headervert2.add(s1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////////Ort/////////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Ort");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("Bonn");
-        s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "#192434");     //color black
-        headervert2.add(s);
-        headervert2.add(s1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        headervert.setWidth("50%");
-        ////////////////////////Biographie///////////////////////////////////////////////////////////////////////////////
-        s = new Span("Biographie");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("2018 nach dem Abitur, Ausbildung als Einzelhandeskaufmann, 2021 nach der Ausbildung angestellt als Einzelhandelskaufmann, Seit 2022 Vollzeit-Informatikstudent.");
-        s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "#192434");     //color black
-        headervert2.add(s);
-        headervert2.add(s1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////////Spezialisierungen////////////////////////////////////////////////////////////////////////
-        s = new Span("Spezialisierungen");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("Windows-User, Social-Media-Plattformen, Officeprogramme, diverse IDEs: viel Java-Coding Erfahrung, mäßige C-Coding  Erfahrung");
-        s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "#192434");     //color black
-        headervert2.add(s);
-        headervert2.add(s1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        headervert2 = new VerticalLayout();
-        ////////////////////////Semester////////////////////////////////////////////////////////////////////////////////
-        s = new Span("Akutelles Semester");
-        s.getElement().getStyle().set("font-size", "20px");
-        s.getElement().getStyle().set("color", "#C4CBD3");      //color grey
-        s1 = new Span("3.");
-        s1.getElement().getStyle().set("font-size", "25px");
-        s1.getElement().getStyle().set("color", "#192434");     //color black
-        headervert2.add(s);
-        headervert2.add(s1);
-        headervert2.setSpacing(false);
-        headervert2.setPadding(false);
-        headervert.add(headervert2);
-        headervert.add(new Hr());
-        header.add(headervert);
-        add(header);
+        Image bild = studentDTO.PlaceholderOrImage();
+        bild.setWidth("300px");
+        bild.setHeight("300px");
+        bild.getStyle().set("margin-left", "auto"); // Sodass das Bild rechtsbündig ist
+
+        profilBild.add(bild);
+
+        VerticalLayout rowName = generateProfileDetailsRow(
+                "Name", studentDTO.getStudentVorname() + " " + studentDTO.getStudentName(), "45"
+        );
+        VerticalLayout rowGeburtstag = generateProfileDetailsRow(
+                "Date of Birth", studentDTO.getStudentGeburtstag(), "20"
+        );
+        VerticalLayout rowEmail = generateProfileDetailsRow(
+                "E-Mail Address", studentDTO.getNutzer().getNutzerMail(),"20"
+        );
+        VerticalLayout rowLocation = generateProfileDetailsRow(
+                "Location", studentDTO.getNutzer().getNutzerOrt(),"20"
+        );
+        VerticalLayout rowBiography = generateProfileDetailsRow(
+                "Biography", studentDTO.getStudentBio(),"20"
+        );
+        VerticalLayout rowSpec = generateProfileDetailsRow(
+                "Specializations", studentDTO.getStudentSpezialisierung(),"20"
+        );
+        VerticalLayout rowSemester = generateProfileDetailsRow(
+                "Semester", String.valueOf(studentDTO.getStudentSemester()),"20"
+        );
+
+        // Hr() sind horizontale HTML-Trennlinien (<hr>)
+        profilDetails.add(
+                rowName,
+                new Hr(), rowGeburtstag,
+                new Hr(), rowEmail,
+                new Hr(), rowLocation,
+                new Hr(), rowBiography,
+                new Hr(), rowSpec,
+                new Hr(), rowSemester
+        );
+
+        profilPage.setWidth("50%");
+
+        profilPage.add(profilDetails);
+        profilPage.add(profilBild);
+        return profilPage;
+    }
+
+    /**
+     * Generiert eine Zeile für die Profilseite
+     *
+     * @param _header  Die Überschrift der Zeile
+     * @param _content Der Inhalt der Zeile
+     * @return Die fertige Zeile
+     */
+    private VerticalLayout generateProfileDetailsRow(String _header, String _content, String fontsize) {
+        VerticalLayout row = new VerticalLayout();
+
+        Span header = getWommBuilder().Span.create(_header);
+        Span content = new Span(_content);
+
+        header.getElement().getStyle().set("font-size", "20px");
+        content.getElement().getStyle().set("font-size", fontsize+"px");
+
+        row.add(header);
+        row.setSpacing(false);
+        row.setPadding(false);
+        row.add(content);
+
+        return row;
     }
 }
