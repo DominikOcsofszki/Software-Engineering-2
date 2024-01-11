@@ -148,6 +148,16 @@ public class TranslateMap {
 
         // StudentLayout
         put("SApplicationsView", "Bewerbungen");
+        put("Log out(", "Ausloggen(");
+        put("Log out", "Ausloggen");
+
+
+
+
+
+
+
+        //
 
     }};
 }
