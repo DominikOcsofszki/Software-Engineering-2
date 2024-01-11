@@ -143,5 +143,11 @@ public class TranslateMap {
         put("Decline", "Ablehnen");
         put("You have accepted the application", "Sie haben die Bewerbung angenommen");
         put("You have declined the application", "Sie haben die Bewerbung abgelehnt");
+
+
+
+        // StudentLayout
+        put("SApplicationsView", "Bewerbungen");
+
     }};
 }
