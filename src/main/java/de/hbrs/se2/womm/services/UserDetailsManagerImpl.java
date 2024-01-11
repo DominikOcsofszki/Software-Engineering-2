@@ -1,19 +1,31 @@
 package de.hbrs.se2.womm.services;
 
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.entities.NutzerLogin;
 import de.hbrs.se2.womm.repositories.NutzerLoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
 
 @Service
 public class UserDetailsManagerImpl implements UserDetailsManager {
 
     @Autowired
     private NutzerLoginRepository nutzerLoginRepository;
+    @Autowired
+    private SecurityService securityService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public UserDetailsManagerImpl() {
+    }
 
     @Override
     public void createUser(UserDetails user) {
@@ -32,8 +44,7 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
     }
 
     /**
-     * This method assumes that both oldPassword and the newPassword params
-     * are encoded with configured passwordEncoder
+     * Changes the password of the user
      *
      * @param oldPassword the old password of the user
      * @param newPassword the new password of the user
@@ -41,10 +52,19 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
     @Override
     @Transactional
     public void changePassword(String oldPassword, String newPassword) {
-        NutzerLogin userDetails = nutzerLoginRepository.findNutzerByNutzerPasswort(oldPassword);
-        if (userDetails == null) throw new UsernameNotFoundException("Invalid password");
-        userDetails.setNutzerPasswort(newPassword);
-        nutzerLoginRepository.save(userDetails);
+        long nutzerID = securityService.getLoggedInNutzerID();
+        Optional<NutzerLogin> nutzerLogin = nutzerLoginRepository.findByNutzer_NutzerId(nutzerID);
+
+        nutzerLogin.map(
+                nutzerLogin1 -> {
+                    if (passwordEncoder.matches(oldPassword, nutzerLogin1.getNutzerPasswort())) {
+                        String newPasswordEncoded = passwordEncoder.encode(newPassword);
+                        nutzerLogin1.setNutzerPasswort(newPasswordEncoded);
+                        nutzerLoginRepository.save(nutzerLogin1);
+                    }
+                    return nutzerLogin1;
+                }
+        );
     }
 
     @Override
