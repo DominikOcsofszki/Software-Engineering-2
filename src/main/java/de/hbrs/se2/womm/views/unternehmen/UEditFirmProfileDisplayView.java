@@ -35,7 +35,9 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 
     UnternehmenDTO unternehmenDTO;
     TextArea descriptionTextArea = new TextArea("Company Description");
-    TextArea gruendung  = new TextArea("Since");
+    TextArea gruendung = new TextArea("Since");
+    TextField locationField = new TextField("Company Location");
+    TextField websiteField = new TextField("Company Website");
 
     private long aktuelleNutzerID;
     private UnternehmenService unternehmenService;
@@ -55,7 +57,7 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         this.gridFilterStelle = new GridFilterStelle();
         List<StelleDTO> stelleDTOList = stelleService.getByNutzerId(aktuelleNutzerID);
         this.gridFilterStelle.setUpFromOutside(stelleDTOList);
-        add(gridFilterStelle);
+//        add(gridFilterStelle); //TODO deleted, since wrong place?
 //        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
     }
 
@@ -64,17 +66,7 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
             ratingLayout.add(new Icon(VaadinIcon.STAR));
         }
     }
-    private UnternehmenDTO newUnternehmenDTOFromFields(){
-        UnternehmenDTO newUnternehmenDTO = UnternehmenDTO.builder()
-                .unternehmenId(getUnternehmenDTO().getUnternehmenId())
-                .name(getUnternehmenDTO().getName())
-                .beschreibung(descriptionTextArea.getValue())
-                .gruendung(gruendung.getValue())
-                .nutzer(getUnternehmenDTO().getNutzer())
-                .build();
-        System.out.println(newUnternehmenDTO);
-        return newUnternehmenDTO;
-    }
+
 
     private void setUp() {
 //        Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");
@@ -147,8 +139,9 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         //Save Button
         Button saveButton = new Button("Save Changes");
         saveButton.addClickListener(e -> {
-            UnternehmenDTO newUnternehmenDTO = newUnternehmenDTOFromFields();
-            unternehmenService.saveUnternehmen(newUnternehmenDTO);
+//            UnternehmenDTO newUnternehmenDTO = newUnternehmenDTOFromFields();
+//            unternehmenService.saveUnternehmen(newUnternehmenDTO);
+            unternehmenService.saveUnternehmen(newUnternehmenDTOFromFields());
             UI.getCurrent().getPage().reload();
             // Logic to save changes made to the firm profile
             // Implement your saving logic here
@@ -174,7 +167,7 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 
 
         // Company Location, Number of Employees, and Company Website (Editable Fields)
-        TextField locationField = new TextField("Company Location");
+//        TextField locationField = new TextField("Company Location");
 //        locationField.setValue("Your Company's Location");//ToDo changed
         locationField.setValue(companyLocation);
 
@@ -182,7 +175,7 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 //        employeesField.setValue("Number of Employees");//ToDo changed
         employeesField.setValue(String.valueOf(nrOfEmployees));
 
-        TextField websiteField = new TextField("Company Website");
+//        TextField websiteField = new TextField("Company Website");
 //        websiteField.setValue("http://www.companywebsite.com");//ToDo changed
         websiteField.setValue(companyWebsite);
 
@@ -209,7 +202,7 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 //        add(jobGrid);
     }
 
-//    private List<Stelle> createDummyStellenanzeigen() {
+    //    private List<Stelle> createDummyStellenanzeigen() {
 //        List<Stelle> dummyStellenanzeigen = new ArrayList<>();
 //        for (int i = 1; i <= 5; i++) {
 //            Stelle stelle = new Stelle();
@@ -221,4 +214,11 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 //        }
 //        return dummyStellenanzeigen;
 //    }
+    private UnternehmenDTO newUnternehmenDTOFromFields() {
+        unternehmenDTO.setBeschreibung(descriptionTextArea.getValue());
+        unternehmenDTO.setGruendung(gruendung.getValue());
+        unternehmenDTO.getNutzer().setNutzerOrt(locationField.getValue());
+//        unternehmenDTO.setWebsite(websiteField.getValue());
+        return unternehmenDTO;
+    }
 }
