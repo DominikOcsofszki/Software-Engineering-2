@@ -68,7 +68,7 @@ public class LoginView extends AViewWomm {
         Button submitButton = getWommBuilder().Button.create(getWommBuilder().translateText("LogIn"));
         submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         submitButton.addClickListener(e -> {
-            submitButton.setEnabled(false);
+//            submitButton.setEnabled(false); //TODO remove if ok
             LoginRequest loginRequest = LoginRequest.builder()
                     .username(usernameInput.getValue())
                     .password(passwordInput.getValue()).build();
@@ -88,7 +88,7 @@ public class LoginView extends AViewWomm {
                 closeButton.setAriaLabel("Close");
                 closeButton.addClickListener(event -> {
                     notification.close();
-                    submitButton.setEnabled(true);
+//                    submitButton.setEnabled(true); //TODO remove if ok
                 });
 
                 HorizontalLayout layout = new HorizontalLayout(text, closeButton);
@@ -96,6 +96,7 @@ public class LoginView extends AViewWomm {
 
                 notification.add(layout);
                 notification.open();
+                notification.setDuration(1000); // TODO sec message is shown
             }
         });
 
