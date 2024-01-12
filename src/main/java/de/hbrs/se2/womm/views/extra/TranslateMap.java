@@ -149,5 +149,12 @@ public class TranslateMap {
         // StudentLayout
         put("SApplicationsView", "Bewerbungen");
 
+        // SApplicationView
+        put("Create application:","Bewerbung erstellen:" );
+        put("CV","Lebenslauf" );
+        put("Create","Erstellen" );
+        put("Application photo","Bewerbungsfoto" );
+        put("Application text","Bewerbungs-Text" );
+
     }};
 }
