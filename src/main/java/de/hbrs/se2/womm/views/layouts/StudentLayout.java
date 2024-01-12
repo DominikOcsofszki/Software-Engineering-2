@@ -1,9 +1,7 @@
 package de.hbrs.se2.womm.views.layouts;
 
 import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import de.hbrs.se2.womm.config.SecurityService;
@@ -33,15 +31,6 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
 //        socialMediaSubMenu.addItem("Twitter", listener);
 //        socialMediaSubMenu.addItem("Instagram", listener);
 
-    MenuBar setUpMenuBar(String name, Class<? extends Component> view) {
-        MenuBar menuBar = new MenuBar();
-        menuBar.setOpenOnHover(true);
-        menuBar.isOpenOnHover();
-        menuBar.setThemeName("blue");
-        menuBar.addItem(VaadinBuilderWomm.translateTextStatic(name),
-                e -> UI.getCurrent().navigate(view));
-        return menuBar;
-    }
 
     @Override
     void createDrawer() {
