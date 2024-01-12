@@ -26,12 +26,21 @@ public class UnternehmenLayout extends AbstractLayoutLoggedIn {
         addToDrawer(new VerticalLayout(
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("UApplicationView"), UApplicationView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("UApplicationsView"), UApplicationsView.class),
-//                new RouterLink(VaadinBuilderWomm.translateTextStatic("UChatView"), UChatView.class), //TODO final check
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("UEditFirmProfileDisplayView"), UEditFirmProfileDisplayView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("UFirmProfileDisplayView"), UFirmProfileDisplayView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("UHomepageUnternehmenView"), UHomepageUnternehmenView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("UStelleAnzeigeErstellenView"), UStelleAnzeigeErstellenView.class)
+//                new RouterLink(VaadinBuilderWomm.translateTextStatic("UChatView"), UChatView.class), //TODO final check
 //                new RouterLink(VaadinBuilderWomm.translateTextStatic("UNotificationView"), UNotificationView.class) //TODO Final CHECK
         ));
     }
 }
+/* Old way deelte later after approve
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("UApplicationView"), UApplicationView.class),
+        new RouterLink(VaadinBuilderWomm.translateTextStatic("UApplicationsView"), UApplicationsView.class),
+        new RouterLink(VaadinBuilderWomm.translateTextStatic("UEditFirmProfileDisplayView"), UEditFirmProfileDisplayView.class),
+        new RouterLink(VaadinBuilderWomm.translateTextStatic("UFirmProfileDisplayView"), UFirmProfileDisplayView.class),
+        new RouterLink(VaadinBuilderWomm.translateTextStatic("UHomepageUnternehmenView"), UHomepageUnternehmenView.class),
+        new RouterLink(VaadinBuilderWomm.translateTextStatic("UStelleAnzeigeErstellenView"), UStelleAnzeigeErstellenView.class)
+//                new RouterLink(VaadinBuilderWomm.translateTextStatic("UChatView"), UChatView.class), //TODO final check
+//                new RouterLink(VaadinBuilderWomm.translateTextStatic("UNotificationView"), UNotificationView.class) //TODO Final CHECK*/

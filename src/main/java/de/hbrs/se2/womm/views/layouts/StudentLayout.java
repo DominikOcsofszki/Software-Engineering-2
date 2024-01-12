@@ -35,7 +35,7 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
-                setUpMenuBar("SAboStudentView", SAboStudentView.class),
+                setUpMenuBarWomm("SAboStudentView", SAboStudentView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationsView"), SApplicationsView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SCreateChangeStudentProfileView"), SCreateChangeStudentProfileView.class),

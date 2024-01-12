@@ -22,7 +22,7 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
         super.createHeaderWithLogoutButton(logoutButton, true);
     }
 
-    MenuBar setUpMenuBar(String name, Class<? extends Component> view) {
+    MenuBar setUpMenuBarWomm(String name, Class<? extends Component> view) {
         MenuBar menuBar = new MenuBar();
         menuBar.setOpenOnHover(true);
         menuBar.isOpenOnHover();
