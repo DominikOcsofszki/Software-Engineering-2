@@ -25,11 +25,9 @@ public class UJobProjectWorkshopDisplayView extends VerticalLayout implements Ha
     StelleService stelleService;
     StelleDTO stelleDTO;
     long stelleId;
-    VerticalLayout applicationForm;
 
     public UJobProjectWorkshopDisplayView(StelleService stelleService) {
         this.stelleService = stelleService;
-        this.applicationForm = new VerticalLayout();
     }
 
     @Override
@@ -54,7 +52,6 @@ public class UJobProjectWorkshopDisplayView extends VerticalLayout implements Ha
         }
 
     }
-    //ToDo Banner anpassen
 
     private void setUpBanner() {
         VerticalLayout banner = new VerticalLayout();
@@ -64,14 +61,12 @@ public class UJobProjectWorkshopDisplayView extends VerticalLayout implements Ha
         add(banner);
     }
 
-    //ToDo bestimmten FirmenNamen + FirmenLogo anzeigen
-
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         ImageService imageService = new ImageService();
         Image i = imageService.getRandomImageHeight(100);
         header.add(i);
-        String unternehmenName = this.stelleDTO.getUnternehmen().getName(); //ToDo Changed
+        String unternehmenName = this.stelleDTO.getUnternehmen().getName();
         header.add(new H1(unternehmenName));
         add(header);
     }
