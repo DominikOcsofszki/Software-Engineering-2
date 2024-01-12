@@ -155,6 +155,7 @@ public class TranslateMap {
         put("Your application has been accepted.", "Ihre Bewerbung wurde akzeptiert.");
         put("Your application has been delcined.", "Ihre Bewerbung wurde abgelehnt.");
         put("Your application is awaiting review.", "Ihre Bewerbung befindet sich in Bearbeitung.");
+        put("Your motivational letter:","Ihr Anschreiben:");
         put("Application photo", "Bewerbungsfoto");
         put("Application text", "Bewerbungs-Text");
 
