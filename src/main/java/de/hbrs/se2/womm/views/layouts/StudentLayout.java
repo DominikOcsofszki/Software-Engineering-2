@@ -1,7 +1,9 @@
 package de.hbrs.se2.womm.views.layouts;
 
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import de.hbrs.se2.womm.config.SecurityService;
@@ -23,19 +25,48 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
             UI.getCurrent().navigate(ROUTING.ALL.AccessDeniedView);
     }
 
+//        MenuItem share = menuBar.addItem("Share");
+//        SubMenu shareSubMenu = share.getSubMenu();
+//        MenuItem onSocialMedia = shareSubMenu.addItem("On social media");
+//        SubMenu socialMediaSubMenu = onSocialMedia.getSubMenu();
+//        socialMediaSubMenu.addItem("Facebook", listener);
+//        socialMediaSubMenu.addItem("Twitter", listener);
+//        socialMediaSubMenu.addItem("Instagram", listener);
+
+    MenuBar setUpMenuBar(String name, Class<? extends Component> view) {
+        MenuBar menuBar = new MenuBar();
+        menuBar.setOpenOnHover(true);
+        menuBar.isOpenOnHover();
+        menuBar.setThemeName("blue");
+        menuBar.addItem(VaadinBuilderWomm.translateTextStatic(name),
+                e -> UI.getCurrent().navigate(view));
+        return menuBar;
+    }
+
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
+                setUpMenuBar("SAboStudentView", SAboStudentView.class),
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class),
-//                new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationView"), SApplicationView.class), //TODO check again: delete info was next to it
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationsView"), SApplicationsView.class),
-//                new RouterLink(VaadinBuilderWomm.translateTextStatic("SChatView"), SChatView.class),//TODO final Check
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SCreateChangeStudentProfileView"), SCreateChangeStudentProfileView.class),
-//                new RouterLink(VaadinBuilderWomm.translateTextStatic("SFirmProfileDisplayView"), SFirmProfileDisplayView.class),//TODO check again: delete info was next to it
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SHomepageStudentView"), SHomepageStudentView.class),
-//                new RouterLink(VaadinBuilderWomm.translateTextStatic("SJobProjectWorkshopDisplayView"), SJobProjectWorkshopDisplayView.class),//TODO check again: delete info was next to it
-//                new RouterLink(VaadinBuilderWomm.translateTextStatic("SNotificationView"), SNotificationView.class), //TODO fianl Check
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SStudentProfileDisplayView"), SStudentProfileDisplayView.class)
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("SStudentProfileDisplayView"), SStudentProfileDisplayView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class)
+
+  /* Old way deelte later after approve
+   new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationsView"), SApplicationsView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("SCreateChangeStudentProfileView"), SCreateChangeStudentProfileView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("SHomepageStudentView"), SHomepageStudentView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("SStudentProfileDisplayView"), SStudentProfileDisplayView.class),
+                new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class)
+*/
+                //                new RouterLink(VaadinBuilderWomm.translateTextStatic("SChatView"), SChatView.class),//TODO final Check
+                //                new RouterLink(VaadinBuilderWomm.translateTextStatic("SFirmProfileDisplayView"), SFirmProfileDisplayView.class),//TODO check again: delete info was next to it
+                //                new RouterLink(VaadinBuilderWomm.translateTextStatic("SJobProjectWorkshopDisplayView"), SJobProjectWorkshopDisplayView.class),//TODO check again: delete info was next to it
+                //                new RouterLink(VaadinBuilderWomm.translateTextStatic("SNotificationView"), SNotificationView.class), //TODO fianl Check
+                //                new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationView"), SApplicationView.class), //TODO check again: delete info was next to it
         ));
     }
 
