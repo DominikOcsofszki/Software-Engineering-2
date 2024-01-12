@@ -37,6 +37,7 @@ public class UFirmProfileDisplayView extends AViewWomm {
         this.gridFilterStelle = new GridFilterStelle();
         List<StelleDTO> stelleDTOList = stelleService.getByNutzerId(aktuelleNutzerID);
         this.gridFilterStelle.setUpFromOutside(stelleDTOList);
+        gridFilterStelle.setColumnClickListener(ROUTING.UNTERNEHMEN.UJobProjectWorkshopDisplayView);
         add(gridFilterStelle);
     }
     private String checkIfNullShowTextLink(String checkString){
