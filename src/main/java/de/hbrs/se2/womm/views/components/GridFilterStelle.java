@@ -41,8 +41,8 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
         };
     }
 
-    public void setColumnClickListener() {
+    public void setColumnClickListener(String location) {
         this.grid.addItemClickListener(item -> UI.getCurrent()
-                .navigate(ROUTING.STUDENT.SJobProjectWorkshopDisplayView + "/" + item.getItem().getStelleId()));
+                .navigate(location + "/" + item.getItem().getStelleId()));
     }
 }

@@ -31,8 +31,8 @@ public class GridFilterBewerbung extends AGridFilter<BewerbungDTO> {
         };
     }
 
-    public void setColumnClickListener() {
+    public void setColumnClickListener(String location) {
         this.grid.addItemClickListener(item -> UI.getCurrent()
-                .navigate(ROUTING.UNTERNEHMEN.UApplicationView + "/" + (item.getItem()).getBewerbungId()));
+                .navigate(location + "/" + (item.getItem()).getBewerbungId()));
     }
 }

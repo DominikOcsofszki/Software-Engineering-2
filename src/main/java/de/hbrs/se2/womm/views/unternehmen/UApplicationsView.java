@@ -37,7 +37,7 @@ public class UApplicationsView extends AViewWomm {
 
         List<BewerbungDTO> bewerbungen = bewerbungService.getByUnternehmenNutzerId(unternehmenId);
         gridFilterBewerbung.setUpFromOutside(bewerbungen);
-        gridFilterBewerbung.setColumnClickListener();
+        gridFilterBewerbung.setColumnClickListener(ROUTING.UNTERNEHMEN.UApplicationView);
         add(gridFilterBewerbung);
     }
 }
