@@ -33,7 +33,7 @@ public class SHomepageStudentView extends AViewWomm {
         this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
         this.gridFilterStelle = new GridFilterStelle();
         this.gridFilterStelle.setUpFromOutside(stelleService.getAllByFilter("",""));
-        this.gridFilterStelle.setColumnClickListener();
+        this.gridFilterStelle.setColumnClickListener(ROUTING.STUDENT.SJobProjectWorkshopDisplayView);
         setUpHeader();
 //        setUpBanner();
         setUpSearchFields();
