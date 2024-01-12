@@ -72,7 +72,8 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 //        Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");
         Image companyLogo = getUnternehmenDTO().PlaceholderOrImage();
         H2 firmName = new H2(getUnternehmenDTO().getName());
-        String companyDescription = getUnternehmenDTO().getBeschreibung();
+        String companyDescription = getUnternehmenDTO().getBeschreibung() == null ?
+                "Company Description" : getUnternehmenDTO().getBeschreibung();
         long nrOfReviews = 123;//ToDo DTO Reviews ---> Anzahl von Bewertungen
 //        long nrOfReviews = getUnternehmenDTO().getNrOfRatings(); //ToDo DTO Reviews ---> Anzahl von Bewertungen
         HorizontalLayout ratingLayout = new HorizontalLayout();//ToDo refactored
@@ -90,7 +91,9 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         setupStars(starsRating, ratingLayout);
 //Set up Fields:
         descriptionTextArea.setValue(companyDescription);
-        gruendung.setValue(getUnternehmenDTO().getGruendung());
+        String gruendung1 = getUnternehmenDTO().getGruendung() == null ?
+                "Company Since" : getUnternehmenDTO().getGruendung();
+        gruendung.setValue(gruendung1);
 
 /*
         Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");//ToDo put at top
