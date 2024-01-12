@@ -20,7 +20,10 @@ import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.model.ApplicationStatus;
-import de.hbrs.se2.womm.services.*;
+import de.hbrs.se2.womm.services.BewerbungService;
+import de.hbrs.se2.womm.services.ImageService;
+import de.hbrs.se2.womm.services.StelleService;
+import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -42,6 +45,18 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
     VerticalLayout applicationForm;
     boolean formToggle = false;
 
+    public SJobProjectWorkshopDisplayView(StelleService stelleService,
+                                          SecurityService securityService,
+                                          BewerbungService bewerbungService,
+                                          StudentService studentService) {
+
+        this.securityService = securityService;
+        this.bewerbungService = bewerbungService;
+        this.studentService = studentService;
+        this.stelleService = stelleService;
+        this.applicationForm = new VerticalLayout();
+    }
+
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter Long parameter) {
         if (parameter != null) {
@@ -50,7 +65,7 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
             Optional<StelleDTO> checkStelleDTO = stelleService.getById(this.stelleId);
             if (checkStelleDTO.isEmpty()) {
                 System.out.println("StelleDTO ist null");
-                add(new H1("Keine Stelle in der DB für ID: "+this.stelleId+" gefunden"));
+                add(new H1("Keine Stelle in der DB für ID: " + this.stelleId + " gefunden"));
             } else {
                 this.stelleDTO = checkStelleDTO.get();
                 System.out.println("Parameter: " + parameter);
@@ -64,18 +79,6 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
             add(new H1("Keine Stelle gefunden - Parameter ist null"));
         }
 
-    }
-
-    public SJobProjectWorkshopDisplayView(StelleService stelleService,
-                                          SecurityService securityService,
-                                          BewerbungService bewerbungService,
-                                          StudentService studentService) {
-
-        this.securityService = securityService;
-        this.bewerbungService = bewerbungService;
-        this.studentService = studentService;
-        this.stelleService = stelleService;
-        this.applicationForm = new VerticalLayout();
     }
     //ToDo Banner anpassen
 
@@ -106,7 +109,11 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
         //Ueberschrift
 //        header.add(new H1("Unternehmenname"));
         String unternehmenName = this.stelleDTO.getUnternehmen().getName(); //ToDo Changed
-        header.add(new H1(unternehmenName));
+        H1 name = new H1(unternehmenName);
+        name.addClickListener(e -> UI.getCurrent()
+                .navigate(ROUTING.STUDENT.SFirmProfileDisplayView + "/" + stelleDTO.getUnternehmen().getUnternehmenId()));
+        name.getStyle().set("cursor", "pointer");
+        header.add(name);
 //        header.add(new H1("Unternehmenname"));
         add(header);
     }
@@ -207,7 +214,8 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
         //Erstellen-Button
         Button erstellenButton = new Button(getWommBuilder().translateText("Send"));
         erstellenButton.addClickListener(e -> {
-            if (textArea.getValue().trim().isEmpty()) createErrorNotification(getWommBuilder().translateText("Please enter your application into the text field!"));
+            if (textArea.getValue().trim().isEmpty())
+                createErrorNotification(getWommBuilder().translateText("Please enter your application into the text field!"));
             else if (stelleService.getById(stelleId).isPresent()) {
                 StelleDTO currentStelle = stelleService.getById(stelleId).get();
                 long studentId = securityService.getLoggedInNutzerID();
