@@ -85,7 +85,9 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
 
         studentDTO.setStudentSpezialisierung(spezialisierungen.getValue());
 
-        studentDTO.setStudentSemester(semester.getValue().intValue());
+        if (validateSemester(semester)) {
+            studentDTO.setStudentSemester(semester.getValue().intValue());
+        }
 
         studentService.saveStudent(studentDTO);
     }
@@ -270,12 +272,14 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         TextArea textAreaBio = new TextArea();
         textAreaBio.setValue(studentDTO.getStudentBio() == null ? "" : studentDTO.getStudentBio());
         VerticalLayout layoutBio = generateSinglePropertyField("Biography", textAreaBio);
+        layoutBio.getStyle().set("width", "200%");
 
         // ----------------- Specializations -----------------
 
         TextArea textAreaSpecializations = new TextArea();
         textAreaSpecializations.setValue(studentDTO.getStudentSpezialisierung() == null ? "" : studentDTO.getStudentSpezialisierung());
         VerticalLayout layoutSpec = generateSinglePropertyField("Specializations", textAreaSpecializations);
+        layoutSpec.getStyle().set("width", "200%");
 
         // ----------------- Semester -----------------
 
@@ -344,24 +348,53 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
     }
 
     private boolean validateDatepicker(DatePicker geburtstag) {
-        return (geburtstag != null && !geburtstag.toString().isBlank());
+        return (geburtstag != null &&
+                geburtstag.getValue() != null &&
+                !geburtstag.isInvalid() &&
+                !geburtstag.toString().isBlank() &&
+                geburtstag.getValue().isAfter(LocalDate.of(1900, 1, 1))
+        );
+
     }
 
     private boolean validateEmail(EmailField email, EmailField confirmEmail) {
-        return (email != null && confirmEmail != null && email.getValue().equals(confirmEmail.getValue()));
+        return (email != null &&
+                confirmEmail != null &&
+                !email.isInvalid() &&
+                !email.getValue().isBlank() &&
+                email.getValue().equals(confirmEmail.getValue()));
     }
 
     private boolean validatePassword(PasswordField oldPassword, PasswordField newPassword, PasswordField newPasswordConfirm) {
+        // Null guard clause
+        if (oldPassword == null || newPassword == null || newPasswordConfirm == null) {
+            return false;
+        }
+
+        // Empty / Invalid tests
+        if (!newPassword.isInvalid() && newPassword.getValue().isBlank()) {
+            return false;
+        }
+
+        // Passwords match
         if (!newPassword.getValue().equals(newPasswordConfirm.getValue())) {
             return false;
         }
 
+        // Old password is not empty
         if (oldPassword.getValue().isBlank()) {
             return false;
         }
 
         userDetailsManager.changePassword(oldPassword.getValue(), newPassword.getValue());
         return true;
+    }
+
+    private boolean validateSemester(NumberField semester) {
+        return (semester != null &&
+                semester.getValue() != null &&
+                !semester.isInvalid() &&
+                semester.getValue() > 0);
     }
 }
 
