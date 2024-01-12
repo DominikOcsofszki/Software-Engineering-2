@@ -2,6 +2,7 @@ package de.hbrs.se2.womm.views.unternehmen;
 
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -67,7 +68,8 @@ public class UJobProjectWorkshopDisplayView extends VerticalLayout implements Ha
         Image i = imageService.getRandomImageHeight(100);
         header.add(i);
         String unternehmenName = this.stelleDTO.getUnternehmen().getName();
-        header.add(new H1(unternehmenName));
+        H1 name = new H1(unternehmenName);
+        header.add(name);
         add(header);
     }
 
