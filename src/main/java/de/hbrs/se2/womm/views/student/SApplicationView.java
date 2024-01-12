@@ -1,12 +1,11 @@
 package de.hbrs.se2.womm.views.student;
 
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.StelleDTO;
@@ -35,6 +34,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Strin
     byte[] bewerbungPdf;
     byte[] bewerbungPdf1;
     TextArea bewerbungText = new TextArea();
+//    TextArea bewerbungText = new TextArea();
 
     StelleService stelleService;
     UnternehmenService unternehmenService;
@@ -85,7 +85,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Strin
     private void setUpHeader(){
         HorizontalLayout header = new HorizontalLayout();
         //Ueberschrift
-        H1 h1 = getWommBuilder().H1.create("Bewerbung erstellen:");
+        H1 h1 = getWommBuilder().H1.create("Create application:");
         header.add(h1);
 
         add(header);
@@ -95,7 +95,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Strin
         VerticalLayout bewerbung = new VerticalLayout();
 
         //TextfeldText
-        bewerbungText.setPlaceholder("Bewerbungs-Text");
+        bewerbungText.setPlaceholder(getWommBuilder().translateText("Application text"));
         bewerbungText.setClearButtonVisible(true);
         bewerbungText.setWidthFull();
 
@@ -103,10 +103,12 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Strin
 
         //Bild
 
-        add(new HorizontalLayout(new Paragraph("Bewerbungsfoto"),new ComponentImageUpload()));
+        add(new HorizontalLayout(getWommBuilder().Paragraph.create("Application photo"),new ComponentImageUpload()));
+//        add(new HorizontalLayout(new Paragraph("Bewerbungsfoto"),new ComponentImageUpload()));
 
         //Lebenslauf
-        add(new HorizontalLayout(new Paragraph("Lebenslauf"),new ComponentImageUpload()));
+        add(new HorizontalLayout(getWommBuilder().Paragraph.create("CV"),new ComponentImageUpload()));
+//        add(new HorizontalLayout(new Paragraph("Lebenslauf"),new ComponentImageUpload()));
 
            /* MultiFileMemoryBuffer buffer = new MultiFileMemoryBuffer();
             Upload upload = new Upload(buffer);
@@ -129,7 +131,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Strin
         //ToDo -Erstellung eines Datenbankobjekts mit StellenanzeigeTyp, StellenanzeigeBezeichnung, StellenanzeigeBeschreibung, FirmenLogo, FirmenName
         //ToDo -Routing zum korrekten UnternehmenView
         //Erstellen-Button
-        Button erstellenButton = new Button("Erstellen");
+        Button erstellenButton = getWommBuilder().Button.create("Create");
         erstellenButton.addClickListener(e -> {
             //String stelleIdFromFunction = String.valueOf(bewerbungDTO());
             System.out.println(bewerbungPdf);

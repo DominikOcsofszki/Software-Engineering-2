@@ -31,12 +31,13 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
     private String parameter;
     UnternehmenService unternehmenService;
     UnternehmenDTO unternehmenDTO;
-//    UnternehmenDTO unternehmenDTO = GenerateUnternehmenDTO.generateUnternehmenDTO(1).get(0);
+    //    UnternehmenDTO unternehmenDTO = GenerateUnternehmenDTO.generateUnternehmenDTO(1).get(0);
     long unternehmenId = 1;
+
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
         this.parameter = parameter;
-        if(this.parameter != null) this.unternehmenId = Long.parseLong(this.parameter);
+        if (this.parameter != null) this.unternehmenId = Long.parseLong(this.parameter);
         System.out.println("Parameter: " + this.parameter);
         try {
             this.unternehmenDTO = setUpUnternehmenDTO(this.unternehmenId);
@@ -44,6 +45,7 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
             throw new RuntimeException(e);
         }
     }
+
     private UnternehmenDTO setUpUnternehmenDTO(long id) throws NotFoundException {
         return unternehmenService.getByNutzerId(id);
     }
@@ -133,12 +135,13 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         jobGrid.addItemClickListener(event -> {
             Stelle selectedStelle = event.getItem();
             if (selectedStelle != null) {
-                UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
+                UI.getCurrent().navigate(ROUTING.STUDENT.SJobProjectWorkshopDisplayView + "/" + selectedStelle.getStelleId().toString());
             }
         });
 
         add(jobGrid);
     }
+
     // Dummy-Stellenanzeigen erstellen (nur für Testzwecke)
     private List<Stelle> createDummyStellenanzeigen() {
         List<Stelle> dummyStellenanzeigen = new ArrayList<>();
@@ -155,10 +158,6 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         return dummyStellenanzeigen;
     }
 }
-
-
-
-
 
 
 //package de.hbrs.se2.womm.views;

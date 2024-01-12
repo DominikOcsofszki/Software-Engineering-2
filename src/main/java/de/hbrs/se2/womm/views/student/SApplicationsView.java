@@ -35,7 +35,7 @@ public class SApplicationsView extends VerticalLayout {
     StelleService stelleService;
     BewerbungService bewerbungService;
     StudentDTO studentDTO;
-    List <BewerbungDTO> listOfBewerbungDTO;
+    List<BewerbungDTO> listOfBewerbungDTO;
     private long aktuelleNutzerID;
 
 
@@ -46,7 +46,9 @@ public class SApplicationsView extends VerticalLayout {
         this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
         System.out.println(aktuelleNutzerID);
         this.listOfBewerbungDTO = bewerbungService.getByStudentNutzerId(aktuelleNutzerID);
-        System.out.println(this.listOfBewerbungDTO.get(0).getBewerbungStelle().getStelleTitel());
+        if (!listOfBewerbungDTO.isEmpty()) {
+            System.out.println(this.listOfBewerbungDTO.get(0).getBewerbungStelle().getStelleTitel());
+        }
         GridFilterBewerbungStudents gridFilterBewerbungStudent = new GridFilterBewerbungStudents();
         gridFilterBewerbungStudent.setUpFromOutside(listOfBewerbungDTO);
 
@@ -59,29 +61,31 @@ public class SApplicationsView extends VerticalLayout {
     }
 
 
-    private class demoInhaltSApplications{
+    private class demoInhaltSApplications {
         String unternehmen;
         String stelle;
         String status;
 
-        String getUnternehmen(){
+        String getUnternehmen() {
             return unternehmen;
         }
-        String getStelle(){
+
+        String getStelle() {
             return stelle;
         }
-        String getStatus(){
+
+        String getStatus() {
             return status;
         }
 
-        demoInhaltSApplications(String unternehmen,String stelle, String status){
+        demoInhaltSApplications(String unternehmen, String stelle, String status) {
             this.unternehmen = unternehmen;
             this.stelle = stelle;
             this.status = status;
         }
     }
 
-    private void setUpHeader(){
+    private void setUpHeader() {
 
         HorizontalLayout header = new HorizontalLayout();
 
@@ -91,7 +95,8 @@ public class SApplicationsView extends VerticalLayout {
         add(header);
 
     }
-    private void setUpApplications(){
+
+    private void setUpApplications() {
 
         VerticalLayout notification = new VerticalLayout();
 
@@ -102,10 +107,10 @@ public class SApplicationsView extends VerticalLayout {
         searchField.setValueChangeMode(ValueChangeMode.EAGER);
 
         List<demoInhaltSApplications> inhalt = Arrays.asList(
-                new demoInhaltSApplications("Apple","Software-Tester", "Offen"),
-                new demoInhaltSApplications("Microsoft","UI/UX-Designer", "Abgelehnt"),
-                new demoInhaltSApplications("HBRS","Programmierer", "Angenommen"),
-                new demoInhaltSApplications("W.O.M.M","Hausmeister", "Offen"));
+                new demoInhaltSApplications("Apple", "Software-Tester", "Offen"),
+                new demoInhaltSApplications("Microsoft", "UI/UX-Designer", "Abgelehnt"),
+                new demoInhaltSApplications("HBRS", "Programmierer", "Angenommen"),
+                new demoInhaltSApplications("W.O.M.M", "Hausmeister", "Offen"));
 
         Grid<demoInhaltSApplications> grid = new Grid<>(demoInhaltSApplications.class, false);
 

@@ -148,6 +148,23 @@ public class TranslateMap {
 
         // StudentLayout
         put("SApplicationsView", "Bewerbungen");
+        put("Log out(", "Ausloggen(");
+        put("Log out", "Ausloggen");
+
+
+
+
+
+
+
+        //
+
+        // SApplicationView
+        put("Create application:","Bewerbung erstellen:" );
+        put("CV","Lebenslauf" );
+        put("Create","Erstellen" );
+        put("Application photo","Bewerbungsfoto" );
+        put("Application text","Bewerbungs-Text" );
 
     }};
 }
