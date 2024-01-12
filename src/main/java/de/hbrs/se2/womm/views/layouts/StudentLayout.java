@@ -27,14 +27,14 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
     void createDrawer() {
         addToDrawer(new VerticalLayout(
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class),
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationView"), SApplicationView.class),
+//                new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationView"), SApplicationView.class), //TODO check again: delete info was next to it
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationsView"), SApplicationsView.class),
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SChatView"), SChatView.class),
+//                new RouterLink(VaadinBuilderWomm.translateTextStatic("SChatView"), SChatView.class),//TODO final Check
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SCreateChangeStudentProfileView"), SCreateChangeStudentProfileView.class),
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SFirmProfileDisplayView"), SFirmProfileDisplayView.class),
+//                new RouterLink(VaadinBuilderWomm.translateTextStatic("SFirmProfileDisplayView"), SFirmProfileDisplayView.class),//TODO check again: delete info was next to it
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SHomepageStudentView"), SHomepageStudentView.class),
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SJobProjectWorkshopDisplayView"), SJobProjectWorkshopDisplayView.class),
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SNotificationView"), SNotificationView.class),
+//                new RouterLink(VaadinBuilderWomm.translateTextStatic("SJobProjectWorkshopDisplayView"), SJobProjectWorkshopDisplayView.class),//TODO check again: delete info was next to it
+//                new RouterLink(VaadinBuilderWomm.translateTextStatic("SNotificationView"), SNotificationView.class), //TODO fianl Check
                 new RouterLink(VaadinBuilderWomm.translateTextStatic("SStudentProfileDisplayView"), SStudentProfileDisplayView.class)
         ));
     }
