@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.unternehmen;
 
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.PageTitle;
@@ -18,6 +19,14 @@ public class UApplicantView extends AViewWomm implements HasUrlParameter<Long> {
     // ToDo: finish this view
     @Override
     public void setParameter(BeforeEvent beforeEvent, Long aLong) {
-        this.studentId = aLong;
+        if (aLong != null) {
+            this.studentId = aLong;
+        } else {
+            setup404Page();
+        }
+    }
+
+    private void setup404Page() {
+        add(new H1("404 Not Found! :("));
     }
 }

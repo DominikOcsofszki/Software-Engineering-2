@@ -17,7 +17,6 @@ import de.hbrs.se2.womm.services.BewerbungService;
 import de.hbrs.se2.womm.services.ImageService;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
-import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -52,13 +51,17 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
 
     @Override
     public void setParameter(BeforeEvent beforeEvent, @OptionalParameter Long bewerbungID) {
-        Optional<BewerbungDTO> fetchedBewerbung = bewerbungService.getById(bewerbungID);
-        fetchedBewerbung.ifPresent(bewerbungDTO -> this.bewerbung = bewerbungDTO);
-        Optional<StelleDTO> checkStelleDTO = stelleService.getById(bewerbung.getBewerbungStelle().getStelleId());
-        this.stelleDTO = checkStelleDTO.get();
+        if (bewerbungID != null) {
+            Optional<BewerbungDTO> fetchedBewerbung = bewerbungService.getById(bewerbungID);
+            fetchedBewerbung.ifPresent(bewerbungDTO -> this.bewerbung = bewerbungDTO);
+            Optional<StelleDTO> checkStelleDTO = stelleService.getById(bewerbung.getBewerbungStelle().getStelleId());
+            this.stelleDTO = checkStelleDTO.get();
 
 
-        setUpApplication();
+            setUpApplication();
+        } else {
+            setup404Page();
+        }
     }
 
     void setUpApplication() {
@@ -66,7 +69,6 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
 
         studentID = bewerbung.getBewerbungStudent().getStudentId();
         Optional<StudentDTO> fetchedStudent = studentService.getById(studentID);
-        fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
         fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
         studentName = student.getStudentName();
         studentVorname = student.getStudentVorname();
@@ -200,5 +202,8 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
 
         add(stellenanzeige);
 
+    }
+    private void setup404Page() {
+        add(new H1("404 Not Found! :("));
     }
 }
