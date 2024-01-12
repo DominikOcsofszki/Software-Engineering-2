@@ -9,6 +9,8 @@ import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.*;
@@ -61,7 +63,8 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
             TextField ort,
             TextArea biographie,
             TextArea spezialisierungen,
-            NumberField semester
+            NumberField semester,
+            TextArea lebenslauf
     ) {
         if (validateDatepicker(geburtstag)) {
             studentDTO.setStudentGeburtstag(geburtstag.getValue().toString());
@@ -74,7 +77,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         }
 
         if (validatePassword(oldPassword, newPassword, newPasswordConfirm)) {
-            System.out.println("TODO: Password validation");
+            userDetailsManager.changePassword(oldPassword.getValue(), newPassword.getValue());
         }
 
         if (!ort.getValue().isBlank()) {
@@ -88,6 +91,8 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         if (validateSemester(semester)) {
             studentDTO.setStudentSemester(semester.getValue().intValue());
         }
+
+        //ToDO studentDTO.setStudentCV(lebenslauf.getValue());
 
         studentService.saveStudent(studentDTO);
     }
@@ -227,13 +232,13 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         passwordOld.setTooltipText(getWommBuilder().translateText("Please enter your current valid Password"));
         passwordNew.setRequiredIndicatorVisible(true);
         passwordNew.setAllowedCharPattern("[A-Za-z0-9]");
-        passwordNew.setMinLength(6);
+        passwordNew.setMinLength(4);
         passwordNew.setMaxLength(12);
         passwordNew.setClearButtonVisible(true);
         passwordNew.setTooltipText(getWommBuilder().translateText("Please enter your new valid Password"));
         passwordNewConfirm.setRequiredIndicatorVisible(true);
         passwordNewConfirm.setAllowedCharPattern("[A-Za-z0-9]");
-        passwordNewConfirm.setMinLength(6);
+        passwordNewConfirm.setMinLength(4);
         passwordNewConfirm.setMaxLength(12);
         passwordNewConfirm.setClearButtonVisible(true);
         passwordNewConfirm.setTooltipText(getWommBuilder().translateText("Please re-enter your new valid Password"));
@@ -288,22 +293,35 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         numberFieldSemester.setValue(((semesters != null) ? Double.valueOf(semesters) : 0));
         VerticalLayout layoutSemester = generateSinglePropertyField(getWommBuilder().translateText("Semester"), numberFieldSemester);
 
+        // ----------------- Curriculum Vitae -----------------
+
+        TextArea textAreaCurriculumVitae = new TextArea();
+        textAreaCurriculumVitae.setValue("Muss noch gemacht werden!");   //ToDO need CV DTO access
+        VerticalLayout layoutCV = generateSinglePropertyField("Curriculum Vitae", textAreaCurriculumVitae);
+        layoutCV.getStyle().set("width","200%");
+
         // ----------------- Save Changes -----------------
 
         Button buttonSaveChanges = getWommBuilder().Button.create("Save Changes");
-        buttonSaveChanges.addClickListener(e -> saveChanges(
-                datePickerDob,
-                checkEmailNotifs,
-                emailField,
-                emailFieldConfirm,
-                passwordOld,
-                passwordNew,
-                passwordNewConfirm,
-                fieldLocation,
-                textAreaBio,
-                textAreaSpecializations,
-                numberFieldSemester
-        ));
+        buttonSaveChanges.addClickListener(e -> {
+            saveChanges(
+                    datePickerDob,
+                    checkEmailNotifs,
+                    emailField,
+                    emailFieldConfirm,
+                    passwordOld,
+                    passwordNew,
+                    passwordNewConfirm,
+                    fieldLocation,
+                    textAreaBio,
+                    textAreaSpecializations,
+                    numberFieldSemester,
+                    textAreaCurriculumVitae
+            );
+            Notification notification = Notification
+                    .show(getWommBuilder().translateText("Changes saved!"));
+            notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+        });
 
         layoutDetails.add(
                 layoutName,
@@ -315,6 +333,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                 new Hr(), layoutBio,
                 new Hr(), layoutSpec,
                 new Hr(), layoutSemester,
+                new Hr(), layoutCV,
                 new Hr(), buttonSaveChanges
         );
 
@@ -386,7 +405,6 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
             return false;
         }
 
-        userDetailsManager.changePassword(oldPassword.getValue(), newPassword.getValue());
         return true;
     }
 

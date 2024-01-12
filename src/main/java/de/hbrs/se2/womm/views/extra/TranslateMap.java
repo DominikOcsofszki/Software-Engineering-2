@@ -128,6 +128,8 @@ public class TranslateMap {
         put("Please enter your current semester", "Bitte gib dein aktuelles Semester ein");
         put("Please re-enter your valid e-mail address", "Bitte wiederhole deine gültige E-Mail-Adresse");
         put("Semester", "Semester");
+        put("Curriculum Vitae", "Lebenslauf");
+        put("Changes saved!", "Änderungen gespeichert!");
 
         //SJobProjectWorkshopDisplayView
         put("The job offer is not available anymore :(", "Das Stellenangebot existiert nicht mehr :(");
