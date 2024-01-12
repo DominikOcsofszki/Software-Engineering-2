@@ -37,6 +37,7 @@ public class UFirmProfileDisplayView extends AViewWomm {
         this.gridFilterStelle = new GridFilterStelle();
         List<StelleDTO> stelleDTOList = stelleService.getByNutzerId(aktuelleNutzerID);
         this.gridFilterStelle.setUpFromOutside(stelleDTOList);
+        gridFilterStelle.setColumnClickListener(ROUTING.UNTERNEHMEN.UJobProjectWorkshopDisplayView);
         add(gridFilterStelle);
     }
     private String checkIfNullShowTextLink(String checkString){
@@ -72,13 +73,13 @@ public class UFirmProfileDisplayView extends AViewWomm {
         buttonsLayout.add(logoAndSubscribeLayout);
         buttonsLayout.add(editButton);
 
-        // Rating with Number of Reviews
-        HorizontalLayout ratingLayout = new HorizontalLayout();
-        ratingLayout.add(new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR));
-        ratingLayout.add(new Span(" (123 Reviews)")); // Replace with the actual number of reviews
-//            ratingLayout.add(unternehmenDTO.getRating());
-//            ratingLayout.add(new Span(unternehmenDTO.getNrOfReviews() + " Reviews"));
-        add(ratingLayout);
+//        // Rating with Number of Reviews
+//        HorizontalLayout ratingLayout = new HorizontalLayout();
+//        ratingLayout.add(new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR));
+//        ratingLayout.add(new Span(" (123 Reviews)")); // Replace with the actual number of reviews
+////            ratingLayout.add(unternehmenDTO.getRating());
+////            ratingLayout.add(new Span(unternehmenDTO.getNrOfReviews() + " Reviews"));
+//        add(ratingLayout);
 
         // Company Location, Number of Employees, and Company Website
         HorizontalLayout detailsLayout = new HorizontalLayout();
@@ -89,13 +90,13 @@ public class UFirmProfileDisplayView extends AViewWomm {
 //            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span("Company Location")); // Replace with the actual location
         detailsLayout.add(locationLayout);
 
-        // Number of Employees
-        HorizontalLayout employeesLayout = new HorizontalLayout();
-//            employeesLayout.add(new Icon(VaadinIcon.USERS), new Span(unternehmenDTO.getNrOfEmplooyeeee())); // Replace with the actual number of employees
-//            employeesLayout.add(new Icon(VaadinIcon.USERS), new Span("Number of Employees: 100")); // Replace with the actual number of employees
-        employeesLayout.add(new Icon(VaadinIcon.USERS), new Span(checkIfNullShowTextLink(null))); // Replace with the actual number of employees
-
-        detailsLayout.add(employeesLayout);
+//        // Number of Employees
+//        HorizontalLayout employeesLayout = new HorizontalLayout();
+////            employeesLayout.add(new Icon(VaadinIcon.USERS), new Span(unternehmenDTO.getNrOfEmplooyeeee())); // Replace with the actual number of employees
+////            employeesLayout.add(new Icon(VaadinIcon.USERS), new Span("Number of Employees: 100")); // Replace with the actual number of employees
+//        employeesLayout.add(new Icon(VaadinIcon.USERS), new Span(checkIfNullShowTextLink(null))); // Replace with the actual number of employees
+//
+//        detailsLayout.add(employeesLayout);
 
         // Link to Company Website with Icon
         HorizontalLayout websiteLayout = new HorizontalLayout();

@@ -139,6 +139,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
         H1 name = new H1(unternehmenName);
         name.addClickListener(e -> UI.getCurrent()
                 .navigate(ROUTING.STUDENT.SFirmProfileDisplayView + "/" + stelleDTO.getUnternehmen().getUnternehmenId()));
+        name.getStyle().set("cursor", "pointer");
         header.add(name);
         add(header);
     }
