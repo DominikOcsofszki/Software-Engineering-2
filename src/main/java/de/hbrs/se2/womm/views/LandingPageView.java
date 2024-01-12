@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views;
 
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -53,6 +54,11 @@ public class LandingPageView extends AViewWomm {
         add(footer);
     }
 
+    private void listenEnterForLoginClick(Button buttonLog) {
+        UI.getCurrent().addShortcutListener(
+                () -> buttonLog.click(),
+                Key.ENTER);
+    }
     private HorizontalLayout createHeader() {
         HorizontalLayout header = new HorizontalLayout();
         Image logoImage = new Image("themes/theme_1/Womm_big_logo.png", "");
@@ -132,6 +138,7 @@ public class LandingPageView extends AViewWomm {
 
 //            Button buttonLog = new Button("LogIn");
         Button buttonLog = getWommBuilder().Button.create("LogIn");
+        listenEnterForLoginClick(buttonLog);
         buttonLog.addClickListener( e -> UI.getCurrent().navigate(LoginView.class));
         buttonLog.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
         buttonLog.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
