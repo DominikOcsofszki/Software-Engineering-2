@@ -1,22 +1,22 @@
 package de.hbrs.se2.womm.views;
 
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
@@ -67,6 +67,7 @@ public class LoginView extends AViewWomm {
 
         Button submitButton = getWommBuilder().Button.create(getWommBuilder().translateText("LogIn"));
         submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        addClickListenerForEnter(submitButton, usernameInput, passwordInput);
         submitButton.addClickListener(e -> {
 //            submitButton.setEnabled(false); //TODO remove if ok
             LoginRequest loginRequest = LoginRequest.builder()
@@ -113,6 +114,13 @@ public class LoginView extends AViewWomm {
         );
     }
 
+    private void addClickListenerForEnter(Button submitButton, TextField textfield, PasswordField passwordfield) {
+        textfield.setValueChangeMode(ValueChangeMode.EAGER);
+                passwordfield.setValueChangeMode(ValueChangeMode.EAGER);
+        UI.getCurrent().addShortcutListener(
+                () -> submitButton.click(),
+                Key.ENTER);
+    }
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
