@@ -31,6 +31,7 @@ abstract class AbstractLayout extends AppLayout {
 
     }
 
+
     void createHeaderWithLogoutButton(Button logout, boolean withMenu) {
         if (withMenu) this.header.add(new DrawerToggle());
         this.header.add(nameImage, logo);
