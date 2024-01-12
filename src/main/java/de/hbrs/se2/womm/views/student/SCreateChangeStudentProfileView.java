@@ -136,7 +136,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                 .set("font-size", "35px");
         spanNameInformation.getElement().getStyle()
                 .set("color", "#5e5e5e");
-
+        layoutName.setSpacing(false);
         layoutName.add(
                 spanName,
                 spanNameValue,
@@ -160,7 +160,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
             datePickerDob.setValue(LocalDate.now());
         }
         datePickerDob.setWidth("100%");
-
+        layoutDob.setSpacing(false);
         layoutDob.add(
                 spanDob,
                 datePickerDob
@@ -202,7 +202,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         emailFieldConfirm.setValue("");
         emailFieldConfirm.setClearButtonVisible(true);
         emailFieldConfirm.setTooltipText(getWommBuilder().translateText("Please re-enter your valid e-mail address"));
-
+        layoutEmail.setSpacing(false);
         layoutEmail.add(
                 emailFieldHeader,
                 emailField,
@@ -255,7 +255,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                 .getStyle()
                 .set("flex-grow", "1")
                 .set("width", "100%");
-
+        layoutPassword.setSpacing(false);
         layoutPassword.add(
                 spanPasswordFieldHeader,
                 spanOldPassword,
@@ -271,12 +271,14 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         TextField fieldLocation = new TextField();
         fieldLocation.setValue(studentDTO.getNutzer().getNutzerOrt() == null ? "" : studentDTO.getNutzer().getNutzerOrt());
         VerticalLayout layoutLocation = generateSinglePropertyField("Location", fieldLocation);
+        layoutLocation.setSpacing(false);
 
         // ----------------- Bio -----------------
 
         TextArea textAreaBio = new TextArea();
         textAreaBio.setValue(studentDTO.getStudentBio() == null ? "" : studentDTO.getStudentBio());
         VerticalLayout layoutBio = generateSinglePropertyField("Biography", textAreaBio);
+        layoutBio.setSpacing(false);
         layoutBio.getStyle().set("width", "200%");
 
         // ----------------- Specializations -----------------
@@ -284,6 +286,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         TextArea textAreaSpecializations = new TextArea();
         textAreaSpecializations.setValue(studentDTO.getStudentSpezialisierung() == null ? "" : studentDTO.getStudentSpezialisierung());
         VerticalLayout layoutSpec = generateSinglePropertyField("Specializations", textAreaSpecializations);
+        layoutSpec.setSpacing(false);
         layoutSpec.getStyle().set("width", "200%");
 
         // ----------------- Semester -----------------
@@ -292,12 +295,14 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         Integer semesters = studentDTO.getStudentSemester();
         numberFieldSemester.setValue(((semesters != null) ? Double.valueOf(semesters) : 0));
         VerticalLayout layoutSemester = generateSinglePropertyField(getWommBuilder().translateText("Semester"), numberFieldSemester);
+        layoutSemester.setSpacing(false);
 
         // ----------------- Curriculum Vitae -----------------
 
         TextArea textAreaCurriculumVitae = new TextArea();
         textAreaCurriculumVitae.setValue("Muss noch gemacht werden!");   //ToDO need CV DTO access
         VerticalLayout layoutCV = generateSinglePropertyField("Curriculum Vitae", textAreaCurriculumVitae);
+        layoutCV.setSpacing(false);
         layoutCV.getStyle().set("width","200%");
 
         // ----------------- Save Changes -----------------
@@ -357,11 +362,11 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         propertyField
                 .getStyle()
                 .set("width", "100%");
-
         layoutProperty.add(
                 spanPropertyHeader,
                 propertyField
         );
+
 
         return layoutProperty;
     }
