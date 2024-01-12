@@ -14,6 +14,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -52,6 +53,7 @@ public class RegistrierungStudentView extends AViewWomm {
     DatePicker dateOfBirthComponent;
     TextField locationComponent;
     Button registerComponent;
+    ProgressBar progressBar = new ProgressBar();
 
     public RegistrierungStudentView(AuthenticationController authenticationController, SecurityService securityService) {
         super();
@@ -146,19 +148,19 @@ public class RegistrierungStudentView extends AViewWomm {
 
         registerComponent = getWommBuilder().Button.create("Register", event -> {
             if (!nameComponent.isEmpty() && !surnameComponent.isEmpty() &&
-            !usernameComponent.isEmpty() && !emailComponent.isEmpty() &&
-            !passwordComponent.isEmpty() && !passwordConfirmComponent.isEmpty() &&
-            !locationComponent.isEmpty()) {
+                    !usernameComponent.isEmpty() && !emailComponent.isEmpty() &&
+                    !passwordComponent.isEmpty() && !passwordConfirmComponent.isEmpty() &&
+                    !locationComponent.isEmpty()) {
                 if (passwordComponent.getValue().equals(passwordConfirmComponent.getValue())) {
                     Pattern pattern = Pattern.compile(EMAIL_REGEX);
                     Matcher matcher = pattern.matcher(emailComponent.getValue());
                     if (matcher.matches()) {
+                        setUpLoadingBarRegistration();
                         register();
                     } else {
                         createErrorNotification(getWommBuilder().translateText("Bitte eine gültige Email eingeben!"));
                     }
-                }
-                else {
+                } else {
                     createErrorNotification(getWommBuilder().translateText("Passwörter stimmen nicht überein!"));
                 }
             } else {
@@ -185,13 +187,18 @@ public class RegistrierungStudentView extends AViewWomm {
         );
     }
 
+    private void setUpLoadingBarRegistration() {
+        progressBar.setIndeterminate(true);
+        add(progressBar);
+    }
+
     private void register() {
         try {
             StudentRegistrationRequest request = getStudentRegistrationRequest();
 
             ResponseEntity<Void> response = authenticationController.registerStudent(request);
 
-            if(response.getStatusCode().is2xxSuccessful()) {
+            if (response.getStatusCode().is2xxSuccessful()) {
                 Notification notification = new Notification();
                 notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 
@@ -200,6 +207,7 @@ public class RegistrierungStudentView extends AViewWomm {
                 Button closeButton = new Button(new Icon("lumo", "cross"));
                 closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
                 createClickListener(notification, text, closeButton);
+                UI.getCurrent().navigate(ROUTING.ALL.LoginView);
             }
         } catch (Exception e) {
             createErrorNotification(e.getMessage());
@@ -243,7 +251,10 @@ public class RegistrierungStudentView extends AViewWomm {
 
         Button closeButton = new Button(new Icon("lumo", "cross"));
         closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-        closeButton.addClickListener(e -> notification.close());
+        closeButton.addClickListener(e -> {
+            notification.close();
+            this.remove(progressBar);
+        });
 
         HorizontalLayout layout = new HorizontalLayout(text, closeButton);
         layout.setAlignItems(Alignment.CENTER);
