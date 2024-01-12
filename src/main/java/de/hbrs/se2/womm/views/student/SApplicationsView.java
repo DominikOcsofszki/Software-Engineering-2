@@ -51,6 +51,7 @@ public class SApplicationsView extends VerticalLayout {
         }
         GridFilterBewerbungStudents gridFilterBewerbungStudent = new GridFilterBewerbungStudents();
         gridFilterBewerbungStudent.setUpFromOutside(listOfBewerbungDTO);
+        gridFilterBewerbungStudent.setColumnClickListener();
 
 
         setUpHeader();

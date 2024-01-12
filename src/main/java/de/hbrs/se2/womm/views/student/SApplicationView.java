@@ -1,182 +1,136 @@
 package de.hbrs.se2.womm.views.student;
 
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.Unit;
+import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
-import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.dtos.StelleDTO;
+import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
-import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.model.ApplicationStatus;
 import de.hbrs.se2.womm.services.BewerbungService;
-import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
-import de.hbrs.se2.womm.services.UnternehmenService;
+import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
-import de.hbrs.se2.womm.views.extra.ComponentImageUpload;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
+import java.util.List;
+import java.util.Optional;
+
 @Route(value = ROUTING.STUDENT.SApplicationView, layout = StudentLayout.class)
-@RolesAllowed({ "ADMIN", "STUDENT"})
+@RolesAllowed({"ADMIN", "STUDENT"})
 @PageTitle("ApplicationView")
-public class SApplicationView extends AViewWomm implements HasUrlParameter<String> {
-//public class SApplicationView extends VerticalLayout implements HasUrlParameter<String> {
-    //Changed
-    StudentDTO studentDTO;
-    StelleDTO stelleDTO;
-    UnternehmenDTO unternehmenDTO;
-    //
-    byte[] bewerbungPdf;
-    byte[] bewerbungPdf1;
-    TextArea bewerbungText = new TextArea();
-//    TextArea bewerbungText = new TextArea();
-
-    StelleService stelleService;
-    UnternehmenService unternehmenService;
-    BewerbungService bewerbungService;
-    SecurityService securityService;
-    String valueFromQuerry;
-
-    private long aktuelleNutzerID;
+public class SApplicationView extends AViewWomm implements HasUrlParameter<Long> {
+    private final BewerbungService bewerbungService;
+    private final StudentService studentService;
+    private BewerbungDTO bewerbung;
+    private String bewerbungText;
+    private StudentDTO student;
+    private Long studentID;
+    private String studentName;
+    private String studentVorname;
+    //private byte[] studentProfilePicture;
 
     public SApplicationView(BewerbungService bewerbungService,
-                            StelleService stelleService,
-                            UnternehmenService unternehmenService,
-                            SecurityService securityService,
                             StudentService studentService) {
         super();
-        this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
-        this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
         this.bewerbungService = bewerbungService;
-        this.stelleService = stelleService;
-        this.unternehmenService = unternehmenService;
-        this.securityService = securityService;
-        //SetUp:
-        //
-        setUpHeader();
-        setUpBewerbung();
+        this.studentService = studentService;
     }
+
 
     @Override
-    public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
-        if (parameter == null) {
-            valueFromQuerry = "";
-        } else {
-            add(String.format("parameter: %s.",
-                    parameter));
-            valueFromQuerry = parameter;
-            long parameterLong = Long.parseLong(parameter);
-//            this.stelleDTO = stelleService.getById(parameterLong) == null ? null :
-//                    stelleService.getById(parameterLong);
-            this.stelleDTO = stelleService.getById(parameterLong).isPresent() ?
-                    stelleService.getById(parameterLong).get() : null;
-            System.out.println("stelleDTO:" + stelleDTO);
-
-        }
+    public void setParameter(BeforeEvent beforeEvent, @OptionalParameter Long bewerbungID) {
+        Optional<BewerbungDTO> fetchedBewerbung = bewerbungService.getById(bewerbungID);
+        fetchedBewerbung.ifPresent(bewerbungDTO -> this.bewerbung = bewerbungDTO);
+        setUpApplication();
     }
 
+    void setUpApplication() {
+        bewerbungText = bewerbung.getBewerbungText();
 
+        studentID = bewerbung.getBewerbungStudent().getStudentId();
+        Optional<StudentDTO> fetchedStudent = studentService.getById(studentID);
+        fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
+        fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
+        studentName = student.getStudentName();
+        studentVorname = student.getStudentVorname();
+        //studentProfilePicture = student.getNutzer().getNutzerProfilbild();
 
-    private void setUpHeader(){
-        HorizontalLayout header = new HorizontalLayout();
-        //Ueberschrift
-        H1 h1 = getWommBuilder().H1.create("Create application:");
-        header.add(h1);
+        setUpTop();
 
-        add(header);
+        String status = bewerbung.getBewerbungStatus();
+        setUpStatus(status);
+
+        setUpAnschreiben();
+
     }
 
-    private void setUpBewerbung() {
-        VerticalLayout bewerbung = new VerticalLayout();
+    private void setUpTop() {
+        HorizontalLayout top = new HorizontalLayout();
+        top.setAlignItems(FlexComponent.Alignment.CENTER);
+        top.setJustifyContentMode(JustifyContentMode.AROUND);
+        Image image = new Image(ASSETS.IMG.IMG8, "placeholder");
+        image.setWidth(200, Unit.PIXELS);
+        image.setHeight(200, Unit.PIXELS);
+        image.getStyle().set("border", "1px solid grey");
+        image.getStyle().set("border-radius", "5px");
+        top.add(image);
+        H3 name = new H3(String.format("%s, %s", studentName, studentVorname));
+        name.getStyle().set("cursor", "pointer");
+        top.add(name);
+        add(top);
+    }
 
-        //TextfeldText
-        bewerbungText.setPlaceholder(getWommBuilder().translateText("Application text"));
-        bewerbungText.setClearButtonVisible(true);
-        bewerbungText.setWidthFull();
-
-        bewerbung.add(bewerbungText);
-
-        //Bild
-
-        add(new HorizontalLayout(getWommBuilder().Paragraph.create("Application photo"),new ComponentImageUpload()));
-//        add(new HorizontalLayout(new Paragraph("Bewerbungsfoto"),new ComponentImageUpload()));
-
-        //Lebenslauf
-        add(new HorizontalLayout(getWommBuilder().Paragraph.create("CV"),new ComponentImageUpload()));
-//        add(new HorizontalLayout(new Paragraph("Lebenslauf"),new ComponentImageUpload()));
-
-           /* MultiFileMemoryBuffer buffer = new MultiFileMemoryBuffer();
-            Upload upload = new Upload(buffer);
-
-            upload.addSucceededListener(event -> {
-                String fileName = event.getFileName();
-                InputStream inputStream = buffer.getInputStream(fileName);
-                try {
-                    bewerbungPdf = inputStream.readAllBytes();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+    private void setUpAnschreiben() {
+        VerticalLayout anschreiben = new VerticalLayout();
+        List.of(bewerbungText.split("\n\n")).forEach(paragraph -> {
+            List.of(paragraph.split("\n")).forEach(subParagraph -> {
+                Paragraph newParagraph = new Paragraph(subParagraph);
+                anschreiben.add(newParagraph);
             });
-            bewerbung.add(upload);
-            */
-            add(bewerbung);
-
-
-
-        //ToDo -Erstellung eines Datenbankobjekts mit StellenanzeigeTyp, StellenanzeigeBezeichnung, StellenanzeigeBeschreibung, FirmenLogo, FirmenName
-        //ToDo -Routing zum korrekten UnternehmenView
-        //Erstellen-Button
-        Button erstellenButton = getWommBuilder().Button.create("Create");
-        erstellenButton.addClickListener(e -> {
-            //String stelleIdFromFunction = String.valueOf(bewerbungDTO());
-            System.out.println(bewerbungPdf);
-            System.out.println(bewerbungPdf1);
-            UI.getCurrent().navigate(SApplicationView.class,"3");
-            //getUI().ifPresent(ui -> stelleDTO());
-
         });
-
-        // erstellenButton.addClickListener(e -> {
-        //     getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
-        // });
-        bewerbung.add(erstellenButton);
-
-        add(bewerbung);
-
-
-
+        add(anschreiben);
     }
 
-    //Name Student
-
-    //Bild Student
-
-
-
-    /*
-    private long bewerbungDTO(){
-
-        long stelleId = 3l;
-        long getUserId = 3l;
-        StelleDTO stelleDTO = stelleController.getById(getUserId).getBody();
-        StudentDTO studentDTO = studentController;
-        Unternehmen unternehmen = UnternehmenMapper.INSTANCE.dtoZuUnternehmen(unternehmenDTO);
-        BewerbungDTO erzeugDTO = BewerbungDTO.builder()
-                .bewerbungPdf(bewerbungPdf)
-                .bewerbungText(bewerbungText.getValue())
-                .bewerbungStelle(stelleDTO)
-                .bewerbungStudent(studentDTO)
-                .build();
-        stelleController.saveStelle(erzeugDTO);
-        System.out.println(erzeugDTO);
-        return stelleId;
+    private void setUpDoesNotExist() {
+        //TODO
     }
 
-
-     */
+    private void setUpStatus(String bewerbungStatus) {
+        HorizontalLayout layout = new HorizontalLayout();
+        H3 text;
+        if (ApplicationStatus.AKZEPTIERT.toString().equals(bewerbungStatus)) {
+            Icon icon = new Icon(VaadinIcon.CHECK_CIRCLE);
+            icon.setColor("green");
+            layout.add(icon);
+            text = new H3(getWommBuilder().translateText("Your application has been accepted."));
+            text.getStyle().setColor("green");
+            layout.add(text);
+        } else if (ApplicationStatus.ABGELEHNT.toString().equals(bewerbungStatus)) {
+            Icon icon = new Icon(VaadinIcon.CLOSE_CIRCLE);
+            icon.setColor("red");
+            layout.add(icon);
+            text = new H3(getWommBuilder().translateText("Your application has been delcined."));
+            text.getStyle().setColor("red");
+            layout.add(text);
+        } else if (ApplicationStatus.AUSSTEHEND.toString().equals(bewerbungStatus)) {
+            /*
+            Icon icon = new Icon(VaadinIcon.CHECK_CIRCLE);
+            icon.setColor("green");
+            layout.add(icon);
+             */
+            text = new H3(getWommBuilder().translateText("Your application is awaiting review."));
+            layout.add(text);
+        }
+        add(layout);
+    }
 }

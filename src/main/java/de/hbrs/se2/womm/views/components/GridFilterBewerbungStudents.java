@@ -1,6 +1,8 @@
 package de.hbrs.se2.womm.views.components;
 
+import com.vaadin.flow.component.UI;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
+import de.hbrs.se2.womm.views.layouts.ROUTING;
 
 public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
 
@@ -28,5 +30,10 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
             case "bewerbungStatus" -> dto.getBewerbungStatus();
             default -> null;
         };
+    }
+
+    public void setColumnClickListener() {
+        this.grid.addItemClickListener(item -> UI.getCurrent()
+                .navigate(ROUTING.STUDENT.SApplicationView + "/" + item.getItem().getBewerbungId()));
     }
 }
