@@ -17,11 +17,11 @@ public class TranslateMap {
         put("LogIn", "Anmelden");
 
         //UHomepageUnternehmenView
-        put("Create advertisement","Stellenanzeige erstellen");
+        put("Create advertisement", "Stellenanzeige erstellen");
         put("View applications", "Bewerbungen anschauen");
 
         //AGridFilter
-        put("Filter by...","Filter nach...");
+        put("Filter by...", "Filter nach...");
 
         //GridFilterStelle (filter by)
         put("Advertisement title", "Name Stellenanzeige"); // dont change!!
@@ -32,7 +32,7 @@ public class TranslateMap {
         put("Name", "Name");
 
         // SAboStudentView
-        put("Enter keyword","Stichwort eingeben");
+        put("Enter keyword", "Stichwort eingeben");
         put("Subscriptions", "Abonnements");
 
         //Unternehmen Layout
@@ -145,26 +145,19 @@ public class TranslateMap {
         put("You have declined the application", "Sie haben die Bewerbung abgelehnt");
 
 
-
         // StudentLayout
         put("SApplicationsView", "Bewerbungen");
         put("Log out(", "Ausloggen(");
         put("Log out", "Ausloggen");
 
 
-
-
-
-
-
-        //
-
         // SApplicationView
-        put("Create application:","Bewerbung erstellen:" );
-        put("CV","Lebenslauf" );
-        put("Create","Erstellen" );
-        put("Application photo","Bewerbungsfoto" );
-        put("Application text","Bewerbungs-Text" );
+        put("Your application has been accepted.", "Ihre Bewerbung wurde akzeptiert.");
+        put("Your application has been delcined.", "Ihre Bewerbung wurde abgelehnt.");
+        put("Your application is awaiting review.", "Ihre Bewerbung befindet sich in Bearbeitung.");
+        put("Application photo", "Bewerbungsfoto");
+        put("Application text", "Bewerbungs-Text");
+
 
     }};
 }
