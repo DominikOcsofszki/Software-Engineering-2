@@ -2,7 +2,6 @@ package de.hbrs.se2.womm.views.unternehmen;
 
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -49,7 +48,7 @@ public class UJobProjectWorkshopDisplayView extends VerticalLayout implements Ha
             }
 
         } else {
-            add(new H1("Keine Stelle gefunden - Parameter ist null"));
+            setup404Page();
         }
 
     }
@@ -131,5 +130,7 @@ public class UJobProjectWorkshopDisplayView extends VerticalLayout implements Ha
 
     }
 
-
+    private void setup404Page() {
+        add(new H1("404 Not Found! :("));
+    }
 }

@@ -76,7 +76,7 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
             }
 
         } else {
-            add(new H1("Keine Stelle gefunden - Parameter ist null"));
+            setup404Page();
         }
 
     }
@@ -279,5 +279,9 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
 
         notification.add(layout);
         notification.open();
+    }
+
+    private void setup404Page() {
+        add(new H1("404 Not Found! :("));
     }
 }
