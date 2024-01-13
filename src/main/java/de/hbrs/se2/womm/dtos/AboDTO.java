@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class AboDTO {
+public class AboDTO implements AbstractDTO{
     private Integer aboId;
 
     private Boolean aboBenachrichtigungen;
