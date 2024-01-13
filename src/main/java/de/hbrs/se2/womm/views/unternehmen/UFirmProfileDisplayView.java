@@ -56,6 +56,8 @@ public class UFirmProfileDisplayView extends AViewWomm {
         Div logoAndName = new Div();
 //            Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");
         Image companyLogo = unternehmenDTO.PlaceholderOrImage();
+        companyLogo.setWidth(200 + "px");
+        companyLogo.setHeight(200 + "px");
         // Image companyLogo = new Image("themes/theme_1/logo_placeholder.png", "");
         //companyLogo.setWidth("50px"); // Adjust the width as needed
         logoAndName.add(companyLogo);
