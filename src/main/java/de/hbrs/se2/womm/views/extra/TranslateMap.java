@@ -161,6 +161,8 @@ public class TranslateMap {
         put("Application photo", "Bewerbungsfoto");
         put("Application text", "Bewerbungs-Text");
 
+        // SNotificationView
+        put("New Jobs from your subscribed companies", "Neue Stellenangebote von deinen abonnierten Unternehmen");
 
     }};
 }

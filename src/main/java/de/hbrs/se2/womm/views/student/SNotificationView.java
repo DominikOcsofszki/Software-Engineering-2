@@ -1,112 +1,67 @@
 package de.hbrs.se2.womm.views.student;
 
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.Unit;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import de.hbrs.se2.womm.views.extra.ASSETS;
+import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.dtos.AboDTO;
+import de.hbrs.se2.womm.dtos.NutzerDTO;
+import de.hbrs.se2.womm.dtos.StelleDTO;
+import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.AboStudentUnternehmenService;
+import de.hbrs.se2.womm.services.StelleService;
+import de.hbrs.se2.womm.views.components.GridFilterStelle;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Route(value = ROUTING.STUDENT.SNotificationView, layout = StudentLayout.class)
-@RolesAllowed({"STUDENT","ADMIN"})
+@RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("NotificationView")
 public class SNotificationView extends AViewWomm {
+    GridFilterStelle gridFilterStelle = new GridFilterStelle();
+    StelleDTO stelleDTO;
+    StelleService stelleService;
+    SecurityService securityService;
+    //    StudentService studentService;
+    AboStudentUnternehmenService aboStudentUnternehmenService;
+    //    StudentDTO studentDTO;
+    List<AboDTO> aboDTOList;
+    List<UnternehmenDTO> unternehmenDTOList;
+    List<StelleDTO> stelleDTOList;
 
-    public SNotificationView() {
+    public SNotificationView(StelleService stelleService, SecurityService securityService,
+                             AboStudentUnternehmenService aboStudentUnternehmenService) {
+        this.aboStudentUnternehmenService = aboStudentUnternehmenService;
+        this.stelleService = stelleService;
+        this.securityService = securityService;
+        this.aboDTOList = aboStudentUnternehmenService.getByNutzerId(securityService.getLoggedInNutzerID());
+        System.out.println("AboDTOList: " + aboDTOList);
+        this.unternehmenDTOList = aboDTOList.stream().map(AboDTO::getUnternehmen).toList();
+        System.out.println("UnternehmenDTOList: " + unternehmenDTOList);
+        this.stelleDTOList = unternehmenDTOList.stream().
+                map(UnternehmenDTO::getNutzer).
+                map(NutzerDTO::getNutzerId).
+                map(stelleService::getByNutzerId).flatMap(List::stream).toList();
+//                .toList().stream().flatMap(List::stream).toList();
+        System.out.println("-------------------");
+        System.out.println("StelleDTOList: " + stelleDTOList);
+        System.out.println("-------------------");
+
         setUpHeader();
-        // SetUpSNotification();
-//        add(new ComponentFilterGridControllerBenachrichtigungen());
+        gridFilterStelle.setUpFromOutside(stelleDTOList);
+        add(gridFilterStelle);
     }
 
-    private void setUpHeader(){
-        HorizontalLayout header = new HorizontalLayout();
-        //Suchfeld
-        header.add(new H1("Neue Benachrichtigungen"));
-        add(header);
+    void setUpHeader() {
+//        H1 headerText = getWommBuilder().H1.create("New notifications from your subscribed companies");
+        H1 headerText = getWommBuilder().H1.create("New Jobs from your subscribed companies");
+//        H1 headerText = getWommBuilder().H1.create("Notifications");
+        add(headerText);
     }
 
-    private static final String LIT_TEMPLATE_HTML = """
-            <vaadin-button title="Go to ..."
-                           @click="${clickHandler}"
-                           theme="tertiary-inline small link">
-                ${item.id}
-            </vaadin-button>""";
-
-    private void setUpSNotification() {
-        VerticalLayout notification = new VerticalLayout();
-
-        //Todo Für Studenten zugehörige Benachrichtigungen anzeigen
-        //ToDo demoInhalte ersetzen
-
-        Image image1 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
-        Image image2 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
-        Image image3 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
-        Image image4 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
-
-        image1.setHeight(40, Unit.PIXELS);
-        image2.setHeight(40, Unit.PIXELS);
-        image3.setHeight(40, Unit.PIXELS);
-        image4.setHeight(40, Unit.PIXELS);
-
-        List<demoInhalt> inhalt = Arrays.asList(
-                new demoInhalt(image1,"Apple", "1 Neue Stellenausschreibung verfügbar!"),
-                new demoInhalt(image2,"Microsoft", "1 Neue Stellenausschreibung verfügbar!"),
-                new demoInhalt(image3,"HBRS", "3 Neue Stellenausschreibung verfügbar!"),
-                new demoInhalt(image4,"W.O.M.M", "10 Neue Stellenausschreibung verfügbar!"));
-
-        Grid<demoInhalt> grid = new Grid<>(demoInhalt.class, false);
-
-        //ToDo Verlinkung zum entsprechenden Unternehmen anpassen
-
-        grid.setItems(inhalt);
-        grid.addComponentColumn(demoInhalt::getImage).setHeader("Logo").setWidth("10%");
-        grid.addColumn(LitRenderer.<demoInhalt>of(LIT_TEMPLATE_HTML)
-                .withProperty("id", demoInhalt::getName)
-                .withFunction("clickHandler", person -> {
-                    UI.getCurrent().navigate(SFirmProfileDisplayView.class);
-                })).setHeader("Name").setWidth("25%").setSortable(true);
-        grid.addColumn(demoInhalt::getMessage).setHeader("Nachricht").setWidth("65%");
-        notification.add(grid);
-        grid.recalculateColumnWidths();
-
-        notification.setWidth("100%");
-
-        add(notification);
-
-    }
-
-    private class demoInhalt{
-        Image image;
-        String name;
-        String message;
-
-        private Image getImage(){
-            return image;
-        }
-        private String getName(){
-            return name;
-        }
-        private String getMessage(){
-            return message;
-        }
-
-        private demoInhalt(Image image,String name, String message){
-            this.image = image;
-            this.name = name;
-            this.message = message;
-        }
-    }
 
 }

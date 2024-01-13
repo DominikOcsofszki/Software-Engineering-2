@@ -1,15 +1,15 @@
 package de.hbrs.se2.womm.views.components;
 
 import com.vaadin.flow.component.UI;
-import de.hbrs.se2.womm.dtos.AboStudentUnternehmenDTO;
+import de.hbrs.se2.womm.dtos.AboDTO;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 
-public class GridFilterAboFromStudent extends AGridFilter<AboStudentUnternehmenDTO>{
+public class GridFilterAboFromStudent extends AGridFilter<AboDTO>{
 
     @Override
     protected void configureGrid() {
-        grid.addColumn(aboStudentUnternehmenDTO -> aboStudentUnternehmenDTO.getUnternehmen().getName()).setHeader("Name Unternehmen");
-        grid.addColumn(aboStudentUnternehmenDTO -> aboStudentUnternehmenDTO.getUnternehmen().getBeschreibung()).setHeader("Beschreibung Unternehmen");
+        grid.addColumn(AboDTO -> AboDTO.getUnternehmen().getName()).setHeader("Name Unternehmen");
+        grid.addColumn(AboDTO -> AboDTO.getUnternehmen().getBeschreibung()).setHeader("Beschreibung Unternehmen");
         setColumnClickListener();
     }
 
@@ -22,7 +22,7 @@ public class GridFilterAboFromStudent extends AGridFilter<AboStudentUnternehmenD
     }
 
     @Override
-    protected String checkItem(AboStudentUnternehmenDTO dto, String searchBy) {
+    protected String checkItem(AboDTO dto, String searchBy) {
         return switch (searchBy) {
             case "Name Unternehmen" -> dto.getUnternehmen().getName();
             case "Beschreibung Unternehmen" -> dto.getUnternehmen().getBeschreibung();

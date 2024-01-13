@@ -1,6 +1,6 @@
 package de.hbrs.se2.womm.junit.services;
 
-import de.hbrs.se2.womm.dtos.AboStudentUnternehmenDTO;
+import de.hbrs.se2.womm.dtos.AboDTO;
 import de.hbrs.se2.womm.entities.AboStudentUnternehmen;
 import de.hbrs.se2.womm.mapper.AboStudentUnternehmenMapper;
 import de.hbrs.se2.womm.repositories.AboStudentUnternehmenRepository;
@@ -44,24 +44,24 @@ class AboStudentUnternehmenServiceTest {
     @Test
     void testGetById() {
         long id = 1;
-        AboStudentUnternehmenDTO mockedDTO = AboStudentUnternehmenDTO.builder().aboId(1).build();
+        AboDTO mockedDTO = AboDTO.builder().aboId(1).build();
         when(aboStudentUnternehmenRepository.findById(id)).thenReturn(Optional.of(aboStudentUnternehmen));
         when(aboStudentUnternehmenMapper.aboStudentUnternehmenToaboStudentUnternehmenDTO(aboStudentUnternehmen)).thenReturn(mockedDTO);
 
-        Optional<AboStudentUnternehmenDTO> result = Optional.ofNullable(aboStudentUnternehmenService.getById(id));
+        Optional<AboDTO> result = Optional.ofNullable(aboStudentUnternehmenService.getById(id));
         assertTrue(result.isPresent());
     }
 
     @Test
     void testGetByNutzerId() {
         long nutzerId = 1;
-        AboStudentUnternehmenDTO mockedDTO = AboStudentUnternehmenDTO.builder().aboId(1).build();
+        AboDTO mockedDTO = AboDTO.builder().aboId(1).build();
 
         when(aboStudentUnternehmenRepository.findByStudent_NutzerNutzerIdOrUnternehmen_Nutzer_NutzerId(nutzerId, nutzerId))
                 .thenReturn(Arrays.asList(aboStudentUnternehmen));
         when(aboStudentUnternehmenMapper.aboStudentUnternehmenToaboStudentUnternehmenDTO(aboStudentUnternehmen)).thenReturn(mockedDTO);
 
-        List<AboStudentUnternehmenDTO> result = aboStudentUnternehmenService.getByNutzerId(nutzerId);
+        List<AboDTO> result = aboStudentUnternehmenService.getByNutzerId(nutzerId);
         assertNotNull(result);
     }
 
@@ -73,24 +73,24 @@ class AboStudentUnternehmenServiceTest {
         AboStudentUnternehmen abo2 = AboStudentUnternehmen.builder()
                 .aboId(2).build();
 
-        AboStudentUnternehmenDTO mockedDTO1 = AboStudentUnternehmenDTO.builder()
+        AboDTO mockedDTO1 = AboDTO.builder()
                 .aboId(1).build();
 
-        AboStudentUnternehmenDTO mockedDTO2 = AboStudentUnternehmenDTO.builder()
+        AboDTO mockedDTO2 = AboDTO.builder()
                 .aboId(2).build();
 
         when(aboStudentUnternehmenRepository.findAll()).thenReturn(Arrays.asList(abo1, abo2));
         when(aboStudentUnternehmenMapper.aboStudentUnternehmenToaboStudentUnternehmenDTO(abo1)).thenReturn(mockedDTO1);
         when(aboStudentUnternehmenMapper.aboStudentUnternehmenToaboStudentUnternehmenDTO(abo2)).thenReturn(mockedDTO2);
 
-        List<AboStudentUnternehmenDTO> result = aboStudentUnternehmenService.getAll();
+        List<AboDTO> result = aboStudentUnternehmenService.getAll();
         assertNotNull(result);
         assertEquals(2, result.size());
     }
 
     @Test
     void testSaveAboStudentUnternehmen() {
-        AboStudentUnternehmenDTO aboDTO = AboStudentUnternehmenDTO.builder()
+        AboDTO aboDTO = AboDTO.builder()
                 .aboId(1).build();
 
         AboStudentUnternehmen aboToSave = AboStudentUnternehmen.builder()
