@@ -1,31 +1,33 @@
 package de.hbrs.se2.womm.views.student;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.router.*;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.dtos.AboStudentUnternehmenDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Stelle;
+import de.hbrs.se2.womm.services.AboStudentUnternehmenService;
 import de.hbrs.se2.womm.services.StelleService;
+import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.components.GridFilterStelle;
 import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
-import de.hbrs.se2.womm.views.unternehmen.UEditFirmProfileDisplayView;
 import jakarta.annotation.security.RolesAllowed;
-import javassist.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Route(value = ROUTING.STUDENT.SFirmProfileDisplayView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
@@ -37,11 +39,21 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
     //    UnternehmenDTO unternehmenDTO = GenerateUnternehmenDTO.generateUnternehmenDTO(1).get(0);
     private UnternehmenDTO unternehmenDTO;
     private Long unternehmenID;
+    private Long studentID;
     GridFilterStelle gridFilterStelle;
+    SecurityService securityService;
+    StudentService studentService;
+    AboStudentUnternehmenService aboStudentUnternehmenService;
 
-    public SFirmProfileDisplayView(UnternehmenService unternehmenService, StelleService stelleService) {
+    public SFirmProfileDisplayView(UnternehmenService unternehmenService, StelleService stelleService,
+                                   SecurityService securityService, StudentService studentService,
+                                   AboStudentUnternehmenService aboStudentUnternehmenService) {
         this.unternehmenService = unternehmenService;
         this.stelleService = stelleService;
+        this.securityService = securityService;
+        this.studentService = studentService;
+        this.studentID = studentService.getByNutzerId(securityService.getLoggedInNutzerID()).getStudentId();
+        this.aboStudentUnternehmenService = aboStudentUnternehmenService;
     }
 
     @Override
@@ -56,6 +68,27 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         this.gridFilterStelle.setUpFromOutside(stelleDTOList);
         gridFilterStelle.setColumnClickListener(ROUTING.STUDENT.SJobProjectWorkshopDisplayView);
         add(gridFilterStelle);
+    }
+//    public class AboStudentUnternehmenDTO {
+//        private Integer aboId;
+//
+//        private Boolean aboBenachrichtigungen;
+//
+//        private StudentDTO student;
+//
+//        private UnternehmenDTO unternehmen;
+//    }
+    private AboStudentUnternehmenDTO returnAboStudentUnternehmenDTO() {
+        AboStudentUnternehmenDTO aboStudentUnternehmenDTO = AboStudentUnternehmenDTO.builder().build();
+        aboStudentUnternehmenDTO.setAboBenachrichtigungen(true);
+        aboStudentUnternehmenDTO.setStudent(studentService.getById(studentID).get());
+        aboStudentUnternehmenDTO.setUnternehmen(unternehmenService.getUnternehmenPerID(unternehmenID));
+        return aboStudentUnternehmenDTO;
+    }
+
+    void setUpSubscrition() {
+
+        aboStudentUnternehmenService.saveAboStudentUnternehmen(returnAboStudentUnternehmenDTO());
     }
 
     private void setUp() {
@@ -80,6 +113,7 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         subscribeButton.addClickListener(e -> {
             // Logic for subscription
             // You can implement the subscription logic here
+            setUpSubscrition();
             Notification.show("Subscribed!");
         });
         logoAndSubscribeLayout.add(subscribeButton);
