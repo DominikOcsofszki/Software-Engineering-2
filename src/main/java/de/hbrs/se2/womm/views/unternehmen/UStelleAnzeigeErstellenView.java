@@ -21,6 +21,7 @@ import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
+import java.util.Date;
 import java.util.List;
 
 @Route(value = ROUTING.UNTERNEHMEN.UStelleAnzeigeErstellenView, layout = UnternehmenLayout.class)
@@ -142,6 +143,9 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
     }
 
+    Date now() {
+        return new Date();
+    }
     private void buildAndSaveStelleDTO() {
         System.out.println("UnternehmenDTO: " + unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()
@@ -150,6 +154,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                 .stelleWebsite(stelleWebsite.getValue())
                 .stelleBeschreibung(stelleBeschreibung.getValue())
                 .unternehmen(unternehmenDTO)
+                .erstellungsdatum((new Date()))
                 .build();
 //        StelleDTO stelleDTO = stelleService.saveStelle(erzeugDTO);
         stelleService.saveStelle(erzeugDTO);
