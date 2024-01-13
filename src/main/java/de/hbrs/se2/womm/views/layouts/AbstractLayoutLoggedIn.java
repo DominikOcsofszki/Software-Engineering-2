@@ -13,6 +13,8 @@ import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.student.SNotificationView;
 import de.hbrs.se2.womm.views.unternehmen.UNotificationView;
 
+import java.util.Random;
+
 abstract class AbstractLayoutLoggedIn extends AbstractLayout {
     protected final SecurityService securityService;
 
@@ -30,8 +32,10 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
     }
 
     int getMessagesCount() {
-        long nutzerId = securityService.getLoggedInNutzerID();
-        int nrOfMessages = (int) nutzerId; //TODO get NR of messages from DB (count)
+
+//        long nutzerId = securityService.getLoggedInNutzerID();
+//        int nrOfMessages = (int) nutzerId; //TODO get NR of messages from DB (count) //TODO @Jan
+        int nrOfMessages = (new Random()).nextInt(10);
         return nrOfMessages;
     }
 
