@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
+import java.util.Date;
+
 @Builder
 @Data
 @Getter
@@ -14,5 +16,6 @@ public class StelleDTO implements AbstractDTO {
     private String stelleBeschreibung;
     private String stelleWebsite;
     private UnternehmenDTO stelleUnternehmen;
+    private Date erstellungsdatum;
 
 }
