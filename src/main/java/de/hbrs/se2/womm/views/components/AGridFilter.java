@@ -55,6 +55,7 @@ public abstract class AGridFilter<ExtendAbstractDTO extends AbstractDTO>
         select.setItems(filterByItemsFromDTO);
         HorizontalLayout toolbar = new HorizontalLayout(filterText, select);
         toolbar.addClassName("toolbar");
+        grid.setAllRowsVisible(true); //TODO do wen want that?
         add(toolbar, grid);
     }
 
