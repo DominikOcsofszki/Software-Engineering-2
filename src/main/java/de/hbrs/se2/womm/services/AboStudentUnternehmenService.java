@@ -1,9 +1,8 @@
 package de.hbrs.se2.womm.services;
 
-import de.hbrs.se2.womm.dtos.AboStudentUnternehmenDTO;
+import de.hbrs.se2.womm.dtos.AboDTO;
 import de.hbrs.se2.womm.entities.AboStudentUnternehmen;
 import de.hbrs.se2.womm.mapper.AboStudentUnternehmenMapper;
-import de.hbrs.se2.womm.mapper.UnternehmenMapper;
 import de.hbrs.se2.womm.repositories.AboStudentUnternehmenRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,28 +17,28 @@ public class AboStudentUnternehmenService {
         this.aboStudentUnternehmenRepository =  aboStudentUnternehmenRepository;
     }
 
-    public AboStudentUnternehmenDTO getById(long id){
+    public AboDTO getById(long id){
         return aboStudentUnternehmenRepository
                 .findById(id)
                 .map(aboStudentUnternehmenMapper::aboStudentUnternehmenToaboStudentUnternehmenDTO)
                 .orElse(null);
     }
 
-    public List<AboStudentUnternehmenDTO> getByNutzerId(long id){
+    public List<AboDTO> getByNutzerId(long id){
         return aboStudentUnternehmenRepository.findByStudent_NutzerNutzerIdOrUnternehmen_Nutzer_NutzerId(id,id)
                 .stream()
                 .map(aboStudentUnternehmenMapper::aboStudentUnternehmenToaboStudentUnternehmenDTO)
                 .toList();
     }
 
-    public List<AboStudentUnternehmenDTO> getAll(){
+    public List<AboDTO> getAll(){
         return aboStudentUnternehmenRepository.findAll()
                 .stream()
                 .map(aboStudentUnternehmenMapper::aboStudentUnternehmenToaboStudentUnternehmenDTO)
                 .toList();
     }
 
-    public void saveAboStudentUnternehmen(AboStudentUnternehmenDTO aboDTO){
+    public void saveAboStudentUnternehmen(AboDTO aboDTO){
         AboStudentUnternehmen zuSpeichern =
                 aboStudentUnternehmenMapper.aboStudentUnternehmenDTOToAboStudentUnternehmen(aboDTO);
         aboStudentUnternehmenRepository.save(zuSpeichern);

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class AboStudentUnternehmenDTO {
+public class AboDTO {
     private Integer aboId;
 
     private Boolean aboBenachrichtigungen;
