@@ -6,6 +6,7 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.theme.lumo.LumoUtility;
@@ -31,10 +32,15 @@ abstract class AbstractLayout extends AppLayout {
 
     }
 
-    void createHeaderWithLogoutButton(Button logout, boolean withMenu) {
+//    void createHeaderWithLogoutButton(Button logout, boolean withMenu) {
+    void createHeaderWithLogoutButton(Button logout, boolean withMenu, MenuBar menuBar) {
         if (withMenu) this.header.add(new DrawerToggle());
-        this.header.add(nameImage, logo);
-        if (logout != null) this.header.add(logout);
+        if (logout == null) {
+            this.header.add(nameImage, logo);
+        } else {
+            this.header.add(nameImage, logo, menuBar);
+            this.header.add(logout);
+        }
         addToNavbar(header);
     }
 
