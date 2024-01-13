@@ -2,6 +2,7 @@ package de.hbrs.se2.womm.views.components;
 
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -56,6 +57,9 @@ public abstract class AGridFilter<ExtendAbstractDTO extends AbstractDTO>
         HorizontalLayout toolbar = new HorizontalLayout(filterText, select);
         toolbar.addClassName("toolbar");
 //        grid.setAllRowsVisible(true); //TODO do wen want that?
+//        grid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS); //More options
+//        grid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT); //TODO Adding to show all Text
+        grid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
         add(toolbar, grid);
     }
 

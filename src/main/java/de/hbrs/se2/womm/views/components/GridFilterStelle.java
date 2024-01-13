@@ -2,6 +2,7 @@ package de.hbrs.se2.womm.views.components;
 
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.grid.GridVariant;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -17,6 +18,13 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
         grid.addColumn(StelleDTO::getStelleTitel).setHeader(new Html("<b>" +header1+"</b>"));
         String header2 = VaadinBuilderWomm.translateTextStatic("Firm name");
         grid.addColumn(stelleDTO -> stelleDTO.getUnternehmen().getName()).setHeader(new Html("<b>" +header2+"</b>"));
+        String header3 = VaadinBuilderWomm.translateTextStatic("Advertisement description");
+        grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader(new Html("<b>" +header3+"</b>"));
+//        grid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT); //TODO Adding to show all Text
+//                .setFooter(String.format("%s total Advertisement", 1000));; //TODO any reason for html???/
+        //We can also add footer to grid, e.g. with the number of advertisments
+
+
     }
 
     @Override
