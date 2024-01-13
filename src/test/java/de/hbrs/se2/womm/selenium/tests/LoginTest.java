@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.selenium.tests;
 
 import de.hbrs.se2.womm.selenium.extra.AbstractPrepareTestSelenium;
+import de.hbrs.se2.womm.selenium.extra.LOCATORS;
 import de.hbrs.se2.womm.selenium.extra.LogoutPage;
 import de.hbrs.se2.womm.selenium.pages.LoginPage;
 import org.junit.jupiter.api.Test;
@@ -16,28 +17,23 @@ public class LoginTest extends AbstractPrepareTestSelenium {
         loginPage.goToWebsiteAndWaitUntilTitlePresent();
     }
 
-    //@Test
-    void testTitle() {
-        // Exercise
-        String title = driver.getTitle();
-        logger.info(title);
-        // Verify
-        assert(title.equals("LoginView"));
-    }
+//    String name = "selenium";
+//    String surname = "test";
+//    String username = "seleniumtest";
+//    String email = "seleniumtest@web.de";
+//    String password = "seleniumtest";
+//    String confirmPassword = "seleniumtest";
+//    String bday = "01.01.2000";
+//    String location = "world";
+//    registerPage.register(name, surname, username, email, password, confirmPassword, bday, location);
 
-    //@Test
+    @Test
     void testLogin() {
-        // Exercise
-        String title = driver.getTitle();
-        logger.info(title);
-//        wait.until(d -> d.getTitle().equals("xxx"));
-        assert(title.equals(loginPage.getWebsiteTitle()));
-
-        loginPage.login("test", "test");
-        assert (!driver.getTitle().equals(loginPage.getWebsiteTitle()));
-        // Verify
-        //DoDo
-//        logoutPages.logout();
+        loginPage.login("seleniumtest", "seleniumtest");
+        assert(driver.findElement(LOCATORS.LOGOUT_BUTTON).isDisplayed());
+        if(driver.findElement(LOCATORS.LOGOUT_BUTTON).isDisplayed()){
+            driver.findElement(LOCATORS.LOGOUT_BUTTON).click();
+        }
     }
 
 

@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 
 public class LOCATORS {
 
+    public static final By LOGOUT_BUTTON = By.id("logout-button");
+
     public static final By BUTTON_BUILDER_1 = By.id("button-builder-1");
     public static final By BUTTON_BUILDER_2 = By.id("button-builder-2");
     public static final By BUTTON_BUILDER_3 = By.id("button-builder-3");

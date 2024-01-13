@@ -1,8 +1,8 @@
 package de.hbrs.se2.womm.selenium.pages;
 
 import de.hbrs.se2.womm.selenium.extra.AbstractPage;
+import de.hbrs.se2.womm.selenium.extra.LOCATORS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,9 +25,9 @@ public class LoginPage extends AbstractPage {
         wait.until(webDriver -> webDriver.getTitle().equals(getWebsiteTitle()));
     }
     private void setUp() {
-        usernameField = driver.findElement(By.id("input-vaadin-text-field-6"));
-        passwordField = driver.findElement(By.id("input-vaadin-password-field-7"));
-        loginButton = driver.findElement(By.id("login-button")); //ToDo: ID ändern
+        usernameField = driver.findElement(LOCATORS.TEXT_FIELD_BUILDER_1);
+        passwordField = driver.findElement(LOCATORS.PASSWORDFIELD_BUILDER_1);
+        loginButton = driver.findElement(LOCATORS.BUTTON_BUILDER_1);
     }
 
 

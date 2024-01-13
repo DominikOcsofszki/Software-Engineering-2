@@ -3,7 +3,6 @@ package de.hbrs.se2.womm.selenium.pages;
 import de.hbrs.se2.womm.selenium.extra.AbstractPage;
 import de.hbrs.se2.womm.selenium.extra.LOCATORS;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -64,8 +63,15 @@ public class RegisterPage extends AbstractPage {
         this.email.sendKeys(email);
         this.password.sendKeys(password);
         this.confirmPassword.sendKeys(confirmPassword);
-        this.bday.sendKeys(bday);
+//        this.bday.sendKeys(Keys.COMMAND + "a");
+//        this.bday.sendKeys(Keys.DELETE);
+//        this.bday.sendKeys(Keys.ESCAPE);
+//        this.bday.sendKeys(bday);
+//        this.bday.click();
+//        wait.until(webDriver -> this.bday.getAttribute("value").equals(bday));
+
         this.location.sendKeys(location);
+        wait.until(webDriver -> this.location.getAttribute("value").equals(location));
         this.buttonRegister.click();
         wait.until(webDriver -> !(webDriver.getTitle().equals(getWebsiteTitle())));
     }
