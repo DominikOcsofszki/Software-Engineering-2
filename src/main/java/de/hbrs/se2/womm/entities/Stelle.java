@@ -3,6 +3,8 @@ package de.hbrs.se2.womm.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "stelle")
 @Getter
@@ -25,6 +27,9 @@ public class Stelle {
 
     @Column(name = "stelle_beschreibung", nullable = false)
     private String stelleBeschreibung;
+
+    @Column(name = "stelle_erstellungsdatum", nullable = false)
+    private Date erstellungsdatum;
 
     @Column(name = "stelle_website")
     private String stelleWebsite;

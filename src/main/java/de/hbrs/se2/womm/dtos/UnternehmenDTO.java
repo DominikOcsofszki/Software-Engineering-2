@@ -14,6 +14,7 @@ public class UnternehmenDTO implements AbstractDTO {
     private String name;
     private String beschreibung;
     private String gruendung;
+    private String website_url;
     private NutzerDTO nutzer;
     public Image PlaceholderOrImage(){
         return ASSETS.buildPlaceholder(50);
