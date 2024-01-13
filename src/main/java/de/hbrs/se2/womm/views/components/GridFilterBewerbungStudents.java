@@ -6,11 +6,13 @@ import de.hbrs.se2.womm.views.layouts.ROUTING;
 
 public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
 
+    //TODO: Translation is missing
     @Override
     protected void configureGrid() {
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getUnternehmen().getName()).setHeader("Unternehmen");
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getStelleTitel()).setHeader("Stelle");
         grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader("Status");
+        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungText()).setHeader("Bewerbungstext");
     }
 
     @Override
