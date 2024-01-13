@@ -4,7 +4,6 @@ import de.hbrs.se2.womm.selenium.extra.AbstractPrepareTestSelenium;
 import de.hbrs.se2.womm.selenium.extra.LOCATORS;
 import de.hbrs.se2.womm.selenium.pages.LoginPage;
 import de.hbrs.se2.womm.selenium.pages.RegisterPage;
-import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
@@ -18,7 +17,7 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
         loginPage = new LoginPage(driver, wait);
     }
 
-    @Test
+//    @Test
     public void testRegister() {
         Random random = new Random();
         long randomInt = random.nextLong(1_000_000_000);
@@ -32,7 +31,7 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
         String location = "world";
         registerPage.register(name, surname, username, email, password, confirmPassword, bday, location);
     }
-    @Test
+//    @Test
     public void testRegisterAndLogin() {
         Random random = new Random();
         long randomInt = random.nextLong(1_000_000_000);

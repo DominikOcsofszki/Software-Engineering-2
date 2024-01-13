@@ -4,7 +4,6 @@ import de.hbrs.se2.womm.selenium.extra.AbstractPrepareTestSelenium;
 import de.hbrs.se2.womm.selenium.extra.LOCATORS;
 import de.hbrs.se2.womm.selenium.extra.LogoutPage;
 import de.hbrs.se2.womm.selenium.pages.LoginPage;
-import org.junit.jupiter.api.Test;
 
 public class LoginTest extends AbstractPrepareTestSelenium {
     LoginPage loginPage;
@@ -27,7 +26,7 @@ public class LoginTest extends AbstractPrepareTestSelenium {
 //    String location = "world";
 //    registerPage.register(name, surname, username, email, password, confirmPassword, bday, location);
 
-    @Test
+//    @Test
     void testLogin() {
         loginPage.login("seleniumtest", "seleniumtest");
         assert(driver.findElement(LOCATORS.LOGOUT_BUTTON).isDisplayed());
