@@ -128,6 +128,8 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 //        logoAndName.add(new H2("Firm Name"));//ToDo put at top, refactored
         logoAndName.add(firmName);//ToDo put at top, refactored
         logoAndEditLayout.add(logoAndName);
+        companyLogo.setWidth(200 + "px");
+        companyLogo.setHeight(200 + "px");
 
         /*Button editButton = new Button("Edit firm profile");
         editButton.addClickListener(e -> {
