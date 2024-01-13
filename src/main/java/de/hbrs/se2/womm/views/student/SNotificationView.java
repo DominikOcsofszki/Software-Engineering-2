@@ -57,7 +57,8 @@ public class SNotificationView extends AViewWomm {
     }
 
     void setUpHeader() {
-        H1 headerText = getWommBuilder().H1.create("New notifications from your subscribed companies");
+//        H1 headerText = getWommBuilder().H1.create("New notifications from your subscribed companies");
+        H1 headerText = getWommBuilder().H1.create("New Jobs from your subscribed companies");
 //        H1 headerText = getWommBuilder().H1.create("Notifications");
         add(headerText);
     }
