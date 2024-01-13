@@ -58,6 +58,8 @@ public class LoginView extends AViewWomm {
         usernameInput.setRequired(true);
         usernameInput.setRequiredIndicatorVisible(true);
         usernameInput.setErrorMessage(getWommBuilder().translateText("Username is required"));
+        usernameInput.focus();
+
 
         PasswordField passwordInput = getWommBuilder().PasswordField.create(getWommBuilder().translateText("Password"));
         passwordInput.setWidthFull();
