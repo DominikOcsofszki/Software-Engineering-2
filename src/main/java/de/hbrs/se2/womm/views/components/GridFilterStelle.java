@@ -2,6 +2,7 @@ package de.hbrs.se2.womm.views.components;
 
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.grid.GridVariant;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -16,7 +17,14 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
         String header1 = VaadinBuilderWomm.translateTextStatic("Advertisement title");
         grid.addColumn(StelleDTO::getStelleTitel).setHeader(new Html("<b>" +header1+"</b>"));
         String header2 = VaadinBuilderWomm.translateTextStatic("Firm name");
-        grid.addColumn(stelleDTO -> stelleDTO.getStelleUnternehmen().getName()).setHeader(new Html("<b>" +header2+"</b>"));
+        grid.addColumn(stelleDTO -> stelleDTO.getUnternehmen().getName()).setHeader(new Html("<b>" +header2+"</b>"));
+        String header3 = VaadinBuilderWomm.translateTextStatic("Advertisement description");
+        grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader(new Html("<b>" +header3+"</b>"));
+//        grid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT); //TODO Adding to show all Text
+//                .setFooter(String.format("%s total Advertisement", 1000));; //TODO any reason for html???/
+        //We can also add footer to grid, e.g. with the number of advertisments
+
+
     }
 
     @Override
@@ -34,15 +42,15 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
 
         return switch (searchBy) {
             case "Name Stellenanzeige" -> dto.getStelleTitel();
-            case "Name Unternehmen" -> dto.getStelleUnternehmen().toString();
+            case "Name Unternehmen" -> dto.getUnternehmen().toString();
             case "Advertisement title" -> dto.getStelleTitel();
-            case "Firm name" -> dto.getStelleUnternehmen().toString();
+            case "Firm name" -> dto.getUnternehmen().toString();
             default -> null;
         };
     }
 
-    public void setColumnClickListener() {
+    public void setColumnClickListener(String location) {
         this.grid.addItemClickListener(item -> UI.getCurrent()
-                .navigate(ROUTING.STUDENT.SJobProjectWorkshopDisplayView + "/" + item.getItem().getStelleId()));
+                .navigate(location + "/" + item.getItem().getStelleId()));
     }
 }

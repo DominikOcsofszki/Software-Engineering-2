@@ -20,7 +20,10 @@ import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.model.ApplicationStatus;
-import de.hbrs.se2.womm.services.*;
+import de.hbrs.se2.womm.services.BewerbungService;
+import de.hbrs.se2.womm.services.ImageService;
+import de.hbrs.se2.womm.services.StelleService;
+import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
@@ -42,30 +45,6 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
     VerticalLayout applicationForm;
     boolean formToggle = false;
 
-    @Override
-    public void setParameter(BeforeEvent event, @OptionalParameter Long parameter) {
-        if (parameter != null) {
-            System.out.println("Parameter: " + parameter);
-            this.stelleId = parameter;
-            Optional<StelleDTO> checkStelleDTO = stelleService.getById(this.stelleId);
-            if (checkStelleDTO.isEmpty()) {
-                System.out.println("StelleDTO ist null");
-                add(new H1("Keine Stelle in der DB für ID: "+this.stelleId+" gefunden"));
-            } else {
-                this.stelleDTO = checkStelleDTO.get();
-                System.out.println("Parameter: " + parameter);
-                setUpBanner();
-                setUpHeader();
-                setUpStellenanzeige();
-                setUpButtons();
-            }
-
-        } else {
-            add(new H1("Keine Stelle gefunden - Parameter ist null"));
-        }
-
-    }
-
     public SJobProjectWorkshopDisplayView(StelleService stelleService,
                                           SecurityService securityService,
                                           BewerbungService bewerbungService,
@@ -76,6 +55,30 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
         this.studentService = studentService;
         this.stelleService = stelleService;
         this.applicationForm = new VerticalLayout();
+    }
+
+    @Override
+    public void setParameter(BeforeEvent event, @OptionalParameter Long parameter) {
+        if (parameter != null) {
+            System.out.println("Parameter: " + parameter);
+            this.stelleId = parameter;
+            Optional<StelleDTO> checkStelleDTO = stelleService.getById(this.stelleId);
+            if (checkStelleDTO.isEmpty()) {
+                System.out.println("StelleDTO ist null");
+                add(new H1("Keine Stelle in der DB für ID: " + this.stelleId + " gefunden"));
+            } else {
+                this.stelleDTO = checkStelleDTO.get();
+                System.out.println("Parameter: " + parameter);
+                setUpBanner();
+                setUpHeader();
+                setUpStellenanzeige();
+                setUpButtons();
+            }
+
+        } else {
+            setup404Page();
+        }
+
     }
     //ToDo Banner anpassen
 
@@ -105,8 +108,12 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
 
         //Ueberschrift
 //        header.add(new H1("Unternehmenname"));
-        String unternehmenName = this.stelleDTO.getStelleUnternehmen().getName(); //ToDo Changed
-        header.add(new H1(unternehmenName));
+        String unternehmenName = this.stelleDTO.getUnternehmen().getName(); //ToDo Changed
+        H1 name = new H1(unternehmenName);
+        name.addClickListener(e -> UI.getCurrent()
+                .navigate(ROUTING.STUDENT.SFirmProfileDisplayView + "/" + stelleDTO.getUnternehmen().getUnternehmenId()));
+        name.getStyle().set("cursor", "pointer");
+        header.add(name);
 //        header.add(new H1("Unternehmenname"));
         add(header);
     }
@@ -207,12 +214,13 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
         //Erstellen-Button
         Button erstellenButton = new Button(getWommBuilder().translateText("Send"));
         erstellenButton.addClickListener(e -> {
-            if (textArea.getValue().trim().isEmpty()) createErrorNotification(getWommBuilder().translateText("Please enter your application into the text field!"));
+            if (textArea.getValue().trim().isEmpty())
+                createErrorNotification(getWommBuilder().translateText("Please enter your application into the text field!"));
             else if (stelleService.getById(stelleId).isPresent()) {
                 StelleDTO currentStelle = stelleService.getById(stelleId).get();
                 long studentId = securityService.getLoggedInNutzerID();
                 StudentDTO currentUser = studentService.getByNutzerId(studentId);
-                UnternehmenDTO unternehmen = currentStelle.getStelleUnternehmen();
+                UnternehmenDTO unternehmen = currentStelle.getUnternehmen();
                 var returned = bewerbungService.saveBewerbung(BewerbungDTO.builder()
                         .bewerbungStelle(currentStelle)
                         .bewerbungStudent(currentUser)
@@ -271,5 +279,9 @@ public class SJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
 
         notification.add(layout);
         notification.open();
+    }
+
+    private void setup404Page() {
+        add(new H1("404 Not Found! :("));
     }
 }

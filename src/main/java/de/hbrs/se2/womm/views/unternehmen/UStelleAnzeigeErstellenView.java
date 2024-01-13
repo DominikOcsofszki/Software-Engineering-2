@@ -1,6 +1,5 @@
 package de.hbrs.se2.womm.views.unternehmen;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.H1;
@@ -11,8 +10,10 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.dtos.AboStudentUnternehmenDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.services.AboStudentUnternehmenService;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
@@ -20,8 +21,10 @@ import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
+import java.util.List;
+
 @Route(value = ROUTING.UNTERNEHMEN.UStelleAnzeigeErstellenView, layout = UnternehmenLayout.class)
-@RolesAllowed({"UNTERNEHMEN","ADMIN"})
+@RolesAllowed({"UNTERNEHMEN", "ADMIN"})
 @PageTitle("StelleAnzeigeErstellenView")
 public class UStelleAnzeigeErstellenView extends AViewWomm
         implements HasUrlParameter<String> {
@@ -32,11 +35,9 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     TextArea stelleBeschreibung = new TextArea();
 
     StelleService stelleService;
-
     UnternehmenService unternehmenService;
-
     SecurityService securityService;
-
+    AboStudentUnternehmenService aboStudentUnternehmenService;
     String valueFromQuerry;
     private long aktuelleNutzerID;
     private UnternehmenDTO unternehmenDTO;
@@ -56,18 +57,20 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
     public UStelleAnzeigeErstellenView(StelleService stelleService,
                                        UnternehmenService unternehmenService,
-                                       SecurityService securityService) {
+                                       SecurityService securityService,
+                                       AboStudentUnternehmenService aboStudentUnternehmenService) {
         super();
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         this.stelleService = stelleService;
         this.unternehmenService = unternehmenService;
         this.securityService = securityService;
+        this.aboStudentUnternehmenService = aboStudentUnternehmenService;
         setUpHeader();
         setUpStellenanzeige();
     }
 
-    private void setUpHeader(){
+    private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         //Ueberschrift
         header.add(new H1("Stellenausschreibung erstellen:"));
@@ -118,12 +121,10 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         //Erstellen-Button
         Button erstellenButton = new Button("Erstellen");
         erstellenButton.addClickListener(e -> {
-            if(stelleWebsite.getValue().matches(URL_REGEX)) {
-                String stelleIdFromFunction = String.valueOf(stelleDTO());
-//            UI.getCurrent().navigate(UStelleAnzeigeErstellenView.class,stelleIdFromFunction);//ToDo refactored
-//            UI.getCurrent().navigate(UFirmProfileDisplayView.class,stelleIdFromFunction);
-                UI.getCurrent().navigate(UFirmProfileDisplayView.class);
-            }else{
+            if (stelleWebsite.getValue().matches(URL_REGEX)) {
+                buildAndSaveStelleDTO();
+//                UI.getCurrent().navigate(UFirmProfileDisplayView.class);
+            } else {
                 Notification notification = new Notification();
                 notification.setText("Bitte überprüfen Sie ihre Eingaben!");
                 notification.open();
@@ -132,34 +133,47 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
         });
 
-       // erstellenButton.addClickListener(e -> {
-       //     getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
-       // });
+        // erstellenButton.addClickListener(e -> {
+        //     getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
+        // });
         stellenanzeige.add(erstellenButton);
 
         add(stellenanzeige);
 
     }
 
-    private long stelleDTO(){
-//        long stelleId = 3l;
-//        long getUserId = 1l;
-//        UnternehmenDTO unternehmenDTO = unternehmenController.getUnternehmenById(getUserId).getBody();
+    private void buildAndSaveStelleDTO() {
         System.out.println("UnternehmenDTO: " + unternehmenDTO);
-//        Unternehmen unternehmen = UnternehmenMapper.INSTANCE.dtoZuUnternehmen(unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()
                 .stelleTitel(stelleTitel.getValue())
                 .stelleOrt(stelleOrt.getValue())
                 .stelleWebsite(stelleWebsite.getValue())
                 .stelleBeschreibung(stelleBeschreibung.getValue())
-                .stelleUnternehmen(unternehmenDTO)
+                .unternehmen(unternehmenDTO)
                 .build();
-        StelleDTO stelleDTO = stelleService.saveStelle(erzeugDTO);
-        System.out.println(stelleDTO.getStelleId());
-        return stelleDTO.getStelleId();
+//        StelleDTO stelleDTO = stelleService.saveStelle(erzeugDTO);
+        stelleService.saveStelle(erzeugDTO);
+        List<AboStudentUnternehmenDTO> allAboStudentUnternehmenDTO =
+                aboStudentUnternehmenService.getByNutzerId(unternehmenDTO.getNutzer().getNutzerId());
+//        List<AboStudentUnternehmenDTO> allAboStudentUnternehmenDTO =
+//                aboStudentUnternehmenService.getAll();
+        System.out.println("-----------------------------------");
+        System.out.println("allAboStudentUnternehmenDTO: " + allAboStudentUnternehmenDTO);
+        System.out.println("-----------------------------------");
+
+        allAboStudentUnternehmenDTO.forEach(
+                aboStudentUnternehmenDTO -> {
+                    if (aboStudentUnternehmenDTO.getAboBenachrichtigungen()) {
+                        Notification notification = new Notification();
+                        notification.setText("Neue Stelle: " + erzeugDTO.getStelleTitel());
+                        notification.setText("Student Informed: " + aboStudentUnternehmenDTO.getStudent().getStudentVorname()
+                                + " " + aboStudentUnternehmenDTO.getStudent().getStudentName());
+                        System.out.println("Neue Stelle: " + erzeugDTO.getStelleTitel());
+                        notification.open();
+                        notification.setDuration(5000);
+                    }
+                });
     }
-
-
 
 
 }

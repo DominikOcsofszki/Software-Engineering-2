@@ -41,6 +41,7 @@ public class UHomepageUnternehmenView extends AViewWomm {
         this.gridFilterStelle = new GridFilterStelle();
         List<StelleDTO> stelleDTOList = stelleService.getByNutzerId(aktuelleNutzerID);
         this.gridFilterStelle.setUpFromOutside(stelleDTOList);
+        this.gridFilterStelle.setColumnClickListener(ROUTING.UNTERNEHMEN.UJobProjectWorkshopDisplayView);
         add(gridFilterStelle);
 
 //        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));

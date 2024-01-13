@@ -52,15 +52,15 @@ html {
 }
 
 vaadin-grid {
-    background-color: rgba(0, 0, 0, 0.0);
+    background-color: rgba(255, 255, 255, 1);
 }
 
 vaadin-grid::part(body-cell){
-    background-color: rgba(0, 0, 0, 0.0);
+    background-color: rgba(255, 255, 255, 1);
     padding: 15px;
 }
 vaadin-grid::part(header-cell){
-    background-color: rgba(0, 0, 0, 0.0);
+    background-color: rgba(255, 255, 255, 1);
     padding: 15px;
 
 }

@@ -15,7 +15,7 @@ public class StelleDTO implements AbstractDTO {
     private String stelleOrt;
     private String stelleBeschreibung;
     private String stelleWebsite;
-    private UnternehmenDTO stelleUnternehmen;
+    private UnternehmenDTO unternehmen;
     private Date erstellungsdatum;
 
 }

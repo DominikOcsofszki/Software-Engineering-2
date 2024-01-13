@@ -4,6 +4,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
@@ -63,9 +64,13 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
 
     @Override
     public void setParameter(BeforeEvent beforeEvent, @OptionalParameter Long bewerbungID) {
-        Optional<BewerbungDTO> fetchedBewerbung = bewerbungService.getById(bewerbungID);
-        fetchedBewerbung.ifPresent(bewerbungDTO -> this.bewerbung = bewerbungDTO);
-        setUpApplication();
+        if (bewerbungID != null) {
+            Optional<BewerbungDTO> fetchedBewerbung = bewerbungService.getById(bewerbungID);
+            fetchedBewerbung.ifPresent(bewerbungDTO -> this.bewerbung = bewerbungDTO);
+            setUpApplication();
+        } else {
+            setup404Page();
+        }
     }
 
     void setUpApplication() {
@@ -73,7 +78,6 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
 
         studentID = bewerbung.getBewerbungStudent().getStudentId();
         Optional<StudentDTO> fetchedStudent = studentService.getById(studentID);
-        fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
         fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
         studentName = student.getStudentName();
         studentVorname = student.getStudentVorname();
@@ -112,12 +116,10 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
 
     private void setUpAnschreiben() {
         VerticalLayout anschreiben = new VerticalLayout();
-        List.of(bewerbungText.split("\n\n")).forEach(paragraph -> {
-            List.of(paragraph.split("\n")).forEach(subParagraph -> {
-                Paragraph newParagraph = new Paragraph(subParagraph);
-                anschreiben.add(newParagraph);
-            });
-        });
+        List.of(bewerbungText.split("\n\n")).forEach(paragraph -> List.of(paragraph.split("\n")).forEach(subParagraph -> {
+            Paragraph newParagraph = new Paragraph(subParagraph);
+            anschreiben.add(newParagraph);
+        }));
         add(anschreiben);
     }
 
@@ -180,5 +182,9 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
             confirmation.add(text);
         }
         add(confirmation);
+    }
+
+    private void setup404Page() {
+        add(new H1("404 Not Found! :("));
     }
 }
