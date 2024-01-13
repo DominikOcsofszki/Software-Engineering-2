@@ -11,7 +11,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.dtos.AboStudentUnternehmenDTO;
+import de.hbrs.se2.womm.dtos.AboDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Stelle;
@@ -25,6 +25,7 @@ import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
+import de.hbrs.se2.womm.dtos.AboDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +70,7 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         gridFilterStelle.setColumnClickListener(ROUTING.STUDENT.SJobProjectWorkshopDisplayView);
         add(gridFilterStelle);
     }
-//    public class AboStudentUnternehmenDTO {
+//    public class AboDTO {
 //        private Integer aboId;
 //
 //        private Boolean aboBenachrichtigungen;
@@ -78,17 +79,17 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
 //
 //        private UnternehmenDTO unternehmen;
 //    }
-    private AboStudentUnternehmenDTO returnAboStudentUnternehmenDTO() {
-        AboStudentUnternehmenDTO aboStudentUnternehmenDTO = AboStudentUnternehmenDTO.builder().build();
-        aboStudentUnternehmenDTO.setAboBenachrichtigungen(true);
-        aboStudentUnternehmenDTO.setStudent(studentService.getById(studentID).get());
-        aboStudentUnternehmenDTO.setUnternehmen(unternehmenService.getUnternehmenPerID(unternehmenID));
-        return aboStudentUnternehmenDTO;
+    private AboDTO returnAboDTO() {
+        AboDTO AboDTO = de.hbrs.se2.womm.dtos.AboDTO.builder().build();
+        AboDTO.setAboBenachrichtigungen(true);
+        AboDTO.setStudent(studentService.getById(studentID).get());
+        AboDTO.setUnternehmen(unternehmenService.getUnternehmenPerID(unternehmenID));
+        return AboDTO;
     }
 
     void setUpSubscrition() {
 
-        aboStudentUnternehmenService.saveAboStudentUnternehmen(returnAboStudentUnternehmenDTO());
+        aboStudentUnternehmenService.saveAboStudentUnternehmen(returnAboDTO());
     }
 
     private void setUp() {

@@ -10,7 +10,7 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.dtos.AboStudentUnternehmenDTO;
+import de.hbrs.se2.womm.dtos.AboDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.services.AboStudentUnternehmenService;
@@ -153,21 +153,21 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                 .build();
 //        StelleDTO stelleDTO = stelleService.saveStelle(erzeugDTO);
         stelleService.saveStelle(erzeugDTO);
-        List<AboStudentUnternehmenDTO> allAboStudentUnternehmenDTO =
+        List<AboDTO> allAboDTO =
                 aboStudentUnternehmenService.getByNutzerId(unternehmenDTO.getNutzer().getNutzerId());
-//        List<AboStudentUnternehmenDTO> allAboStudentUnternehmenDTO =
+//        List<AboDTO> allAboDTO =
 //                aboStudentUnternehmenService.getAll();
         System.out.println("-----------------------------------");
-        System.out.println("allAboStudentUnternehmenDTO: " + allAboStudentUnternehmenDTO);
+        System.out.println("allAboDTO: " + allAboDTO);
         System.out.println("-----------------------------------");
 
-        allAboStudentUnternehmenDTO.forEach(
-                aboStudentUnternehmenDTO -> {
-                    if (aboStudentUnternehmenDTO.getAboBenachrichtigungen()) {
+        allAboDTO.forEach(
+                AboDTO -> {
+                    if (AboDTO.getAboBenachrichtigungen()) {
                         Notification notification = new Notification();
                         notification.setText("Neue Stelle: " + erzeugDTO.getStelleTitel());
-                        notification.setText("Student Informed: " + aboStudentUnternehmenDTO.getStudent().getStudentVorname()
-                                + " " + aboStudentUnternehmenDTO.getStudent().getStudentName());
+                        notification.setText("Student Informed: " + AboDTO.getStudent().getStudentVorname()
+                                + " " + AboDTO.getStudent().getStudentName());
                         System.out.println("Neue Stelle: " + erzeugDTO.getStelleTitel());
                         notification.open();
                         notification.setDuration(5000);
