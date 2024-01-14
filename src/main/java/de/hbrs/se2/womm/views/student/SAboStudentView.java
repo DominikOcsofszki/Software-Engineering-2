@@ -24,12 +24,12 @@ public class SAboStudentView extends  AViewWomm{
     public SAboStudentView(AboStudentUnternehmenService aboStudentUnternehmenService, SecurityService securityService) {
         nutzerID = securityService.getLoggedInNutzerID();
         AboDTOList = aboStudentUnternehmenService.getByNutzerId(nutzerID);
-        System.out.println("-------------------");
+        
         AboDTOList.forEach(AboDTO -> {
-            System.out.println(AboDTO.getUnternehmen().getName());
-            System.out.println(AboDTO.getUnternehmen().getBeschreibung());
+            
+            
         });
-        System.out.println("-------------------");
+        
         H1 abonnements = getWommBuilder().H1.create("Subscriptions");
         add(abonnements);
         gridFilterAboFromStudent.setUpFromOutside(AboDTOList);

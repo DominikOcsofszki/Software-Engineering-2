@@ -17,7 +17,7 @@ public class RedirectController {
     public RedirectView redirectWithUsingRedirectView(RedirectAttributes attributes) {
         UserDetails loggedInUser = securityService.getAuthenticatedUser();
         if(loggedInUser != null){
-            System.out.println("loggedInUser: " + loggedInUser.getUsername());
+            
             if(securityService.isUserAdmin()){
                 return new RedirectView("vaadin/admin");
             }else if(securityService.isUserUnternehmen()){

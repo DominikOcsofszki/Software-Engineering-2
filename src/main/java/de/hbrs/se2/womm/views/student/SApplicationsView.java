@@ -44,10 +44,10 @@ public class SApplicationsView extends VerticalLayout {
         this.bewerbungService = bewerbungService;
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.studentDTO = studentService.getByNutzerId(aktuelleNutzerID);
-        System.out.println(aktuelleNutzerID);
+        
         this.listOfBewerbungDTO = bewerbungService.getByStudentNutzerId(aktuelleNutzerID);
         if (!listOfBewerbungDTO.isEmpty()) {
-            System.out.println(this.listOfBewerbungDTO.get(0).getBewerbungStelle().getStelleTitel());
+            
         }
         GridFilterBewerbungStudents gridFilterBewerbungStudent = new GridFilterBewerbungStudents();
         gridFilterBewerbungStudent.setUpFromOutside(listOfBewerbungDTO);

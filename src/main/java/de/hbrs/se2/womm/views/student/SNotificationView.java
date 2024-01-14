@@ -39,17 +39,17 @@ public class SNotificationView extends AViewWomm {
         this.stelleService = stelleService;
         this.securityService = securityService;
         this.aboDTOList = aboStudentUnternehmenService.getByNutzerId(securityService.getLoggedInNutzerID());
-        System.out.println("AboDTOList: " + aboDTOList);
+        
         this.unternehmenDTOList = aboDTOList.stream().map(AboDTO::getUnternehmen).toList();
-        System.out.println("UnternehmenDTOList: " + unternehmenDTOList);
+        
         this.stelleDTOList = unternehmenDTOList.stream().
                 map(UnternehmenDTO::getNutzer).
                 map(NutzerDTO::getNutzerId).
                 map(stelleService::getByNutzerId).flatMap(List::stream).toList();
 
-        System.out.println("-------------------");
-        System.out.println("StelleDTOList: " + stelleDTOList);
-        System.out.println("-------------------");
+        
+        
+        
 
         setUpHeader();
         gridFilterStelle.setUpFromOutside(stelleDTOList);

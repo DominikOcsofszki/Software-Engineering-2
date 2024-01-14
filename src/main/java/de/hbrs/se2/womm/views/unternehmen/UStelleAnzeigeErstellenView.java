@@ -147,7 +147,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         return new Date();
     }
     private void buildAndSaveStelleDTO() {
-        System.out.println("UnternehmenDTO: " + unternehmenDTO);
+        
         StelleDTO erzeugDTO = StelleDTO.builder()
                 .stelleTitel(stelleTitel.getValue())
                 .stelleOrt(stelleOrt.getValue())
@@ -162,9 +162,9 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                 aboStudentUnternehmenService.getByNutzerId(unternehmenDTO.getNutzer().getNutzerId());
 
 
-        System.out.println("-----------------------------------");
-        System.out.println("allAboDTO: " + allAboDTO);
-        System.out.println("-----------------------------------");
+        
+        
+        
 
         allAboDTO.forEach(
                 AboDTO -> {
@@ -173,7 +173,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                         notification.setText("Neue Stelle: " + erzeugDTO.getStelleTitel());
                         notification.setText("Student Informed: " + AboDTO.getStudent().getStudentVorname()
                                 + " " + AboDTO.getStudent().getStudentName());
-                        System.out.println("Neue Stelle: " + erzeugDTO.getStelleTitel());
+                        
                         notification.open();
                         notification.setDuration(5000);
                     }

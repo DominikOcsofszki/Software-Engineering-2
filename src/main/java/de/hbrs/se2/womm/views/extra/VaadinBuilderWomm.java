@@ -259,7 +259,7 @@ public class VaadinBuilderWomm {
             return translateTextMap.get(text);
         } else {
             newTextNeedsToBeTranslated.add(text);
-            System.out.println("put(\"" + text + "\", \"" + text + "<-\");");
+            
 
             translateTextMap.put(text, "->" + text);
             return text;
@@ -268,17 +268,17 @@ public class VaadinBuilderWomm {
 
     public static void printAllTextNotTranslatedToConsole() {
         if (newTextNeedsToBeTranslated.isEmpty()) {
-            System.out.println("Nothing to translate");
-            System.out.println("Translation can be found in TranslateMap.java");
+            
+            
             return;
         }
-        System.out.println("Not translated:");
-        System.out.println(newTextNeedsToBeTranslated);
-        System.out.println("------------");
-        System.out.println("Add this to TranslateMap.java");
+        
+        
+        
+        
         for (String translateMe : newTextNeedsToBeTranslated) {
 
-            System.out.println("put(\"" + translateMe + "\", \"\");");
+            
         }
     }
 
