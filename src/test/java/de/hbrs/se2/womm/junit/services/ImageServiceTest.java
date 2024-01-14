@@ -1,7 +1,5 @@
 package de.hbrs.se2.womm.junit.services;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.vaadin.flow.component.html.Image;
 import de.hbrs.se2.womm.dtos.NutzerDTO;
 import de.hbrs.se2.womm.services.ImageService;
@@ -10,12 +8,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ImageServiceTest {
 
     ImageService service;
+    static SecureRandom secureRandom = new SecureRandom(); // Compliant for security-sensitive use cases
 
     @BeforeEach
     void setup() {
@@ -96,9 +97,8 @@ public class ImageServiceTest {
 
     @Test
     void testgetRandomImageHeight() {
-        Random r = new Random();
         for (int i = 0; i < 100; i++) {
-            int height = r.nextInt(-1000, 1000);
+            int height = secureRandom.nextInt(-1000, 1000);
 
             assertDoesNotThrow(() -> service.getRandomImageHeight(height));
 
@@ -110,9 +110,8 @@ public class ImageServiceTest {
     }
 
     public static byte[] getRandomByteArray() {
-        Random r = new Random();
-        byte[] result = new byte[r.nextInt(1, 10) * 8];
-        r.nextBytes(result);
+        byte[] result = new byte[secureRandom.nextInt(1, 10) * 8];
+        secureRandom.nextBytes(result);
         return result;
     }
 }
