@@ -5,11 +5,13 @@ import de.hbrs.se2.womm.selenium.extra.LOCATORS;
 import de.hbrs.se2.womm.selenium.pages.LoginPage;
 import de.hbrs.se2.womm.selenium.pages.RegisterPage;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class RegisterTest extends AbstractPrepareTestSelenium {
     RegisterPage registerPage;
     LoginPage loginPage;
+    Random random = new SecureRandom();
 
     @Override
     protected void setupPageBeforeEach() {
@@ -19,7 +21,6 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
 
 //    @Test
     public void testRegister() {
-        Random random = new Random();
         long randomInt = random.nextLong(1_000_000_000);
         String name = "selenium"+randomInt;
         String surname = "test";
@@ -33,7 +34,6 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
     }
 //    @Test
     public void testRegisterAndLogin() {
-        Random random = new Random();
         long randomInt = random.nextLong(1_000_000_000);
         String name = "selenium"+randomInt;
         String surname = "test";
