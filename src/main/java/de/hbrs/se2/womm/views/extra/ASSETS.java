@@ -14,9 +14,9 @@ public class ASSETS {
         return placeholderIMG;
     }
     static public class StyleGuide {
-        public static final String LogoText = "themes/style_guide/LogoText.png"; //ToDo
-        public static final String LogoPerson = "themes/style_guide/LogoPerson.png"; //ToDo
-        public static final String LogoWork = "themes/style_guide/LogoWork.png"; //ToDo
+        public static final String LogoText = "themes/style_guide/LogoText.png"; 
+        public static final String LogoPerson = "themes/style_guide/LogoPerson.png"; 
+        public static final String LogoWork = "themes/style_guide/LogoWork.png"; 
     }
     static public class LOGO {
     }

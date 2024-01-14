@@ -125,7 +125,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                 spanNameValue,
                 spanNameInformation
         );
-        VerticalLayout layoutDob = new VerticalLayout(); // Dob = Date of Birth
+        VerticalLayout layoutDob = new VerticalLayout(); 
         Span spanDob = getWommBuilder().Span.create("Date of Birth");
         DatePicker datePickerDob = new DatePicker();
         DatePicker.DatePickerI18n singleFormatI18n = new DatePicker.DatePickerI18n();
@@ -246,7 +246,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         VerticalLayout layoutSemester = generateSinglePropertyField(getWommBuilder().translateText("Semester"), numberFieldSemester);
         layoutSemester.setSpacing(false);
         TextArea textAreaCurriculumVitae = new TextArea();
-        textAreaCurriculumVitae.setValue("Muss noch gemacht werden!");   //ToDO need CV DTO access
+        textAreaCurriculumVitae.setValue("Muss noch gemacht werden!");   
         VerticalLayout layoutCV = generateSinglePropertyField("Curriculum Vitae", textAreaCurriculumVitae);
         layoutCV.setSpacing(false);
         layoutCV.getStyle().set("width", "200%");

@@ -14,8 +14,8 @@ public class TranslateMap {
         translateMap.put("Create advertisement", "Stellenanzeige erstellen");
         translateMap.put("View applications", "Bewerbungen anschauen");
         translateMap.put("Filter by...", "Filter nach...");
-        translateMap.put("Advertisement title", "Name Stellenanzeige"); // dont change!!
-        translateMap.put("Firm name", "Name Unternehmen"); // dont change!!
+        translateMap.put("Advertisement title", "Name Stellenanzeige"); 
+        translateMap.put("Firm name", "Name Unternehmen"); 
         translateMap.put("Home", "Startseite");
         translateMap.put("Name", "Name");
         translateMap.put("Enter keyword", "Stichwort eingeben");

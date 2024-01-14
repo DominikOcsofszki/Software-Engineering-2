@@ -83,7 +83,7 @@ public class LoginView extends AViewWomm {
                 layout.setAlignItems(Alignment.CENTER);
                 notification.add(layout);
                 notification.open();
-                notification.setDuration(1000); // TODO sec message is shown
+                notification.setDuration(1000); 
             }
         });
         loginFormLayout.add(

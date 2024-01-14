@@ -59,13 +59,13 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         H2 firmName = new H2(getUnternehmenDTO().getName());
         String companyDescription = getUnternehmenDTO().getBeschreibung() == null ?
                 "Company Description" : getUnternehmenDTO().getBeschreibung();
-        long nrOfReviews = 123;//ToDo DTO Reviews ---> Anzahl von Bewertungen
-        HorizontalLayout ratingLayout = new HorizontalLayout();//ToDo refactored
+        long nrOfReviews = 123;
+        HorizontalLayout ratingLayout = new HorizontalLayout();
         int starsRating = 5;
         int nrOfEmployees = 999;
         String companyLocation = getUnternehmenDTO().getNutzer().getNutzerOrt() == null ?
                 "Company Location" : getUnternehmenDTO().getNutzer().getNutzerOrt();
-        String companyWebsite = "http://www.companywebsite.com";
+        String companyWebsite = "http:
         String reviews = " (" + nrOfReviews + " Reviews)";
         setupStars(starsRating, ratingLayout);
         descriptionTextArea.setValue(companyDescription);
@@ -80,7 +80,7 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         HorizontalLayout logoAndEditLayout = new HorizontalLayout();
         Div logoAndName = new Div();
         logoAndName.add(companyLogo);
-        logoAndName.add(firmName);//ToDo put at top, refactored
+        logoAndName.add(firmName);
         logoAndEditLayout.add(logoAndName);
         companyLogo.setWidth(200 + "px");
         companyLogo.setHeight(200 + "px");
@@ -99,7 +99,7 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         add(buttonsLayout);
         buttonsLayout.add(logoAndEditLayout);
         buttonsLayout.add(saveButton);
-        ratingLayout.add(new Span(reviews));//ToDo Refactored
+        ratingLayout.add(new Span(reviews));
         add(ratingLayout);
         locationField.setValue(companyLocation);
         TextField employeesField = new TextField("Number of Employees");

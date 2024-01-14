@@ -48,7 +48,7 @@ public class UFirmProfileDisplayView extends AViewWomm {
         companyLogo.setWidth(200 + "px");
         companyLogo.setHeight(200 + "px");
         logoAndName.add(companyLogo);
-        logoAndName.add(new H2(unternehmenDTO.getName())); // Replace with the actual company name
+        logoAndName.add(new H2(unternehmenDTO.getName())); 
         logoAndSubscribeLayout.add(logoAndName);
         Button editButton = new Button("Edit firm profile");
         editButton.addClickListener(e -> {
@@ -59,11 +59,11 @@ public class UFirmProfileDisplayView extends AViewWomm {
         buttonsLayout.add(editButton);
         HorizontalLayout detailsLayout = new HorizontalLayout();
         HorizontalLayout locationLayout = new HorizontalLayout();
-        locationLayout.add(new Icon(VaadinIcon.MAP_MARKER), new Span(unternehmenDTO.getNutzer().getNutzerOrt())); // Replace with the actual location
+        locationLayout.add(new Icon(VaadinIcon.MAP_MARKER), new Span(unternehmenDTO.getNutzer().getNutzerOrt())); 
         detailsLayout.add(locationLayout);
         HorizontalLayout websiteLayout = new HorizontalLayout();
         Icon linkIcon = new Icon(VaadinIcon.EXTERNAL_LINK);
-        linkIcon.setColor(""); // Set the color as needed #hex vaadin blue ????
+        linkIcon.setColor(""); 
         websiteLayout.add(linkIcon, new Anchor(checkIfNullShowTextLink(null), checkIfNullShowTextLink(null)));
         detailsLayout.add(websiteLayout);
         add(detailsLayout);

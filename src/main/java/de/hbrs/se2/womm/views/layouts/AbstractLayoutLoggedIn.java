@@ -18,13 +18,13 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
         String username = securityService.getAuthenticatedUser() == null ? null :
                 securityService.getAuthenticatedUser().getUsername();
         long nutzerId = securityService.getLoggedInNutzerID();
-        String text = VaadinBuilderWomm.translateTextStatic("Log out"); //TODO better change to this?
+        String text = VaadinBuilderWomm.translateTextStatic("Log out"); 
         Button logoutButton = new Button(text, e -> securityService.logout());
         super.createHeaderWithLogoutButton(logoutButton, true, addBenachrichtigungen());
     }
     int getMessagesCount() {
         long nutzerId = securityService.getLoggedInNutzerID();
-        int nrOfMessages = (int) nutzerId; //TODO get NR of messages from DB (count)
+        int nrOfMessages = (int) nutzerId; 
         return nrOfMessages;
     }
     MenuBar addBenachrichtigungen() {
@@ -54,7 +54,7 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
     MenuBar setUpMenuBarWomm(String name, Class<? extends Component> view, VaadinIcon iconName) {
         Icon icon = new Icon(iconName);
         MenuBar menuBar = setUpMenuBarWomm(name, view);
-        menuBar.getChildren().findFirst().get().getElement().insertChild(0, icon.getElement());       //left side
+        menuBar.getChildren().findFirst().get().getElement().insertChild(0, icon.getElement());       
         return menuBar;
     }
 }

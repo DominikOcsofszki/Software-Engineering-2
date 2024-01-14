@@ -13,13 +13,13 @@ public class StelleService {
     public StelleService(StelleRepository stelleRepository) {
         this.stelleRepository = stelleRepository;
     }
-    public List<StelleDTO> getByUnternehmenId(Long unternehmenId) { //ToDo why not working ????
+    public List<StelleDTO> getByUnternehmenId(Long unternehmenId) { 
         return stelleRepository.findByUnternehmen_UnternehmenId(unternehmenId)
                 .stream()
                 .map(stelleMapper::stelleToStelleDto)
                 .toList();
     }
-    public List<StelleDTO> getByNutzerId(Long nutzerID) { //ToDo why not working ????
+    public List<StelleDTO> getByNutzerId(Long nutzerID) { 
         return stelleRepository.findByUnternehmen_Nutzer_NutzerId(nutzerID)
                 .stream()
                 .map(stelleMapper::stelleToStelleDto)

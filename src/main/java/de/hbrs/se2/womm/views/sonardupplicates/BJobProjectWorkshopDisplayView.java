@@ -78,7 +78,7 @@ public class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
         ImageService imageService = new ImageService();
         Image i = imageService.getRandomImageHeight(100);
         header.add(i);
-        String unternehmenName = this.stelleDTO.getUnternehmen().getName(); //ToDo Changed
+        String unternehmenName = this.stelleDTO.getUnternehmen().getName(); 
         H1 name = new H1(unternehmenName);
         if(securityService.isUserStudent()) {
             String routingToUnternehmenWebsite = ROUTING.STUDENT.SFirmProfileDisplayView;

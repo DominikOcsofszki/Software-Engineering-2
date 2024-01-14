@@ -50,7 +50,7 @@ public class SStudentProfileDisplayView extends AViewWomm {
         Image bild = studentDTO.PlaceholderOrImage();
         bild.setWidth("300px");
         bild.setHeight("300px");
-        bild.getStyle().set("margin-left", "auto"); // Sodass das Bild rechtsbündig ist
+        bild.getStyle().set("margin-left", "auto"); 
         profilBild.add(bild);
         VerticalLayout rowName = generateProfileDetailsRow(
                 "Name", studentDTO.getStudentVorname() + " " + studentDTO.getStudentName(), "45"
