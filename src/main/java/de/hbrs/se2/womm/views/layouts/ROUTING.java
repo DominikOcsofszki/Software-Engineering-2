@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views.layouts;
-
 public class ROUTING {
     static public class ALL {
         public static final String LandingPageView = "LandingPageView";
@@ -8,7 +7,6 @@ public class ROUTING {
         public static final String RegistrierungUnternehmenView = "RegistrierungUnternehmenView";
         public static final String AccessDeniedView = "AccessDeniedView";
     }
-
     static public class STUDENT {
         public static final String SAboStudentView = "SAboStudentView";
         public static final String SApplicationView = "SApplicationView";
@@ -21,7 +19,6 @@ public class ROUTING {
         public static final String SNotificationView = "SNotificationView";
         public static final String SStudentProfileDisplayView = "SStudentProfileDisplayView";
     }
-
     public class UNTERNEHMEN {
         public static final String UApplicationView = "UApplicationView";
         public static final String UApplicationsView = "UApplicationsView";
@@ -36,4 +33,3 @@ public class ROUTING {
         public static final String UApplicantView = "UApplicantView";
     }
 }
-

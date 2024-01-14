@@ -1,11 +1,8 @@
 package de.hbrs.se2.womm.views.components;
-
 import com.vaadin.flow.component.UI;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
-
 public class GridFilterBewerbung extends AGridFilter<BewerbungDTO> {
-
     @Override
     protected void configureGrid() {
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStudent().getStudentName()).setHeader("Lastname");
@@ -13,7 +10,6 @@ public class GridFilterBewerbung extends AGridFilter<BewerbungDTO> {
         grid.addColumn(BewerbungDTO::getBewerbungText).setHeader("Application");
         grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader("Status");
     }
-
     @Override
     protected String[] getFilterByItemsFromDTO() {
         return new String[]{
@@ -21,7 +17,6 @@ public class GridFilterBewerbung extends AGridFilter<BewerbungDTO> {
                 "Firstname",
         };
     }
-
     @Override
     protected String checkItem(BewerbungDTO dto, String searchBy) {
         return switch (searchBy) {
@@ -30,7 +25,6 @@ public class GridFilterBewerbung extends AGridFilter<BewerbungDTO> {
             default -> null;
         };
     }
-
     public void setColumnClickListener(String location) {
         this.grid.addItemClickListener(item -> UI.getCurrent()
                 .navigate(location + "/" + (item.getItem()).getBewerbungId()));

@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views.layouts;
-
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -12,13 +11,10 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import de.hbrs.se2.womm.config.CONFIGS;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
-
 abstract class AbstractLayout extends AppLayout {
     HorizontalLayout header = new HorizontalLayout();
     Image nameImage = new Image("themes/theme_1/Womm_text_logo.png", "An image in the theme");
-
     Image logo = new Image("themes/theme_1/logo.png", "An image in the theme");
-
     public AbstractLayout() {
         Button translateToggle = addTranslateToggle();
         addToNavbar(translateToggle);
@@ -29,10 +25,7 @@ abstract class AbstractLayout extends AppLayout {
         if (CONFIGS.DEVMODE) {
             AddDevModeButtons();
         }
-
     }
-
-
     void createHeaderWithLogoutButton(Button logout, boolean withMenu, MenuBar menuBar) {
         if (withMenu) this.header.add(new DrawerToggle());
         if (logout == null) {
@@ -44,18 +37,15 @@ abstract class AbstractLayout extends AppLayout {
         }
         addToNavbar(header);
     }
-
     void configName() {
         nameImage.setHeight(50, Unit.PIXELS);
         nameImage.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.MEDIUM);
     }
-
     void configLogo() {
         logo.setWidth(50, Unit.PIXELS);
         logo.setHeight(50, Unit.PIXELS);
         logo.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.MEDIUM);
     }
-
     void configHeader() {
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.setWidthFull();
@@ -63,11 +53,8 @@ abstract class AbstractLayout extends AppLayout {
                 LumoUtility.Padding.Vertical.NONE,
                 LumoUtility.Padding.Horizontal.MEDIUM);
     }
-
-
     void createDrawer() {
     }
-
     void AddDevModeButtons() {
         Button buttonToShowMissingTranslated = new Button("console");
         buttonToShowMissingTranslated.addClickListener(
@@ -80,11 +67,8 @@ abstract class AbstractLayout extends AppLayout {
                     UI.getCurrent().getPage().reload();
                 }
         );
-
         addToNavbar(buttonToShowMissingTranslated, buttonToggleDevMode);
-
     }
-
     private static Button addTranslateToggle() {
         Button translateToggle = new Button("EN/DE");
         translateToggle.addClickListener(

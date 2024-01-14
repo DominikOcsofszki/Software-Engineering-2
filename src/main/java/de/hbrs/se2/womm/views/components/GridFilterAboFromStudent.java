@@ -1,18 +1,14 @@
 package de.hbrs.se2.womm.views.components;
-
 import com.vaadin.flow.component.UI;
 import de.hbrs.se2.womm.dtos.AboDTO;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
-
 public class GridFilterAboFromStudent extends AGridFilter<AboDTO>{
-
     @Override
     protected void configureGrid() {
         grid.addColumn(AboDTO -> AboDTO.getUnternehmen().getName()).setHeader("Name Unternehmen");
         grid.addColumn(AboDTO -> AboDTO.getUnternehmen().getBeschreibung()).setHeader("Beschreibung Unternehmen");
         setColumnClickListener();
     }
-
     @Override
     protected String[] getFilterByItemsFromDTO() {
         return new String[]{
@@ -20,7 +16,6 @@ public class GridFilterAboFromStudent extends AGridFilter<AboDTO>{
             "Beschreibung Unternehmen"
         };
     }
-
     @Override
     protected String checkItem(AboDTO dto, String searchBy) {
         return switch (searchBy) {

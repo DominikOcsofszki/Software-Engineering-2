@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views;
-
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -14,46 +13,27 @@ import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import jakarta.annotation.security.RolesAllowed;
-
 @Route(value = ROUTING.ALL.LandingPageView, layout = LoggedOutLayout.class)
 @RolesAllowed({"UNTERNEHMEN", "ADMIN", "STUDENT"})
 @AnonymousAllowed
 @PageTitle("LandingPageView")
 public class LandingPageView extends AViewWomm {
-
     public LandingPageView() {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
-
-
         HorizontalLayout header = createHeader();
-
-
-
-
         VerticalLayout heroSection = createHeroSection();
         add(heroSection);
-
-
         HorizontalLayout logoSection = createLogoSection();
         add(logoSection);
-
-
         VerticalLayout descriptionSection = createDescriptionSection();
         add(descriptionSection);
-
-
         HorizontalLayout registrationSection = createRegistrationSection();
         add(registrationSection);
-
-
         Div contactInfo = createContactInfo();
         add(contactInfo);
-
-
         HorizontalLayout footer = createFooter();
         add(footer);
     }
-
     private void listenEnterForLoginClick(Button buttonLog) {
         UI.getCurrent().addShortcutListener(
                 () -> buttonLog.click(),
@@ -67,8 +47,6 @@ public class LandingPageView extends AViewWomm {
         header.add(logoImage);
         return header;
     }
-
-
     private HorizontalLayout createLogoSection() {
         HorizontalLayout logoSection = new HorizontalLayout();
        /* Image logoImage = new Image("themes/theme_1/Womm_big_logo.png", "");
@@ -86,70 +64,51 @@ public class LandingPageView extends AViewWomm {
         heroSection.add(heroImage);
         return heroSection;
     }
-
    /* private Div createHeroSection() {
-
         Div heroSection = new Div();
         heroSection.getStyle().set("background-image", "url('themes/theme_1/Background_hero_womm.jpg')");
         heroSection.getStyle().set("background-size", "cover"); // Das Bild auf die gesamte Seite ausdehnen
         heroSection.getStyle().set("background-attachment", "fixed"); // Das Bild fixieren, damit es beim Scrollen sichtbar bleibt
         heroSection.setWidth("100%");
         heroSection.setHeight("70vh"); // volle Bildschirmhöhe
-
         VerticalLayout content = new VerticalLayout();
         content.setAlignItems(FlexComponent.Alignment.CENTER);
-
         heroSection.add(content);
-
         return heroSection;
     }*/
-
     private VerticalLayout createDescriptionSection() {
         VerticalLayout descriptionSection = new VerticalLayout();
         descriptionSection.setAlignItems(Alignment.CENTER);
-
         H1 title = getWommBuilder().H1.create("Find your dream job on w.o.m.m.");
         title.getStyle().set("color", "#044FA3"); // HEX-Farbcode
         descriptionSection.add(title);
-
-
         Paragraph description = getWommBuilder().Paragraph.create("Your job search portal. Discover thousands of job opportunities and more.");
         description.getStyle().set("color", "#044FA3"); // HEX-Farbcode
         descriptionSection.add(description);
-
         return descriptionSection;
     }
-
     private HorizontalLayout createRegistrationSection() {
         HorizontalLayout registrationSection = new HorizontalLayout();
-
-
         Button buttonRegStd = getWommBuilder().Button.create("SignUp as Student");
         buttonRegStd.addClickListener( e -> UI.getCurrent().navigate(RegistrierungStudentView.class));
         buttonRegStd.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
         buttonRegStd.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         registrationSection.add(buttonRegStd);
-
         Button buttonRegCpny = getWommBuilder().Button.create("SignUp as Company");
         buttonRegCpny.addClickListener( e -> UI.getCurrent().navigate(RegistrierungUnternehmenView.class));
         buttonRegCpny.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
         buttonRegCpny.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         registrationSection.add(buttonRegCpny);
-
-
         Button buttonLog = getWommBuilder().Button.create("LogIn");
         listenEnterForLoginClick(buttonLog);
         buttonLog.addClickListener( e -> UI.getCurrent().navigate(LoginView.class));
         buttonLog.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
         buttonLog.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         registrationSection.add(buttonLog);
-
         registrationSection.add(buttonRegStd);
         registrationSection.add(buttonLog);
-
         return registrationSection;
     }
-
     private Div createContactInfo() {
         Div contactInfo = new Div();
         contactInfo.add(
@@ -157,7 +116,6 @@ public class LandingPageView extends AViewWomm {
         );
         return contactInfo;
     }
-
     private HorizontalLayout createFooter() {
         HorizontalLayout footer = new HorizontalLayout();
         footer.add(new Anchor("Datenschutzbestimmungen", "# Data protection"));

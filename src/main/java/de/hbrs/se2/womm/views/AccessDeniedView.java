@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views;
-
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -12,17 +11,10 @@ import de.hbrs.se2.womm.config.CONFIGS;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
-
 @Route(value = ROUTING.ALL.AccessDeniedView)
 public class AccessDeniedView extends AViewWomm implements BeforeEnterObserver {
-
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-
-
-
-
-
         Text accessDeniedText = new Text(VaadinBuilderWomm.translateTextStatic("Access Denied!"));
         add(accessDeniedText);
         if (CONFIGS.DEVMODE) {

@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views.student;
-
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
@@ -11,7 +10,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.*;
-
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
@@ -23,22 +21,17 @@ import de.hbrs.se2.womm.views.extra.TEMPLATE;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
-
 import java.util.Arrays;
 import java.util.List;
-
 @Route(value = ROUTING.STUDENT.SApplicationsView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("ApplicationsView")
 public class SApplicationsView extends VerticalLayout {
-
     StelleService stelleService;
     BewerbungService bewerbungService;
     StudentDTO studentDTO;
     List<BewerbungDTO> listOfBewerbungDTO;
     private long aktuelleNutzerID;
-
-
     public SApplicationsView(BewerbungService bewerbungService, StelleService stelleService, StudentService studentService, SecurityService securityService) {
         this.stelleService = stelleService;
         this.bewerbungService = bewerbungService;
@@ -52,87 +45,12 @@ public class SApplicationsView extends VerticalLayout {
         GridFilterBewerbungStudents gridFilterBewerbungStudent = new GridFilterBewerbungStudents();
         gridFilterBewerbungStudent.setUpFromOutside(listOfBewerbungDTO);
         gridFilterBewerbungStudent.setColumnClickListener();
-
-
         setUpHeader();
-
-
         add(gridFilterBewerbungStudent);
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void setUpHeader() {
-
         HorizontalLayout header = new HorizontalLayout();
-
-
         header.add(new H1("Bewerbungen:"));
-
         add(header);
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

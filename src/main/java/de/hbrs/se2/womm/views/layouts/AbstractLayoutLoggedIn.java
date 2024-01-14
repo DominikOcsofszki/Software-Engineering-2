@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views.layouts;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -12,29 +11,22 @@ import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.student.SNotificationView;
 import de.hbrs.se2.womm.views.unternehmen.UNotificationView;
-
 abstract class AbstractLayoutLoggedIn extends AbstractLayout {
     protected final SecurityService securityService;
-
     AbstractLayoutLoggedIn(SecurityService securityService) {
         this.securityService = securityService;
         String username = securityService.getAuthenticatedUser() == null ? null :
                 securityService.getAuthenticatedUser().getUsername();
         long nutzerId = securityService.getLoggedInNutzerID();
-
         String text = VaadinBuilderWomm.translateTextStatic("Log out"); //TODO better change to this?
-
         Button logoutButton = new Button(text, e -> securityService.logout());
-
         super.createHeaderWithLogoutButton(logoutButton, true, addBenachrichtigungen());
     }
-
     int getMessagesCount() {
         long nutzerId = securityService.getLoggedInNutzerID();
         int nrOfMessages = (int) nutzerId; //TODO get NR of messages from DB (count)
         return nrOfMessages;
     }
-
     MenuBar addBenachrichtigungen() {
         boolean isStudent = securityService.isUserStudent();
         long messages = getMessagesCount();
@@ -48,7 +40,6 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
         }
         return menu;
     }
-
     MenuBar setUpMenuBarWomm(String name, Class<? extends Component> view) {
         MenuBar menuBar = new MenuBar();
         menuBar.addThemeVariants(MenuBarVariant.LUMO_ICON);
@@ -60,12 +51,10 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
         menuBar.setWidthFull();
         return menuBar;
     }
-
     MenuBar setUpMenuBarWomm(String name, Class<? extends Component> view, VaadinIcon iconName) {
         Icon icon = new Icon(iconName);
         MenuBar menuBar = setUpMenuBarWomm(name, view);
         menuBar.getChildren().findFirst().get().getElement().insertChild(0, icon.getElement());       //left side
-
         return menuBar;
     }
 }

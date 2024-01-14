@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views.unternehmen;
-
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
@@ -20,9 +19,7 @@ import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
-
 import java.util.List;
-
 @Route(value = ROUTING.UNTERNEHMEN.UHomepageUnternehmenView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN", "ADMIN"})
 @PageTitle("HomepageUnternehmenView")
@@ -35,27 +32,17 @@ public class UHomepageUnternehmenView extends AViewWomm {
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         setUpHeader();
-
-
         setUpSearchFields();
         this.gridFilterStelle = new GridFilterStelle();
         List<StelleDTO> stelleDTOList = stelleService.getByNutzerId(aktuelleNutzerID);
         this.gridFilterStelle.setUpFromOutside(stelleDTOList);
         this.gridFilterStelle.setColumnClickListener(ROUTING.UNTERNEHMEN.UJobProjectWorkshopDisplayView);
         add(gridFilterStelle);
-
-
     }
-
     private void setUpComponentFilterGridControllerStellen() { //ToDo: this was added
-
-
     }
-
-
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
-
         String button1 = getWommBuilder().translateText("Create advertisement");
         Button b1 = new Button(button1, new Icon(VaadinIcon.PLUS));
         b1.addClickListener(e -> UI.getCurrent().navigate(UStelleAnzeigeErstellenView.class));
@@ -76,13 +63,10 @@ public class UHomepageUnternehmenView extends AViewWomm {
         Button b5 = new Button(button5, new Icon(VaadinIcon.PENCIL));
         b5.addClickListener(e -> UI.getCurrent().navigate(UEditFirmProfileDisplayView.class));
         header.add(b5);
-
         add(header);
-
         b5.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
     }
-
     private void setUpSearchFields() {
         setUpComponentFilterGridControllerStellen();
     }

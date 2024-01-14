@@ -1,43 +1,25 @@
 package de.hbrs.se2.womm.views.extra;
-
 import java.util.HashMap;
 import java.util.Map;
-
-
-
 public class TranslateMap {
     public static Map<String, String> translateMap = new HashMap<>();
-
     static {
         translateMap.put("", "");
-
         translateMap.put("Your job search portal. Discover thousands of job opportunities and more.", "Dein Jobportal. Entdecke tausende Jobangebote und mehr.");
         translateMap.put("SignUp as Student", "Registriere dich als Student");
         translateMap.put("SignUp as Company", "Registriere dich als Unternehmen");
         translateMap.put("Find your dream job on w.o.m.m.", "Finde deinen Traumjob auf w.o.m.m.");
         translateMap.put("Want to create company profile? Contact us at kontakt@womm.de.", "Möchtest du ein Firmenprofil erstellen? Kontaktiere uns unter kontakt@womm.de.");
         translateMap.put("LogIn", "Anmelden");
-
-
         translateMap.put("Create advertisement", "Stellenanzeige erstellen");
         translateMap.put("View applications", "Bewerbungen anschauen");
-
-
         translateMap.put("Filter by...", "Filter nach...");
-
-
         translateMap.put("Advertisement title", "Name Stellenanzeige"); // dont change!!
         translateMap.put("Firm name", "Name Unternehmen"); // dont change!!
-
-
         translateMap.put("Home", "Startseite");
         translateMap.put("Name", "Name");
-
-
         translateMap.put("Enter keyword", "Stichwort eingeben");
         translateMap.put("Subscriptions", "Abonnements");
-
-
         translateMap.put("UChatView", "Chat");
         translateMap.put("UEditFirmProfileDisplayView", "Profil editieren");
         translateMap.put("UFirmProfileDisplayView", "Profil");
@@ -46,8 +28,6 @@ public class TranslateMap {
         translateMap.put("UApplicationView", "Bewerbung");
         translateMap.put("UNotificationView", "Benachrichtigungen");
         translateMap.put("UApplicationsView", "Bewerbungen");
-
-
         translateMap.put("SJobProjectWorkshopDisplayView", "Stellenanzeigen(delete link)");
         translateMap.put("SStudentProfileDisplayView", "Profil");
         translateMap.put("SCreateChangeStudentProfileView", "Profil editieren");
@@ -62,17 +42,11 @@ public class TranslateMap {
         translateMap.put("View subscriptions", "Abonnements anzeigen");
         translateMap.put("Notifications", "Benachrichtigungen");
         translateMap.put("Edit profile", "Profil bearbeiten");
-
-
         translateMap.put("%s is not a valid ID.", "%s ist keine gültige ID.");
         translateMap.put("Surname, Name", "Name, Vorname");
         translateMap.put("Motivational letter", "Anschreiben");
         translateMap.put("The application with the ID '%s' could not be found.", "Die Bewerbung mit der ID '%s' konnte nicht gefunden werden.");
-
-
         translateMap.put("Access Denied!", "Zugriff verweigert!");
-
-
         translateMap.put("Confirm Password", "Passwort bestätigen");
         translateMap.put("Password is required", "Passwort ist erforderlich");
         translateMap.put("Email connected to your future account", "Email, die mit Ihrem zukünftigen Konto verbunden ist");
@@ -100,8 +74,6 @@ public class TranslateMap {
         translateMap.put("Register", "Registrieren");
         translateMap.put("Surname", "Nachname");
         translateMap.put("Company Name", "Name Ihres Unternehmens");
-
-
         translateMap.put("Location", "Ort");
         translateMap.put("Date of Birth", "Geburtstag");
         translateMap.put("e-mail", "E-Mail");
@@ -110,8 +82,6 @@ public class TranslateMap {
         translateMap.put("Current semester", "Aktuelles Semester");
         translateMap.put("Specializations", "Spezialisierungen");
         translateMap.put("Biography", "Biographie");
-
-
         translateMap.put("Enter your old password", "Altes Passwort");
         translateMap.put("Save Changes", "Änderungen Speichern");
         translateMap.put("Please enter a valid e-mail address", "Bitte eine gültige E-Mail-Adresse angeben");
@@ -132,8 +102,6 @@ public class TranslateMap {
         translateMap.put("Semester", "Semester");
         translateMap.put("Curriculum Vitae", "Lebenslauf");
         translateMap.put("Changes saved!", "Änderungen gespeichert!");
-
-
         translateMap.put("The job offer is not available anymore :(", "Das Stellenangebot existiert nicht mehr :(");
         translateMap.put("Please enter your application into the text field!", "Trage bitte dein Anschreiben in das Feld ein!");
         translateMap.put("Send", "Abschicken");
@@ -141,31 +109,19 @@ public class TranslateMap {
         translateMap.put("Apply now", "Jetzt bewerben");
         translateMap.put("Apply later", "Später bewerben");
         translateMap.put("Your application has been sent successfully", "Deine Bewerbung wurde erfolgreich versendet");
-
-
         translateMap.put("Accept", "Annehmen");
         translateMap.put("Decline", "Ablehnen");
         translateMap.put("You have accepted the application", "Sie haben die Bewerbung angenommen");
         translateMap.put("You have declined the application", "Sie haben die Bewerbung abgelehnt");
-
-
-
         translateMap.put("SApplicationsView", "Bewerbungen");
         translateMap.put("Log out(", "Ausloggen(");
         translateMap.put("Log out", "Ausloggen");
-
-
-
         translateMap.put("Your application has been accepted.", "Ihre Bewerbung wurde akzeptiert.");
         translateMap.put("Your application has been delcined.", "Ihre Bewerbung wurde abgelehnt.");
         translateMap.put("Your application is awaiting review.", "Ihre Bewerbung befindet sich in Bearbeitung.");
         translateMap.put("Your motivational letter:", "Ihr Anschreiben:");
         translateMap.put("Application photo", "Bewerbungsfoto");
         translateMap.put("Application text", "Bewerbungs-Text");
-
-
         translateMap.put("New Jobs from your subscribed companies", "Neue Stellenangebote von deinen abonnierten Unternehmen");
-
-
     }
 }

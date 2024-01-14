@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.services;
-
 import de.hbrs.se2.womm.dtos.CompanyRegistrationRequest;
 import de.hbrs.se2.womm.dtos.LoginRequest;
 import de.hbrs.se2.womm.dtos.RegistrationRequest;
@@ -22,7 +21,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 @Service
 public class AuthenticationService {
     @Autowired
@@ -39,12 +37,10 @@ public class AuthenticationService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private AuthenticationManager authenticationManager;
-
     public void registerStudent(StudentRegistrationRequest request) throws UsernameAlreadyTakenException {
         String username = request.getUsername();
         String email = request.getEmail();
         createUser(request, username, Roles.STUDENT.name());
-
         Nutzer user = nutzerRepository.findNutzerByNutzerMail(email);
         studentRepository.save(Student.builder()
                     .studentVorname(request.getFirstname())
@@ -54,19 +50,16 @@ public class AuthenticationService {
                     .nutzer(user)
                 .build());
     }
-
     public void registerCompany(CompanyRegistrationRequest request) throws UsernameAlreadyTakenException {
         String username = request.getUsername();
         String email = request.getEmail();
         createUser(request, username, Roles.UNTERNEHMEN.name());
-
         Nutzer user = nutzerRepository.findNutzerByNutzerMail(email);
         unternehmenRepository.save(Unternehmen.builder()
                     .nutzer(user)
                     .name(request.getName())
                 .build());
     }
-
     public Authentication loginUser(LoginRequest request) throws AuthenticationException {
         NutzerLogin user = nutzerLoginRepository.findNutzerByNutzerName(request.getUsername());
         if (user == null) throw new AuthenticationException("Invalid username");
@@ -79,27 +72,22 @@ public class AuthenticationService {
             throw new AuthenticationException("Invalid password");
         }
     }
-
     /**
      * speichert einen Nutzer für Student- oder Unternehmensanfrage
      */
     private void createUser(RegistrationRequest request, String username, String role) throws UsernameAlreadyTakenException {
         if (nutzerLoginRepository.existsNutzerByNutzerName(username))
             throw new UsernameAlreadyTakenException("Username " + username + " is already taken!");
-
         Nutzer nutzer = Nutzer.builder()
                 .nutzerMail(request.getEmail())
                 .nutzerOrt(request.getLocation())
                 .nutzerAktiv(true).build();
-
         Nutzer savedNutzer = nutzerRepository.save(nutzer);
-
         NutzerLogin nutzerLogin = NutzerLogin.builder()
                 .nutzerName(request.getUsername())
                 .nutzerPasswort(passwordEncoder.encode(request.getPassword()))
                 .rolle(role)
                 .nutzer(savedNutzer).build();
-
         userDetailsManager.createUser(nutzerLogin);
     }
 }

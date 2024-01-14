@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views;
-
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
@@ -28,22 +27,17 @@ import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.LoggedOutLayout;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import org.springframework.http.ResponseEntity;
-
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 @Route(value = ROUTING.ALL.RegistrierungStudentView, layout = LoggedOutLayout.class)
 @AnonymousAllowed
 @PageTitle("RegistrierungStudentView")
 public class RegistrierungStudentView extends AViewWomm {
-
     SecurityService securityService;
     AuthenticationController authenticationController;
-
     private static final String EMAIL_REGEX =
             "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-
     TextField nameComponent;
     TextField surnameComponent;
     TextField usernameComponent;
@@ -54,31 +48,22 @@ public class RegistrierungStudentView extends AViewWomm {
     TextField locationComponent;
     Button registerComponent;
     ProgressBar progressBar = new ProgressBar();
-
     public RegistrierungStudentView(AuthenticationController authenticationController, SecurityService securityService) {
         super();
-
         this.securityService = securityService;
         this.authenticationController = authenticationController;
-
         setSizeFull();
-
         setAlignItems(Alignment.CENTER);
-
         setJustifyContentMode(JustifyContentMode.CENTER);
-
         H4 h4 = getWommBuilder().H4.create("Student/in Registration");
         add(h4);
-
         nameComponent = getWommBuilder().TextField.create("Name");
         String yourRealName = getWommBuilder().translateText("Your REAL Name");
         nameComponent.setTooltipText(yourRealName);
         nameComponent.setRequired(true);
         nameComponent.setRequiredIndicatorVisible(true);
         String nameIsRequired = getWommBuilder().translateText("Name is required");
-
         nameComponent.setErrorMessage(nameIsRequired);
-
         surnameComponent = getWommBuilder().TextField.create("Surname");
         String yourRealSurname = getWommBuilder().translateText("Your REAL surname");
         surnameComponent.setTooltipText(yourRealSurname);
@@ -87,7 +72,6 @@ public class RegistrierungStudentView extends AViewWomm {
         surnameComponent.setRequiredIndicatorVisible(true);
         String surnameIsRequired = getWommBuilder().translateText("Surname is required");
         surnameComponent.setErrorMessage(surnameIsRequired);
-
         usernameComponent = getWommBuilder().TextField.create("Username");
         String yourDesiredUsername = getWommBuilder().translateText("Your desired username");
         usernameComponent.setTooltipText(yourDesiredUsername);
@@ -95,7 +79,6 @@ public class RegistrierungStudentView extends AViewWomm {
         usernameComponent.setRequiredIndicatorVisible(true);
         String usernameIsRequired = getWommBuilder().translateText("Username is required");
         usernameComponent.setErrorMessage(usernameIsRequired);
-
         emailComponent = getWommBuilder().EmailField.create("Email \uD83D\uDE33");
         String text = getWommBuilder().translateText("Email connected to your future account");
         emailComponent.setTooltipText(text);
@@ -104,7 +87,6 @@ public class RegistrierungStudentView extends AViewWomm {
         emailComponent.setPrefixComponent(VaadinIcon.ENVELOPE.create());
         String emailIsRequired = getWommBuilder().translateText("Email is required");
         emailComponent.setErrorMessage(emailIsRequired);
-
         passwordComponent = getWommBuilder().PasswordField.create("Password");
         String thePasswordUsedForLogin = getWommBuilder().translateText("The password used for login");
         passwordComponent.setTooltipText(thePasswordUsedForLogin);
@@ -112,7 +94,6 @@ public class RegistrierungStudentView extends AViewWomm {
         passwordComponent.setRequiredIndicatorVisible(true);
         String passwordIsRequired = getWommBuilder().translateText("Password is required");
         passwordComponent.setErrorMessage(passwordIsRequired);
-
         passwordConfirmComponent = getWommBuilder().PasswordField.create("Confirm Password");
         String repeatYourPassword = getWommBuilder().translateText("Repeat your password");
         passwordConfirmComponent.setTooltipText(repeatYourPassword);
@@ -120,7 +101,6 @@ public class RegistrierungStudentView extends AViewWomm {
         passwordConfirmComponent.setRequiredIndicatorVisible(true);
         String passwordConfirmationIsRequired = getWommBuilder().translateText("Password Confirmation is required");
         passwordConfirmComponent.setErrorMessage(passwordConfirmationIsRequired);
-
         DatePicker.DatePickerI18n singleFormatI18n = new DatePicker.DatePickerI18n();
         singleFormatI18n.setDateFormat("dd.MM.yyyy");
         dateOfBirthComponent = getWommBuilder().DatePicker.create("Date of Birth");
@@ -131,11 +111,8 @@ public class RegistrierungStudentView extends AViewWomm {
         dateOfBirthComponent.setRequiredIndicatorVisible(true);
         String errorMessage = getWommBuilder().translateText("Invalid date given. Dates must follow the 'DD.MM.YYYY' format.");
         dateOfBirthComponent.setErrorMessage(errorMessage);
-
         LocalDate today = LocalDate.now();
-
         dateOfBirthComponent.setValue(today);
-
         locationComponent = getWommBuilder().TextField.create("Location");
         String yourCurrentLivingLocation = getWommBuilder().translateText("Your current living location");
         locationComponent.setTooltipText(yourCurrentLivingLocation);
@@ -144,8 +121,6 @@ public class RegistrierungStudentView extends AViewWomm {
         locationComponent.setPrefixComponent(VaadinIcon.PIN.create());
         String locationIsRequired = getWommBuilder().translateText("Location is required");
         locationComponent.setErrorMessage(locationIsRequired);
-
-
         registerComponent = getWommBuilder().Button.create("Register", event -> {
             if (!nameComponent.isEmpty() && !surnameComponent.isEmpty() &&
                     !usernameComponent.isEmpty() && !emailComponent.isEmpty() &&
@@ -167,9 +142,7 @@ public class RegistrierungStudentView extends AViewWomm {
                 createErrorNotification(getWommBuilder().translateText("Fülle alle Felder aus!"));
             }
         });
-
         FormLayout formLayout = new FormLayout();
-
         formLayout.add(
                 nameComponent,
                 surnameComponent,
@@ -180,30 +153,23 @@ public class RegistrierungStudentView extends AViewWomm {
                 dateOfBirthComponent,
                 locationComponent
         );
-
         add(
                 formLayout,
                 registerComponent
         );
     }
-
     private void setUpLoadingBarRegistration() {
         progressBar.setIndeterminate(true);
         add(progressBar);
     }
-
     private void register() {
         try {
             StudentRegistrationRequest request = getStudentRegistrationRequest();
-
             ResponseEntity<Void> response = authenticationController.registerStudent(request);
-
             if (response.getStatusCode().is2xxSuccessful()) {
                 Notification notification = new Notification();
                 notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-
                 Div text = new Div(getWommBuilder().Text.create("Registrierung erfolgreich!"));
-
                 Button closeButton = new Button(new Icon("lumo", "cross"));
                 closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
                 createClickListener(notification, text, closeButton);
@@ -213,20 +179,16 @@ public class RegistrierungStudentView extends AViewWomm {
             createErrorNotification(e.getMessage());
         }
     }
-
     static void createClickListener(Notification notification, Div text, Button closeButton) {
         closeButton.addClickListener(e -> {
             notification.close();
             UI.getCurrent().navigate(ROUTING.ALL.LoginView);
         });
-
         HorizontalLayout layout = new HorizontalLayout(text, closeButton);
         layout.setAlignItems(Alignment.CENTER);
-
         notification.add(layout);
         notification.open();
     }
-
     private StudentRegistrationRequest getStudentRegistrationRequest() {
         StudentRegistrationRequest request = new StudentRegistrationRequest();
         request.setFirstname(nameComponent.getValue());
@@ -234,35 +196,25 @@ public class RegistrierungStudentView extends AViewWomm {
         request.setEmail(emailComponent.getValue());
         request.setUsername(usernameComponent.getValue());
         request.setPassword(passwordComponent.getValue());
-
-
-
         request.setDob(dateOfBirthComponent.getValue().toString());
-
         request.setLocation(locationComponent.getValue());
         return request;
     }
-
     private void createErrorNotification(String errorText) {
         Notification notification = new Notification();
         notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
         Div text = new Div(new Text(errorText));
-
         Button closeButton = new Button(new Icon("lumo", "cross"));
         closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
         closeButton.addClickListener(e -> {
             notification.close();
             this.remove(progressBar);
         });
-
         HorizontalLayout layout = new HorizontalLayout(text, closeButton);
         layout.setAlignItems(Alignment.CENTER);
-
         notification.add(layout);
         notification.open();
     }
-
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);

@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views.unternehmen;
-
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
@@ -27,16 +26,13 @@ import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
-
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Optional;
-
 @Route(value = ROUTING.UNTERNEHMEN.UApplicationView, layout = UnternehmenLayout.class)
 @RolesAllowed({"UNTERNEHMEN", "ADMIN"})
 @PageTitle("ApplicationView")
 public class UApplicationView extends AViewWomm implements HasUrlParameter<Long> {
-
     private final SecurityService securityService;
     private final BewerbungService bewerbungService;
     private final StudentService studentService;
@@ -49,7 +45,6 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
     private String studentName;
     private String studentVorname;
     private byte[] studentProfilePicture;
-
     public UApplicationView(BewerbungService bewerbungService,
                             StudentService studentService,
                             SecurityService securityService,
@@ -60,8 +55,6 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
         this.securityService = securityService;
         this.unternehmenService = unternehmenService;
     }
-
-
     @Override
     public void setParameter(BeforeEvent beforeEvent, @OptionalParameter Long bewerbungID) {
         if (bewerbungID != null) {
@@ -72,30 +65,23 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
             setup404Page();
         }
     }
-
     void setUpApplication() {
         bewerbungText = bewerbung.getBewerbungText();
-
         studentID = bewerbung.getBewerbungStudent().getStudentId();
         Optional<StudentDTO> fetchedStudent = studentService.getById(studentID);
         fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
         studentName = student.getStudentName();
         studentVorname = student.getStudentVorname();
         studentProfilePicture = student.getNutzer().getNutzerProfilbild();
-
         long userId = securityService.getLoggedInNutzerID();
         unternehmen = unternehmenService.getByNutzerId(userId);
-
         setUpTop();
         setUpAnschreiben();
-
         String status = bewerbung.getBewerbungStatus();
-
         if (status.equals(ApplicationStatus.AUSSTEHEND.toString())) setupButtons();
         else if (status.equals(ApplicationStatus.AKZEPTIERT.toString())) createConfirmation(true);
         else if (status.equals(ApplicationStatus.ABGELEHNT.toString())) createConfirmation(false);
     }
-
     private void setUpTop() {
         HorizontalLayout top = new HorizontalLayout();
         top.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -113,7 +99,6 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
         top.add(name);
         add(top);
     }
-
     private void setUpAnschreiben() {
         VerticalLayout anschreiben = new VerticalLayout();
         List.of(bewerbungText.split("\n\n")).forEach(paragraph -> List.of(paragraph.split("\n")).forEach(subParagraph -> {
@@ -122,7 +107,6 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
         }));
         add(anschreiben);
     }
-
     private void setupButtons() {
         HorizontalLayout buttons = new HorizontalLayout();
         Button acceptButton = new Button(getWommBuilder().translateText("Accept"));
@@ -140,7 +124,6 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
             remove(buttons);
             createConfirmation(true);
         });
-
         Button declineButton = new Button(getWommBuilder().translateText("Decline"));
         declineButton.setIcon(new Icon(VaadinIcon.CLOSE));
         declineButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
@@ -156,13 +139,10 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
             remove(buttons);
             createConfirmation(false);
         });
-
         buttons.add(acceptButton);
         buttons.add(declineButton);
-
         add(buttons);
     }
-
     private void createConfirmation(boolean accepted) {
         HorizontalLayout confirmation = new HorizontalLayout();
         H3 text;
@@ -183,7 +163,6 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
         }
         add(confirmation);
     }
-
     private void setup404Page() {
         add(new H1("404 Not Found! :("));
     }

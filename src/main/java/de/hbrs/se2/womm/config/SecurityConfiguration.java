@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.config;
-
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import de.hbrs.se2.womm.services.UserDetailsManagerImpl;
 import de.hbrs.se2.womm.views.LoginView;
@@ -17,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends VaadinWebSecurity {
@@ -31,19 +29,15 @@ public class SecurityConfiguration extends VaadinWebSecurity {
         super.configure(http);
         setLoginView(http, LoginView.class);
     }
-
-
     @Bean
     UserDetailsManager userDetailsManager() {
         return new UserDetailsManagerImpl();
     }
-
     @Override
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
-
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -51,18 +45,15 @@ public class SecurityConfiguration extends VaadinWebSecurity {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
             throws Exception {
         return config.getAuthenticationManager();
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public void configSecurityContext() {
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_GLOBAL);

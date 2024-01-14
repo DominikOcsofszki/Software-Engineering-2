@@ -1,13 +1,9 @@
 package de.hbrs.se2.womm.views.components;
-
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
-
 public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
-
-
     @Override
     protected void configureGrid() {
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getUnternehmen().getName()).setHeader("Unternehmen");
@@ -17,7 +13,6 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
         setUpColorBewerbungen(grid);
         grid.addClassName("styling");
     }
-
     void setUpColorBewerbungen(Grid<BewerbungDTO> grid){
         grid.setPartNameGenerator(bewerbung -> {
             if (bewerbung.getBewerbungStatus().equalsIgnoreCase("akzeptiert"))
@@ -35,7 +30,6 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
                 "bewerbungStatus"
         };
     }
-
     @Override
     protected String checkItem(BewerbungDTO dto, String searchBy) {
         return switch (searchBy) {
@@ -45,7 +39,6 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
             default -> null;
         };
     }
-
     public void setColumnClickListener() {
         this.grid.addItemClickListener(item -> UI.getCurrent()
                 .navigate(ROUTING.STUDENT.SApplicationView + "/" + item.getItem().getBewerbungId()));

@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views.student;
-
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -15,9 +14,7 @@ import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
-
 import java.util.List;
-
 @Route(value = ROUTING.STUDENT.SNotificationView, layout = StudentLayout.class)
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("NotificationView")
@@ -26,13 +23,10 @@ public class SNotificationView extends AViewWomm {
     StelleDTO stelleDTO;
     StelleService stelleService;
     SecurityService securityService;
-
     AboStudentUnternehmenService aboStudentUnternehmenService;
-
     List<AboDTO> aboDTOList;
     List<UnternehmenDTO> unternehmenDTOList;
     List<StelleDTO> stelleDTOList;
-
     public SNotificationView(StelleService stelleService, SecurityService securityService,
                              AboStudentUnternehmenService aboStudentUnternehmenService) {
         this.aboStudentUnternehmenService = aboStudentUnternehmenService;
@@ -46,22 +40,15 @@ public class SNotificationView extends AViewWomm {
                 map(UnternehmenDTO::getNutzer).
                 map(NutzerDTO::getNutzerId).
                 map(stelleService::getByNutzerId).flatMap(List::stream).toList();
-
         
         
         
-
         setUpHeader();
         gridFilterStelle.setUpFromOutside(stelleDTOList);
         add(gridFilterStelle);
     }
-
     void setUpHeader() {
-
         H1 headerText = getWommBuilder().H1.create("New Jobs from your subscribed companies");
-
         add(headerText);
     }
-
-
 }

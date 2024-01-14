@@ -1,5 +1,4 @@
 package de.hbrs.se2.womm.views;
-
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.Text;
@@ -30,48 +29,38 @@ import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-
-
 @Route(value = ROUTING.ALL.LoginView, layout = LoggedOutLayout.class)
 @PermitAll
 @PageTitle("LoginView")
 public class LoginView extends AViewWomm {
-
     SecurityService securityService;
-
     LoginView(@Autowired AuthenticationController authenticationController, SecurityService securityService) {
         this.securityService = securityService;
         addClassName("login-view");
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
-
         VerticalLayout loginFormLayout = new VerticalLayout();
         loginFormLayout.setAlignItems(Alignment.CENTER);
         loginFormLayout.setJustifyContentMode(JustifyContentMode.CENTER);
         loginFormLayout.getStyle().setWidth("25%");
         loginFormLayout.setPadding(true);
         loginFormLayout.getStyle().setBackground("white");
-
         TextField usernameInput = getWommBuilder().TextField.create(getWommBuilder().translateText("Username"));
         usernameInput.setWidthFull();
         usernameInput.setRequired(true);
         usernameInput.setRequiredIndicatorVisible(true);
         usernameInput.setErrorMessage(getWommBuilder().translateText("Username is required"));
         usernameInput.focus();
-
-
         PasswordField passwordInput = getWommBuilder().PasswordField.create(getWommBuilder().translateText("Password"));
         passwordInput.setWidthFull();
         passwordInput.setRequired(true);
         passwordInput.setRequiredIndicatorVisible(true);
         passwordInput.setErrorMessage(getWommBuilder().translateText("Password is required"));
-
         Button submitButton = getWommBuilder().Button.create(getWommBuilder().translateText("LogIn"));
         submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         addClickListenerForEnter(submitButton, usernameInput, passwordInput);
         submitButton.addClickListener(e -> {
-
             LoginRequest loginRequest = LoginRequest.builder()
                     .username(usernameInput.getValue())
                     .password(passwordInput.getValue()).build();
@@ -83,39 +72,31 @@ public class LoginView extends AViewWomm {
             } catch (AuthenticationException error) {
                 Notification notification = new Notification();
                 notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
                 Div text = new Div(new Text(error.getMessage()));
-
                 Button closeButton = new Button(new Icon("lumo", "cross"));
                 closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
                 closeButton.setAriaLabel("Close");
                 closeButton.addClickListener(event -> {
                     notification.close();
-
                 });
-
                 HorizontalLayout layout = new HorizontalLayout(text, closeButton);
                 layout.setAlignItems(Alignment.CENTER);
-
                 notification.add(layout);
                 notification.open();
                 notification.setDuration(1000); // TODO sec message is shown
             }
         });
-
         loginFormLayout.add(
                 new H3(getWommBuilder().translateText("LogIn")),
                 usernameInput,
                 passwordInput,
                 submitButton
         );
-
         add(
                 new H1("w.o.o.m."),
                 loginFormLayout
         );
     }
-
     private void addClickListenerForEnter(Button submitButton, TextField textfield, PasswordField passwordfield) {
         textfield.setValueChangeMode(ValueChangeMode.EAGER);
                 passwordfield.setValueChangeMode(ValueChangeMode.EAGER);
