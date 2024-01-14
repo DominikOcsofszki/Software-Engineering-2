@@ -16,6 +16,7 @@ import java.util.Random;
 public class ImageServiceTest {
 
     ImageService service;
+    static Random r = new Random();
 
     @BeforeEach
     void setup() {
@@ -96,7 +97,7 @@ public class ImageServiceTest {
 
     @Test
     void testgetRandomImageHeight() {
-        Random r = new Random();
+//        Random r = new Random();
         for (int i = 0; i < 100; i++) {
             int height = r.nextInt(-1000, 1000);
 
@@ -110,7 +111,7 @@ public class ImageServiceTest {
     }
 
     public static byte[] getRandomByteArray() {
-        Random r = new Random();
+//        Random r = new Random();
         byte[] result = new byte[r.nextInt(1, 10) * 8];
         r.nextBytes(result);
         return result;
