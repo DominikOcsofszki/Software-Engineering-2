@@ -38,6 +38,7 @@ abstract class AbstractLayout extends AppLayout {
         if (logout == null) {
             this.header.add(nameImage, logo);
         } else {
+            logout.setId("logout-button");
             this.header.add(nameImage, logo, menuBar);
             this.header.add(logout);
         }
