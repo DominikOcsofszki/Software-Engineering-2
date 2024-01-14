@@ -57,26 +57,26 @@ class UserDetailsManagerImplTest {
     }
     @Test
     void testChangePassword() {
-        String oldPassword = "oldPass";
-        String newPassword = "newPass";
+        String oP = "oldPass";
+        String nP = "newPass";
         NutzerLogin userDetails = new NutzerLogin();
-        when(nutzerLoginRepository.findNutzerByNutzerPasswort(oldPassword)).thenReturn(userDetails);
+        when(nutzerLoginRepository.findNutzerByNutzerPasswort(oP)).thenReturn(userDetails);
 
-        assertDoesNotThrow(() -> userDetailsManager.changePassword(oldPassword, newPassword));
+        assertDoesNotThrow(() -> userDetailsManager.changePassword(oP, nP));
 
         // Verify that nutzerLoginRepository.findNutzerByNutzerPasswort() is called with the correct old password
-        verify(nutzerLoginRepository, times(1)).findNutzerByNutzerPasswort(oldPassword);
+        verify(nutzerLoginRepository, times(1)).findNutzerByNutzerPasswort(oP);
         // Verify that nutzerLoginRepository.save() is called with the updated user details
         verify(nutzerLoginRepository, times(1)).save(userDetails);
     }
     @Test
     void testChangePassword_InvalidPassword() {
-        String oldPassword = "invalidPass";
-        String newPassword = "newPass";
-        when(nutzerLoginRepository.findNutzerByNutzerPasswort(oldPassword)).thenReturn(null);
+        String oP = "invalidPass";
+        String nP = "newPass";
+        when(nutzerLoginRepository.findNutzerByNutzerPasswort(oP)).thenReturn(null);
 
         // Verify that changePassword() throws UsernameNotFoundException for an invalid old password
-        assertThrows(UsernameNotFoundException.class, () -> userDetailsManager.changePassword(oldPassword, newPassword));
+        assertThrows(UsernameNotFoundException.class, () -> userDetailsManager.changePassword(oP, nP));
     }
     @Test
     void testUserExists() {
