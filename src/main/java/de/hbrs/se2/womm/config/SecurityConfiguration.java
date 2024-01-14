@@ -32,9 +32,6 @@ public class SecurityConfiguration extends VaadinWebSecurity {
         setLoginView(http, LoginView.class);
     }
 
-/*
-
-*/
 
     @Bean
     UserDetailsManager userDetailsManager() {

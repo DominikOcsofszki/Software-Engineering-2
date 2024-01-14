@@ -28,17 +28,6 @@ public class UnternehmenLayout extends AbstractLayoutLoggedIn {
                 setUpMenuBarWomm("UApplicationsView", UApplicationsView.class, VaadinIcon.BRIEFCASE),
                 setUpMenuBarWomm("UEditFirmProfileDisplayView", UEditFirmProfileDisplayView.class, VaadinIcon.EDIT),
                 setUpMenuBarWomm("UStelleAnzeigeErstellenView", UStelleAnzeigeErstellenView.class, VaadinIcon.PLUS)
-
-
         ));
     }
 }
-/* Old way deelte later after approve
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("UApplicationView"), UApplicationView.class),
-        new RouterLink(VaadinBuilderWomm.translateTextStatic("UApplicationsView"), UApplicationsView.class),
-        new RouterLink(VaadinBuilderWomm.translateTextStatic("UEditFirmProfileDisplayView"), UEditFirmProfileDisplayView.class),
-        new RouterLink(VaadinBuilderWomm.translateTextStatic("UFirmProfileDisplayView"), UFirmProfileDisplayView.class),
-        new RouterLink(VaadinBuilderWomm.translateTextStatic("UHomepageUnternehmenView"), UHomepageUnternehmenView.class),
-        new RouterLink(VaadinBuilderWomm.translateTextStatic("UStelleAnzeigeErstellenView"), UStelleAnzeigeErstellenView.class)
-
-

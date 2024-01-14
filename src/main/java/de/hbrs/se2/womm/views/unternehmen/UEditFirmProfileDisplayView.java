@@ -95,21 +95,6 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
                 "Company Since" : getUnternehmenDTO().getGruendung();
         gruendung.setValue(gruendung1);
 
-/*
-        Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");//ToDo put at top
-        H2 firmName = new H2("Firm Name");
-        String companyDescription = "Company Description";
-        long nrOfReviews = 123;
-        HorizontalLayout ratingLayout = new HorizontalLayout();//ToDo refactored
-        int starsRating = 2;
-        int nrOfEmployees = 123;
-
-        String companyLocation = "Company Location";
-        String companyWebsite = "http://www.companywebsite.com";
-
-        String reviews =" ("+nrOfReviews+" Reviews)";
-        setupStars(starsRating, ratingLayout);
-*/
 
 
 

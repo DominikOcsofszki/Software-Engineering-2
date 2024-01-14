@@ -83,46 +83,7 @@ public class UHomepageUnternehmenView extends AViewWomm {
         header.setWidth("100%");
     }
 
-/*    private void setUpBanner() {
-        VerticalLayout banner = new VerticalLayout();
-
-       Image i = new Image(ASSETS.BANNER.BANNER2, "alt text");
-
-        i.setWidth("100%");
-        banner.add(i);
-        add(banner);
-    }
-*/
     private void setUpSearchFields() {
-        /*
-        HorizontalLayout searchFields = new HorizontalLayout();
-
-        MultiSelectComboBox filter1 = new MultiSelectComboBox("Offer type");
-        filter1.setItems("Job offer", "Project", "Workshop", "Internship");
-        filter1.setWidth("min-content");
-        searchFields.add(filter1);
-
-        MultiSelectComboBox filter2 = new MultiSelectComboBox("Industry");
-        filter2.setWidth("min-content");
-        filter2.setItems("Informationstechnologie (IT)", "Gesundheitswesen", "Finanzdienstleistungen", "Bildung",
-                "Ingenieurwesen", "Marketing und Werbung", "Medien und Unterhaltung", "Verkauf und Vertrieb",
-                "Gastgewerbe und Tourismus", "Rechtswesen", "Soziale Dienste und gemeinnützige Organisationen",
-                "Fertigung und Produktion", "Transport und Logistik", "Bauwesen", "Energie und Umwelt",
-                "Forschung und Entwicklung", "Design und Kunst", "Landwirtschaft", "Personalwesen", "Telekommunikation");
-        searchFields.add(filter2);
-
-        TextField textField = new TextField();
-        textField.setLabel("Firm or ad name");
-        textField.setPlaceholder("Search");
-        textField.setPrefixComponent(VaadinIcon.SEARCH.create());
-        searchFields.add(textField);
-
-        Button b = new Button("Search", new Icon(VaadinIcon.SEARCH));
-        searchFields.add(b);
-        b.getElement().getStyle().set("margin-top", "auto");
-
-        add(searchFields);
-        */
         setUpComponentFilterGridControllerStellen();
     }
 }
