@@ -5,6 +5,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Image;
@@ -18,6 +19,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.StudentDTO;
+import de.hbrs.se2.womm.model.ProfilePictureB64;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.services.UserDetailsManagerImpl;
 import de.hbrs.se2.womm.views.LandingPageView;
@@ -33,9 +35,9 @@ import java.time.LocalDate;
 @RolesAllowed({"STUDENT", "ADMIN"})
 @PageTitle("CreateChangeStudentProfileView")
 public class SCreateChangeStudentProfileView extends AViewWomm {
-    StudentService studentService;
-    StudentDTO studentDTO;
-    UserDetailsManagerImpl userDetailsManager;
+    private StudentService studentService;
+    private StudentDTO studentDTO;
+    private UserDetailsManagerImpl userDetailsManager;
 
     public SCreateChangeStudentProfileView(
             StudentService studentService,
@@ -116,13 +118,24 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         VerticalLayout layoutDetails = new VerticalLayout();
 
         Image imageProfilePicture = studentDTO.PlaceholderOrImage();
-        imageProfilePicture.getStyle()
-                .set("width", "250px")
-                .set("height", "250px")
-                .set("margin-left", "auto"); // Sodass das Bild rechtsbündig ist
+        imageProfilePicture.setWidth("250px");
+        imageProfilePicture.setHeight("250px");
+
+        ComboBox<ProfilePictureB64> comboBoxProfilePicture = new ComboBox<>();
+        comboBoxProfilePicture.setItems(ProfilePictureB64.values());
+        comboBoxProfilePicture.setItemLabelGenerator(ProfilePictureB64::name);
+        comboBoxProfilePicture.setLabel("Profile Picture");
+        comboBoxProfilePicture.addValueChangeListener(e -> {
+            if (e.getValue() != null) {
+                imageProfilePicture.setSrc(e.getValue().toString());
+                studentDTO.getNutzer().setNutzerProfilbild(e.getValue().toString().getBytes());
+            }
+        });
+        comboBoxProfilePicture.setWidth("250px");
 
         layoutPicture.add(
-                imageProfilePicture
+                imageProfilePicture,
+                comboBoxProfilePicture
         );
 
         // ----------------- Header (Name) -----------------
@@ -303,7 +316,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         textAreaCurriculumVitae.setValue("Muss noch gemacht werden!");   //ToDO need CV DTO access
         VerticalLayout layoutCV = generateSinglePropertyField("Curriculum Vitae", textAreaCurriculumVitae);
         layoutCV.setSpacing(false);
-        layoutCV.getStyle().set("width","200%");
+        layoutCV.getStyle().set("width", "200%");
 
         // ----------------- Save Changes -----------------
 
