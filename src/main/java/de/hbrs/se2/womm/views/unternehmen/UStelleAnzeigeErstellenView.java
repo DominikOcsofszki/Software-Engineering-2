@@ -143,8 +143,12 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
     }
 
-    Date now() {
-        return new Date();
+    protected void setUpFieldForEdit(StelleDTO stelleDTO) {
+                stelleTitel.setValue(stelleDTO.getStelleTitel());
+                stelleOrt.setValue(stelleDTO.getStelleOrt());
+                stelleWebsite.setValue(stelleDTO.getStelleWebsite());
+                stelleBeschreibung.setValue(stelleDTO.getStelleBeschreibung());
+                unternehmenDTO = stelleDTO.getUnternehmen();
     }
     private void buildAndSaveStelleDTO() {
         System.out.println("UnternehmenDTO: " + unternehmenDTO);

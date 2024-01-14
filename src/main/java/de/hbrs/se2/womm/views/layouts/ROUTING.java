@@ -34,6 +34,8 @@ public class ROUTING {
         public static final String UNotificationView = "UNotificationView";
         public static final String UJobProjectWorkshopDisplayView = "UJobProjectWorkshopDisplayView";
         public static final String UApplicantView = "UApplicantView";
+        public static final String EditUJobProjectWorkshopDisplayView = "EditUJobProjectWorkshopDisplayView";
+
     }
 }
 
