@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.views.components;
 
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.grid.Grid;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 
@@ -11,10 +12,21 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
     protected void configureGrid() {
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getUnternehmen().getName()).setHeader("Unternehmen");
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getStelleTitel()).setHeader("Stelle");
-        grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader("Status");
-        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungText()).setHeader("Bewerbungstext");
+        grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader("Status").setSortable(true);
+        grid.addColumn(BewerbungDTO::getBewerbungText).setHeader("Bewerbungstext");
+        setUpColorBewerbungen(grid);
+        grid.addClassName("styling");
     }
 
+    void setUpColorBewerbungen(Grid<BewerbungDTO> grid){
+        grid.setPartNameGenerator(bewerbung -> {
+            if (bewerbung.getBewerbungStatus().equalsIgnoreCase("akzeptiert"))
+                return "akzeptiert";
+            if (bewerbung.getBewerbungStatus().equalsIgnoreCase("abgelehnt"))
+                return "abgelehnt";
+            return null;
+        });
+    }
     @Override
     protected String[] getFilterByItemsFromDTO() {
         return new String[]{
