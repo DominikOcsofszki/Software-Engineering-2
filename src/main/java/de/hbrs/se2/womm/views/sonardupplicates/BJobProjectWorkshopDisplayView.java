@@ -13,7 +13,9 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.router.*;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.OptionalParameter;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
@@ -26,22 +28,20 @@ import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
-import de.hbrs.se2.womm.views.layouts.StudentLayout;
-import jakarta.annotation.security.RolesAllowed;
 
 import java.util.List;
 import java.util.Optional;
 
-@Route(value = ROUTING.STUDENT.SJobProjectWorkshopDisplayView, layout = StudentLayout.class)
-@RolesAllowed({"STUDENT", "ADMIN"})
-@PageTitle("JobProjectWorkshopDisplayView")
-public class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlParameter<Long> {
+//@Route(value = ROUTING.STUDENT.SJobProjectWorkshopDisplayView, layout = StudentLayout.class)
+//@RolesAllowed({"STUDENT", "ADMIN"})
+//@PageTitle("JobProjectWorkshopDisplayView")
+public abstract class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlParameter<Long> {
     SecurityService securityService;
     StelleService stelleService;
     BewerbungService bewerbungService;
     StudentService studentService;
     StelleDTO stelleDTO;
-    long stelleId;
+    protected long stelleId;
     VerticalLayout applicationForm;
     boolean formToggle = false;
 

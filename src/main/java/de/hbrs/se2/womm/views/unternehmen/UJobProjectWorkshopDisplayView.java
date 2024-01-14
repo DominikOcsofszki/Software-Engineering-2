@@ -1,5 +1,7 @@
 package de.hbrs.se2.womm.views.unternehmen;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -19,6 +21,13 @@ public class UJobProjectWorkshopDisplayView extends BJobProjectWorkshopDisplayVi
 
     public UJobProjectWorkshopDisplayView(StelleService stelleService, SecurityService securityService, BewerbungService bewerbungService, StudentService studentService) {
         super(stelleService, securityService, bewerbungService, studentService);
+        add(new Button("Edit", e -> {
+            UI.getCurrent().navigate(ROUTING.UNTERNEHMEN.EditUJobProjectWorkshopDisplayView + "/" + stelleId);
+        }));
+    }
+
+    void addButtonEdit() {
+
     }
 }
 //    StelleService stelleService;
