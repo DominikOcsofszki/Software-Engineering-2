@@ -18,14 +18,31 @@ public class BenachrichtigungService {
     }
 
     public List<BenachrichtigungDTO> getByNutzerId(Long nutzer_id){
-        return benachrichtigungRepository.findByNutzer_id(nutzer_id)
+        return benachrichtigungRepository.findBenachrichtigungByNutzer_NutzerId(nutzer_id)
                 .stream()
                 .map(benachrichtigungMapper::BenachrichtigungToDto)
                 .toList();
     }
 
+    public List<BenachrichtigungDTO> getUngelesenByNutzerID(Long nutzer_id){
+        return benachrichtigungRepository.findBenachrichtigungByNutzer_NutzerIdAndGelesenIsFalse(nutzer_id)
+                .stream()
+                .map(benachrichtigungMapper::BenachrichtigungToDto)
+                .toList();
+    }
+
+    public int getAnzahlUngelesenByNutzerID(Long nutzer_id){
+        return benachrichtigungRepository.findBenachrichtigungByNutzer_NutzerIdAndGelesenIsFalse(nutzer_id).size();
+    }
+
     public void setGelesen(BenachrichtigungDTO benachrichtigungDTO){
         benachrichtigungDTO.setGelesen(true);
+        Benachrichtigung benachrichtigung = benachrichtigungMapper
+                .BenachrichtigungDTOToBenachrichtigung(benachrichtigungDTO);
+        benachrichtigungRepository.save(benachrichtigung);
+    }
+
+    public void saveBenachrichtigung(BenachrichtigungDTO benachrichtigungDTO){
         Benachrichtigung benachrichtigung = benachrichtigungMapper
                 .BenachrichtigungDTOToBenachrichtigung(benachrichtigungDTO);
         benachrichtigungRepository.save(benachrichtigung);

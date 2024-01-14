@@ -27,5 +27,5 @@ public class Benachrichtigung {
 
     @ManyToOne
     @JoinColumn(name = "nutzer_id")
-    private Nutzer nutzer_id;
+    private Nutzer nutzer;
 }
