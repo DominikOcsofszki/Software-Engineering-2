@@ -49,7 +49,7 @@ vaadin-grid.styling::part(akzeptiert) {
     background-color: rgba(var(--womm-success-color), 0.08);
 }
 
-vaadin-grid.styling::part(labgelehnt) {
+vaadin-grid.styling::part(abgelehnt) {
     background-color: rgba(var(--womm-error-color), 0.08);
 }
 .login-view {

@@ -23,7 +23,7 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
             if (bewerbung.getBewerbungStatus().equalsIgnoreCase("akzeptiert"))
                 return "akzeptiert";
             if (bewerbung.getBewerbungStatus().equalsIgnoreCase("abgelehnt"))
-                return "labgelehnt";
+                return "abgelehnt";
             return null;
         });
     }
