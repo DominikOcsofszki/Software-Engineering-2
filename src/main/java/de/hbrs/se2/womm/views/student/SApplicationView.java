@@ -55,7 +55,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
             Optional<BewerbungDTO> fetchedBewerbung = bewerbungService.getById(bewerbungID);
             fetchedBewerbung.ifPresent(bewerbungDTO -> this.bewerbung = bewerbungDTO);
             Optional<StelleDTO> checkStelleDTO = stelleService.getById(bewerbung.getBewerbungStelle().getStelleId());
-            this.stelleDTO = checkStelleDTO.get();
+            this.stelleDTO = checkStelleDTO.orElse(null);
 
 
             setUpApplication();
