@@ -12,8 +12,8 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
     protected void configureGrid() {
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getUnternehmen().getName()).setHeader("Unternehmen");
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getStelleTitel()).setHeader("Stelle");
-        grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader("Status");
-        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungText()).setHeader("Bewerbungstext");
+        grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader("Status").setSortable(true);
+        grid.addColumn(BewerbungDTO::getBewerbungText).setHeader("Bewerbungstext");
         setUpColorBewerbungen(grid);
         grid.addClassName("styling");
     }
