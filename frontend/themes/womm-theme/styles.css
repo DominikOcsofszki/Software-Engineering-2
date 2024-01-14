@@ -46,11 +46,11 @@ html {
 
 }
 vaadin-grid.styling::part(akzeptiert) {
-    background-color: rgba(var(--womm-success-color), 0.1);
+    background-color: rgba(var(--womm-success-color), 0.08);
 }
 
 vaadin-grid.styling::part(labgelehnt) {
-    background-color: rgba(var(--womm-error-color), 0.1);
+    background-color: rgba(var(--womm-error-color), 0.08);
 }
 .login-view {
     display: flex;
