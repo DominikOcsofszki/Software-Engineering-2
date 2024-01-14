@@ -1,7 +1,6 @@
 package de.hbrs.se2.womm.junit.services;
 
 import de.hbrs.se2.womm.dtos.StelleDTO;
-import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Nutzer;
 import de.hbrs.se2.womm.entities.Stelle;
 import de.hbrs.se2.womm.entities.Unternehmen;
@@ -238,38 +237,31 @@ public class StelleServiceTest {
                 .stelleWebsite("url")
                 .unternehmen(Unternehmen.builder().unternehmenId(101).name("unternehmen").build())
                 .build());
-        listDTO = service.getAllByFilter("2023", "Geburtsjahr");
-        assertEquals(1, listDTO.size());
+        testServiceGetAllByFilter("2023", "Geburtsjahr",1);
 
-        listDTO = service.getAllByFilter("ite", "titel");
-        assertEquals(1, listDTO.size());
+        testServiceGetAllByFilter("ite", "titel",1);
 
-        listDTO = service.getAllByFilter("le", "titel");
-        assertEquals(0, listDTO.size());
+        testServiceGetAllByFilter("le", "titel",0);
 
-        listDTO = service.getAllByFilter("or", "ort");
-        assertEquals(1, listDTO.size());
+        testServiceGetAllByFilter("or", "ort",1);
 
-        listDTO = service.getAllByFilter("Oettershagen", "ort");
-        assertEquals(0, listDTO.size());
+        testServiceGetAllByFilter("Oettershagen", "ort",0);
 
-        listDTO = service.getAllByFilter("beschrei", "beschreibung");
-        assertEquals(1, listDTO.size());
+        testServiceGetAllByFilter("beschrei", "beschreibung",1);
 
-        listDTO = service.getAllByFilter("descr", "beschreibung");
-        assertEquals(0, listDTO.size());
+        testServiceGetAllByFilter("descr", "beschreibung",0);
 
-        listDTO = service.getAllByFilter("url", "website");
-        assertEquals(1, listDTO.size());
+        testServiceGetAllByFilter("url", "website",1);
 
-        listDTO = service.getAllByFilter("seite", "website");
-        assertEquals(0, listDTO.size());
+        testServiceGetAllByFilter("seite", "website",0);
 
-        listDTO = service.getAllByFilter("unter", "unternehmen");
-        assertEquals(1, listDTO.size());
+        testServiceGetAllByFilter("unter", "unternehmen",1);
 
-        listDTO = service.getAllByFilter("le", "unternehmen");
-        assertEquals(0, listDTO.size());
+        testServiceGetAllByFilter("le", "unternehmen",0);
+    }
+    private void testServiceGetAllByFilter(String filter, String attribute, int expectedSize) {
+        listDTO = service.getAllByFilter(filter, attribute);
+        assertEquals(expectedSize, listDTO.size());
     }
 
     @Test
