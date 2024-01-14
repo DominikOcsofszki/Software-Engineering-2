@@ -5,9 +5,11 @@ import de.hbrs.se2.womm.views.extra.ASSETS;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Builder
-public class StudentDTO implements AbstractDTO {
+public class StudentDTO implements AbstractDTO, Serializable {
     private NutzerDTO nutzer;
     private Long studentId;
     private String studentVorname;

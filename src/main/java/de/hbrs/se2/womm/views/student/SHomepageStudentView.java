@@ -7,6 +7,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import de.hbrs.se2.womm.chat.SChatView;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.services.StelleService;

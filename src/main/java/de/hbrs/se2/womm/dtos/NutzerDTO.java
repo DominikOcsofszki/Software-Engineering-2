@@ -10,10 +10,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
+import java.io.Serializable;
+
 @Builder
 @Data
 @Getter
-public class NutzerDTO {
+public class NutzerDTO implements Serializable {
     private long nutzerId;
     private String nutzerMail;
     private Boolean nutzerAktiv;
