@@ -4,6 +4,7 @@ import de.hbrs.se2.womm.selenium.extra.AbstractPrepareTestSelenium;
 import de.hbrs.se2.womm.selenium.extra.LOCATORS;
 import de.hbrs.se2.womm.selenium.pages.LoginPage;
 import de.hbrs.se2.womm.selenium.pages.RegisterPage;
+import org.junit.jupiter.api.Test;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -26,11 +27,11 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
         String surname = "test";
         String username = "seleniumtest"+randomInt;
         String email = "seleniumtest"+randomInt+"@web.de";
-        String password = "seleniumtest";
-        String confirmPassword = "seleniumtest";
+        String pw = "seleniumtest";
+        String cP = "seleniumtest";
         String bday = "01.01.2000";
         String location = "world";
-        registerPage.register(name, surname, username, email, password, confirmPassword, bday, location);
+        registerPage.register(name, surname, username, email, pw, cP, bday, location);
     }
 //    @Test
     public void testRegisterAndLogin() {
@@ -39,12 +40,13 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
         String surname = "test";
         String username = "seleniumtest"+randomInt;
         String email = "seleniumtest"+randomInt+"@web.de";
-        String password = "seleniumtest";
-        String confirmPassword = "seleniumtest";
+        String pw = "seleniumtest";
+        String cP = "seleniumtest";
         String bday = "01.01.2000";
         String location = "world";
-        registerPage.register(name, surname, username, email, password, confirmPassword, bday, location);
-        loginPage.login(username, password);
+        registerPage.register(name, surname, username, email, pw, cP, bday, location);
+        loginPage.login(username, pw);
+        wait.until(driver -> driver.findElement(LOCATORS.LOGOUT_BUTTON).isDisplayed());
         assert(driver.findElement(LOCATORS.LOGOUT_BUTTON).isDisplayed());
 
         if(driver.findElement(LOCATORS.LOGOUT_BUTTON).isDisplayed()){
