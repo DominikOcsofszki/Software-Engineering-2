@@ -34,9 +34,9 @@ public class BewerbungServiceTest {
 
     @Test
     void testGetAll() {
-        // Mocking the behavior of bewerbungRepository
+
         when(bewerbungRepositoryMock.findAll()).thenReturn(Arrays.asList(be));
-        // Test
+
         List<BewerbungDTO> bewerbungDTOList = bewerbungService.getAll();
         assertNotNull(bewerbungDTOList);
         assertEquals(1,bewerbungDTOList.size());
@@ -45,9 +45,9 @@ public class BewerbungServiceTest {
     @Test
     void testGetById() {
         Long bewerbungId = 1L;
-        // Mocking the behavior of bewerbungRepository
+
         when(bewerbungRepositoryMock.findById(bewerbungId)).thenReturn(Optional.of(be));
-        // Test
+
         Optional<BewerbungDTO> bewerbungDTO = bewerbungService.getById(bewerbungId);
         assertTrue(bewerbungDTO.isPresent());
         assertEquals(bewerbungDTO.get().getBewerbungId(),(long)be.getBewerbungId());
@@ -56,10 +56,10 @@ public class BewerbungServiceTest {
     @Test
     void testGetByNutzerId() {
         Long nutzerId = 1L;
-        // Mocking the behavior of bewerbungRepository
+
         when(bewerbungRepositoryMock.findBewerbungByStudent_Nutzer_NutzerId(nutzerId))
                 .thenReturn(Arrays.asList(be));
-        // Test
+
         List<BewerbungDTO> bewerbungDTOList = bewerbungService.getByStudentNutzerId(nutzerId);
         assertNotNull(bewerbungDTOList);
     }

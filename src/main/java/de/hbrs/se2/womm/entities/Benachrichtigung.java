@@ -18,7 +18,7 @@ public class Benachrichtigung {
     @Column(name = "nachricht")
     private String nachricht;
 
-    //If false the message hasn't been read
+
     @Column(name = "gelesen")
     private boolean gelesen;
 

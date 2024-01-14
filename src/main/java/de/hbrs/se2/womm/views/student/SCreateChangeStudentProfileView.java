@@ -94,7 +94,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
             studentDTO.setStudentSemester(semester.getValue().intValue());
         }
 
-        //ToDO studentDTO.setStudentCV(lebenslauf.getValue());
+
 
         studentService.saveStudent(studentDTO);
     }
@@ -138,7 +138,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                 comboBoxProfilePicture
         );
 
-        // ----------------- Header (Name) -----------------
+
 
         VerticalLayout layoutName = new VerticalLayout();
         Span spanName = getWommBuilder().Span.create("Name");
@@ -156,7 +156,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                 spanNameInformation
         );
 
-        // ----------------- Date of Birth -----------------
+
 
         VerticalLayout layoutDob = new VerticalLayout(); // Dob = Date of Birth
         Span spanDob = getWommBuilder().Span.create("Date of Birth");
@@ -169,7 +169,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         try {
             datePickerDob.setValue(LocalDate.parse(studentDTO.getStudentGeburtstag()));
         } catch (Exception e) {
-//            e.printStackTrace();    //TODO remove this from production
+
             datePickerDob.setValue(LocalDate.now());
         }
         datePickerDob.setWidth("100%");
@@ -179,7 +179,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                 datePickerDob
         );
 
-        // ----------------- E-Mail Checkbox -----------------
+
 
         Checkbox checkEmailNotifs = new Checkbox();
 
@@ -189,7 +189,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         checkEmailNotifs.setLabelComponent(spanEmailNotifsDescription);
         checkEmailNotifs.setValue(studentDTO.isStudentBenachrichtigung());
 
-        // ----------------- E-Mail -----------------
+
 
         VerticalLayout layoutEmail = new VerticalLayout();
         Span emailFieldHeader = getWommBuilder().Span.create("e-mail");
@@ -223,7 +223,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                 emailFieldConfirm
         );
 
-        // ----------------- Password -----------------
+
 
         VerticalLayout layoutPassword = new VerticalLayout();
         Span spanPasswordFieldHeader = getWommBuilder().Span.create("Password");
@@ -279,14 +279,14 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                 passwordNewConfirm
         );
 
-        // ----------------- Location -----------------
+
 
         TextField fieldLocation = new TextField();
         fieldLocation.setValue(studentDTO.getNutzer().getNutzerOrt() == null ? "" : studentDTO.getNutzer().getNutzerOrt());
         VerticalLayout layoutLocation = generateSinglePropertyField("Location", fieldLocation);
         layoutLocation.setSpacing(false);
 
-        // ----------------- Bio -----------------
+
 
         TextArea textAreaBio = new TextArea();
         textAreaBio.setValue(studentDTO.getStudentBio() == null ? "" : studentDTO.getStudentBio());
@@ -294,7 +294,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         layoutBio.setSpacing(false);
         layoutBio.getStyle().set("width", "200%");
 
-        // ----------------- Specializations -----------------
+
 
         TextArea textAreaSpecializations = new TextArea();
         textAreaSpecializations.setValue(studentDTO.getStudentSpezialisierung() == null ? "" : studentDTO.getStudentSpezialisierung());
@@ -302,7 +302,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         layoutSpec.setSpacing(false);
         layoutSpec.getStyle().set("width", "200%");
 
-        // ----------------- Semester -----------------
+
 
         NumberField numberFieldSemester = new NumberField();
         Integer semesters = studentDTO.getStudentSemester();
@@ -310,7 +310,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         VerticalLayout layoutSemester = generateSinglePropertyField(getWommBuilder().translateText("Semester"), numberFieldSemester);
         layoutSemester.setSpacing(false);
 
-        // ----------------- Curriculum Vitae -----------------
+
 
         TextArea textAreaCurriculumVitae = new TextArea();
         textAreaCurriculumVitae.setValue("Muss noch gemacht werden!");   //ToDO need CV DTO access
@@ -318,7 +318,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         layoutCV.setSpacing(false);
         layoutCV.getStyle().set("width", "200%");
 
-        // ----------------- Save Changes -----------------
+
 
         Button buttonSaveChanges = getWommBuilder().Button.create("Save Changes");
         buttonSaveChanges.addClickListener(e -> {
@@ -403,22 +403,22 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
     }
 
     private boolean validatePassword(PasswordField oldPassword, PasswordField newPassword, PasswordField newPasswordConfirm) {
-        // Null guard clause
+
         if (oldPassword == null || newPassword == null || newPasswordConfirm == null) {
             return false;
         }
 
-        // Empty / Invalid tests
+
         if (!newPassword.isInvalid() && newPassword.getValue().isBlank()) {
             return false;
         }
 
-        // Passwords match
+
         if (!newPassword.getValue().equals(newPasswordConfirm.getValue())) {
             return false;
         }
 
-        // Old password is not empty
+
         if (oldPassword.getValue().isBlank()) {
             return false;
         }

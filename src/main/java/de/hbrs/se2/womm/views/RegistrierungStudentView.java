@@ -76,7 +76,7 @@ public class RegistrierungStudentView extends AViewWomm {
         nameComponent.setRequired(true);
         nameComponent.setRequiredIndicatorVisible(true);
         String nameIsRequired = getWommBuilder().translateText("Name is required");
-//        String nameIsRequired = getWommBuilder().translateText("Name is required");
+
         nameComponent.setErrorMessage(nameIsRequired);
 
         surnameComponent = getWommBuilder().TextField.create("Surname");
@@ -235,8 +235,8 @@ public class RegistrierungStudentView extends AViewWomm {
         request.setUsername(usernameComponent.getValue());
         request.setPassword(passwordComponent.getValue());
 
-        //Outputs this date as a String, such as 2007-12-03.
-        //The output will be in the ISO-8601 format yyyy-MM-dd.
+
+
         request.setDob(dateOfBirthComponent.getValue().toString());
 
         request.setLocation(locationComponent.getValue());

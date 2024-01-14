@@ -101,13 +101,13 @@ public class UnternehmenServiceTest {
     void testSaveUnternehmen() {
         NutzerDTO nutzerDTO = NutzerDTO.builder()
                 .nutzerId(1L)
-                // weitere Nutzer-Details setzen, falls erforderlich
+
                 .build();
 
         UnternehmenDTO unternehmenDTO = UnternehmenDTO.builder()
                 .unternehmenId(1L)
                 .nutzer(nutzerDTO)
-                // weitere Unternehmens-Details setzen, falls erforderlich
+
                 .build();
 
         Nutzer nutzer = nutzerMapper.nutzerDTOToNutzer(nutzerDTO);

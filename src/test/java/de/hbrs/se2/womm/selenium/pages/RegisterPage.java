@@ -34,13 +34,13 @@ public class RegisterPage extends AbstractPage {
         driver.get(getWebsiteUrl());
         wait.until(webDriver -> webDriver.getTitle().equals(getWebsiteTitle()));
     }
-//    private void setUp() {
-//        usernameField = driver.findElement(By.id("input-vaadin-text-field-6"));
-//        passwordField = driver.findElement(By.id("input-vaadin-password-field-7"));
-//        loginButton = driver.findElement(By.id("login-button")); //ToDo: ID ändern
-//    }
+
+
+
+
+
     private void setUp() {
-//        name = driver.findElement(By.id("text-field-builder-1"));
+
 
         name = driver.findElement(LOCATORS.TEXT_FIELD_BUILDER_1);
         surname = driver.findElement(LOCATORS.TEXT_FIELD_BUILDER_2);
@@ -63,12 +63,12 @@ public class RegisterPage extends AbstractPage {
         this.email.sendKeys(email);
         this.password.sendKeys(password);
         this.confirmPassword.sendKeys(confirmPassword);
-//        this.bday.sendKeys(Keys.COMMAND + "a");
-//        this.bday.sendKeys(Keys.DELETE);
-//        this.bday.sendKeys(Keys.ESCAPE);
-//        this.bday.sendKeys(bday);
-//        this.bday.click();
-//        wait.until(webDriver -> this.bday.getAttribute("value").equals(bday));
+
+
+
+
+
+
 
         this.location.sendKeys(location);
         wait.until(webDriver -> this.location.getAttribute("value").equals(location));
@@ -76,12 +76,12 @@ public class RegisterPage extends AbstractPage {
         wait.until(webDriver -> !(webDriver.getTitle().equals(getWebsiteTitle())));
     }
 
-//
-//    public void login(String username, String password) {
-//        setUp();
-//        usernameField.sendKeys(username);
-//        passwordField.sendKeys(password);
-//        loginButton.click();
-//        wait.until(webDriver -> !(webDriver.getTitle().equals(getWebsiteTitle())));
-//    }
+
+
+
+
+
+
+
+
 }

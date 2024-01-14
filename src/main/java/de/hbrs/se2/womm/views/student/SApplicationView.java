@@ -39,7 +39,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
     private Long studentID;
     private String studentName;
     private String studentVorname;
-    //private byte[] studentProfilePicture;
+
 
     public SApplicationView(BewerbungService bewerbungService, StudentService studentService, StelleService stelleService) {
         super();
@@ -72,7 +72,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
         fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
         studentName = student.getStudentName();
         studentVorname = student.getStudentVorname();
-        //studentProfilePicture = student.getNutzer().getNutzerProfilbild();
+
 
         setUpTop();
 
@@ -101,7 +101,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
     }
 
     private void setUpDoesNotExist() {
-        //TODO
+
     }
 
     private void setUpStatus(String bewerbungStatus) {
@@ -150,7 +150,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
     private void setUpStellenanzeige() {
         VerticalLayout stellenanzeige = new VerticalLayout();
 
-        // Ort
+
 
         HorizontalLayout ortLayout = new HorizontalLayout();
         Icon ortsIcon = VaadinIcon.PIN.create();
@@ -161,7 +161,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
 
         stellenanzeige.add(ortLayout);
 
-        // Hyperlink
+
 
         HorizontalLayout linkLayout = new HorizontalLayout();
         Icon linkIcon = VaadinIcon.LINK.create();
@@ -175,7 +175,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
 
         stellenanzeige.add(linkLayout);
 
-        // Beschreibung + Header
+
 
         Div beschreibung = new Div();
 

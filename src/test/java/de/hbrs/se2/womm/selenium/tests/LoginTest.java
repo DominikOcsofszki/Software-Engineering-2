@@ -12,21 +12,21 @@ public class LoginTest extends AbstractPrepareTestSelenium {
     @Override
     protected void setupPageBeforeEach() {
         loginPage = new LoginPage(driver, wait);
-//        this.logoutPages = new LogoutPages(driver);
+
         loginPage.goToWebsiteAndWaitUntilTitlePresent();
     }
 
-//    String name = "selenium";
-//    String surname = "test";
-//    String username = "seleniumtest";
-//    String email = "seleniumtest@web.de";
-//    String password = "seleniumtest";
-//    String confirmPassword = "seleniumtest";
-//    String bday = "01.01.2000";
-//    String location = "world";
-//    registerPage.register(name, surname, username, email, password, confirmPassword, bday, location);
 
-//    @Test
+
+
+
+
+
+
+
+
+
+
     void testLogin() {
         loginPage.login("seleniumtest", "seleniumtest");
         assert(driver.findElement(LOCATORS.LOGOUT_BUTTON).isDisplayed());

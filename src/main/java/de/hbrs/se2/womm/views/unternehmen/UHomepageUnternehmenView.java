@@ -35,7 +35,7 @@ public class UHomepageUnternehmenView extends AViewWomm {
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         setUpHeader();
-       // setUpBanner();
+
 
         setUpSearchFields();
         this.gridFilterStelle = new GridFilterStelle();
@@ -44,18 +44,18 @@ public class UHomepageUnternehmenView extends AViewWomm {
         this.gridFilterStelle.setColumnClickListener(ROUTING.UNTERNEHMEN.UJobProjectWorkshopDisplayView);
         add(gridFilterStelle);
 
-//        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
+
     }
 
     private void setUpComponentFilterGridControllerStellen() { //ToDo: this was added
-//        add(new ComponentFilterGridControllerStellen(controller));
-//        add(new ComponentFilterStelle(controller));
+
+
     }
 
 
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
-        //Buttons
+
         String button1 = getWommBuilder().translateText("Create advertisement");
         Button b1 = new Button(button1, new Icon(VaadinIcon.PLUS));
         b1.addClickListener(e -> UI.getCurrent().navigate(UStelleAnzeigeErstellenView.class));
@@ -76,16 +76,16 @@ public class UHomepageUnternehmenView extends AViewWomm {
         Button b5 = new Button(button5, new Icon(VaadinIcon.PENCIL));
         b5.addClickListener(e -> UI.getCurrent().navigate(UEditFirmProfileDisplayView.class));
         header.add(b5);
-        //header.add(new Button("Logout Firmname", new Icon(VaadinIcon.EXIT_O)));
+
         add(header);
-        // Layout (letzten zwei buttons nach rechts)
+
         b5.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
     }
 
 /*    private void setUpBanner() {
         VerticalLayout banner = new VerticalLayout();
-//        Image i = new Image("themes/theme_1/banner.jpg", "https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
+
        Image i = new Image(ASSETS.BANNER.BANNER2, "alt text");
 
         i.setWidth("100%");
@@ -96,12 +96,12 @@ public class UHomepageUnternehmenView extends AViewWomm {
     private void setUpSearchFields() {
         /*
         HorizontalLayout searchFields = new HorizontalLayout();
-        //Offer type
+
         MultiSelectComboBox filter1 = new MultiSelectComboBox("Offer type");
         filter1.setItems("Job offer", "Project", "Workshop", "Internship");
         filter1.setWidth("min-content");
         searchFields.add(filter1);
-        //Industry
+
         MultiSelectComboBox filter2 = new MultiSelectComboBox("Industry");
         filter2.setWidth("min-content");
         filter2.setItems("Informationstechnologie (IT)", "Gesundheitswesen", "Finanzdienstleistungen", "Bildung",
@@ -110,13 +110,13 @@ public class UHomepageUnternehmenView extends AViewWomm {
                 "Fertigung und Produktion", "Transport und Logistik", "Bauwesen", "Energie und Umwelt",
                 "Forschung und Entwicklung", "Design und Kunst", "Landwirtschaft", "Personalwesen", "Telekommunikation");
         searchFields.add(filter2);
-        //Suchfeld
+
         TextField textField = new TextField();
         textField.setLabel("Firm or ad name");
         textField.setPlaceholder("Search");
         textField.setPrefixComponent(VaadinIcon.SEARCH.create());
         searchFields.add(textField);
-        // Suche-Button
+
         Button b = new Button("Search", new Icon(VaadinIcon.SEARCH));
         searchFields.add(b);
         b.getElement().getStyle().set("margin-top", "auto");

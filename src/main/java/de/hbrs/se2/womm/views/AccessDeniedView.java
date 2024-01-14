@@ -18,11 +18,11 @@ public class AccessDeniedView extends AViewWomm implements BeforeEnterObserver {
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        // You can add logic to handle permissions or conditions here
-        // For example, check if the user has access rights to the view
-        // If not, redirect or display an access denied message
 
-        // Here's a simple example showing an access denied message
+
+
+
+
         Text accessDeniedText = new Text(VaadinBuilderWomm.translateTextStatic("Access Denied!"));
         add(accessDeniedText);
         if (CONFIGS.DEVMODE) {

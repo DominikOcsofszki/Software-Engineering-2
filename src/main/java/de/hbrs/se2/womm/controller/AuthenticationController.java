@@ -36,7 +36,7 @@ public class AuthenticationController {
 
     @PostMapping("/logout")
     public ResponseEntity<Void> logoutUser(@RequestBody LogoutRequest request) {
-        // TODO: add logic
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

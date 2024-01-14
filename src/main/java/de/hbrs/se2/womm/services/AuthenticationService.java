@@ -44,7 +44,7 @@ public class AuthenticationService {
         String username = request.getUsername();
         String email = request.getEmail();
         createUser(request, username, Roles.STUDENT.name());
-        // speichert Studenten mit FK zur Nutzer-Tabelle
+
         Nutzer user = nutzerRepository.findNutzerByNutzerMail(email);
         studentRepository.save(Student.builder()
                     .studentVorname(request.getFirstname())
@@ -59,7 +59,7 @@ public class AuthenticationService {
         String username = request.getUsername();
         String email = request.getEmail();
         createUser(request, username, Roles.UNTERNEHMEN.name());
-        // speichert Unternehmen mit FK zur Nutzer-Tabelle
+
         Nutzer user = nutzerRepository.findNutzerByNutzerMail(email);
         unternehmenRepository.save(Unternehmen.builder()
                     .nutzer(user)

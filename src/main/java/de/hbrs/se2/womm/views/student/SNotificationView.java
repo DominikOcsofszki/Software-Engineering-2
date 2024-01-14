@@ -26,9 +26,9 @@ public class SNotificationView extends AViewWomm {
     StelleDTO stelleDTO;
     StelleService stelleService;
     SecurityService securityService;
-    //    StudentService studentService;
+
     AboStudentUnternehmenService aboStudentUnternehmenService;
-    //    StudentDTO studentDTO;
+
     List<AboDTO> aboDTOList;
     List<UnternehmenDTO> unternehmenDTOList;
     List<StelleDTO> stelleDTOList;
@@ -46,7 +46,7 @@ public class SNotificationView extends AViewWomm {
                 map(UnternehmenDTO::getNutzer).
                 map(NutzerDTO::getNutzerId).
                 map(stelleService::getByNutzerId).flatMap(List::stream).toList();
-//                .toList().stream().flatMap(List::stream).toList();
+
         System.out.println("-------------------");
         System.out.println("StelleDTOList: " + stelleDTOList);
         System.out.println("-------------------");
@@ -57,9 +57,9 @@ public class SNotificationView extends AViewWomm {
     }
 
     void setUpHeader() {
-//        H1 headerText = getWommBuilder().H1.create("New notifications from your subscribed companies");
+
         H1 headerText = getWommBuilder().H1.create("New Jobs from your subscribed companies");
-//        H1 headerText = getWommBuilder().H1.create("Notifications");
+
         add(headerText);
     }
 

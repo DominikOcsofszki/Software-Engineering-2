@@ -27,14 +27,14 @@ class UserDetailsManagerImplTest {
         UserDetails user = new NutzerLogin(); // Create a UserDetails object for testing
         userDetailsManager.createUser(user);
 
-        // Verify that nutzerLoginRepository.save() is called with the correct user
+
         verify(nutzerLoginRepository, times(1)).save((NutzerLogin) user);
     }
     @Test
     void testUpdateUser() {
         UserDetails user = new NutzerLogin(); // Create a UserDetails object for testing
         userDetailsManager.updateUser(user);
-        // Verify that nutzerLoginRepository.save() is called with the correct user
+
         verify(nutzerLoginRepository, times(1)).save((NutzerLogin) user);
     }
     @Test
@@ -44,7 +44,7 @@ class UserDetailsManagerImplTest {
 
         assertDoesNotThrow(() -> userDetailsManager.deleteUser(username));
 
-        // Verify that nutzerLoginRepository.findNutzerByNutzerName() is called with the correct username
+
         verify(nutzerLoginRepository, times(1)).findNutzerByNutzerName(username);
     }
     @Test
@@ -52,7 +52,7 @@ class UserDetailsManagerImplTest {
         String username = "nonexistentUser";
         when(nutzerLoginRepository.findNutzerByNutzerName(username)).thenReturn(null);
 
-        // Verify that deleteUser() throws UsernameNotFoundException for a nonexistent user
+
         assertThrows(UsernameNotFoundException.class, () -> userDetailsManager.deleteUser(username));
     }
     @Test
@@ -64,9 +64,9 @@ class UserDetailsManagerImplTest {
 
         assertDoesNotThrow(() -> userDetailsManager.changePassword(oP, nP));
 
-        // Verify that nutzerLoginRepository.findNutzerByNutzerPasswort() is called with the correct old password
+
         verify(nutzerLoginRepository, times(1)).findNutzerByNutzerPasswort(oP);
-        // Verify that nutzerLoginRepository.save() is called with the updated user details
+
         verify(nutzerLoginRepository, times(1)).save(userDetails);
     }
     @Test
@@ -75,7 +75,7 @@ class UserDetailsManagerImplTest {
         String nP = "newPass";
         when(nutzerLoginRepository.findNutzerByNutzerPasswort(oP)).thenReturn(null);
 
-        // Verify that changePassword() throws UsernameNotFoundException for an invalid old password
+
         assertThrows(UsernameNotFoundException.class, () -> userDetailsManager.changePassword(oP, nP));
     }
     @Test
@@ -85,7 +85,7 @@ class UserDetailsManagerImplTest {
 
         assertTrue(userDetailsManager.userExists(username));
 
-        // Verify that nutzerLoginRepository.existsNutzerByNutzerName() is called with the correct username
+
         verify(nutzerLoginRepository, times(1)).existsNutzerByNutzerName(username);
     }
     @Test
@@ -95,7 +95,7 @@ class UserDetailsManagerImplTest {
 
         assertFalse(userDetailsManager.userExists(username));
 
-        // Verify that nutzerLoginRepository.existsNutzerByNutzerName() is called with the correct username
+
         verify(nutzerLoginRepository, times(1)).existsNutzerByNutzerName(username);
     }
     @Test
@@ -107,7 +107,7 @@ class UserDetailsManagerImplTest {
         UserDetails userDetails = userDetailsManager.loadUserByUsername(username);
 
         assertNotNull(userDetails);
-        // Verify that nutzerLoginRepository.findNutzerByNutzerName() is called with the correct username
+
         verify(nutzerLoginRepository, times(1)).findNutzerByNutzerName(username);
     }
     @Test
@@ -115,7 +115,7 @@ class UserDetailsManagerImplTest {
         String username = "nonexistentUser";
         when(nutzerLoginRepository.findNutzerByNutzerName(username)).thenReturn(null);
 
-        // Verify that loadUserByUsername() throws UsernameNotFoundException for a nonexistent user
+
         assertThrows(UsernameNotFoundException.class, () -> userDetailsManager.loadUserByUsername(username));
     }
 }

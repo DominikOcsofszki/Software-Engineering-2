@@ -37,7 +37,7 @@ public abstract class AbstractPrepareTestSelenium {
 
     @AfterEach
     void teardown() {
-//        driver.manage().deleteAllCookies();
+
         driver.quit();
     }
 }

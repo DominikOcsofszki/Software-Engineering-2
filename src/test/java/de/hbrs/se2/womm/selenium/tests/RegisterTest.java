@@ -20,7 +20,7 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
         loginPage = new LoginPage(driver, wait);
     }
 
-//    @Test
+
     public void testRegister() {
         long randomInt = random.nextLong(1_000_000_000);
         String name = "selenium"+randomInt;
@@ -33,7 +33,7 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
         String location = "world";
         registerPage.register(name, surname, username, email, pw, cP, bday, location);
     }
-//    @Test
+
     public void testRegisterAndLogin() {
         long randomInt = random.nextLong(1_000_000_000);
         String name = "selenium"+randomInt;

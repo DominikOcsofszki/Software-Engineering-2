@@ -61,7 +61,7 @@ public class RegistrierungUnternehmenView extends AViewWomm {
 
         setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
 
-//        add(new H4("Student/in Registration"));
+
         H4 h4 = getWommBuilder().H4.create("Company Registration");
         add(h4);
 
@@ -71,7 +71,7 @@ public class RegistrierungUnternehmenView extends AViewWomm {
         companyNameComponent.setRequired(true);
         companyNameComponent.setRequiredIndicatorVisible(true);
         String nameIsRequired = getWommBuilder().translateText("Company Name is required");
-//        String nameIsRequired = getWommBuilder().translateText("Name is required");
+
         companyNameComponent.setErrorMessage(nameIsRequired);
 
         usernameComponent = getWommBuilder().TextField.create("Username");

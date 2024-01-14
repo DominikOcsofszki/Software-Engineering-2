@@ -56,9 +56,9 @@ public abstract class AGridFilter<ExtendAbstractDTO extends AbstractDTO>
         select.setItems(filterByItemsFromDTO);
         HorizontalLayout toolbar = new HorizontalLayout(filterText, select);
         toolbar.addClassName("toolbar");
-//        grid.setAllRowsVisible(true); //TODO do wen want that?
-//        grid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS); //More options
-//        grid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT); //TODO Adding to show all Text
+
+
+
         grid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
         add(toolbar, grid);
     }

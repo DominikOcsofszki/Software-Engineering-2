@@ -9,7 +9,7 @@ import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//@PWA(name = "Womm Application", shortName = "womm-app")
+
 @Viewport("width=device-width, initial-scale=1")
 @BodySize(height = "100vh", width = "100vw")
 @Theme(value="womm-theme")

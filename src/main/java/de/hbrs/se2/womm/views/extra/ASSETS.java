@@ -49,7 +49,7 @@ public class ASSETS {
 
     static public class BANNER {
         public static String BANNER = "themes/banner/banner.jpg";
-//        public static String BANNER1 = "themes/banner/banner1.jpg";
+
         public static String BANNER2 = "themes/banner/banner2.jpg";
         public static String BANNER3 = "themes/banner/banner3.jpg";
     }

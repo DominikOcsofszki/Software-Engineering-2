@@ -31,7 +31,7 @@ public class UNotificationView extends VerticalLayout {
 
     private void setUpHeader(){
         HorizontalLayout header = new HorizontalLayout();
-        //Suchfeld
+
         header.add(new H1("Neue Benachrichtigungen"));
         add(header);
     }
@@ -47,8 +47,8 @@ public class UNotificationView extends VerticalLayout {
     private void setUpUNotification() {
         VerticalLayout notification = new VerticalLayout();
 
-        //Todo Für Unternehmen zugehörige Benachrichtigungen anzeigen
-        //ToDo demoInhalte ersetzen
+
+
 
         Image image1 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
         Image image2 = new Image(ASSETS.RANDOM.USER, "Alternative image text");
@@ -68,7 +68,7 @@ public class UNotificationView extends VerticalLayout {
 
         Grid<demoInhalt> grid = new Grid<>(demoInhalt.class, false);
 
-        //ToDo Verlinkung zur entsprechenden Bewerbung anpassen
+
 
         grid.setItems(inhalt);
         grid.addComponentColumn(demoInhalt::getImage).setHeader("Profilbild").setWidth("10%");

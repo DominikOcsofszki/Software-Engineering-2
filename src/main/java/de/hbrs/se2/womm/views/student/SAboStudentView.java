@@ -34,7 +34,7 @@ public class SAboStudentView extends  AViewWomm{
         add(abonnements);
         gridFilterAboFromStudent.setUpFromOutside(AboDTOList);
         add(gridFilterAboFromStudent);
-//        System.out.println(AboDTOList);
+
     }
 
 }

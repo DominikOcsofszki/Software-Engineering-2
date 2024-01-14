@@ -3,14 +3,14 @@ package de.hbrs.se2.womm.views.extra;
 import java.util.HashMap;
 import java.util.Map;
 
-//Translating of the GUI
-//Generated from
+
+
 public class TranslateMap {
     public static Map<String, String> translateMap = new HashMap<>();
 
     static {
         translateMap.put("", "");
-        // LandingPageView
+
         translateMap.put("Your job search portal. Discover thousands of job opportunities and more.", "Dein Jobportal. Entdecke tausende Jobangebote und mehr.");
         translateMap.put("SignUp as Student", "Registriere dich als Student");
         translateMap.put("SignUp as Company", "Registriere dich als Unternehmen");
@@ -18,26 +18,26 @@ public class TranslateMap {
         translateMap.put("Want to create company profile? Contact us at kontakt@womm.de.", "Möchtest du ein Firmenprofil erstellen? Kontaktiere uns unter kontakt@womm.de.");
         translateMap.put("LogIn", "Anmelden");
 
-        //UHomepageUnternehmenView
+
         translateMap.put("Create advertisement", "Stellenanzeige erstellen");
         translateMap.put("View applications", "Bewerbungen anschauen");
 
-        //AGridFilter
+
         translateMap.put("Filter by...", "Filter nach...");
 
-        //GridFilterStelle (filter by)
+
         translateMap.put("Advertisement title", "Name Stellenanzeige"); // dont change!!
         translateMap.put("Firm name", "Name Unternehmen"); // dont change!!
 
-        // SCreateChangeStudentProfileView
+
         translateMap.put("Home", "Startseite");
         translateMap.put("Name", "Name");
 
-        // SAboStudentView
+
         translateMap.put("Enter keyword", "Stichwort eingeben");
         translateMap.put("Subscriptions", "Abonnements");
 
-        //Unternehmen Layout
+
         translateMap.put("UChatView", "Chat");
         translateMap.put("UEditFirmProfileDisplayView", "Profil editieren");
         translateMap.put("UFirmProfileDisplayView", "Profil");
@@ -47,7 +47,7 @@ public class TranslateMap {
         translateMap.put("UNotificationView", "Benachrichtigungen");
         translateMap.put("UApplicationsView", "Bewerbungen");
 
-        // Student Layout
+
         translateMap.put("SJobProjectWorkshopDisplayView", "Stellenanzeigen(delete link)");
         translateMap.put("SStudentProfileDisplayView", "Profil");
         translateMap.put("SCreateChangeStudentProfileView", "Profil editieren");
@@ -63,16 +63,16 @@ public class TranslateMap {
         translateMap.put("Notifications", "Benachrichtigungen");
         translateMap.put("Edit profile", "Profil bearbeiten");
 
-        // UApplicationView
+
         translateMap.put("%s is not a valid ID.", "%s ist keine gültige ID.");
         translateMap.put("Surname, Name", "Name, Vorname");
         translateMap.put("Motivational letter", "Anschreiben");
         translateMap.put("The application with the ID '%s' could not be found.", "Die Bewerbung mit der ID '%s' konnte nicht gefunden werden.");
 
-        //AccessDeniedView
+
         translateMap.put("Access Denied!", "Zugriff verweigert!");
 
-        //registerview
+
         translateMap.put("Confirm Password", "Passwort bestätigen");
         translateMap.put("Password is required", "Passwort ist erforderlich");
         translateMap.put("Email connected to your future account", "Email, die mit Ihrem zukünftigen Konto verbunden ist");
@@ -101,7 +101,7 @@ public class TranslateMap {
         translateMap.put("Surname", "Nachname");
         translateMap.put("Company Name", "Name Ihres Unternehmens");
 
-        //StudentProfileDisplayView
+
         translateMap.put("Location", "Ort");
         translateMap.put("Date of Birth", "Geburtstag");
         translateMap.put("e-mail", "E-Mail");
@@ -111,7 +111,7 @@ public class TranslateMap {
         translateMap.put("Specializations", "Spezialisierungen");
         translateMap.put("Biography", "Biographie");
 
-        //CreateChangeStudentProfileView
+
         translateMap.put("Enter your old password", "Altes Passwort");
         translateMap.put("Save Changes", "Änderungen Speichern");
         translateMap.put("Please enter a valid e-mail address", "Bitte eine gültige E-Mail-Adresse angeben");
@@ -133,7 +133,7 @@ public class TranslateMap {
         translateMap.put("Curriculum Vitae", "Lebenslauf");
         translateMap.put("Changes saved!", "Änderungen gespeichert!");
 
-        //SJobProjectWorkshopDisplayView
+
         translateMap.put("The job offer is not available anymore :(", "Das Stellenangebot existiert nicht mehr :(");
         translateMap.put("Please enter your application into the text field!", "Trage bitte dein Anschreiben in das Feld ein!");
         translateMap.put("Send", "Abschicken");
@@ -142,20 +142,20 @@ public class TranslateMap {
         translateMap.put("Apply later", "Später bewerben");
         translateMap.put("Your application has been sent successfully", "Deine Bewerbung wurde erfolgreich versendet");
 
-        //UApplicationView
+
         translateMap.put("Accept", "Annehmen");
         translateMap.put("Decline", "Ablehnen");
         translateMap.put("You have accepted the application", "Sie haben die Bewerbung angenommen");
         translateMap.put("You have declined the application", "Sie haben die Bewerbung abgelehnt");
 
 
-        // StudentLayout
+
         translateMap.put("SApplicationsView", "Bewerbungen");
         translateMap.put("Log out(", "Ausloggen(");
         translateMap.put("Log out", "Ausloggen");
 
 
-        // SApplicationView
+
         translateMap.put("Your application has been accepted.", "Ihre Bewerbung wurde akzeptiert.");
         translateMap.put("Your application has been delcined.", "Ihre Bewerbung wurde abgelehnt.");
         translateMap.put("Your application is awaiting review.", "Ihre Bewerbung befindet sich in Bearbeitung.");
@@ -163,7 +163,7 @@ public class TranslateMap {
         translateMap.put("Application photo", "Bewerbungsfoto");
         translateMap.put("Application text", "Bewerbungs-Text");
 
-        // SNotificationView
+
         translateMap.put("New Jobs from your subscribed companies", "Neue Stellenangebote von deinen abonnierten Unternehmen");
 
 

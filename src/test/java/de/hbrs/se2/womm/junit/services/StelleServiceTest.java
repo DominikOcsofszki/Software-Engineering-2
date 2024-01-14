@@ -184,7 +184,7 @@ public class StelleServiceTest {
 
     @Test
     void testGetAllByFilter() {
-        //--------Mocking----------
+
         when(repo.findByStelleTitelIsContainingIgnoreCase(any(String.class))).thenAnswer(
                 i -> {
                     return listEntity
@@ -225,7 +225,7 @@ public class StelleServiceTest {
                             .toList();
                 }
         );
-        //--------Testing----------
+
         listDTO = service.getAllByFilter("2023", "Geburtsjahr");
         assertEquals(0, listDTO.size());
 

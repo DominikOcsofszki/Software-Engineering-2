@@ -73,7 +73,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
-        //Ueberschrift
+
         header.add(new H1("Stellenausschreibung erstellen:"));
 
         add(header);
@@ -82,26 +82,26 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     private void setUpStellenanzeige() {
         VerticalLayout stellenanzeige = new VerticalLayout();
 
-        //Combobox
+
         ComboBox stellenanzeigenTyp = new ComboBox("Stellenanzeigen-Typ");
         stellenanzeigenTyp.setWidth("min-content");
         stellenanzeigenTyp.setItems("Workshop", "Projekt", "Werksstudenten-Stelle");
 
         stellenanzeige.add(stellenanzeigenTyp);
 
-        //TextfeldTitel
+
         stelleTitel.setPlaceholder("Stellenbezeichnung");
         stelleTitel.setClearButtonVisible(true);
 
         stellenanzeige.add(stelleTitel);
 
-        //Textfeld StelleOrt
+
         stelleOrt.setPlaceholder("Ortsname");
         stelleOrt.setClearButtonVisible(true);
 
         stellenanzeige.add(stelleOrt);
 
-        //Textfeld StelleWebsite
+
         stelleWebsite.setPlaceholder("URL");
         stelleWebsite.setClearButtonVisible(true);
 
@@ -110,21 +110,21 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
         stellenanzeige.add(stelleWebsite);
 
-        //Textfeld StelleBeschreibung
+
         stelleBeschreibung.setWidthFull();
         stelleBeschreibung.setPlaceholder("Stellenbeschreibung");
         stelleBeschreibung.setClearButtonVisible(true);
 
         stellenanzeige.add(stelleBeschreibung);
 
-        //ToDo -Erstellung eines Datenbankobjekts mit StellenanzeigeTyp, StellenanzeigeBezeichnung, StellenanzeigeBeschreibung, FirmenLogo, FirmenName
-        //ToDo -Routing zum korrekten UnternehmenView
-        //Erstellen-Button
+
+
+
         Button erstellenButton = new Button("Erstellen");
         erstellenButton.addClickListener(e -> {
             if (stelleWebsite.getValue().matches(URL_REGEX)) {
                 buildAndSaveStelleDTO();
-//                UI.getCurrent().navigate(UFirmProfileDisplayView.class);
+
             } else {
                 Notification notification = new Notification();
                 notification.setText("Bitte überprüfen Sie ihre Eingaben!");
@@ -134,9 +134,9 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
         });
 
-        // erstellenButton.addClickListener(e -> {
-        //     getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
-        // });
+
+
+
         stellenanzeige.add(erstellenButton);
 
         add(stellenanzeige);
@@ -156,12 +156,12 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                 .unternehmen(unternehmenDTO)
                 .erstellungsdatum((new Date()))
                 .build();
-//        StelleDTO stelleDTO = stelleService.saveStelle(erzeugDTO);
+
         stelleService.saveStelle(erzeugDTO);
         List<AboDTO> allAboDTO =
                 aboStudentUnternehmenService.getByNutzerId(unternehmenDTO.getNutzer().getNutzerId());
-//        List<AboDTO> allAboDTO =
-//                aboStudentUnternehmenService.getAll();
+
+
         System.out.println("-----------------------------------");
         System.out.println("allAboDTO: " + allAboDTO);
         System.out.println("-----------------------------------");

@@ -28,8 +28,8 @@ public class UnternehmenLayout extends AbstractLayoutLoggedIn {
                 setUpMenuBarWomm("UApplicationsView", UApplicationsView.class, VaadinIcon.BRIEFCASE),
                 setUpMenuBarWomm("UEditFirmProfileDisplayView", UEditFirmProfileDisplayView.class, VaadinIcon.EDIT),
                 setUpMenuBarWomm("UStelleAnzeigeErstellenView", UStelleAnzeigeErstellenView.class, VaadinIcon.PLUS)
-//                new RouterLink(VaadinBuilderWomm.translateTextStatic("UChatView"), UChatView.class), //TODO final check
-//                new RouterLink(VaadinBuilderWomm.translateTextStatic("UNotificationView"), UNotificationView.class) //TODO Final CHECK
+
+
         ));
     }
 }
@@ -40,5 +40,5 @@ public class UnternehmenLayout extends AbstractLayoutLoggedIn {
         new RouterLink(VaadinBuilderWomm.translateTextStatic("UFirmProfileDisplayView"), UFirmProfileDisplayView.class),
         new RouterLink(VaadinBuilderWomm.translateTextStatic("UHomepageUnternehmenView"), UHomepageUnternehmenView.class),
         new RouterLink(VaadinBuilderWomm.translateTextStatic("UStelleAnzeigeErstellenView"), UStelleAnzeigeErstellenView.class)
-//                new RouterLink(VaadinBuilderWomm.translateTextStatic("UChatView"), UChatView.class), //TODO final check
-//                new RouterLink(VaadinBuilderWomm.translateTextStatic("UNotificationView"), UNotificationView.class) //TODO Final CHECK*/
+
+

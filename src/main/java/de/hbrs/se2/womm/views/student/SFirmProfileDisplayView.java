@@ -37,7 +37,7 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
 
     private UnternehmenService unternehmenService;
     private StelleService stelleService;
-    //    UnternehmenDTO unternehmenDTO = GenerateUnternehmenDTO.generateUnternehmenDTO(1).get(0);
+
     private UnternehmenDTO unternehmenDTO;
     private Long unternehmenID;
     private Long studentID;
@@ -70,15 +70,15 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         gridFilterStelle.setColumnClickListener(ROUTING.STUDENT.SJobProjectWorkshopDisplayView);
         add(gridFilterStelle);
     }
-//    public class AboDTO {
-//        private Integer aboId;
-//
-//        private Boolean aboBenachrichtigungen;
-//
-//        private StudentDTO student;
-//
-//        private UnternehmenDTO unternehmen;
-//    }
+
+
+
+
+
+
+
+
+
     private AboDTO returnAboDTO() {
         AboDTO AboDTO = de.hbrs.se2.womm.dtos.AboDTO.builder().build();
         AboDTO.setAboBenachrichtigungen(true);
@@ -93,36 +93,36 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
     }
 
     private void setUp() {
-        // Logo, Company Name, Subscribe and Chat Button
+
         HorizontalLayout buttonsLayout = new HorizontalLayout();
 
-        // Logo, Company Name, Subscribe and Chat Buttons
+
         HorizontalLayout logoAndSubscribeLayout = new HorizontalLayout();
         Div logoAndName = new Div();
-//            Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");
+
         Image companyLogo = new Image(ASSETS.IMG.PLACEHOLDER, "placeholder");
         companyLogo.setWidth(200 + "px");
         companyLogo.setHeight(200 + "px");
-        // Image companyLogo = new Image("themes/theme_1/logo_placeholder.png", "");
-        //companyLogo.setWidth("50px"); // Adjust the width as needed
+
+
         logoAndName.add(companyLogo);
         logoAndName.add(new H2(unternehmenDTO.getName())); // Replace with the actual company name
         logoAndSubscribeLayout.add(logoAndName);
 
-        // Subscribe Button
+
         Button subscribeButton = new Button("Subscribe");
         subscribeButton.addClickListener(e -> {
-            // Logic for subscription
-            // You can implement the subscription logic here
+
+
             setUpSubscrition();
             Notification.show("Subscribed!");
         });
         logoAndSubscribeLayout.add(subscribeButton);
 
-        // Chat Button
+
         Button chatButton = new Button("Chat");
         chatButton.addClickListener(e -> {
-            // Logic for opening a chat
+
             Notification.show("Opening Chat...");
         });
 
@@ -130,16 +130,16 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         buttonsLayout.add(logoAndSubscribeLayout);
         buttonsLayout.add(chatButton);
 
-        // Company Location, Number of Employees, and Company Website
+
         HorizontalLayout detailsLayout = new HorizontalLayout();
 
-        // Company Location with Geo Tag Icon
+
         HorizontalLayout locationLayout = new HorizontalLayout();
         locationLayout.add(new Icon(VaadinIcon.MAP_MARKER), new Span(unternehmenDTO.getNutzer().getNutzerOrt())); // Replace with the actual location
-//            locationLayout.add(new Icon(VaadinIcon.LOCATION_ARROW_CIRCLE_O), new Span("Company Location")); // Replace with the actual location
+
         detailsLayout.add(locationLayout);
 
-        // Link to Company Website with Icon
+
         HorizontalLayout websiteLayout = new HorizontalLayout();
         Icon linkIcon = new Icon(VaadinIcon.EXTERNAL_LINK);
         linkIcon.setColor(""); // Set the color as needed #hex vaadin blue ????
@@ -151,17 +151,17 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         add(companyDescription);
     }
 
-    // Dummy-Stellenanzeigen erstellen (nur für Testzwecke)
+
     private List<Stelle> createDummyStellenanzeigen() {
         List<Stelle> dummyStellenanzeigen = new ArrayList<>();
-        // Hier könntest du echte Stellenanzeigen aus einer Datenquelle laden oder Dummy-Daten verwenden
+
         for (int i = 1; i <= 5; i++) {
             Stelle stelle = new Stelle();
             stelle.setStelleId(i);
             stelle.setStelleTitel("Job " + i);
             stelle.setStelleTitel("Description " + i);
             stelle.setStelleOrt("Location " + i);
-            // Weitere Stellenanzeigen-Eigenschaften setzen
+
             dummyStellenanzeigen.add(stelle);
         }
         return dummyStellenanzeigen;

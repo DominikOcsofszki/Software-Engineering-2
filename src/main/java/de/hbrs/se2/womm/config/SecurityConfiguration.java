@@ -35,7 +35,7 @@ public class SecurityConfiguration extends VaadinWebSecurity {
 /*
 
 */
-    //ToDo Connect to DB
+
     @Bean
     UserDetailsManager userDetailsManager() {
         return new UserDetailsManagerImpl();

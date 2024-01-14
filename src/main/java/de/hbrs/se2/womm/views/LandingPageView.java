@@ -24,32 +24,32 @@ public class LandingPageView extends AViewWomm {
     public LandingPageView() {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
-        // Header-Bereich
+
         HorizontalLayout header = createHeader();
-//        add(header);
 
 
-        // Hero-Bereich
+
+
         VerticalLayout heroSection = createHeroSection();
         add(heroSection);
 
-        // Logo-Bereich
+
         HorizontalLayout logoSection = createLogoSection();
         add(logoSection);
 
-        // Beschreibung
+
         VerticalLayout descriptionSection = createDescriptionSection();
         add(descriptionSection);
 
-        // Registrierungs- oder Anmeldebereich
+
         HorizontalLayout registrationSection = createRegistrationSection();
         add(registrationSection);
 
-        // Kontaktinformationen
+
         Div contactInfo = createContactInfo();
         add(contactInfo);
 
-        // Footer-Bereich
+
         HorizontalLayout footer = createFooter();
         add(footer);
     }
@@ -88,7 +88,7 @@ public class LandingPageView extends AViewWomm {
     }
 
    /* private Div createHeroSection() {
-        // Div-Element, das den Hintergrund bildet
+
         Div heroSection = new Div();
         heroSection.getStyle().set("background-image", "url('themes/theme_1/Background_hero_womm.jpg')");
         heroSection.getStyle().set("background-size", "cover"); // Das Bild auf die gesamte Seite ausdehnen
@@ -107,12 +107,12 @@ public class LandingPageView extends AViewWomm {
     private VerticalLayout createDescriptionSection() {
         VerticalLayout descriptionSection = new VerticalLayout();
         descriptionSection.setAlignItems(Alignment.CENTER);
-//        H1 title = new H1("Find your dream job on w.o.m.m.");
+
         H1 title = getWommBuilder().H1.create("Find your dream job on w.o.m.m.");
         title.getStyle().set("color", "#044FA3"); // HEX-Farbcode
         descriptionSection.add(title);
 
-//        Paragraph description = new Paragraph("Your job search portal. Discover thousands of job opportunities and more.");
+
         Paragraph description = getWommBuilder().Paragraph.create("Your job search portal. Discover thousands of job opportunities and more.");
         description.getStyle().set("color", "#044FA3"); // HEX-Farbcode
         descriptionSection.add(description);
@@ -123,7 +123,7 @@ public class LandingPageView extends AViewWomm {
     private HorizontalLayout createRegistrationSection() {
         HorizontalLayout registrationSection = new HorizontalLayout();
 
-//            Button buttonRegStd = new Button("SignUp");
+
         Button buttonRegStd = getWommBuilder().Button.create("SignUp as Student");
         buttonRegStd.addClickListener( e -> UI.getCurrent().navigate(RegistrierungStudentView.class));
         buttonRegStd.getStyle().set("background-color", "#044FA3"); // HEX-Farbcode
@@ -136,7 +136,7 @@ public class LandingPageView extends AViewWomm {
         buttonRegCpny.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         registrationSection.add(buttonRegCpny);
 
-//            Button buttonLog = new Button("LogIn");
+
         Button buttonLog = getWommBuilder().Button.create("LogIn");
         listenEnterForLoginClick(buttonLog);
         buttonLog.addClickListener( e -> UI.getCurrent().navigate(LoginView.class));

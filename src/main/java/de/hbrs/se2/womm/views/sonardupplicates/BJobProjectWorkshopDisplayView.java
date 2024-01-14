@@ -69,7 +69,7 @@ public class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
             } else {
                 this.stelleDTO = checkStelleDTO.get();
                 System.out.println("Parameter: " + parameter);
-//                setUpBanner();
+
                 setUpHeader();
                 setUpStellenanzeige();
                 if(securityService.isUserStudent()) {
@@ -82,39 +82,39 @@ public class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
         }
 
     }
-    //ToDo Banner anpassen
 
-//    private void setUpBanner() {
-//        VerticalLayout banner = new VerticalLayout();
-//        Image i = new Image("themes/theme_1/banner.jpg", "https://unsplash.com/de/fotos/%EC%B2%AD%EB%A1%9D%EC%83%89-led-%ED%8C%A8%EB%84%90-EUsVwEOsblE");
-//        i.setWidth("100%");
-//        banner.add(i);
-//        add(banner);
-//    }
 
-    //ToDo bestimmten FirmenNamen + FirmenLogo anzeigen
+
+
+
+
+
+
+
+
+
 
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         ImageService imageService = new ImageService();
 
-        //Logo
-//        Image i = new Image(ASSETS.RANDOM.USER, "Alternative image text");
-//        Image i = this.stelleDTO.getStelleUnternehmen().PlaceholderOrImage(); //ToDo Changed
 
-//        Image i = imageService.getImage(this.stelleDTO.getStelleUnternehmen().getNutzer()); //ToDo Changed
-//        Image i = imageService.test();
+
+
+
+
+
         Image i = imageService.getRandomImageHeight(100);
-//        i.setWidth("25%");
+
         header.add(i);
 
-        //Ueberschrift
-//        header.add(new H1("Unternehmenname"));
+
+
         String unternehmenName = this.stelleDTO.getUnternehmen().getName(); //ToDo Changed
         H1 name = new H1(unternehmenName);
-//        boolean isStudent = securityService.isUserStudent();
-//        System.out.println("isStudent: " + isStudent);    //ToDo check if we want to implement the same click for UNternehmen not only students
-//        String routingToUnternehmenWebsite = isStudent ? ROUTING.STUDENT.SFirmProfileDisplayView : ROUTING.UNTERNEHMEN.UFirmProfileDisplayView;
+
+
+
         if(securityService.isUserStudent()) {
             String routingToUnternehmenWebsite = ROUTING.STUDENT.SFirmProfileDisplayView;
             name.addClickListener(e -> UI.getCurrent()
@@ -122,7 +122,7 @@ public class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
             name.getStyle().set("cursor", "pointer");
         }
         header.add(name);
-//        header.add(new H1("Unternehmenname"));
+
         add(header);
     }
 
@@ -130,7 +130,7 @@ public class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
     private void setUpStellenanzeige() {
         VerticalLayout stellenanzeige = new VerticalLayout();
 
-        // Ort
+
 
         HorizontalLayout ortLayout = new HorizontalLayout();
         Icon ortsIcon = VaadinIcon.PIN.create();
@@ -141,7 +141,7 @@ public class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
 
         stellenanzeige.add(ortLayout);
 
-        // Hyperlink
+
 
         HorizontalLayout linkLayout = new HorizontalLayout();
         Icon linkIcon = VaadinIcon.LINK.create();
@@ -156,7 +156,7 @@ public class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
         stellenanzeige.add(linkLayout);
 
 
-        // Beschreibung + Header
+
 
         Div beschreibung = new Div();
 
@@ -188,7 +188,7 @@ public class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
     private void setUpButtons() {
         HorizontalLayout buttons = new HorizontalLayout();
 
-        //Erstellen-Button
+
         Button bewerbungButton = new Button(getWommBuilder().translateText("Apply now"), new Icon(VaadinIcon.PENCIL));
         bewerbungButton.addClickListener(e -> {
             if (formToggle) {
@@ -219,7 +219,7 @@ public class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlP
 
         applicationForm.add(textArea);
 
-        //Erstellen-Button
+
         Button erstellenButton = new Button(getWommBuilder().translateText("Send"));
         erstellenButton.addClickListener(e -> {
             if (textArea.getValue().trim().isEmpty())

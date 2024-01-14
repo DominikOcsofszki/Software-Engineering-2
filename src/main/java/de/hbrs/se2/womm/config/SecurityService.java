@@ -22,7 +22,7 @@ public class SecurityService {
                 return (UserDetails) context.getAuthentication().getPrincipal();
             }
         }
-        // Anonymous or no authentication.
+
         return null;
     }
 
