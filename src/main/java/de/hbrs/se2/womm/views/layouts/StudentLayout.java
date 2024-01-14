@@ -5,14 +5,21 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.services.BenachrichtigungService;
 import de.hbrs.se2.womm.views.student.*;
 
 //@Component
 public class StudentLayout extends AbstractLayoutLoggedIn {
+    BenachrichtigungService benachrichtigungService;
 
-    protected StudentLayout(SecurityService securityService) {
-        super(securityService);
+    protected StudentLayout(SecurityService securityService,
+                           BenachrichtigungService benachrichtigungService) {
+        super(securityService, benachrichtigungService);
+        this.benachrichtigungService = benachrichtigungService;
     }
+//    protected StudentLayout(SecurityService securityService) {
+//        super(securityService);
+//    }}
 
     @Override
     protected void onAttach(AttachEvent attachEvent) {

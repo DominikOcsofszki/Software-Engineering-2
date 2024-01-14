@@ -5,11 +5,16 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.services.BenachrichtigungService;
 import de.hbrs.se2.womm.views.unternehmen.*;
 
 public class UnternehmenLayout extends AbstractLayoutLoggedIn {
-    protected UnternehmenLayout(SecurityService securityService) {
-        super(securityService);
+    BenachrichtigungService benachrichtigungService;
+
+    protected UnternehmenLayout(SecurityService securityService,
+                            BenachrichtigungService benachrichtigungService) {
+        super(securityService, benachrichtigungService);
+        this.benachrichtigungService = benachrichtigungService;
     }
 
     @Override

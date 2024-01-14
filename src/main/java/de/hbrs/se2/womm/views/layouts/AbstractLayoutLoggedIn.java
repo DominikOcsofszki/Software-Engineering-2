@@ -9,14 +9,18 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.menubar.MenuBarVariant;
 import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.services.BenachrichtigungService;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.student.SNotificationView;
 import de.hbrs.se2.womm.views.unternehmen.UNotificationView;
 
 abstract class AbstractLayoutLoggedIn extends AbstractLayout {
     protected final SecurityService securityService;
+    BenachrichtigungService benachrichtigungService;
 
-    AbstractLayoutLoggedIn(SecurityService securityService) {
+    AbstractLayoutLoggedIn(SecurityService securityService,
+                           BenachrichtigungService benachrichtigungService) {
+        this.benachrichtigungService = benachrichtigungService;
         this.securityService = securityService;
         String username = securityService.getAuthenticatedUser() == null ? null :
                 securityService.getAuthenticatedUser().getUsername();
@@ -31,7 +35,8 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
 
     int getMessagesCount() {
         long nutzerId = securityService.getLoggedInNutzerID();
-        int nrOfMessages = (int) nutzerId; //TODO get NR of messages from DB (count)
+        int nrOfMessages = benachrichtigungService.getAnzahlUngelesenByNutzerID(nutzerId);
+//        int nrOfMessages = (int) nutzerId; //TODO get NR of messages from DB (count)
         return nrOfMessages;
     }
 
