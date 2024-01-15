@@ -110,7 +110,7 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         logoAndSubscribeLayout.add(logoAndName);
 
         // Subscribe Button
-        Button subscribeButton = new Button("Subscribe");
+        Button subscribeButton = getWommBuilder().Button.create("Subscribe");
         subscribeButton.addClickListener(e -> {
             // Logic for subscription
             // You can implement the subscription logic here
@@ -120,7 +120,7 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         logoAndSubscribeLayout.add(subscribeButton);
 
         // Chat Button
-        Button chatButton = new Button("Chat");
+        Button chatButton = getWommBuilder().Button.create("Chat");
         chatButton.addClickListener(e -> {
             // Logic for opening a chat
             Notification.show("Opening Chat...");
