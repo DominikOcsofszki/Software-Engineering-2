@@ -77,7 +77,8 @@ public abstract class AGridFilter<ExtendAbstractDTO extends AbstractDTO>
 
     boolean compareFilteringToLowerCase(String checkItem, String inputSearchNameFilter) {
         inputSearchNameFilter = inputSearchNameFilter.toLowerCase();
-        return checkItem.contains(inputSearchNameFilter);
+        String checkItemLowerCase = checkItem.toLowerCase();
+        return checkItemLowerCase.contains(inputSearchNameFilter);
     }
 
     boolean filterFunction(ExtendAbstractDTO dto, String inputSearchNameFilter, String searchBy) {
