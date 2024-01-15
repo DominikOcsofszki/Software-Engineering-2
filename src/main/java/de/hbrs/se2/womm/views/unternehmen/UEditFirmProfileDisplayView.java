@@ -57,8 +57,8 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         this.gridFilterStelle = new GridFilterStelle();
         List<StelleDTO> stelleDTOList = stelleService.getByNutzerId(aktuelleNutzerID);
         this.gridFilterStelle.setUpFromOutside(stelleDTOList);
-//        add(gridFilterStelle); //TODO deleted, since wrong place?
-//        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
+
+
     }
 
     void setupStars(int stars, HorizontalLayout ratingLayout) {
@@ -69,24 +69,24 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 
 
     private void setUp() {
-//        Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");
+
         Image companyLogo = getUnternehmenDTO().PlaceholderOrImage();
         H2 firmName = new H2(getUnternehmenDTO().getName());
         String companyDescription = getUnternehmenDTO().getBeschreibung() == null ?
                 "Company Description" : getUnternehmenDTO().getBeschreibung();
-        long nrOfReviews = 123;//ToDo DTO Reviews ---> Anzahl von Bewertungen
-//        long nrOfReviews = getUnternehmenDTO().getNrOfRatings(); //ToDo DTO Reviews ---> Anzahl von Bewertungen
-        HorizontalLayout ratingLayout = new HorizontalLayout();//ToDo refactored
+        long nrOfReviews = 123;
+
+        HorizontalLayout ratingLayout = new HorizontalLayout();
         int starsRating = 5;
-//        int starsRating = getUnternehmenDTO().getStars(); //ToDo DTO
+
         int nrOfEmployees = 999;
 //        int nrOfEmployees = getUnternehmenDTO().getNumberOfEmployees(); //ToDo DTO
 
-//        String companyLocation = "Company Location";
+
         String companyLocation = getUnternehmenDTO().getNutzer().getNutzerOrt() == null ?
                 "Company Location" : getUnternehmenDTO().getNutzer().getNutzerOrt();
         String companyWebsite = "http://www.companywebsite.com";
-//        String companyWebsite = getUnternehmenDTO().getWebsite();//ToDo DTO
+
         String reviews = " (" + nrOfReviews + " Reviews)";
         setupStars(starsRating, ratingLayout);
 //Set up Fields:
@@ -96,16 +96,16 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         gruendung.setValue(gruendung1);
 
 /*
-        Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");//ToDo put at top
+        Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");
         H2 firmName = new H2("Firm Name");
         String companyDescription = "Company Description";
         long nrOfReviews = 123;
-        HorizontalLayout ratingLayout = new HorizontalLayout();//ToDo refactored
+        HorizontalLayout ratingLayout = new HorizontalLayout();
         int starsRating = 2;
         int nrOfEmployees = 123;
 
         String companyLocation = "Company Location";
-        String companyWebsite = "http://www.companywebsite.com";
+        String companyWebsite = "http:
 
         String reviews =" ("+nrOfReviews+" Reviews)";
         setupStars(starsRating, ratingLayout);
@@ -125,18 +125,18 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 
         HorizontalLayout logoAndEditLayout = new HorizontalLayout();
         Div logoAndName = new Div();
-//        Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");//ToDo put at top
+
         //companyLogo.setWidth("150px");
         logoAndName.add(companyLogo);
-//        logoAndName.add(new H2("Firm Name"));//ToDo put at top, refactored
-        logoAndName.add(firmName);//ToDo put at top, refactored
+
+        logoAndName.add(firmName);
         logoAndEditLayout.add(logoAndName);
         companyLogo.setWidth(200 + "px");
         companyLogo.setHeight(200 + "px");
 
         /*Button editButton = new Button("Edit firm profile");
         editButton.addClickListener(e -> {
-            // Logic to navigate to the edit profile view
+            
             UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
         });
         logoAndEditLayout.add(editButton);*/
@@ -144,81 +144,46 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         //Save Button
         Button saveButton = new Button("Save Changes");
         saveButton.addClickListener(e -> {
-//            UnternehmenDTO newUnternehmenDTO = newUnternehmenDTOFromFields();
-//            unternehmenService.saveUnternehmen(newUnternehmenDTO);
+
+
             unternehmenService.saveUnternehmen(newUnternehmenDTOFromFields());
             UI.getCurrent().getPage().reload();
-            // Logic to save changes made to the firm profile
-            // Implement your saving logic here
+
+
         });
 
-        // Company description Text Area
-//        TextArea descriptionTextArea = new TextArea("Company Description");//ToDo Refactored
-//        descriptionTextArea.setValue(companyDescription);
-//        TextArea descriptionTextArea = new TextArea(companyDescription);//ToDo Refactored
+
         descriptionTextArea.setWidth("100%");
         descriptionTextArea.setHeight("200px");
         add(buttonsLayout);
         buttonsLayout.add(logoAndEditLayout);
         buttonsLayout.add(saveButton);
 
-        // Rating with Number of Reviews
-//        HorizontalLayout ratingLayout = new HorizontalLayout();//ToDo refactored
-//        ratingLayout.add(starsRating);//Refactored
-//        ratingLayout.add(new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR), new Icon(VaadinIcon.STAR));//Refactored
-//        ratingLayout.add(new Span(" (123 Reviews)"));//ToDo Refactored
-        ratingLayout.add(new Span(reviews));//ToDo Refactored
+
+        ratingLayout.add(new Span(reviews));
         add(ratingLayout);
 
 
         // Company Location, Number of Employees, and Company Website (Editable Fields)
-//        TextField locationField = new TextField("Company Location");
-//        locationField.setValue("Your Company's Location");//ToDo changed
+
+
         locationField.setValue(companyLocation);
 
         TextField employeesField = new TextField("Number of Employees");
-//        employeesField.setValue("Number of Employees");//ToDo changed
+
         employeesField.setValue(String.valueOf(nrOfEmployees));
 
-//        TextField websiteField = new TextField("Company Website");
-//        websiteField.setValue("http://www.companywebsite.com");//ToDo changed
+
         websiteField.setValue(companyWebsite);
 
         add(locationField, employeesField, websiteField);
 
         add(descriptionTextArea, gruendung);
 
-        // Job Advertisements - Grid for Displaying Job Postings
-//        Grid<Stelle> jobGrid = new Grid<>();
-//        jobGrid.addColumn(Stelle::getStelleTitel).setHeader("Job title");
-//        jobGrid.addColumn(Stelle::getStelleBeschreibung).setHeader("Job description");
-//        jobGrid.addColumn(Stelle::getStelleOrt).setHeader("Location");
 
-//        List<Stelle> stellenanzeigen = createDummyStellenanzeigen();
-//        jobGrid.setItems(stellenanzeigen);
-//
-//        jobGrid.addItemClickListener(event -> {
-//            Stelle selectedStelle = event.getItem();
-//            if (selectedStelle != null) {
-//                UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
-//            }
-//
-//        });
-//        add(jobGrid);
     }
 
-    //    private List<Stelle> createDummyStellenanzeigen() {
-//        List<Stelle> dummyStellenanzeigen = new ArrayList<>();
-//        for (int i = 1; i <= 5; i++) {
-//            Stelle stelle = new Stelle();
-//            stelle.setStelleId(i);
-//            stelle.setStelleTitel("Job " + i);
-//            stelle.setStelleBeschreibung("Description " + i);
-//            stelle.setStelleOrt("Location " + i);
-//            dummyStellenanzeigen.add(stelle);
-//        }
-//        return dummyStellenanzeigen;
-//    }
+
     private UnternehmenDTO newUnternehmenDTOFromFields() {
         unternehmenDTO.setBeschreibung(descriptionTextArea.getValue());
         unternehmenDTO.setGruendung(gruendung.getValue());
