@@ -25,7 +25,6 @@ import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
-import de.hbrs.se2.womm.dtos.AboDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,9 +86,14 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         return AboDTO;
     }
 
-    void setUpSubscrition() {
-
-        aboStudentUnternehmenService.saveAboStudentUnternehmen(returnAboDTO());
+    boolean setUpCheckSubscrition() {
+        try { //TODO check again
+            aboStudentUnternehmenService.saveAboStudentUnternehmen(returnAboDTO());
+        } catch (Exception e) {
+            Notification.show("You are already subscribed to this company");
+            return false;
+        }
+        return true;
     }
 
     private void setUp() {
@@ -114,8 +118,8 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         subscribeButton.addClickListener(e -> {
             // Logic for subscription
             // You can implement the subscription logic here
-            setUpSubscrition();
-            Notification.show("Subscribed!");
+            boolean notSubscribedYet =  setUpCheckSubscrition();
+            if (notSubscribedYet)Notification.show("Subscribed!");
         });
         logoAndSubscribeLayout.add(subscribeButton);
 
