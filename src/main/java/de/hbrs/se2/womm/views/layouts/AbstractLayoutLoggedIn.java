@@ -11,7 +11,7 @@ import com.vaadin.flow.component.menubar.MenuBarVariant;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.services.BenachrichtigungService;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
-import de.hbrs.se2.womm.views.student.SNotificationView;
+import de.hbrs.se2.womm.views.student.SChatView;
 import de.hbrs.se2.womm.views.unternehmen.UNotificationView;
 
 abstract class AbstractLayoutLoggedIn extends AbstractLayout {
@@ -47,7 +47,7 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
         MenuBar menu = new MenuBar();
         menu.setOpenOnHover(true);
         if (isStudent) {
-            menu.addItem(inboxCounter, e -> UI.getCurrent().navigate(SNotificationView.class));
+            menu.addItem(inboxCounter, e -> UI.getCurrent().navigate(SChatView.class));
         } else {
             menu.addItem(inboxCounter, e -> UI.getCurrent().navigate(UNotificationView.class));
         }
