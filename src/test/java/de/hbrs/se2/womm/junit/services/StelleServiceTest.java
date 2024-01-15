@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.junit.services;
 
 import de.hbrs.se2.womm.dtos.StelleDTO;
+import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.entities.Nutzer;
 import de.hbrs.se2.womm.entities.Stelle;
 import de.hbrs.se2.womm.entities.Unternehmen;
@@ -237,28 +238,29 @@ public class StelleServiceTest {
                 .stelleWebsite("url")
                 .unternehmen(Unternehmen.builder().unternehmenId(101).name("unternehmen").build())
                 .build());
-        testServiceGetAllByFilter("2023", "Geburtsjahr",1);
+        testServiceGetAllByFilter("2023", "Geburtsjahr", 1);
 
-        testServiceGetAllByFilter("ite", "titel",1);
+        testServiceGetAllByFilter("ite", "titel", 1);
 
-        testServiceGetAllByFilter("le", "titel",0);
+        testServiceGetAllByFilter("le", "titel", 0);
 
-        testServiceGetAllByFilter("or", "ort",1);
+        testServiceGetAllByFilter("or", "ort", 1);
 
-        testServiceGetAllByFilter("Oettershagen", "ort",0);
+        testServiceGetAllByFilter("Oettershagen", "ort", 0);
 
-        testServiceGetAllByFilter("beschrei", "beschreibung",1);
+        testServiceGetAllByFilter("beschrei", "beschreibung", 1);
 
-        testServiceGetAllByFilter("descr", "beschreibung",0);
+        testServiceGetAllByFilter("descr", "beschreibung", 0);
 
-        testServiceGetAllByFilter("url", "website",1);
+        testServiceGetAllByFilter("url", "website", 1);
 
-        testServiceGetAllByFilter("seite", "website",0);
+        testServiceGetAllByFilter("seite", "website", 0);
 
-        testServiceGetAllByFilter("unter", "unternehmen",1);
+        testServiceGetAllByFilter("unter", "unternehmen", 1);
 
-        testServiceGetAllByFilter("le", "unternehmen",0);
+        testServiceGetAllByFilter("le", "unternehmen", 0);
     }
+
     private void testServiceGetAllByFilter(String filter, String attribute, int expectedSize) {
         listDTO = service.getAllByFilter(filter, attribute);
         assertEquals(expectedSize, listDTO.size());
@@ -309,6 +311,24 @@ public class StelleServiceTest {
             listEntity.add(input);
             return input;
         });
+
+        stelle = Stelle.builder()
+                .stelleId(100)
+                .stelleTitel("titel")
+                .stelleOrt("ort")
+                .stelleBeschreibung("beschreibung")
+                .stelleWebsite("url")
+                .unternehmen(Unternehmen.builder().name("unternehmen").build())
+                .build();
+
+        stelleDTO = StelleDTO.builder()
+                .stelleId(100L)
+                .stelleTitel("titel")
+                .stelleOrt("ort")
+                .stelleBeschreibung("beschreibung")
+                .stelleWebsite("url")
+                .unternehmen(UnternehmenDTO.builder().name("unternehmen").build())
+                .build();
 
         assertEquals(0, listEntity.size());
 
