@@ -36,8 +36,8 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
     UnternehmenDTO unternehmenDTO;
     TextArea descriptionTextArea = new TextArea("Company Description");
     TextArea gruendung = new TextArea("Since");
-    TextField locationField = new TextField("Company Location");
-    TextField websiteField = new TextField("Company Website");
+    TextField locationField = getWommBuilder().TextField.create("Company Location");
+    TextField websiteField = getWommBuilder().TextField.create("Company Website");
 
     private long aktuelleNutzerID;
     private UnternehmenService unternehmenService;
@@ -142,7 +142,7 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         logoAndEditLayout.add(editButton);*/
 
         //Save Button
-        Button saveButton = new Button("Save Changes");
+        Button saveButton = getWommBuilder().Button.create("Save Changes");
         saveButton.addClickListener(e -> {
 //            UnternehmenDTO newUnternehmenDTO = newUnternehmenDTOFromFields();
 //            unternehmenService.saveUnternehmen(newUnternehmenDTO);
@@ -176,7 +176,7 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 //        locationField.setValue("Your Company's Location");//ToDo changed
         locationField.setValue(companyLocation);
 
-        TextField employeesField = new TextField("Number of Employees");
+        TextField employeesField = getWommBuilder().TextField.create("Number of Employees");
 //        employeesField.setValue("Number of Employees");//ToDo changed
         employeesField.setValue(String.valueOf(nrOfEmployees));
 
