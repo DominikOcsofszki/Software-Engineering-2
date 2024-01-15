@@ -65,8 +65,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
             TextField ort,
             TextArea biographie,
             TextArea spezialisierungen,
-            NumberField semester,
-            TextArea lebenslauf
+            NumberField semester
     ) {
         if (validateDatepicker(geburtstag)) {
             studentDTO.setStudentGeburtstag(geburtstag.getValue().toString());
@@ -93,22 +92,12 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         if (validateSemester(semester)) {
             studentDTO.setStudentSemester(semester.getValue().intValue());
         }
-
-        //ToDO studentDTO.setStudentCV(lebenslauf.getValue());
-
         studentService.saveStudent(studentDTO);
     }
 
     private Component getHeader() {
         HorizontalLayout header = new HorizontalLayout();
-        Button home = getWommBuilder().Button.create("Home");
-
-        home.getElement().getStyle().set("margin-right", "0");
-        home.addClickListener(e -> UI.getCurrent().navigate(LandingPageView.class));
-
         header.setWidth("100%");
-        header.add(home);
-
         return header;
     }
 
@@ -310,13 +299,6 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         VerticalLayout layoutSemester = generateSinglePropertyField(getWommBuilder().translateText("Semester"), numberFieldSemester);
         layoutSemester.setSpacing(false);
 
-        // ----------------- Curriculum Vitae -----------------
-
-        TextArea textAreaCurriculumVitae = new TextArea();
-        textAreaCurriculumVitae.setValue("Muss noch gemacht werden!");   //ToDO need CV DTO access
-        VerticalLayout layoutCV = generateSinglePropertyField("Curriculum Vitae", textAreaCurriculumVitae);
-        layoutCV.setSpacing(false);
-        layoutCV.getStyle().set("width", "200%");
 
         // ----------------- Save Changes -----------------
 
@@ -333,8 +315,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                     fieldLocation,
                     textAreaBio,
                     textAreaSpecializations,
-                    numberFieldSemester,
-                    textAreaCurriculumVitae
+                    numberFieldSemester
             );
             Notification notification = Notification
                     .show(getWommBuilder().translateText("Changes saved!"));
@@ -351,7 +332,6 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
                 new Hr(), layoutBio,
                 new Hr(), layoutSpec,
                 new Hr(), layoutSemester,
-                new Hr(), layoutCV,
                 new Hr(), buttonSaveChanges
         );
 
