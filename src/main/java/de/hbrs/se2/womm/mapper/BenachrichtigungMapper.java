@@ -9,6 +9,7 @@ import org.mapstruct.factory.Mappers;
 public interface BenachrichtigungMapper {
     BenachrichtigungMapper INSTANCE = Mappers.getMapper(BenachrichtigungMapper.class);
 
+
     Benachrichtigung BenachrichtigungDTOToBenachrichtigung(BenachrichtigungDTO Benachrichtigung);
     BenachrichtigungDTO BenachrichtigungToDto(Benachrichtigung Benachrichtigung);
 }

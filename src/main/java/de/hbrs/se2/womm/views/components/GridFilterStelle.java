@@ -7,6 +7,8 @@ import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 
+import java.time.format.DateTimeFormatter;
+
 public class GridFilterStelle extends AGridFilter<StelleDTO>{
     public GridFilterStelle() {
         super();
@@ -20,6 +22,8 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
         grid.addColumn(stelleDTO -> stelleDTO.getUnternehmen().getName()).setHeader(new Html("<b>" +header2+"</b>"));
         String header3 = VaadinBuilderWomm.translateTextStatic("Advertisement description");
         grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader(new Html("<b>" +header3+"</b>"));
+//        grid.addColumn(StelleDTO::getErstellungsdatum).setHeader("Erstellungsdatum").setSortable(true);
+        grid.addColumn(StelleDTO::getErstellungsdatum).setHeader("Erstellungsdatum").setSortable(true);
 //        grid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT); //TODO Adding to show all Text
 //                .setFooter(String.format("%s total Advertisement", 1000));; //TODO any reason for html???/
         //We can also add footer to grid, e.g. with the number of advertisments

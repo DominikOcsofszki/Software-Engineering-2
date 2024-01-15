@@ -12,15 +12,18 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.AboDTO;
+import de.hbrs.se2.womm.dtos.BenachrichtigungDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.services.AboStudentUnternehmenService;
+import de.hbrs.se2.womm.services.BenachrichtigungService;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.List;
@@ -37,6 +40,9 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     TextArea stelleBeschreibung = new TextArea();
     Select<String> stellenanzeigenTyp;
     String chosenTyp;
+
+    @Autowired
+    BenachrichtigungService benachrichtigungService;
     StelleService stelleService;
     UnternehmenService unternehmenService;
     SecurityService securityService;
@@ -175,20 +181,40 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 //        StelleDTO stelleDTO = stelleService.saveStelle(erzeugDTO);
         stelleService.saveStelle(erzeugDTO);
         List<AboDTO> allAboDTO =
-                aboStudentUnternehmenService.getByNutzerId(unternehmenDTO.getNutzer().getNutzerId());
+                aboStudentUnternehmenService.getByUnternehmenId(unternehmenDTO.getUnternehmenId());
 //        List<AboDTO> allAboDTO =
 //                aboStudentUnternehmenService.getAll();
         System.out.println("-----------------------------------");
         System.out.println("allAboDTO: " + allAboDTO);
         System.out.println("-----------------------------------");
 
+//        String msg = "Neue Stelle: " + erzeugDTO.getStelleTitel() ;
+String msg  = "Neue Stelle: " + erzeugDTO.getStelleTitel() + "\n" + "Ort: " + erzeugDTO.getStelleOrt() +
+        "\n" + "Beschreibung: " + erzeugDTO.getStelleBeschreibung() + "\n" + "Website: " +
+        erzeugDTO.getStelleWebsite();
         allAboDTO.forEach(
                 AboDTO -> {
                     if (AboDTO.getAboBenachrichtigungen()) {
+                        BenachrichtigungDTO msgDTO = BenachrichtigungDTO.builder()
+                                .nachricht(msg)
+                                .gelesen(false)
+                                .date(new Date())
+                                .nutzer(AboDTO.getStudent().getNutzer())
+                                .build();
+                        System.out.println("====================================");
+                        System.out.println("BenachrichtigungDTO: " + msgDTO);
+                        System.out.println(msgDTO.getNutzer());
+                        System.out.println(msgDTO.getNutzer().getNutzerId());
+                        System.out.println(msgDTO.isGelesen());
+                        System.out.println(msgDTO.getNachricht());
+
+                        System.out.println("====================================");
+
+                        benachrichtigungService.saveBenachrichtigung(msgDTO);
                         Notification notification = new Notification();
                         notification.setText("Neue Stelle: " + erzeugDTO.getStelleTitel());
                         notification.setText("Student Informed: " + AboDTO.getStudent().getStudentVorname()
-                                + " " + AboDTO.getStudent().getStudentName());
+                                + " " + AboDTO.getStudent().getStudentName() + " id:" + AboDTO.getStudent().getNutzer().getNutzerId());
                         System.out.println("Neue Stelle: " + erzeugDTO.getStelleTitel());
                         notification.open();
                         notification.setDuration(5000);
