@@ -171,6 +171,8 @@ public class RegistrierungUnternehmenView extends AViewWomm {
                 String close = getWommBuilder().translateText("Close");
                 closeButton.setAriaLabel(close);
                 RegistrierungStudentView.createClickListener(notification, text, closeButton);
+                UI.getCurrent().navigate(ROUTING.ALL.LoginView);
+
             }
         } catch (Exception e) {
             createErrorNotification(e.getMessage());
