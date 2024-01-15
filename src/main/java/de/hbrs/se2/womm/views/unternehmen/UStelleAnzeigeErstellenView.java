@@ -1,11 +1,12 @@
 package de.hbrs.se2.womm.views.unternehmen;
 
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
@@ -34,7 +35,8 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     TextField stelleOrt = new TextField();
     TextField stelleWebsite = new TextField();
     TextArea stelleBeschreibung = new TextArea();
-
+    Select<String> stellenanzeigenTyp;
+    String chosenTyp;
     StelleService stelleService;
     UnternehmenService unternehmenService;
     SecurityService securityService;
@@ -43,7 +45,6 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     private long aktuelleNutzerID;
     private UnternehmenDTO unternehmenDTO;
     private StelleDTO stelleToEdit;
-    ComboBox stellenanzeigenTyp = new ComboBox("Stellenanzeigen-Typ");
     private int stellePrimaryKey;
 
     private static final String URL_REGEX = "(https://www.)|(www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
@@ -71,6 +72,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         this.unternehmenService = unternehmenService;
         this.securityService = securityService;
         this.aboStudentUnternehmenService = aboStudentUnternehmenService;
+        this.chosenTyp = "Werkstudenten-Stelle";
         setUpHeader();
         setUpStellenanzeige();
     }
@@ -86,9 +88,11 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     private void setUpStellenanzeige() {
         VerticalLayout stellenanzeige = new VerticalLayout();
 
-        //Combobox
+        //Selector
+        this.stellenanzeigenTyp = new Select<>("Stellenanzeigen-Typ", this::selectComponentListener);
         stellenanzeigenTyp.setWidth("min-content");
-        stellenanzeigenTyp.setItems("Workshop", "Projekt", "Werksstudenten-Stelle");
+        stellenanzeigenTyp.setItems("Workshop", "Projekt", "Werkstudenten-Stelle");
+        stellenanzeigenTyp.setValue("Werkstudenten-Stelle");
 
         stellenanzeige.add(stellenanzeigenTyp);
 
@@ -160,6 +164,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         System.out.println("UnternehmenDTO: " + unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()
                 .stelleId(stelleToEdit == null ? null : stelleToEdit.getStelleId())
+                .stelleTyp(chosenTyp)
                 .stelleTitel(stelleTitel.getValue())
                 .stelleOrt(stelleOrt.getValue())
                 .stelleWebsite(stelleWebsite.getValue())
@@ -191,5 +196,8 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                 });
     }
 
+    private void selectComponentListener(AbstractField.ComponentValueChangeEvent<Select<String>, String> e) {
+        this.chosenTyp = e.getValue();
+    }
 
 }

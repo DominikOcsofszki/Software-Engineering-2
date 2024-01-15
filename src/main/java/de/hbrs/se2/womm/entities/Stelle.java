@@ -19,6 +19,9 @@ public class Stelle {
     @Column(name = "stelle_id")
     private Integer stelleId;
 
+    @Column(name = "stelle_typ", nullable = false)
+    private String stelleTyp;
+
     @Column(name = "stelle_titel", nullable = false)
     private String stelleTitel;
 
