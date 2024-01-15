@@ -42,6 +42,9 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     String valueFromQuerry;
     private long aktuelleNutzerID;
     private UnternehmenDTO unternehmenDTO;
+    private StelleDTO stelleToEdit;
+    ComboBox stellenanzeigenTyp = new ComboBox("Stellenanzeigen-Typ");
+    private int stellePrimaryKey;
 
     private static final String URL_REGEX = "(https://www.)|(www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
@@ -61,6 +64,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                                        SecurityService securityService,
                                        AboStudentUnternehmenService aboStudentUnternehmenService) {
         super();
+        this.stelleToEdit = null;
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         this.stelleService = stelleService;
@@ -83,7 +87,6 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         VerticalLayout stellenanzeige = new VerticalLayout();
 
         //Combobox
-        ComboBox stellenanzeigenTyp = new ComboBox("Stellenanzeigen-Typ");
         stellenanzeigenTyp.setWidth("min-content");
         stellenanzeigenTyp.setItems("Workshop", "Projekt", "Werksstudenten-Stelle");
 
@@ -144,6 +147,9 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     }
 
     protected void setUpFieldForEdit(StelleDTO stelleDTO) {
+                stelleToEdit = stelleDTO;
+//                stellenanzeigenTyp.setValue(stelleDTO.());
+                stellePrimaryKey = stelleDTO.getStelleId().intValue();
                 stelleTitel.setValue(stelleDTO.getStelleTitel());
                 stelleOrt.setValue(stelleDTO.getStelleOrt());
                 stelleWebsite.setValue(stelleDTO.getStelleWebsite());
@@ -153,6 +159,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     private void buildAndSaveStelleDTO() {
         System.out.println("UnternehmenDTO: " + unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()
+                .stelleId(stelleToEdit == null ? null : stelleToEdit.getStelleId())
                 .stelleTitel(stelleTitel.getValue())
                 .stelleOrt(stelleOrt.getValue())
                 .stelleWebsite(stelleWebsite.getValue())
