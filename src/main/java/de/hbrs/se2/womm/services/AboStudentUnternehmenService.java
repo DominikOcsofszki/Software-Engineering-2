@@ -31,6 +31,13 @@ public class AboStudentUnternehmenService {
                 .toList();
     }
 
+    public List<AboDTO> getByUnternehmenId(long unternehmen_id){
+        return aboStudentUnternehmenRepository.findByUnternehmen_UnternehmenId(unternehmen_id)
+                .stream()
+                .map(aboStudentUnternehmenMapper::aboStudentUnternehmenToaboStudentUnternehmenDTO)
+                .toList();
+    }
+
     public List<AboDTO> getAll(){
         return aboStudentUnternehmenRepository.findAll()
                 .stream()

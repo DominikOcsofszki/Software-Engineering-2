@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap');
 
+
+
+
 /*Path: frontend/themes/womm-theme/styles.css*/
 
 /*public static final String Avenir = "Avenir Next LT Pro";*/
@@ -40,6 +43,14 @@ html {
     /*--lumo-primary-color-50pct: rgba(var(--womm-primary-color), 0.5);*/
     /*--lumo-primary-color-10pct: rgba(var(--womm-primary-color), 0.1);*/
     /*--lumo-primary-color: rgba(var(--womm-primary-color), 1);*/
+
+}
+vaadin-grid.styling::part(akzeptiert) {
+    background-color: rgba(var(--womm-success-color), 0.08);
+}
+
+vaadin-grid.styling::part(abgelehnt) {
+    background-color: rgba(var(--womm-error-color), 0.08);
 }
 .login-view {
     display: flex;

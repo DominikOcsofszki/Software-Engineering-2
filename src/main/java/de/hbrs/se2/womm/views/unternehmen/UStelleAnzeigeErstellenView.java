@@ -1,12 +1,12 @@
 package de.hbrs.se2.womm.views.unternehmen;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
@@ -23,6 +23,7 @@ import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.List;
@@ -37,7 +38,10 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     TextField stelleOrt = new TextField();
     TextField stelleWebsite = new TextField();
     TextArea stelleBeschreibung = new TextArea();
+    Select<String> stellenanzeigenTyp;
+    String chosenTyp;
 
+    @Autowired
     BenachrichtigungService benachrichtigungService;
     StelleService stelleService;
     UnternehmenService unternehmenService;
@@ -46,6 +50,8 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     String valueFromQuerry;
     private long aktuelleNutzerID;
     private UnternehmenDTO unternehmenDTO;
+    private StelleDTO stelleToEdit;
+    private int stellePrimaryKey;
 
     private static final String URL_REGEX = "(https://www.)|(www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
@@ -63,16 +69,16 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     public UStelleAnzeigeErstellenView(StelleService stelleService,
                                        UnternehmenService unternehmenService,
                                        SecurityService securityService,
-                                       AboStudentUnternehmenService aboStudentUnternehmenService,
-                                       BenachrichtigungService benachrichtigungService) {
+                                       AboStudentUnternehmenService aboStudentUnternehmenService) {
         super();
-        this.benachrichtigungService = benachrichtigungService;
+        this.stelleToEdit = null;
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         this.stelleService = stelleService;
         this.unternehmenService = unternehmenService;
         this.securityService = securityService;
         this.aboStudentUnternehmenService = aboStudentUnternehmenService;
+        this.chosenTyp = "Werkstudenten-Stelle";
         setUpHeader();
         setUpStellenanzeige();
     }
@@ -88,10 +94,11 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     private void setUpStellenanzeige() {
         VerticalLayout stellenanzeige = new VerticalLayout();
 
-        //Combobox
-        ComboBox stellenanzeigenTyp = new ComboBox("Stellenanzeigen-Typ");
+        //Selector
+        this.stellenanzeigenTyp = new Select<>("Stellenanzeigen-Typ", this::selectComponentListener);
         stellenanzeigenTyp.setWidth("min-content");
-        stellenanzeigenTyp.setItems("Workshop", "Projekt", "Werksstudenten-Stelle");
+        stellenanzeigenTyp.setItems("Workshop", "Projekt", "Werkstudenten-Stelle");
+        stellenanzeigenTyp.setValue("Werkstudenten-Stelle");
 
         stellenanzeige.add(stellenanzeigenTyp);
 
@@ -126,7 +133,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         //ToDo -Erstellung eines Datenbankobjekts mit StellenanzeigeTyp, StellenanzeigeBezeichnung, StellenanzeigeBeschreibung, FirmenLogo, FirmenName
         //ToDo -Routing zum korrekten UnternehmenView
         //Erstellen-Button
-        Button erstellenButton = new Button("Erstellen");
+        Button erstellenButton = getWommBuilder().Button.create("Erstellen");
         erstellenButton.addClickListener(e -> {
             if (stelleWebsite.getValue().matches(URL_REGEX)) {
                 buildAndSaveStelleDTO();
@@ -149,9 +156,21 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
     }
 
+    protected void setUpFieldForEdit(StelleDTO stelleDTO) {
+                stelleToEdit = stelleDTO;
+//                stellenanzeigenTyp.setValue(stelleDTO.());
+                stellePrimaryKey = stelleDTO.getStelleId().intValue();
+                stelleTitel.setValue(stelleDTO.getStelleTitel());
+                stelleOrt.setValue(stelleDTO.getStelleOrt());
+                stelleWebsite.setValue(stelleDTO.getStelleWebsite());
+                stelleBeschreibung.setValue(stelleDTO.getStelleBeschreibung());
+                unternehmenDTO = stelleDTO.getUnternehmen();
+    }
     private void buildAndSaveStelleDTO() {
         System.out.println("UnternehmenDTO: " + unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()
+                .stelleId(stelleToEdit == null ? null : stelleToEdit.getStelleId())
+                .stelleTyp(chosenTyp)
                 .stelleTitel(stelleTitel.getValue())
                 .stelleOrt(stelleOrt.getValue())
                 .stelleWebsite(stelleWebsite.getValue())
@@ -162,7 +181,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 //        StelleDTO stelleDTO = stelleService.saveStelle(erzeugDTO);
         stelleService.saveStelle(erzeugDTO);
         List<AboDTO> allAboDTO =
-                aboStudentUnternehmenService.getByNutzerId(unternehmenDTO.getNutzer().getNutzerId());
+                aboStudentUnternehmenService.getByUnternehmenId(unternehmenDTO.getUnternehmenId());
 //        List<AboDTO> allAboDTO =
 //                aboStudentUnternehmenService.getAll();
         System.out.println("-----------------------------------");
@@ -180,12 +199,12 @@ String msg  = "Neue Stelle: " + erzeugDTO.getStelleTitel() + "\n" + "Ort: " + er
                                 .nachricht(msg)
                                 .gelesen(false)
                                 .date(new Date())
-                                .nutzerDTO(AboDTO.getStudent().getNutzer())
+                                .nutzer(AboDTO.getStudent().getNutzer())
                                 .build();
                         System.out.println("====================================");
                         System.out.println("BenachrichtigungDTO: " + msgDTO);
-                        System.out.println(msgDTO.getNutzerDTO());
-                        System.out.println(msgDTO.getNutzerDTO().getNutzerId());
+                        System.out.println(msgDTO.getNutzer());
+                        System.out.println(msgDTO.getNutzer().getNutzerId());
                         System.out.println(msgDTO.isGelesen());
                         System.out.println(msgDTO.getNachricht());
 
@@ -203,5 +222,8 @@ String msg  = "Neue Stelle: " + erzeugDTO.getStelleTitel() + "\n" + "Ort: " + er
                 });
     }
 
+    private void selectComponentListener(AbstractField.ComponentValueChangeEvent<Select<String>, String> e) {
+        this.chosenTyp = e.getValue();
+    }
 
 }

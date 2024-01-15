@@ -8,5 +8,7 @@ import java.util.List;
 public interface AboStudentUnternehmenRepository extends JpaRepository<AboStudentUnternehmen,Long> {
     AboStudentUnternehmen findAboStudentUnternehmenByAboId(long aboID);
     List<AboStudentUnternehmen> findByStudent_NutzerNutzerIdOrUnternehmen_Nutzer_NutzerId(long s_id, long u_id);
+
+    List<AboStudentUnternehmen> findByUnternehmen_UnternehmenId(Long id);
     List<AboStudentUnternehmen> findAboStudentUnternehmenByStudent_StudentId(long studentID);
 }

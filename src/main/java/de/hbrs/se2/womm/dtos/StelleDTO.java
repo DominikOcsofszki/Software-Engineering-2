@@ -11,6 +11,7 @@ import java.util.Date;
 @Getter
 public class StelleDTO implements AbstractDTO {
     private Long stelleId;
+    private String stelleTyp;
     private String stelleTitel;
     private String stelleOrt;
     private String stelleBeschreibung;

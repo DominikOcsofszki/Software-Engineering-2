@@ -53,7 +53,7 @@ public class LoginView extends AViewWomm {
         loginFormLayout.setPadding(true);
         loginFormLayout.getStyle().setBackground("white");
 
-        TextField usernameInput = getWommBuilder().TextField.create(getWommBuilder().translateText("Username"));
+        TextField usernameInput = getWommBuilder().TextField.create("Username");
         usernameInput.setWidthFull();
         usernameInput.setRequired(true);
         usernameInput.setRequiredIndicatorVisible(true);
@@ -61,13 +61,13 @@ public class LoginView extends AViewWomm {
         usernameInput.focus();
 
 
-        PasswordField passwordInput = getWommBuilder().PasswordField.create(getWommBuilder().translateText("Password"));
+        PasswordField passwordInput = getWommBuilder().PasswordField.create("Password");
         passwordInput.setWidthFull();
         passwordInput.setRequired(true);
         passwordInput.setRequiredIndicatorVisible(true);
         passwordInput.setErrorMessage(getWommBuilder().translateText("Password is required"));
 
-        Button submitButton = getWommBuilder().Button.create(getWommBuilder().translateText("LogIn"));
+        Button submitButton = getWommBuilder().Button.create("LogIn");
         submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         addClickListenerForEnter(submitButton, usernameInput, passwordInput);
         submitButton.addClickListener(e -> {
@@ -104,7 +104,7 @@ public class LoginView extends AViewWomm {
         });
 
         loginFormLayout.add(
-                new H3(getWommBuilder().translateText("LogIn")),
+                new H3(getWommBuilder().translateText("LogIn")), //TODO change I to i?
                 usernameInput,
                 passwordInput,
                 submitButton

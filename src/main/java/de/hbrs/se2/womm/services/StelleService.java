@@ -39,6 +39,7 @@ public class StelleService {
 
     public StelleDTO saveStelle(StelleDTO stelleDTO) {
         Stelle stelle = stelleMapper.stelleDtoToStelle(stelleDTO);
+        System.out.println(stelle);
         Stelle erzeugteStelle = stelleRepository.save(stelle);
         return stelleMapper.stelleToStelleDto(erzeugteStelle);
     }

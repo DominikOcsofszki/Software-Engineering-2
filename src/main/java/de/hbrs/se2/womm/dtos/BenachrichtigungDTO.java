@@ -13,5 +13,5 @@ public class BenachrichtigungDTO implements AbstractDTO {
     private String nachricht;
     private boolean gelesen;
     private Date date;
-    private NutzerDTO nutzerDTO;
+    private NutzerDTO nutzer;
 }

@@ -69,11 +69,11 @@ abstract class AbstractLayout extends AppLayout {
     }
 
     void AddDevModeButtons() {
-        Button buttonToShowMissingTranslated = new Button("console");
+        Button buttonToShowMissingTranslated = new Button(VaadinBuilderWomm.translateTextStatic("console"));
         buttonToShowMissingTranslated.addClickListener(
                 e -> VaadinBuilderWomm.printAllTextNotTranslatedToConsole()
         );
-        Button buttonToggleDevMode = new Button("toggle-id-Selector");
+        Button buttonToggleDevMode = new Button(VaadinBuilderWomm.translateTextStatic("toggle-id-Selector"));
         buttonToggleDevMode.addClickListener(
                 e -> {
                     VaadinBuilderWomm.toggleDevMode();
@@ -86,7 +86,7 @@ abstract class AbstractLayout extends AppLayout {
     }
 
     private static Button addTranslateToggle() {
-        Button translateToggle = new Button("EN/DE");
+        Button translateToggle = new Button(VaadinBuilderWomm.translateTextStatic("EN/DE"));
         translateToggle.addClickListener(
                 e -> {
                     VaadinBuilderWomm.toggleTranslateText();
