@@ -127,7 +127,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         //ToDo -Erstellung eines Datenbankobjekts mit StellenanzeigeTyp, StellenanzeigeBezeichnung, StellenanzeigeBeschreibung, FirmenLogo, FirmenName
         //ToDo -Routing zum korrekten UnternehmenView
         //Erstellen-Button
-        Button erstellenButton = new Button("Erstellen");
+        Button erstellenButton = getWommBuilder().Button.create("Erstellen");
         erstellenButton.addClickListener(e -> {
             if (stelleWebsite.getValue().matches(URL_REGEX)) {
                 buildAndSaveStelleDTO();

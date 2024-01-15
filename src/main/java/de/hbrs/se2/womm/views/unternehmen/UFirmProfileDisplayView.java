@@ -65,7 +65,7 @@ public class UFirmProfileDisplayView extends AViewWomm {
         logoAndSubscribeLayout.add(logoAndName);
 
         // Edit Button
-        Button editButton = new Button("Edit firm profile");
+        Button editButton = getWommBuilder().Button.create("Edit firm profile");
         editButton.addClickListener(e -> {
             // Logic to navigate to the edit profile view
             UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);

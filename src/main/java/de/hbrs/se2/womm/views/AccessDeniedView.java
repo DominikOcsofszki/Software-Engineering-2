@@ -26,7 +26,7 @@ public class AccessDeniedView extends AViewWomm implements BeforeEnterObserver {
         Text accessDeniedText = new Text(VaadinBuilderWomm.translateTextStatic("Access Denied!"));
         add(accessDeniedText);
         if (CONFIGS.DEVMODE) {
-            Button buttonLogin = new Button("login");
+            Button buttonLogin = getWommBuilder().Button.create("login");
             buttonLogin.addClickListener(e -> UI.getCurrent().navigate(new RouterLink("login ", LoginView.class).getHref()));
             buttonLogin.addClickListener(
                     e -> UI.getCurrent().getPage().open(
@@ -34,7 +34,7 @@ public class AccessDeniedView extends AViewWomm implements BeforeEnterObserver {
                             "_blank")
             );
             History history = UI.getCurrent().getPage().getHistory();
-            Button button = new Button("Go back");
+            Button button = getWommBuilder().Button.create("Go back");
             button.addClickListener(e -> history.back());
             add(buttonLogin);
             add(button);
