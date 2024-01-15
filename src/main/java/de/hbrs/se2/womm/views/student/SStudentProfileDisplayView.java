@@ -36,12 +36,6 @@ public class SStudentProfileDisplayView extends AViewWomm {
 
     private Component getHeader() {
         HorizontalLayout header = new HorizontalLayout();
-
-        Button b = getWommBuilder().Button.create("Home");
-        b.addClickListener(e -> UI.getCurrent().navigate(SHomepageStudentView.class));
-        b.getElement().getStyle().set("margin-right", "auto");
-
-        header.add(b);
         header.setWidth("100%");
         return header;
     }

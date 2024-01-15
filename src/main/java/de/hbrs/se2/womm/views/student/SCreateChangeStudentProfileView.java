@@ -97,14 +97,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
 
     private Component getHeader() {
         HorizontalLayout header = new HorizontalLayout();
-        Button home = getWommBuilder().Button.create("Home");
-
-        home.getElement().getStyle().set("margin-right", "0");
-        home.addClickListener(e -> UI.getCurrent().navigate(LandingPageView.class));
-
         header.setWidth("100%");
-        header.add(home);
-
         return header;
     }
 
