@@ -48,7 +48,6 @@ public class UFirmProfileDisplayView extends AViewWomm {
         // Logo, Company Name, Subscribe and Chat Buttons
         HorizontalLayout logoAndSubscribeLayout = new HorizontalLayout();
         Div logoAndName = new Div();
-//            Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");
         Image companyLogo = unternehmenDTO.PlaceholderOrImage();
         companyLogo.setWidth(200 + "px");
         companyLogo.setHeight(200 + "px");
@@ -60,7 +59,6 @@ public class UFirmProfileDisplayView extends AViewWomm {
         // Edit Button
         Button editButton = getWommBuilder().Button.create("Edit firm profile");
         editButton.addClickListener(e -> {
-            // Logic to navigate to the edit profile view
             UI.getCurrent().navigate(UEditFirmProfileDisplayView.class);
         });
 
