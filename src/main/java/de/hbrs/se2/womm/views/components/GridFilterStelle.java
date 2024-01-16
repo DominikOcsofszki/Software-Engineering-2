@@ -24,7 +24,7 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
         grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader(new Html("<b>" +header3+"</b>"));
 //        grid.addColumn(StelleDTO::getErstellungsdatum).setHeader("Erstellungsdatum").setSortable(true);
         String header4 = VaadinBuilderWomm.translateTextStatic("Creationdate");
-        grid.addColumn(StelleDTO::getErstellungsdatum).setHeader(new Html("<b>" +header4+"</b>"));
+        grid.addColumn(stelleDTO -> stelleDTO.getErstellungsdatum().toString().substring(0,16)).setHeader(new Html("<b>" +header4+"</b>"));
 //        grid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT); //TODO Adding to show all Text
 //                .setFooter(String.format("%s total Advertisement", 1000));; //TODO any reason for html???/
         //We can also add footer to grid, e.g. with the number of advertisments
