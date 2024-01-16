@@ -23,7 +23,6 @@ import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.model.ApplicationStatus;
 import de.hbrs.se2.womm.services.BewerbungService;
-import de.hbrs.se2.womm.services.ImageService;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
@@ -96,17 +95,6 @@ public abstract class BJobProjectWorkshopDisplayView extends AViewWomm implement
 
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
-        ImageService imageService = new ImageService();
-
-        //Logo
-//        Image i = new Image(ASSETS.RANDOM.USER, "Alternative image text");
-//        Image i = this.stelleDTO.getStelleUnternehmen().PlaceholderOrImage(); //ToDo Changed
-
-//        Image i = imageService.getImage(this.stelleDTO.getStelleUnternehmen().getNutzer()); //ToDo Changed
-//        Image i = imageService.test();
-        Image i = imageService.getRandomImageHeight(100);
-//        i.setWidth("25%");
-        header.add(i);
 
         //Ueberschrift
 //        header.add(new H1("Unternehmenname"));
