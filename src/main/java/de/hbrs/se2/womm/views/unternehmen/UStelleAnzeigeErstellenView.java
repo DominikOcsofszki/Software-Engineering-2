@@ -106,12 +106,16 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         //TextfeldTitel
         stelleTitel.setPlaceholder("Stellenbezeichnung");
         stelleTitel.setClearButtonVisible(true);
+        stelleTitel.setRequired(true);
+        stelleTitel.setErrorMessage(getWommBuilder().translateText("A title must be provided"));
 
         stellenanzeige.add(stelleTitel);
 
         //Textfeld StelleOrt
         stelleOrt.setPlaceholder("Ortsname");
         stelleOrt.setClearButtonVisible(true);
+        stelleOrt.setRequired(true);
+        stelleOrt.setErrorMessage(getWommBuilder().translateText("A location must be provided"));
 
         stellenanzeige.add(stelleOrt);
 
@@ -132,7 +136,6 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stelleBeschreibung.setClearButtonVisible(true);
         stelleBeschreibung.setRequired(true);
         stelleBeschreibung.setErrorMessage(getWommBuilder().translateText("A description must be provided"));
-        stelleBeschreibung.setRequired(true);
         stelleWebsite.setRequiredIndicatorVisible(true);
 
         stellenanzeige.add(stelleBeschreibung);
@@ -150,7 +153,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 //                UI.getCurrent().navigate(UFirmProfileDisplayView.class);
             } else {
                 Notification notification = new Notification();
-                notification.setText("Bitte überprüfen Sie ihre Eingaben! Alle Felder müssen korrekt gefüllt sein!");
+                notification.setText(getWommBuilder().translateText("Please check your Inputs! All fields must be entered correctly!"));
                 notification.open();
                 notification.setDuration(6000);
             }
