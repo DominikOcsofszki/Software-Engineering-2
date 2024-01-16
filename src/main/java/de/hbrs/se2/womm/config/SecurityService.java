@@ -35,14 +35,17 @@ public class SecurityService {
     }
 
     public boolean isUserAdmin() {
+        if(getAuthenticatedUser()==null)return false;
         return getAuthenticatedUser().getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_" + Roles.ADMIN.name()));
     }
 
     public boolean isUserUnternehmen() {
+        if(getAuthenticatedUser()==null)return false;
         return getAuthenticatedUser().getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_" + Roles.UNTERNEHMEN.name()));
     }
 
     public boolean isUserStudent() {
+        if(getAuthenticatedUser()==null)return false;
         return getAuthenticatedUser().getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_" + Roles.STUDENT.name()));
     }
 
