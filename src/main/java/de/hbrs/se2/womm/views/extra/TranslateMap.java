@@ -48,7 +48,7 @@ public class TranslateMap {
         translateMap.put("Create advertisement", "Stellenanzeige erstellen");
         translateMap.put("Profile", "Profil");
         translateMap.put("Homepage", "Homepage");
-        translateMap.put("Applications", "Bewerbung");
+        translateMap.put("Applications", "Bewerbungen");
         translateMap.put("View subscriptions", "Abonnements anzeigen");
         translateMap.put("Notifications", "Benachrichtigungen");
         translateMap.put("Edit profile", "Profil bearbeiten");
