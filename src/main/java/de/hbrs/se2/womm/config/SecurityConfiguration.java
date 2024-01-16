@@ -32,7 +32,6 @@ public class SecurityConfiguration extends VaadinWebSecurity {
         setLoginView(http, LoginView.class);
     }
 
-    //ToDo Connect to DB
     @Bean
     UserDetailsManager userDetailsManager() {
         return new UserDetailsManagerImpl();

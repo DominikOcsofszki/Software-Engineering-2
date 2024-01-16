@@ -38,9 +38,7 @@ public class SHomepageStudentView extends AViewWomm {
         this.gridFilterStelle.setUpFromOutside(stelleService.getAllByFilter("",""));
         this.gridFilterStelle.setColumnClickListener(ROUTING.STUDENT.SJobProjectWorkshopDisplayView);
         setUpHeader();
-//        setUpBanner();
         setUpSearchFields();
-//        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleService, -99L)); //ToDo -99L => all
         add(this.gridFilterStelle);
     }
 

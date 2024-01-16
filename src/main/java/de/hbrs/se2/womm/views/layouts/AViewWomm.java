@@ -10,8 +10,6 @@ public abstract class AViewWomm extends VerticalLayout {
         return vaadinBuilderWomm;
     }
     protected AViewWomm( ) {
-//        setWidth("100%");
-//        setHeight("100%");
         getStyle().set("overflow", "auto");
     }
 

@@ -55,84 +55,21 @@ public class SApplicationsView extends VerticalLayout {
 
 
         setUpHeader();
-        //setUpApplications();
 
         add(gridFilterBewerbungStudent);
 
     }
 
 
-//    private class demoInhaltSApplications {
-//        String unternehmen;
-//        String stelle;
-//        String status;
-//
-//        String getUnternehmen() {
-//            return unternehmen;
-//        }
-//
-//        String getStelle() {
-//            return stelle;
-//        }
-//
-//        String getStatus() {
-//            return status;
-//        }
-//
-//        demoInhaltSApplications(String unternehmen, String stelle, String status) {
-//            this.unternehmen = unternehmen;
-//            this.stelle = stelle;
-//            this.status = status;
-//        }
-//    }
-
     private void setUpHeader() {
 
         HorizontalLayout header = new HorizontalLayout();
 
-        //Ueberschrift
+        //Ueberschrift//TODO translate
         header.add(new H1("Bewerbungen:"));
 
         add(header);
 
     }
-
-//    private void setUpApplications() {
-//
-//        VerticalLayout notification = new VerticalLayout();
-//
-//        TextField searchField = new TextField();
-//        searchField.setWidth("50%");
-//        searchField.setPlaceholder("Suche");
-//        searchField.setPrefixComponent(new Icon(VaadinIcon.SEARCH));
-//        searchField.setValueChangeMode(ValueChangeMode.EAGER);
-//
-//        List<demoInhaltSApplications> inhalt = Arrays.asList(
-//                new demoInhaltSApplications("Apple", "Software-Tester", "Offen"),
-//                new demoInhaltSApplications("Microsoft", "UI/UX-Designer", "Abgelehnt"),
-//                new demoInhaltSApplications("HBRS", "Programmierer", "Angenommen"),
-//                new demoInhaltSApplications("W.O.M.M", "Hausmeister", "Offen"));
-//
-//        Grid<demoInhaltSApplications> grid = new Grid<>(demoInhaltSApplications.class, false);
-//
-//        grid.setItems(inhalt);
-//
-//
-//        //ToDo Verlinkung zum entsprechenden Unternehmen anpassen
-//
-//        grid.addColumn(demoInhaltSApplications::getUnternehmen).setHeader("Unternehmen").setWidth("40%");
-//        grid.addColumn(LitRenderer.<demoInhaltSApplications>of(TEMPLATE.LIT_TEMPLATE_HTML)
-//                .withProperty("id", demoInhaltSApplications::getStelle)
-//                .withFunction("clickHandler", person -> {
-//                    UI.getCurrent().navigate(SApplicationView.class);
-//                })).setHeader("Name").setWidth("40%").setSortable(true);
-//        grid.addColumn(demoInhaltSApplications::getStatus).setHeader("Status").setWidth("20%");
-//        notification.add(grid);
-//        grid.recalculateColumnWidths();
-//
-//        notification.setWidth("100%");
-//
-//        add(notification);
-//    }
 
 }

@@ -32,7 +32,6 @@ abstract class AbstractLayout extends AppLayout {
 
     }
 
-//    void createHeaderWithLogoutButton(Button logout, boolean withMenu) {
     void createHeaderWithLogoutButton(Button logout, boolean withMenu, MenuBar menuBar) {
         if (withMenu) this.header.add(new DrawerToggle());
         if (logout == null) {
@@ -80,9 +79,7 @@ abstract class AbstractLayout extends AppLayout {
                     UI.getCurrent().getPage().reload();
                 }
         );
-//        Button translateToggle = addTranslateToggle();
         addToNavbar(buttonToShowMissingTranslated, buttonToggleDevMode);
-//        addToNavbar(buttonToShowMissingTranslated, buttonToggleDevMode, translateToggle);
     }
 
     private static Button addTranslateToggle() {

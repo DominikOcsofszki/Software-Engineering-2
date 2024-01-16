@@ -158,7 +158,6 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         try {
             datePickerDob.setValue(LocalDate.parse(studentDTO.getStudentGeburtstag()));
         } catch (Exception e) {
-//            e.printStackTrace();    //TODO remove this from production
             datePickerDob.setValue(LocalDate.now());
         }
         datePickerDob.setWidth("100%");
@@ -215,7 +214,7 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         // ----------------- Password -----------------
 
         VerticalLayout layoutPassword = new VerticalLayout();
-        Span spanPasswordFieldHeader = getWommBuilder().Span.create("Password");
+        Span spanPasswordFieldHeader = getWommBuilder().Span.create("Change Password");
         Span spanOldPassword = getWommBuilder().Span.create("Enter your old password");
         Span spanPasswordTooltip = getWommBuilder().Span.create("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported.");
         PasswordField passwordOld = new PasswordField();

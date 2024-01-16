@@ -14,7 +14,6 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
-import com.vaadin.flow.server.StreamResource;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.dtos.StudentDTO;
@@ -28,7 +27,6 @@ import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
 import jakarta.annotation.security.RolesAllowed;
 
-import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +70,23 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
             setup404Page();
         }
     }
+//    private Component getProfil() {
+////        HorizontalLayout profilPage = new HorizontalLayout();
+////        VerticalLayout profilDetails = new VerticalLayout();
+//        VerticalLayout profilBild = new VerticalLayout();
+//
+//        Image bild = student.PlaceholderOrImage();
+//        bild.setWidth("300px");
+//        bild.setHeight("300px");
+//        bild.getStyle().set("margin-left", "auto"); // Sodass das Bild rechtsbündig ist
+//
+//        profilBild.add(bild);
+//        profilPage.setWidth("50%");
+//
+//        profilPage.add(profilDetails);
+//        profilPage.add(profilBild);
+//        return profilPage;
+//    }
 
     void setUpApplication() {
         bewerbungText = bewerbung.getBewerbungText();
@@ -100,12 +115,9 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
         HorizontalLayout top = new HorizontalLayout();
         top.setAlignItems(FlexComponent.Alignment.CENTER);
         top.setJustifyContentMode(JustifyContentMode.AROUND);
-        StreamResource resource = new StreamResource(studentName + ".jpg", () -> new ByteArrayInputStream(studentProfilePicture));
-        Image image = new Image(resource, studentName);
+        Image image = student.PlaceholderOrImage();
         image.setWidth(200, Unit.PIXELS);
         image.setHeight(200, Unit.PIXELS);
-        image.getStyle().set("border", "1px solid grey");
-        image.getStyle().set("border-radius", "5px");
         top.add(image);
         H3 name = new H3(String.format("%s, %s", studentName, studentVorname));
         name.getStyle().set("cursor", "pointer");

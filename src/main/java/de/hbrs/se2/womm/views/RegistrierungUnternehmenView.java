@@ -61,7 +61,6 @@ public class RegistrierungUnternehmenView extends AViewWomm {
 
         setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
 
-//        add(new H4("Student/in Registration"));
         H4 h4 = getWommBuilder().H4.create("Company Registration");
         add(h4);
 
@@ -71,7 +70,6 @@ public class RegistrierungUnternehmenView extends AViewWomm {
         companyNameComponent.setRequired(true);
         companyNameComponent.setRequiredIndicatorVisible(true);
         String nameIsRequired = getWommBuilder().translateText("Company Name is required");
-//        String nameIsRequired = getWommBuilder().translateText("Name is required");
         companyNameComponent.setErrorMessage(nameIsRequired);
 
         usernameComponent = getWommBuilder().TextField.create("Username");
@@ -91,7 +89,7 @@ public class RegistrierungUnternehmenView extends AViewWomm {
         String emailIsRequired = getWommBuilder().translateText("Email is required");
         emailComponent.setErrorMessage(emailIsRequired);
 
-        passwordComponent = getWommBuilder().PasswordField.create("Password");
+        passwordComponent = getWommBuilder().PasswordField.create("Enter Password");
         String thePasswordUsedForLogin = getWommBuilder().translateText("The password used for login");
         passwordComponent.setTooltipText(thePasswordUsedForLogin);
         passwordComponent.setRequired(true);

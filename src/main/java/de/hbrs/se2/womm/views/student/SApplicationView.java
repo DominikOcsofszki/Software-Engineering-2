@@ -39,7 +39,6 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
     private Long studentID;
     private String studentName;
     private String studentVorname;
-    //private byte[] studentProfilePicture;
 
     public SApplicationView(BewerbungService bewerbungService, StudentService studentService, StelleService stelleService) {
         super();
@@ -72,7 +71,6 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
         fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
         studentName = student.getStudentName();
         studentVorname = student.getStudentVorname();
-        //studentProfilePicture = student.getNutzer().getNutzerProfilbild();
 
         setUpTop();
 

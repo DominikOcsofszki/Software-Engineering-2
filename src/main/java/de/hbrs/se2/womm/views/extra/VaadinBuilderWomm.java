@@ -21,7 +21,6 @@ public class VaadinBuilderWomm {
     private static boolean translateText = true;
     private static Map<String, String> translateTextMap = TranslateMap.translateMap;
     private static Set<String> newTextNeedsToBeTranslated = new HashSet<>();
-    //ToDo Add button for showing all querry-selector
     public ButtonBuilder Button = new ButtonBuilder();
     public TextFieldBuilder TextField = new TextFieldBuilder();
     public H1Builder H1 = new H1Builder();
