@@ -58,7 +58,7 @@ public class UHomepageUnternehmenView extends AViewWomm {
     private void setUpHeader() {
         VerticalLayout header = new VerticalLayout();
         String welcome = getWommBuilder().translateText("Welcome ");
-        H1 headerText = getWommBuilder().H1.create(welcome + unternehmenDTO.getName());
+        H1 headerText = new H1(welcome + unternehmenDTO.getName());
         H2 text = getWommBuilder().H2.create("Here you can see all your open advertisements");
         header.add(headerText,text);
         add(header);

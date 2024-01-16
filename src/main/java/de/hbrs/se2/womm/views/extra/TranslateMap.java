@@ -52,7 +52,7 @@ public class TranslateMap {
         translateMap.put("View subscriptions", "Abonnements anzeigen");
         translateMap.put("Notifications", "Benachrichtigungen");
         translateMap.put("Edit profile", "Profil bearbeiten");
-
+        translateMap.put("New Advertisements","Neue Stellenangebote");
         // UApplicationView
         translateMap.put("%s is not a valid ID.", "%s ist keine gültige ID.");
         translateMap.put("Surname, Name", "Name, Vorname");

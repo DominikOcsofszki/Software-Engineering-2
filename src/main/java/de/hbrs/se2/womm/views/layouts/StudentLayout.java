@@ -42,10 +42,10 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
     void createDrawer() {
         addToDrawer(new VerticalLayout(
                 setUpMenuBarWommAndTranslateName("Homepage", SHomepageStudentView.class, VaadinIcon.HOME),
+                setUpMenuBarWommAndTranslateName("New Advertisements", SNotificationView.class, VaadinIcon.BELL),
                 setUpMenuBarWommAndTranslateName("Profile", SStudentProfileDisplayView.class, VaadinIcon.USER),
                 setUpMenuBarWommAndTranslateName("Subscriptions", SAboStudentView.class, VaadinIcon.BOOKMARK),
                 setUpMenuBarWommAndTranslateName("Applications", SApplicationsView.class, VaadinIcon.BRIEFCASE),
-                setUpMenuBarWommAndTranslateName("Notifications", SNotificationView.class, VaadinIcon.BELL),
                 setUpMenuBarWommAndTranslateName("Edit profile", SCreateChangeStudentProfileView.class, VaadinIcon.EDIT)
 
   /* Old way deelte later after approve
