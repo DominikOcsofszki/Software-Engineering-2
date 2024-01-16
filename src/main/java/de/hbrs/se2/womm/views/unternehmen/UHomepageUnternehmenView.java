@@ -37,7 +37,6 @@ public class UHomepageUnternehmenView extends AViewWomm {
         this.aktuelleNutzerID = securityService.getLoggedInNutzerID();
         this.unternehmenDTO = unternehmenService.getByNutzerId(aktuelleNutzerID);
         setUpHeader();
-       // setUpBanner();
 
         setUpSearchFields();
         this.gridFilterStelle = new GridFilterStelle();
@@ -46,12 +45,9 @@ public class UHomepageUnternehmenView extends AViewWomm {
         this.gridFilterStelle.setColumnClickListener(ROUTING.UNTERNEHMEN.UJobProjectWorkshopDisplayView);
         add(gridFilterStelle);
 
-//        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
     }
 
     private void setUpComponentFilterGridControllerStellen() { //ToDo: this was added
-//        add(new ComponentFilterGridControllerStellen(controller));
-//        add(new ComponentFilterStelle(controller));
     }
 
 

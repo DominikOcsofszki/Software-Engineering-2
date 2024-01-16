@@ -191,8 +191,6 @@ public class VaadinBuilderWomm {
             String querryId = "text-builder-" + this.countTextBuilder;
             Text textText = new Text(translatedText);
             textText.setText(translatedText);
-//            textText.setId(querryId);//ToDo update, how to set Querry Id
-//            System.out.println(textText.getId());
             return textText;
         }
     }
@@ -228,7 +226,6 @@ public class VaadinBuilderWomm {
         private int countTextFieldOnView = 0;
 
         public TextField create(String textAbove) {
-//            String translatedTextAbove = translateText(textAbove);
             return create(textAbove, "");
         }
 
@@ -260,7 +257,6 @@ public class VaadinBuilderWomm {
         } else {
             newTextNeedsToBeTranslated.add(text);
             System.out.println("put(\"" + text + "\", \"" + text + "<-\");");
-//            translateTextMap.put(text,"put(\""+text+"\" \"" + text+"<-\");");
             translateTextMap.put(text, "->" + text);
             return text;
         }
@@ -277,7 +273,6 @@ public class VaadinBuilderWomm {
         System.out.println("------------");
         System.out.println("Add this to TranslateMap.java");
         for (String translateMe : newTextNeedsToBeTranslated) {
-//            System.out.println("put(\""+translateMe+"\", \"" + translateMe+"<-TranslationNeeded\");");
             System.out.println("put(\"" + translateMe + "\", \"\");");
         }
     }

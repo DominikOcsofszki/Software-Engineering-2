@@ -136,14 +136,11 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
         stellenanzeige.add(stelleBeschreibung);
 
-        //ToDo -Erstellung eines Datenbankobjekts mit StellenanzeigeTyp, StellenanzeigeBezeichnung, StellenanzeigeBeschreibung, FirmenLogo, FirmenName
-        //ToDo -Routing zum korrekten UnternehmenView
         //Erstellen-Button
         Button erstellenButton = getWommBuilder().Button.create("Erstellen");
         erstellenButton.addClickListener(e -> {
             if (stelleWebsite.getValue().matches(URL_REGEX) && !stelleBeschreibung.isEmpty() && !stelleWebsite.isEmpty() && !stelleOrt.isEmpty() && !stelleTitel.isEmpty()) {
                 buildAndSaveStelleDTO();
-//                UI.getCurrent().navigate(UFirmProfileDisplayView.class);
             } else {
                 Notification notification = new Notification();
                 notification.setText("Bitte überprüfen Sie ihre Eingaben! Alle Felder müssen korrekt gefüllt sein!");
@@ -153,9 +150,6 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
         });
 
-        // erstellenButton.addClickListener(e -> {
-        //     getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
-        // });
         stellenanzeige.add(erstellenButton);
 
         add(stellenanzeige);
@@ -164,7 +158,6 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
     protected void setUpFieldForEdit(StelleDTO stelleDTO) {
                 stelleToEdit = stelleDTO;
-//                stellenanzeigenTyp.setValue(stelleDTO.());
                 stellePrimaryKey = stelleDTO.getStelleId().intValue();
                 stelleTitel.setValue(stelleDTO.getStelleTitel());
                 stelleOrt.setValue(stelleDTO.getStelleOrt());
@@ -184,17 +177,13 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                 .unternehmen(unternehmenDTO)
                 .erstellungsdatum((new Date()))
                 .build();
-//        StelleDTO stelleDTO = stelleService.saveStelle(erzeugDTO);
         stelleService.saveStelle(erzeugDTO);
         List<AboDTO> allAboDTO =
                 aboStudentUnternehmenService.getByUnternehmenId(unternehmenDTO.getUnternehmenId());
-//        List<AboDTO> allAboDTO =
-//                aboStudentUnternehmenService.getAll();
         System.out.println("-----------------------------------");
         System.out.println("allAboDTO: " + allAboDTO);
         System.out.println("-----------------------------------");
 
-//        String msg = "Neue Stelle: " + erzeugDTO.getStelleTitel() ;
 String msg  = "Neue Stelle: " + erzeugDTO.getStelleTitel() + "\n" + "Ort: " + erzeugDTO.getStelleOrt() +
         "\n" + "Beschreibung: " + erzeugDTO.getStelleBeschreibung() + "\n" + "Website: " +
         erzeugDTO.getStelleWebsite();
@@ -218,13 +207,6 @@ String msg  = "Neue Stelle: " + erzeugDTO.getStelleTitel() + "\n" + "Ort: " + er
                         System.out.println("====================================");
 
                         benachrichtigungService.saveBenachrichtigung(msgDTO);
-//                        Notification notification = new Notification();
-//                        notification.setText("Neue Stelle: " + erzeugDTO.getStelleTitel());
-//                        notification.setText("Student Informed: " + AboDTO.getStudent().getStudentVorname()
-//                                + " " + AboDTO.getStudent().getStudentName() + " id:" + AboDTO.getStudent().getNutzer().getNutzerId());
-//                        System.out.println("Neue Stelle: " + erzeugDTO.getStelleTitel());
-//                        notification.open();
-//                        notification.setDuration(5000);
                     }
                 });
         Notification notification = new Notification();
