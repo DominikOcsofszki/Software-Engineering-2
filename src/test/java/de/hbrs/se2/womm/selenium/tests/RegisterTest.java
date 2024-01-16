@@ -14,6 +14,16 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
     LoginPage loginPage;
     Random random = new SecureRandom();
 
+    long randomInt = random.nextLong(1_000_000_000);
+    String name = "selenium"+randomInt;
+    String surname = "test";
+    String username = "seleniumtest"+randomInt;
+    String email = "seleniumtest"+randomInt+"@web.de";
+    String pw = "seleniumtest";
+    String cP = "seleniumtest";
+    String bday = "01.01.2000";
+    String location = "world";
+
     @Override
     protected void setupPageBeforeEach() {
         registerPage = new RegisterPage(driver, wait);
@@ -22,28 +32,10 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
 
 //    @Test
     public void testRegister() {
-        long randomInt = random.nextLong(1_000_000_000);
-        String name = "selenium"+randomInt;
-        String surname = "test";
-        String username = "seleniumtest"+randomInt;
-        String email = "seleniumtest"+randomInt+"@web.de";
-        String pw = "seleniumtest";
-        String cP = "seleniumtest";
-        String bday = "01.01.2000";
-        String location = "world";
         registerPage.register(name, surname, username, email, pw, cP, bday, location);
     }
 //    @Test
     public void testRegisterAndLogin() {
-        long randomInt = random.nextLong(1_000_000_000);
-        String name = "selenium"+randomInt;
-        String surname = "test";
-        String username = "seleniumtest"+randomInt;
-        String email = "seleniumtest"+randomInt+"@web.de";
-        String pw = "seleniumtest";
-        String cP = "seleniumtest";
-        String bday = "01.01.2000";
-        String location = "world";
         registerPage.register(name, surname, username, email, pw, cP, bday, location);
         loginPage.login(username, pw);
         wait.until(driver -> driver.findElement(LOCATORS.LOGOUT_BUTTON).isDisplayed());
