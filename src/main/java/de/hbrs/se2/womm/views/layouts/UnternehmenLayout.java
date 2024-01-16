@@ -29,12 +29,12 @@ public class UnternehmenLayout extends AbstractLayoutLoggedIn {
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Homepage"), UHomepageUnternehmenView.class, VaadinIcon.HOME),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Profile"), UFirmProfileDisplayView.class, VaadinIcon.BUILDING),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Applications"), UApplicationsView.class, VaadinIcon.BRIEFCASE),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Notifications"), UNotificationView.class, VaadinIcon.BELL),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Create advertisement"), UStelleAnzeigeErstellenView.class, VaadinIcon.PLUS),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Edit profile"), UEditFirmProfileDisplayView.class, VaadinIcon.EDIT)
+                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Homepage"), UHomepageUnternehmenView.class, VaadinIcon.HOME),
+                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Profile"), UFirmProfileDisplayView.class, VaadinIcon.BUILDING),
+                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Applications"), UApplicationsView.class, VaadinIcon.BRIEFCASE),
+                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Notifications"), UNotificationView.class, VaadinIcon.BELL),
+                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Create advertisement"), UStelleAnzeigeErstellenView.class, VaadinIcon.PLUS),
+                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Edit profile"), UEditFirmProfileDisplayView.class, VaadinIcon.EDIT)
 
 //                new RouterLink(VaadinBuilderWomm.translateTextStatic("UChatView"), UChatView.class), //TODO final check
 //                new RouterLink(VaadinBuilderWomm.translateTextStatic("UNotificationView"), UNotificationView.class) //TODO Final CHECK
