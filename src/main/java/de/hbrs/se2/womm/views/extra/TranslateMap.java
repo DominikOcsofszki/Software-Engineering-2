@@ -162,5 +162,11 @@ public class TranslateMap {
         translateMap.put("Company Website", "Unternehmens Website");
 //        translateMap.put("Password", "Passwort");
 
+        //UStellenAnzeigeErstellenView
+        translateMap.put("Please check your Inputs! All fields must be entered correctly!", "Bitte überprüfen Sie ihre Eingaben! Alle Felder müssen korrekt gefüllt sein!");
+        translateMap.put("A title must be provided", "Ein Titel muss angegeben werden");
+        translateMap.put("A location must be provided", "Ein Ort muss angegeben werden");
+        translateMap.put("A valid url must be provided", "Eine valide Url muss angegeben werden");
+        translateMap.put("A description must be provided", "Eine Beschreibung muss angegeben werden");
     }
 }
