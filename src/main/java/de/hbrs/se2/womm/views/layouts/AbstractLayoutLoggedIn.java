@@ -28,7 +28,9 @@ abstract class AbstractLayoutLoggedIn extends AbstractLayout {
 
         String text = VaadinBuilderWomm.translateTextStatic("Log out"); //TODO better change to this?
         Button logoutButton = new Button(text, e -> securityService.logout());
-        super.createHeaderWithLogoutButton(logoutButton, true, addBenachrichtigungen());
+//        super.createHeaderWithLogoutButton(logoutButton, true, addBenachrichtigungen());
+        super.createHeaderWithLogoutButton(logoutButton, true,
+                addBenachrichtigungen(), securityService.isUserStudent());
     }
 
     int getMessagesCount() {

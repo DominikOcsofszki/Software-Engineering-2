@@ -44,6 +44,17 @@ abstract class AbstractLayout extends AppLayout {
         addToNavbar(header);
     }
 
+    void createHeaderWithLogoutButton(Button logout, boolean withMenu, MenuBar menuBar, boolean isStudent) {
+        createHeaderWithLogoutButton(logout, withMenu, menuBar);
+        if (isStudent) {
+            logo.addClickListener(e -> UI.getCurrent().navigate(ROUTING.STUDENT.SHomepageStudentView));
+            nameImage.addClickListener(e -> UI.getCurrent().navigate(ROUTING.STUDENT.SHomepageStudentView));
+        } else {
+            logo.addClickListener(e -> UI.getCurrent().navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
+            nameImage.addClickListener(e -> UI.getCurrent().navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
+        }
+    }
+
     void configName() {
         nameImage.setHeight(50, Unit.PIXELS);
         nameImage.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.MEDIUM);
