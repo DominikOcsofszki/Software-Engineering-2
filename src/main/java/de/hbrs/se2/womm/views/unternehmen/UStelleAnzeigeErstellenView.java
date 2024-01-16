@@ -19,6 +19,7 @@ import de.hbrs.se2.womm.services.AboStudentUnternehmenService;
 import de.hbrs.se2.womm.services.BenachrichtigungService;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.UnternehmenService;
+import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
@@ -192,6 +193,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 String msg  = "Neue Stelle: " + erzeugDTO.getStelleTitel() + "\n" + "Ort: " + erzeugDTO.getStelleOrt() +
         "\n" + "Beschreibung: " + erzeugDTO.getStelleBeschreibung() + "\n" + "Website: " +
         erzeugDTO.getStelleWebsite();
+        int countAbo = allAboDTO.size();
         allAboDTO.forEach(
                 AboDTO -> {
                     if (AboDTO.getAboBenachrichtigungen()) {
@@ -211,15 +213,20 @@ String msg  = "Neue Stelle: " + erzeugDTO.getStelleTitel() + "\n" + "Ort: " + er
                         System.out.println("====================================");
 
                         benachrichtigungService.saveBenachrichtigung(msgDTO);
-                        Notification notification = new Notification();
-                        notification.setText("Neue Stelle: " + erzeugDTO.getStelleTitel());
-                        notification.setText("Student Informed: " + AboDTO.getStudent().getStudentVorname()
-                                + " " + AboDTO.getStudent().getStudentName() + " id:" + AboDTO.getStudent().getNutzer().getNutzerId());
-                        System.out.println("Neue Stelle: " + erzeugDTO.getStelleTitel());
-                        notification.open();
-                        notification.setDuration(5000);
+//                        Notification notification = new Notification();
+//                        notification.setText("Neue Stelle: " + erzeugDTO.getStelleTitel());
+//                        notification.setText("Student Informed: " + AboDTO.getStudent().getStudentVorname()
+//                                + " " + AboDTO.getStudent().getStudentName() + " id:" + AboDTO.getStudent().getNutzer().getNutzerId());
+//                        System.out.println("Neue Stelle: " + erzeugDTO.getStelleTitel());
+//                        notification.open();
+//                        notification.setDuration(5000);
                     }
                 });
+        Notification notification = new Notification();
+        notification.setText(VaadinBuilderWomm.translateTextStatic("Abo-count: ") + countAbo);
+        notification.open();
+        notification.setDuration(5000);
+
         getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
     }
 
