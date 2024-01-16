@@ -2,6 +2,8 @@ package de.hbrs.se2.womm.views.unternehmen;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -54,7 +56,13 @@ public class UHomepageUnternehmenView extends AViewWomm {
 
 
     private void setUpHeader() {
-        HorizontalLayout header = new HorizontalLayout();
+        VerticalLayout header = new VerticalLayout();
+        String welcome = getWommBuilder().translateText("Welcome ");
+        H1 headerText = getWommBuilder().H1.create(welcome + unternehmenDTO.getName());
+        H2 text = getWommBuilder().H2.create("Here you can see all your open advertisements");
+        header.add(headerText,text);
+        add(header);
+        /*
         //Buttons
         String button1 = getWommBuilder().translateText("Create advertisement");
         Button b1 = new Button(button1, new Icon(VaadinIcon.PLUS));
@@ -81,6 +89,8 @@ public class UHomepageUnternehmenView extends AViewWomm {
         // Layout (letzten zwei buttons nach rechts)
         b5.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
+        */
+
     }
 
 /*    private void setUpBanner() {

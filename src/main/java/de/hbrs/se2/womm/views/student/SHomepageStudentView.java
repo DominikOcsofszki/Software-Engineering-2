@@ -46,10 +46,11 @@ public class SHomepageStudentView extends AViewWomm {
 
     private void setUpHeader() {
         VerticalLayout header = new VerticalLayout();
-        H1 headerText = getWommBuilder().H1.create("Welcome " + studentDTO.getStudentName());
+        String welcome = getWommBuilder().translateText("Welcome ");
+        H1 headerText = getWommBuilder().H1.create(welcome +  studentDTO.getStudentName());
         H2 text = getWommBuilder().H2.create("Here you can see all open advertisements");
         header.add(headerText,text);
-
+        add(header);
 /*
         //Buttons
 //        Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
@@ -79,7 +80,6 @@ public class SHomepageStudentView extends AViewWomm {
         b4.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
  */
-        add(header);
     }
 /*
     private void setUpBanner() {
