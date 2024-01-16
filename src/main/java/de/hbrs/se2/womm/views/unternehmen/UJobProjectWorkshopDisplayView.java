@@ -6,6 +6,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
+import de.hbrs.se2.womm.services.BenachrichtigungService;
 import de.hbrs.se2.womm.services.BewerbungService;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
@@ -19,8 +20,10 @@ import jakarta.annotation.security.RolesAllowed;
 @PageTitle("JobProjectWorkshopDisplayView")
 public class UJobProjectWorkshopDisplayView extends BJobProjectWorkshopDisplayView implements HasUrlParameter<Long> {
 
-    public UJobProjectWorkshopDisplayView(StelleService stelleService, SecurityService securityService, BewerbungService bewerbungService, StudentService studentService) {
-        super(stelleService, securityService, bewerbungService, studentService);
+    public UJobProjectWorkshopDisplayView(StelleService stelleService, SecurityService securityService,
+                                          BewerbungService bewerbungService, StudentService studentService,
+                                          BenachrichtigungService benachrichtigungService) {
+        super(stelleService, securityService, bewerbungService, studentService, benachrichtigungService);
         add(new Button("Edit", e -> {
             UI.getCurrent().navigate(ROUTING.UNTERNEHMEN.EditUJobProjectWorkshopDisplayView + "/" + stelleId);
         }));

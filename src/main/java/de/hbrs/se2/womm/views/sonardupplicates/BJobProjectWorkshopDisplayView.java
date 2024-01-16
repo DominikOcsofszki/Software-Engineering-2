@@ -17,17 +17,16 @@ import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
 import de.hbrs.se2.womm.config.SecurityService;
-import de.hbrs.se2.womm.dtos.BewerbungDTO;
-import de.hbrs.se2.womm.dtos.StelleDTO;
-import de.hbrs.se2.womm.dtos.StudentDTO;
-import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.dtos.*;
 import de.hbrs.se2.womm.model.ApplicationStatus;
+import de.hbrs.se2.womm.services.BenachrichtigungService;
 import de.hbrs.se2.womm.services.BewerbungService;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,12 +42,15 @@ public abstract class BJobProjectWorkshopDisplayView extends AViewWomm implement
     protected long stelleId;
     VerticalLayout applicationForm;
     boolean formToggle = false;
+    BenachrichtigungService benachrichtigungService;
 
     public BJobProjectWorkshopDisplayView(StelleService stelleService,
                                           SecurityService securityService,
                                           BewerbungService bewerbungService,
-                                          StudentService studentService) {
+                                          StudentService studentService,
+                                          BenachrichtigungService benachrichtigungService) {
 
+        this.benachrichtigungService = benachrichtigungService;
         this.securityService = securityService;
         this.bewerbungService = bewerbungService;
         this.studentService = studentService;
@@ -220,6 +222,13 @@ public abstract class BJobProjectWorkshopDisplayView extends AViewWomm implement
                         .bewerbungStatus(ApplicationStatus.AUSSTEHEND.toString())
                         .bewerbungText(textArea.getValue()).build());
                 if (returned != null) {
+                    BenachrichtigungDTO benachrichtigungDTO = BenachrichtigungDTO.builder()
+                            .nutzer(unternehmen.getNutzer())
+                            .nachricht(getWommBuilder().translateText("You have a new application from ") + currentUser.getStudentName())
+                            .gelesen(false)
+                            .date(new Date())
+                            .build();
+                    benachrichtigungService.saveBenachrichtigung(benachrichtigungDTO);
                     createSuccessNotification();
                 }
             } else {
