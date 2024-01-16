@@ -10,6 +10,7 @@ public class TranslateMap {
 
     static {
         translateMap.put("", "");
+        translateMap.put("EN/DE", "DE/EN");
         // LandingPageView
         translateMap.put("Your job search portal. Discover thousands of job opportunities and more.", "Dein Jobportal. Entdecke tausende Jobangebote und mehr.");
         translateMap.put("SignUp as Student", "Registriere dich als Student");
@@ -27,6 +28,8 @@ public class TranslateMap {
 
         //AGridFilter
         translateMap.put("Filter by...", "Filter nach...");
+        translateMap.put("Message","Nachricht");
+        translateMap.put("Read","Gelesen");
 
         //GridFilterStelle (filter by)
         translateMap.put("Advertisement", "Stellenanzeige"); // dont change!!
@@ -53,6 +56,7 @@ public class TranslateMap {
         translateMap.put("Notifications", "Benachrichtigungen");
         translateMap.put("Edit profile", "Profil bearbeiten");
         translateMap.put("New Advertisements","Neue Stellenangebote");
+
         // UApplicationView
         translateMap.put("%s is not a valid ID.", "%s ist keine gültige ID.");
         translateMap.put("Surname, Name", "Name, Vorname");
@@ -133,12 +137,18 @@ public class TranslateMap {
         translateMap.put("Apply later", "Später bewerben");
         translateMap.put("Your application has been sent successfully", "Deine Bewerbung wurde erfolgreich versendet");
 
+        //UApplicationsView
+        translateMap.put("Current Applications","Aktuelle Bewerbungen");
+        translateMap.put("Last name","Nachname");
+        translateMap.put("First name","Vorname");
+        translateMap.put("Application","Bewerbung");
+        translateMap.put("State","Status");
+
         //UApplicationView
         translateMap.put("Accept", "Annehmen");
         translateMap.put("Decline", "Ablehnen");
         translateMap.put("You have accepted the application", "Sie haben die Bewerbung angenommen");
         translateMap.put("You have declined the application", "Sie haben die Bewerbung abgelehnt");
-
 
         // StudentLayout
         translateMap.put("SApplicationsView", "Bewerbungen");
@@ -162,6 +172,8 @@ public class TranslateMap {
         translateMap.put("Since", "Seit");
         translateMap.put("Company Location", "Ort des Unternehmens");
         translateMap.put("Company Website", "Unternehmens Website");
+        translateMap.put("Edit firm profile","Firmprofil bearbeiten");
+//        translateMap.put("Password", "Passwort");
 
         //UStellenAnzeigeErstellenView
         translateMap.put("Please check your Inputs! All fields must be entered correctly!", "Bitte überprüfen Sie ihre Eingaben! Alle Felder müssen korrekt gefüllt sein!");
@@ -169,5 +181,10 @@ public class TranslateMap {
         translateMap.put("A location must be provided", "Ein Ort muss angegeben werden");
         translateMap.put("A valid url must be provided", "Eine valide Url muss angegeben werden");
         translateMap.put("A description must be provided", "Eine Beschreibung muss angegeben werden");
+        translateMap.put("Advertisement type","Stellenanzeigentyp");
+        translateMap.put("Project","Projekt");
+        translateMap.put("Student job","Werkstudentenstelle");
+        translateMap.put("Ad description","Stellenbezwichnung");
+        translateMap.put("Create","Erstellen");
     }
 }
