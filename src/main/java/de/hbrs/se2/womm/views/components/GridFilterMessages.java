@@ -17,7 +17,6 @@ public class GridFilterMessages extends AGridFilter<BenachrichtigungDTO> {
     @Override
     protected String checkItem(BenachrichtigungDTO dto, String searchBy) {
         return switch (searchBy) {
-//            case "benachrichtigungId" -> String.valueOf(dto.());
             case "nachricht" -> dto.getNachricht();
             case "gelesen" -> String.valueOf(dto.isGelesen());
             default -> "";

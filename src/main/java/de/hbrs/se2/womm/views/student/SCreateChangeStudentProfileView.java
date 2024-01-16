@@ -158,7 +158,6 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         try {
             datePickerDob.setValue(LocalDate.parse(studentDTO.getStudentGeburtstag()));
         } catch (Exception e) {
-//            e.printStackTrace();    //TODO remove this from production
             datePickerDob.setValue(LocalDate.now());
         }
         datePickerDob.setWidth("100%");

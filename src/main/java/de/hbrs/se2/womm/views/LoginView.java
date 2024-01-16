@@ -71,7 +71,6 @@ public class LoginView extends AViewWomm {
         submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         addClickListenerForEnter(submitButton, usernameInput, passwordInput);
         submitButton.addClickListener(e -> {
-//            submitButton.setEnabled(false); //TODO remove if ok
             LoginRequest loginRequest = LoginRequest.builder()
                     .username(usernameInput.getValue())
                     .password(passwordInput.getValue()).build();
@@ -91,7 +90,6 @@ public class LoginView extends AViewWomm {
                 closeButton.setAriaLabel("Close");
                 closeButton.addClickListener(event -> {
                     notification.close();
-//                    submitButton.setEnabled(true); //TODO remove if ok
                 });
 
                 HorizontalLayout layout = new HorizontalLayout(text, closeButton);
