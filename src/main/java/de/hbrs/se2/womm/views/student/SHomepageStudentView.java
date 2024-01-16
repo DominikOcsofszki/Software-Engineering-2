@@ -47,7 +47,7 @@ public class SHomepageStudentView extends AViewWomm {
     private void setUpHeader() {
         VerticalLayout header = new VerticalLayout();
         String welcome = getWommBuilder().translateText("Welcome ");
-        H1 headerText = getWommBuilder().H1.create(welcome +  studentDTO.getStudentName());
+        H1 headerText = new H1(welcome +  studentDTO.getStudentName());
         H2 text = getWommBuilder().H2.create("Here you can see all open advertisements");
         header.add(headerText,text);
         add(header);
