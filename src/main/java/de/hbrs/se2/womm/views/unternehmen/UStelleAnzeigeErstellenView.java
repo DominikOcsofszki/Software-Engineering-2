@@ -220,6 +220,7 @@ String msg  = "Neue Stelle: " + erzeugDTO.getStelleTitel() + "\n" + "Ort: " + er
                         notification.setDuration(5000);
                     }
                 });
+        getUI().ifPresent(ui -> ui.navigate(ROUTING.UNTERNEHMEN.UHomepageUnternehmenView));
     }
 
     private void selectComponentListener(AbstractField.ComponentValueChangeEvent<Select<String>, String> e) {
