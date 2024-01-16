@@ -42,12 +42,12 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Homepage"), SHomepageStudentView.class, VaadinIcon.HOME),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Profile"), SStudentProfileDisplayView.class, VaadinIcon.USER),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Subscriptions"), SAboStudentView.class, VaadinIcon.BOOKMARK),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Applications"), SApplicationsView.class, VaadinIcon.BRIEFCASE),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Notifications"), SCreateChangeStudentProfileView.class, VaadinIcon.BELL),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Edit profile"), SCreateChangeStudentProfileView.class, VaadinIcon.EDIT)
+                setUpMenuBarWomm("Homepage", SHomepageStudentView.class, VaadinIcon.HOME),
+                setUpMenuBarWomm("Profile", SStudentProfileDisplayView.class, VaadinIcon.USER),
+                setUpMenuBarWomm("Subscriptions", SAboStudentView.class, VaadinIcon.BOOKMARK),
+                setUpMenuBarWomm("Applications", SApplicationsView.class, VaadinIcon.BRIEFCASE),
+                setUpMenuBarWomm("Notifications", SNotificationView.class, VaadinIcon.BELL),
+                setUpMenuBarWomm("Edit profile", SCreateChangeStudentProfileView.class, VaadinIcon.EDIT)
 
   /* Old way deelte later after approve
    new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class),

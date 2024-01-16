@@ -32,7 +32,7 @@ public class UnternehmenLayout extends AbstractLayoutLoggedIn {
                 setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Homepage"), UHomepageUnternehmenView.class, VaadinIcon.HOME),
                 setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Profile"), UFirmProfileDisplayView.class, VaadinIcon.BUILDING),
                 setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Applications"), UApplicationsView.class, VaadinIcon.BRIEFCASE),
-                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Notifications"), UStelleAnzeigeErstellenView.class, VaadinIcon.BELL),
+                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Notifications"), UNotificationView.class, VaadinIcon.BELL),
                 setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Create advertisement"), UStelleAnzeigeErstellenView.class, VaadinIcon.PLUS),
                 setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Edit profile"), UEditFirmProfileDisplayView.class, VaadinIcon.EDIT)
 
