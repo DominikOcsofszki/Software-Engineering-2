@@ -71,11 +71,7 @@ public class LandingPageView extends AViewWomm {
 
     private HorizontalLayout createLogoSection() {
         HorizontalLayout logoSection = new HorizontalLayout();
-       /* Image logoImage = new Image("themes/theme_1/Womm_big_logo.png", "");
-        logoImage.setWidth("260px");
-        logoImage.setHeight("60px");
-        logoSection.add(logoImage);
-*/        return logoSection;
+               return logoSection;
     }
     private VerticalLayout createHeroSection() {
         VerticalLayout heroSection = new VerticalLayout();

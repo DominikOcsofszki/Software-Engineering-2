@@ -48,14 +48,6 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
                 setUpMenuBarWommAndTranslateName("Notifications", SNotificationView.class, VaadinIcon.BELL),
                 setUpMenuBarWommAndTranslateName("Edit profile", SCreateChangeStudentProfileView.class, VaadinIcon.EDIT)
 
-  /* Old way deelte later after approve
-   new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class),
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SApplicationsView"), SApplicationsView.class),
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SCreateChangeStudentProfileView"), SCreateChangeStudentProfileView.class),
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SHomepageStudentView"), SHomepageStudentView.class),
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SStudentProfileDisplayView"), SStudentProfileDisplayView.class),
-                new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class)
-*/
                 //                new RouterLink(VaadinBuilderWomm.translateTextStatic("SChatView"), SChatView.class),//TODO final Check
                 //                new RouterLink(VaadinBuilderWomm.translateTextStatic("SFirmProfileDisplayView"), SFirmProfileDisplayView.class),//TODO check again: delete info was next to it
                 //                new RouterLink(VaadinBuilderWomm.translateTextStatic("SJobProjectWorkshopDisplayView"), SJobProjectWorkshopDisplayView.class),//TODO check again: delete info was next to it
