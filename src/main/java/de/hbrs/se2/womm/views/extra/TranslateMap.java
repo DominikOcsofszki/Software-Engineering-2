@@ -122,7 +122,7 @@ public class TranslateMap {
         translateMap.put("Curriculum Vitae", "Lebenslauf");
         translateMap.put("Changes saved!", "Änderungen gespeichert!");
         translateMap.put("Enter Password", "Passwort eingeben");
-        translateMap.put("Change Password", "Passwort ändern")
+        translateMap.put("Change Password", "Passwort ändern");
 
         //SJobProjectWorkshopDisplayView
         translateMap.put("The job offer is not available anymore :(", "Das Stellenangebot existiert nicht mehr :(");
