@@ -143,17 +143,13 @@ public abstract class BJobProjectWorkshopDisplayView extends AViewWomm implement
 
         // Hyperlink
 
-        HorizontalLayout linkLayout = new HorizontalLayout();
-        Icon linkIcon = VaadinIcon.LINK.create();
-        linkLayout.add(linkIcon);
+        HorizontalLayout websiteLayout = new HorizontalLayout();
+        Icon linkIcon = new Icon(VaadinIcon.EXTERNAL_LINK);
+        Anchor anchor = new Anchor(this.stelleDTO.getStelleWebsite(), this.stelleDTO.getStelleWebsite());
+        anchor.getStyle().setColor("#0000EE");
+        websiteLayout.add(linkIcon, anchor);
 
-        Anchor website = new Anchor();
-        String url = this.stelleDTO.getStelleWebsite();
-        website.setText(url);
-
-        linkLayout.add(website);
-
-        stellenanzeige.add(linkLayout);
+        stellenanzeige.add(websiteLayout);
 
 
         // Beschreibung + Header
