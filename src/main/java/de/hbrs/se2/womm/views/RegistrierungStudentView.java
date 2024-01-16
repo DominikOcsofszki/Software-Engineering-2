@@ -104,7 +104,7 @@ public class RegistrierungStudentView extends AViewWomm {
         String emailIsRequired = getWommBuilder().translateText("Email is required");
         emailComponent.setErrorMessage(emailIsRequired);
 
-        passwordComponent = getWommBuilder().PasswordField.create("Password");
+        passwordComponent = getWommBuilder().PasswordField.create("Enter Password");
         String thePasswordUsedForLogin = getWommBuilder().translateText("The password used for login");
         passwordComponent.setTooltipText(thePasswordUsedForLogin);
         passwordComponent.setRequired(true);

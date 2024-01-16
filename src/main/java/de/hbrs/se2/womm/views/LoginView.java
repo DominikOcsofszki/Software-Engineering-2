@@ -61,7 +61,7 @@ public class LoginView extends AViewWomm {
         usernameInput.focus();
 
 
-        PasswordField passwordInput = getWommBuilder().PasswordField.create("Password");
+        PasswordField passwordInput = getWommBuilder().PasswordField.create("Enter Password");
         passwordInput.setWidthFull();
         passwordInput.setRequired(true);
         passwordInput.setRequiredIndicatorVisible(true);
