@@ -135,7 +135,14 @@ public abstract class BJobProjectWorkshopDisplayView extends AViewWomm implement
 
         HorizontalLayout websiteLayout = new HorizontalLayout();
         Icon linkIcon = new Icon(VaadinIcon.EXTERNAL_LINK);
-        Anchor anchor = new Anchor(this.stelleDTO.getStelleWebsite(), this.stelleDTO.getStelleWebsite());
+
+        String website;
+        if(this.stelleDTO.getStelleWebsite().substring(0,4).equalsIgnoreCase("http")){
+            website = this.stelleDTO.getStelleWebsite();
+        }else{
+            website = "https://" + this.stelleDTO.getStelleWebsite();
+        }
+        Anchor anchor = new Anchor(website, this.stelleDTO.getStelleWebsite());
         anchor.getStyle().setColor("#0000EE");
         websiteLayout.add(linkIcon, anchor);
 

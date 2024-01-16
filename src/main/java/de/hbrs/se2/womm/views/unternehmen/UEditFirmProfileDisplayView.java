@@ -70,20 +70,6 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         Image imageProfilePicture = unternehmenDTO.PlaceholderOrImage();
         imageProfilePicture.setWidth("250px");
         imageProfilePicture.setHeight("250px");
-        /*
-        ComboBox<ProfilePictureB64> comboBoxProfilePicture = new ComboBox<>();
-        comboBoxProfilePicture.setItems(ProfilePictureB64.values());
-        comboBoxProfilePicture.setItemLabelGenerator(ProfilePictureB64::name);
-        comboBoxProfilePicture.setLabel("Profile Picture");
-        comboBoxProfilePicture.addValueChangeListener(e -> {
-            if (e.getValue() != null) {
-                imageProfilePicture.setSrc(e.getValue().toString());
-                unternehmenDTO.getNutzer().setNutzerProfilbild(e.getValue().toString().getBytes());
-
-            }
-        });
-        comboBoxProfilePicture.setWidth("250px");
-        */
         // Location
         String companyLocation = unternehmenDTO.getNutzer().getNutzerOrt() == null ?
                 "Company Location" : unternehmenDTO.getNutzer().getNutzerOrt();

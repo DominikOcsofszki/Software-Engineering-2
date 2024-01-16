@@ -1,6 +1,7 @@
 package de.hbrs.se2.womm.views.student;
 
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
@@ -58,7 +59,7 @@ public class SNotificationView extends AViewWomm {
 
     void setUpHeader() {
 //        H1 headerText = getWommBuilder().H1.create("New notifications from your subscribed companies");
-        H1 headerText = getWommBuilder().H1.create("New Jobs from your subscribed companies");
+        H2 headerText = getWommBuilder().H2.create("New Jobs from your subscribed companies");
 //        H1 headerText = getWommBuilder().H1.create("Notifications");
         add(headerText);
     }

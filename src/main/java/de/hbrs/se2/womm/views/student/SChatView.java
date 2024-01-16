@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.student;
 
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
@@ -21,7 +22,8 @@ public class SChatView extends AViewWomm {
                      BenachrichtigungService benachrichtigungService) {
         this.securityService = securityService;
         this.benachrichtigungService = benachrichtigungService;
-        add("ChatView");
+        H1 headerText = getWommBuilder().H1.create("Notifications");
+        add(headerText);
         gridFilterMessages.setUpFromOutside(benachrichtigungService.getByNutzerId(securityService.getLoggedInNutzerID()));
         add(gridFilterMessages);
     }

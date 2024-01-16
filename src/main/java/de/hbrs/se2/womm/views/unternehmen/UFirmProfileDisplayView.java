@@ -81,7 +81,14 @@ public class UFirmProfileDisplayView extends AViewWomm {
         if (unternehmenDTO.getWebsite_url() != null) {
             HorizontalLayout websiteLayout = new HorizontalLayout();
             Icon linkIcon = new Icon(VaadinIcon.EXTERNAL_LINK);
-            Anchor anchor = new Anchor(unternehmenDTO.getWebsite_url(), unternehmenDTO.getWebsite_url());
+
+            String website;
+            if(this.unternehmenDTO.getWebsite_url().substring(0,4).equalsIgnoreCase("http")){
+                website = this.unternehmenDTO.getWebsite_url();
+            }else{
+                website = "https://" + this.unternehmenDTO.getWebsite_url();
+            }
+            Anchor anchor = new Anchor(website,this.unternehmenDTO.getWebsite_url());
             anchor.getStyle().setColor("#0000EE");
             websiteLayout.add(linkIcon, anchor);
             detailsLayout.add(websiteLayout);
