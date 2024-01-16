@@ -184,7 +184,7 @@ public class TranslateMap {
         translateMap.put("Advertisement type","Stellenanzeigentyp");
         translateMap.put("Project","Projekt");
         translateMap.put("Student job","Werkstudentenstelle");
-        translateMap.put("Ad description","Stellenbezwichnung");
+        translateMap.put("Add description","Stellenbezeichnung");
         translateMap.put("Create","Erstellen");
     }
 }

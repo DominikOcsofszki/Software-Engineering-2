@@ -107,7 +107,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stellenanzeige.add(stellenanzeigenTyp);
 
         //TextfeldTitel
-        String stellenb = getWommBuilder().translateText("Ad description");
+        String stellenb = getWommBuilder().translateText("Add description");
         stelleTitel.setPlaceholder(stellenb);
         stelleTitel.setClearButtonVisible(true);
         stelleTitel.setRequired(true);
