@@ -26,8 +26,11 @@ public class TranslateMap {
         translateMap.put("Filter by...", "Filter nach...");
 
         //GridFilterStelle (filter by)
-        translateMap.put("Advertisement title", "Name Stellenanzeige"); // dont change!!
-        translateMap.put("Firm name", "Name Unternehmen"); // dont change!!
+        translateMap.put("Advertisement", "Stellenanzeige"); // dont change!!
+        translateMap.put("Firm", "Unternehmen"); // dont change!!
+        translateMap.put("Description", "Beschreibung");
+        translateMap.put("Creationdate", "Erstellungsdatum");
+        translateMap.put("Type","Typ");
 
         // SCreateChangeStudentProfileView
         translateMap.put("Home", "Startseite");

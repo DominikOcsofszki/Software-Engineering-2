@@ -16,28 +16,40 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
 
     @Override
     protected void configureGrid() {
-        String header1 = VaadinBuilderWomm.translateTextStatic("Advertisement title");
+        String header1 = VaadinBuilderWomm.translateTextStatic("Advertisement");
         grid.addColumn(StelleDTO::getStelleTitel).setHeader(new Html("<b>" +header1+"</b>"));
-        String header2 = VaadinBuilderWomm.translateTextStatic("Firm name");
+        String header2 = VaadinBuilderWomm.translateTextStatic("Firm");
         grid.addColumn(stelleDTO -> stelleDTO.getUnternehmen().getName()).setHeader(new Html("<b>" +header2+"</b>"));
-        String header3 = VaadinBuilderWomm.translateTextStatic("Advertisement description");
+        String header3 = VaadinBuilderWomm.translateTextStatic("Description");
         grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader(new Html("<b>" +header3+"</b>"));
 //        grid.addColumn(StelleDTO::getErstellungsdatum).setHeader("Erstellungsdatum").setSortable(true);
-        grid.addColumn(StelleDTO::getErstellungsdatum).setHeader("Erstellungsdatum").setSortable(true);
+        String header4 = VaadinBuilderWomm.translateTextStatic("Creationdate");
+        grid.addColumn(StelleDTO::getErstellungsdatum).setHeader(new Html("<b>" +header4+"</b>"));
 //        grid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT); //TODO Adding to show all Text
 //                .setFooter(String.format("%s total Advertisement", 1000));; //TODO any reason for html???/
         //We can also add footer to grid, e.g. with the number of advertisments
-
+        String header5 = VaadinBuilderWomm.translateTextStatic("Type");
+        grid.addColumn(StelleDTO::getStelleTyp).setHeader(new Html("<b>" +header5+"</b>"));
+        String header6 = VaadinBuilderWomm.translateTextStatic("Location");
+        grid.addColumn(StelleDTO::getStelleOrt).setHeader(new Html("<b>" +header6+"</b>"));
 
     }
 
     @Override
     protected String[] getFilterByItemsFromDTO() {
-        String str1 = VaadinBuilderWomm.translateTextStatic("Advertisement title");
-        String str2 = VaadinBuilderWomm.translateTextStatic("Firm name");
+        String str1 = VaadinBuilderWomm.translateTextStatic("Advertisement");
+        String str2 = VaadinBuilderWomm.translateTextStatic("Firm");
+        String str3 = VaadinBuilderWomm.translateTextStatic("Description");
+        String str4 = VaadinBuilderWomm.translateTextStatic("Creationdate");
+        String str5 = VaadinBuilderWomm.translateTextStatic("Type");
+        String str6 = VaadinBuilderWomm.translateTextStatic("Location");
         return new String[]{
                 str1,
-                str2
+                str2,
+                str3,
+                str4,
+                str5,
+                str6
         };
     }
 
@@ -45,10 +57,10 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
     protected String checkItem(StelleDTO dto, String searchBy) {
 
         return switch (searchBy) {
-            case "Name Stellenanzeige" -> dto.getStelleTitel();
-            case "Name Unternehmen" -> dto.getUnternehmen().toString();
-            case "Advertisement title" -> dto.getStelleTitel();
-            case "Firm name" -> dto.getUnternehmen().toString();
+            case "Stellenanzeige" -> dto.getStelleTitel();
+            case "Unternehmen" -> dto.getUnternehmen().toString();
+            case "Advertisement" -> dto.getStelleTitel();
+            case "Firm" -> dto.getUnternehmen().toString();
             default -> null;
         };
     }
