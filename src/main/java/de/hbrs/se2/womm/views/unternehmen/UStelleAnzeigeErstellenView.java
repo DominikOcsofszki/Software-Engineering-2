@@ -106,12 +106,16 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         //TextfeldTitel
         stelleTitel.setPlaceholder("Stellenbezeichnung");
         stelleTitel.setClearButtonVisible(true);
+        stelleTitel.setRequired(true);
+        stelleTitel.setErrorMessage(getWommBuilder().translateText("A title must be provided"));
 
         stellenanzeige.add(stelleTitel);
 
         //Textfeld StelleOrt
         stelleOrt.setPlaceholder("Ortsname");
         stelleOrt.setClearButtonVisible(true);
+        stelleOrt.setRequired(true);
+        stelleOrt.setErrorMessage(getWommBuilder().translateText("A location must be provided"));
 
         stellenanzeige.add(stelleOrt);
 
@@ -121,6 +125,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
         stelleWebsite.setPattern(URL_REGEX);
         stelleWebsite.setRequiredIndicatorVisible(true);
+        stelleWebsite.setErrorMessage(getWommBuilder().translateText("A valid url must be provided"));
 
         stellenanzeige.add(stelleWebsite);
 
@@ -128,6 +133,8 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stelleBeschreibung.setWidthFull();
         stelleBeschreibung.setPlaceholder("Stellenbeschreibung");
         stelleBeschreibung.setClearButtonVisible(true);
+        stelleBeschreibung.setRequired(true);
+        stelleBeschreibung.setErrorMessage(getWommBuilder().translateText("A description must be provided"));
 
         stellenanzeige.add(stelleBeschreibung);
 
@@ -136,7 +143,10 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         //Erstellen-Button
         Button erstellenButton = getWommBuilder().Button.create("Erstellen");
         erstellenButton.addClickListener(e -> {
-            if (stelleWebsite.getValue().matches(URL_REGEX)) {
+            if (stelleWebsite.getValue().matches(URL_REGEX)
+                    && !stelleOrt.getValue().trim().isEmpty()
+                    && !stelleTitel.getValue().trim().isEmpty()
+                    && !stelleBeschreibung.getValue().trim().isEmpty()) {
                 buildAndSaveStelleDTO();
 //                UI.getCurrent().navigate(UFirmProfileDisplayView.class);
             } else {
