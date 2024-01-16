@@ -18,9 +18,12 @@ public class TranslateMap {
         translateMap.put("Want to create company profile? Contact us at kontakt@womm.de.", "Möchtest du ein Firmenprofil erstellen? Kontaktiere uns unter kontakt@womm.de.");
         translateMap.put("LogIn", "Anmelden");
 
-        //UHomepageUnternehmenView
-        translateMap.put("Create advertisement", "Stellenanzeige erstellen");
-        translateMap.put("View applications", "Bewerbungen anschauen");
+
+        //SHomepageStudentView + UHomepageUnternehmenVie
+        translateMap.put("Welcome "," Wilkommen ");
+        translateMap.put("Here you can see all open advertisements", "Hier sehen Sie alle offenen Stellenanzeigen");
+        translateMap.put("Here you can see all your open advertisements", "Hier sehen Sie alle Ihre offenen Stellenanzeigen");
+
 
         //AGridFilter
         translateMap.put("Filter by...", "Filter nach...");
@@ -40,27 +43,12 @@ public class TranslateMap {
         translateMap.put("Enter keyword", "Stichwort eingeben");
         translateMap.put("Subscriptions", "Abonnements");
 
-        //Unternehmen Layout
-        translateMap.put("UChatView", "Chat");
-        translateMap.put("UEditFirmProfileDisplayView", "Profil editieren");
-        translateMap.put("UFirmProfileDisplayView", "Profil");
-        translateMap.put("UHomepageUnternehmenView", "Homepage");
-        translateMap.put("UStelleAnzeigeErstellenView", "Stellenanzeige erstellen");
-        translateMap.put("UApplicationView", "Bewerbung");
-        translateMap.put("UNotificationView", "Benachrichtigungen");
-        translateMap.put("UApplicationsView", "Bewerbungen");
 
-        // Student Layout
-        //translateMap.put("SJobProjectWorkshopDisplayView", "Stellenanzeigen(delete link)");
+        //Unternehmen + Student Layout
+        translateMap.put("Create advertisement", "Stellenanzeige erstellen");
         translateMap.put("Profile", "Profil");
-        //translateMap.put("SApplicationView", "Bewerbung (delete link)");
         translateMap.put("Homepage", "Homepage");
-        //translateMap.put("SNotificationView", "Benachrichtigungen");
-        translateMap.put("Subscriptions", "Abonnements");
-        //translateMap.put("SChatView", "Chat");
-        translateMap.put("Search", "Suche");
-        translateMap.put("Chat", "Chat");
-        //translateMap.put("SFirmProfileDisplayView", "Firmenprofil(delete link)");
+        translateMap.put("Applications", "Bewerbung");
         translateMap.put("View subscriptions", "Abonnements anzeigen");
         translateMap.put("Notifications", "Benachrichtigungen");
         translateMap.put("Edit profile", "Profil bearbeiten");
