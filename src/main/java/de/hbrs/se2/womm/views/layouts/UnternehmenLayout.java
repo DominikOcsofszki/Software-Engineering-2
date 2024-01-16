@@ -31,7 +31,6 @@ public class UnternehmenLayout extends AbstractLayoutLoggedIn {
                 setUpMenuBarWommAndTranslateName("Homepage", UHomepageUnternehmenView.class, VaadinIcon.HOME),
                 setUpMenuBarWommAndTranslateName("Profile", UFirmProfileDisplayView.class, VaadinIcon.BUILDING),
                 setUpMenuBarWommAndTranslateName("Applications", UApplicationsView.class, VaadinIcon.BRIEFCASE),
-                setUpMenuBarWommAndTranslateName("Notifications", UNotificationView.class, VaadinIcon.BELL),
                 setUpMenuBarWommAndTranslateName("Create advertisement", UStelleAnzeigeErstellenView.class, VaadinIcon.PLUS),
                 setUpMenuBarWommAndTranslateName("Edit profile", UEditFirmProfileDisplayView.class, VaadinIcon.EDIT)
 

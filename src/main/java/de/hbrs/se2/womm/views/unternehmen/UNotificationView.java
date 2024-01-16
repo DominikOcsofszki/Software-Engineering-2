@@ -32,7 +32,7 @@ public class UNotificationView extends AViewWomm {
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         //Suchfeld
-        header.add(new H1("Neue Benachrichtigungen"));
+        header.add(getWommBuilder().H1.create("Notifications"));
         add(header);
     }
 }

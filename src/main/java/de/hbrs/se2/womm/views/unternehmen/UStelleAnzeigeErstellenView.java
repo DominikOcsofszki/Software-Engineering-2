@@ -87,7 +87,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     private void setUpHeader() {
         HorizontalLayout header = new HorizontalLayout();
         //Ueberschrift
-        header.add(new H1("Stellenausschreibung erstellen:"));
+        header.add(getWommBuilder().H1.create("Create advertisement"));
 
         add(header);
     }
@@ -96,15 +96,19 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         VerticalLayout stellenanzeige = new VerticalLayout();
 
         //Selector
-        this.stellenanzeigenTyp = new Select<>("Stellenanzeigen-Typ", this::selectComponentListener);
+        String type = getWommBuilder().translateText("Advertisement type");
+        this.stellenanzeigenTyp = new Select<>(type, this::selectComponentListener);
         stellenanzeigenTyp.setWidth("min-content");
-        stellenanzeigenTyp.setItems("Workshop", "Projekt", "Werkstudenten-Stelle");
-        stellenanzeigenTyp.setValue("Werkstudenten-Stelle");
+        String projekt = getWommBuilder().translateText("Project");
+        String werkst = getWommBuilder().translateText("Student job");
+        stellenanzeigenTyp.setItems("Workshop", projekt, werkst);
+        stellenanzeigenTyp.setValue(werkst);
 
         stellenanzeige.add(stellenanzeigenTyp);
 
         //TextfeldTitel
-        stelleTitel.setPlaceholder("Stellenbezeichnung");
+        String stellenb = getWommBuilder().translateText("Ad description");
+        stelleTitel.setPlaceholder(stellenb);
         stelleTitel.setClearButtonVisible(true);
         stelleTitel.setRequired(true);
         stelleTitel.setErrorMessage(getWommBuilder().translateText("A title must be provided"));
@@ -112,7 +116,8 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stellenanzeige.add(stelleTitel);
 
         //Textfeld StelleOrt
-        stelleOrt.setPlaceholder("Ortsname");
+        String ort = getWommBuilder().translateText("Location");
+        stelleOrt.setPlaceholder(ort);
         stelleOrt.setClearButtonVisible(true);
         stelleOrt.setRequired(true);
         stelleOrt.setErrorMessage(getWommBuilder().translateText("A location must be provided"));
@@ -132,7 +137,8 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
         //Textfeld StelleBeschreibung
         stelleBeschreibung.setWidthFull();
-        stelleBeschreibung.setPlaceholder("Stellenbeschreibung");
+        String beschreibung = getWommBuilder().translateText("Description");
+        stelleBeschreibung.setPlaceholder(beschreibung);
         stelleBeschreibung.setClearButtonVisible(true);
         stelleBeschreibung.setRequired(true);
         stelleBeschreibung.setErrorMessage(getWommBuilder().translateText("A description must be provided"));
@@ -141,7 +147,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stellenanzeige.add(stelleBeschreibung);
 
         //Erstellen-Button
-        Button erstellenButton = getWommBuilder().Button.create("Erstellen");
+        Button erstellenButton = getWommBuilder().Button.create("Create");
         erstellenButton.addClickListener(e -> {
             if (stelleWebsite.getValue().matches(URL_REGEX)
                     && !stelleOrt.getValue().trim().isEmpty()

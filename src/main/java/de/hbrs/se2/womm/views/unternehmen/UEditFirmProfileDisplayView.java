@@ -39,8 +39,8 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
     UnternehmenDTO unternehmenDTO;
     TextArea descriptionTextArea = new TextArea(getWommBuilder().translateText("Company Description"));
     TextArea gruendung = new TextArea(getWommBuilder().translateText("Since"));
-    TextField locationField = getWommBuilder().TextField.create(getWommBuilder().translateText("Company Location"));
-    TextField websiteField = getWommBuilder().TextField.create(getWommBuilder().translateText("Company Website"));
+    TextField locationField = getWommBuilder().TextField.create("Company Location");
+    TextField websiteField = getWommBuilder().TextField.create("Company Website");
 
     private long aktuelleNutzerID;
     private UnternehmenService unternehmenService;

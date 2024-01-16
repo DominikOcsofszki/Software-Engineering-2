@@ -31,6 +31,8 @@ public class UApplicationsView extends AViewWomm {
         this.unternehmenService = unternehmenService;
         this.gridFilterBewerbung = new GridFilterBewerbung();
 
+        add(getWommBuilder().H1.create("Current Applications"));
+
         long nutzerId = securityService.getLoggedInNutzerID();
         UnternehmenDTO unternehmen = unternehmenService.getByNutzerId(nutzerId);
         long unternehmenId = unternehmen.getUnternehmenId();
