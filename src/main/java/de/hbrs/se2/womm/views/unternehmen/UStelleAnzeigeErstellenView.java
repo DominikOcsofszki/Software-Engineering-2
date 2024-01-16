@@ -54,7 +54,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     private StelleDTO stelleToEdit;
     private int stellePrimaryKey;
 
-    private static final String URL_REGEX = "(https://www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]|(www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+    private static final String URL_REGEX = "(https://www.)|(www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
@@ -107,6 +107,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stelleTitel.setPlaceholder("Stellenbezeichnung");
         stelleTitel.setClearButtonVisible(true);
         stelleTitel.setRequired(true);
+        stelleTitel.setErrorMessage(getWommBuilder().translateText("A title must be provided"));
 
         stellenanzeige.add(stelleTitel);
 
@@ -114,6 +115,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stelleOrt.setPlaceholder("Ortsname");
         stelleOrt.setClearButtonVisible(true);
         stelleOrt.setRequired(true);
+        stelleOrt.setErrorMessage(getWommBuilder().translateText("A location must be provided"));
 
         stellenanzeige.add(stelleOrt);
 
@@ -124,6 +126,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
 
         stelleWebsite.setPattern(URL_REGEX);
         stelleWebsite.setRequiredIndicatorVisible(true);
+        stelleWebsite.setErrorMessage(getWommBuilder().translateText("A valid url must be provided"));
 
         stellenanzeige.add(stelleWebsite);
 
@@ -132,6 +135,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stelleBeschreibung.setPlaceholder("Stellenbeschreibung");
         stelleBeschreibung.setClearButtonVisible(true);
         stelleBeschreibung.setRequired(true);
+        stelleBeschreibung.setErrorMessage(getWommBuilder().translateText("A description must be provided"));
         stelleWebsite.setRequiredIndicatorVisible(true);
 
         stellenanzeige.add(stelleBeschreibung);
@@ -139,11 +143,14 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         //Erstellen-Button
         Button erstellenButton = getWommBuilder().Button.create("Erstellen");
         erstellenButton.addClickListener(e -> {
-            if (stelleWebsite.getValue().matches(URL_REGEX) && !stelleBeschreibung.isEmpty() && !stelleWebsite.isEmpty() && !stelleOrt.isEmpty() && !stelleTitel.isEmpty()) {
+            if (stelleWebsite.getValue().matches(URL_REGEX)
+                    && !stelleOrt.getValue().trim().isEmpty()
+                    && !stelleTitel.getValue().trim().isEmpty()
+                    && !stelleBeschreibung.getValue().trim().isEmpty()) {
                 buildAndSaveStelleDTO();
             } else {
                 Notification notification = new Notification();
-                notification.setText("Bitte überprüfen Sie ihre Eingaben! Alle Felder müssen korrekt gefüllt sein!");
+                notification.setText(getWommBuilder().translateText("Please check your Inputs! All fields must be entered correctly!"));
                 notification.open();
                 notification.setDuration(6000);
             }
