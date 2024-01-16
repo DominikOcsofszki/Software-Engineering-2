@@ -2,9 +2,12 @@ package de.hbrs.se2.womm.views.student;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
@@ -42,7 +45,12 @@ public class SHomepageStudentView extends AViewWomm {
     }
 
     private void setUpHeader() {
-        HorizontalLayout header = new HorizontalLayout();
+        VerticalLayout header = new VerticalLayout();
+        H1 headerText = getWommBuilder().H1.create("Welcome " + studentDTO.getStudentName());
+        H2 text = getWommBuilder().H2.create("Here you can see all open advertisements");
+        header.add(headerText,text);
+
+/*
         //Buttons
 //        Button b1 = new Button("View subscriptions", new Icon(VaadinIcon.EYE));
         String button1 = getWommBuilder().translateText("View subscriptions");
@@ -70,6 +78,8 @@ public class SHomepageStudentView extends AViewWomm {
         // Layout (letzten zwei buttons nach rechts)
         b4.getElement().getStyle().set("margin-left", "auto");
         header.setWidth("100%");
+ */
+        add(header);
     }
 /*
     private void setUpBanner() {

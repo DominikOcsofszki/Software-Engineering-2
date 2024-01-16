@@ -6,6 +6,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.services.BenachrichtigungService;
+import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.student.*;
 
 //@Component
@@ -41,11 +42,12 @@ public class StudentLayout extends AbstractLayoutLoggedIn {
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
-                setUpMenuBarWomm("SHomepageStudentView", SHomepageStudentView.class, VaadinIcon.HOME),
-                setUpMenuBarWomm("SStudentProfileDisplayView", SStudentProfileDisplayView.class, VaadinIcon.USER),
-                setUpMenuBarWomm("SAboStudentView", SAboStudentView.class, VaadinIcon.BOOKMARK),
-                setUpMenuBarWomm("SApplicationsView", SApplicationsView.class, VaadinIcon.BRIEFCASE),
-                setUpMenuBarWomm("SCreateChangeStudentProfileView", SCreateChangeStudentProfileView.class, VaadinIcon.EDIT)
+                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Homepage"), SHomepageStudentView.class, VaadinIcon.HOME),
+                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Profile"), SStudentProfileDisplayView.class, VaadinIcon.USER),
+                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Subscriptions"), SAboStudentView.class, VaadinIcon.BOOKMARK),
+                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Applications"), SApplicationsView.class, VaadinIcon.BRIEFCASE),
+                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Notifications"), SCreateChangeStudentProfileView.class, VaadinIcon.BELL),
+                setUpMenuBarWomm(VaadinBuilderWomm.translateTextStatic("Edit profile"), SCreateChangeStudentProfileView.class, VaadinIcon.EDIT)
 
   /* Old way deelte later after approve
    new RouterLink(VaadinBuilderWomm.translateTextStatic("SAboStudentView"), SAboStudentView.class),
