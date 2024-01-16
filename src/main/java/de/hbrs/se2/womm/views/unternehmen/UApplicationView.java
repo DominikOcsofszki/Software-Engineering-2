@@ -118,8 +118,8 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
         Image image = student.PlaceholderOrImage();
         image.setWidth(200, Unit.PIXELS);
         image.setHeight(200, Unit.PIXELS);
-        image.getStyle().set("border", "1px solid grey");
-        image.getStyle().set("border-radius", "5px");
+//        image.getStyle().set("border", "1px solid grey");
+//        image.getStyle().set("border-radius", "5px");
         top.add(image);
         H3 name = new H3(String.format("%s, %s", studentName, studentVorname));
         name.getStyle().set("cursor", "pointer");
