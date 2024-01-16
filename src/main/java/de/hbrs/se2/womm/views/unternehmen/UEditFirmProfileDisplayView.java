@@ -2,6 +2,7 @@ package de.hbrs.se2.womm.views.unternehmen;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
@@ -9,6 +10,7 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
@@ -17,6 +19,7 @@ import com.vaadin.flow.router.Route;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
+import de.hbrs.se2.womm.model.ProfilePictureB64;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.components.GridFilterStelle;
@@ -34,10 +37,10 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 
 
     UnternehmenDTO unternehmenDTO;
-    TextArea descriptionTextArea = new TextArea("Company Description");
-    TextArea gruendung = new TextArea("Since");
-    TextField locationField = getWommBuilder().TextField.create("Company Location");
-    TextField websiteField = getWommBuilder().TextField.create("Company Website");
+    TextArea descriptionTextArea = new TextArea(getWommBuilder().translateText("Company Description"));
+    TextArea gruendung = new TextArea(getWommBuilder().translateText("Since"));
+    TextField locationField = getWommBuilder().TextField.create(getWommBuilder().translateText("Company Location"));
+    TextField websiteField = getWommBuilder().TextField.create(getWommBuilder().translateText("Company Website"));
 
     private long aktuelleNutzerID;
     private UnternehmenService unternehmenService;
@@ -57,30 +60,38 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 //        add(new FilterGridStelleByLoggedInNutzerIdOrAllIfFilterNegative(stelleController, unternehmenDTO.getUnternehmenId()));
     }
 
-    void setupStars(int stars, HorizontalLayout ratingLayout) {
-        for (int i = 1; i <= stars; i++) {
-            ratingLayout.add(new Icon(VaadinIcon.STAR));
-        }
-    }
-
-
     private void setUp() {
-//        Image companyLogo = new Image(ASSETS.IMG.IMG9, "Firmen Logo Hier");
-        Image companyLogo = unternehmenDTO.PlaceholderOrImage();
+        // Name
         H2 firmName = new H2(unternehmenDTO.getName());
         String companyDescription = unternehmenDTO.getBeschreibung() == null ?
                 "Company Description" : unternehmenDTO.getBeschreibung();
-        long nrOfReviews = 123;//ToDo DTO Reviews ---> Anzahl von Bewertungen
-        HorizontalLayout ratingLayout = new HorizontalLayout();//ToDo refactored
-        int starsRating = 5;
 
+        // Logo
+        Image imageProfilePicture = unternehmenDTO.PlaceholderOrImage();
+        imageProfilePicture.setWidth("250px");
+        imageProfilePicture.setHeight("250px");
+        /*
+        ComboBox<ProfilePictureB64> comboBoxProfilePicture = new ComboBox<>();
+        comboBoxProfilePicture.setItems(ProfilePictureB64.values());
+        comboBoxProfilePicture.setItemLabelGenerator(ProfilePictureB64::name);
+        comboBoxProfilePicture.setLabel("Profile Picture");
+        comboBoxProfilePicture.addValueChangeListener(e -> {
+            if (e.getValue() != null) {
+                imageProfilePicture.setSrc(e.getValue().toString());
+                unternehmenDTO.getNutzer().setNutzerProfilbild(e.getValue().toString().getBytes());
+
+            }
+        });
+        comboBoxProfilePicture.setWidth("250px");
+        */
+        // Location
         String companyLocation = unternehmenDTO.getNutzer().getNutzerOrt() == null ?
                 "Company Location" : unternehmenDTO.getNutzer().getNutzerOrt();
+        // Website
         String companyWebsite = unternehmenDTO.getWebsite_url() == null ?
                 "Company Website" : unternehmenDTO.getWebsite_url();
-        String reviews = " (" + nrOfReviews + " Reviews)";
-        setupStars(starsRating, ratingLayout);
-//Set up Fields:
+
+        //Set up Fields:
         descriptionTextArea.setValue(companyDescription);
         String gruendung1 = unternehmenDTO.getGruendung() == null ?
                 "Company Since" : unternehmenDTO.getGruendung();
@@ -88,20 +99,18 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
 
         // Logo, Company Name, and Edit Firm Profile Button
         HorizontalLayout buttonsLayout = new HorizontalLayout();
-
         HorizontalLayout logoAndEditLayout = new HorizontalLayout();
-        Div logoAndName = new Div();
+        VerticalLayout logoAndName = new VerticalLayout();
 
-        logoAndName.add(companyLogo);
-        logoAndName.add(firmName);//ToDo put at top, refactored
+        logoAndName.add(firmName);
+        logoAndName.add(imageProfilePicture/*,comboBoxProfilePicture*/);
         logoAndEditLayout.add(logoAndName);
-        companyLogo.setWidth(200 + "px");
-        companyLogo.setHeight(200 + "px");
 
         //Save Button
         Button saveButton = getWommBuilder().Button.create("Save Changes");
         saveButton.addClickListener(e -> {
             unternehmenService.saveUnternehmen(newUnternehmenDTOFromFields());
+            unternehmenService.saveUnternehmen(unternehmenDTO);
             UI.getCurrent().getPage().reload();
         });
 
@@ -111,15 +120,10 @@ public class UEditFirmProfileDisplayView extends AViewWomm {
         buttonsLayout.add(logoAndEditLayout);
         buttonsLayout.add(saveButton);
 
-        ratingLayout.add(new Span(reviews));//ToDo Refactored
-        add(ratingLayout);
-
         locationField.setValue(companyLocation);
-
         websiteField.setValue(companyWebsite);
 
         add(locationField, websiteField);
-
         add(descriptionTextArea, gruendung);
     }
 

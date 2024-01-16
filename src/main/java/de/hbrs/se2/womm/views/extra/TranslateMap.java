@@ -48,17 +48,16 @@ public class TranslateMap {
         translateMap.put("UApplicationsView", "Bewerbungen");
 
         // Student Layout
-        translateMap.put("SJobProjectWorkshopDisplayView", "Stellenanzeigen(delete link)");
-        translateMap.put("SStudentProfileDisplayView", "Profil");
-        translateMap.put("SCreateChangeStudentProfileView", "Profil editieren");
-        translateMap.put("SApplicationView", "Bewerbung (delete link)");
-        translateMap.put("SHomepageStudentView", "Homepage");
-        translateMap.put("SNotificationView", "Benachrichtigungen");
-        translateMap.put("SAboStudentView", "Abonnements");
-        translateMap.put("SChatView", "Chat");
+        //translateMap.put("SJobProjectWorkshopDisplayView", "Stellenanzeigen(delete link)");
+        translateMap.put("Profile", "Profil");
+        //translateMap.put("SApplicationView", "Bewerbung (delete link)");
+        translateMap.put("Homepage", "Homepage");
+        //translateMap.put("SNotificationView", "Benachrichtigungen");
+        translateMap.put("Subscriptions", "Abonnements");
+        //translateMap.put("SChatView", "Chat");
         translateMap.put("Search", "Suche");
         translateMap.put("Chat", "Chat");
-        translateMap.put("SFirmProfileDisplayView", "Firmenprofil(delete link)");
+        //translateMap.put("SFirmProfileDisplayView", "Firmenprofil(delete link)");
         translateMap.put("View subscriptions", "Abonnements anzeigen");
         translateMap.put("Notifications", "Benachrichtigungen");
         translateMap.put("Edit profile", "Profil bearbeiten");
@@ -85,7 +84,7 @@ public class TranslateMap {
         translateMap.put("Password", "Passwort");
         translateMap.put("Username is required", "Benutzername ist erforderlich");
         translateMap.put("Your REAL surname", "Ihr ECHTER Nachname");
-        translateMap.put("Email 😳", "Email 😳");
+        translateMap.put("Email", "Email");
         translateMap.put("Location is required", "Standort ist erforderlich");
         translateMap.put("Your REAL Name", "Ihr ECHTER Name");
         translateMap.put("Your REAL Company Name", "Ihr ECHTER Unternehmensname");
@@ -166,6 +165,10 @@ public class TranslateMap {
         // SNotificationView
         translateMap.put("New Jobs from your subscribed companies", "Neue Stellenangebote von deinen abonnierten Unternehmen");
 
-
+        // UEditFirmProfileDisplayView
+        translateMap.put("Company Description", "Unternehmens Beschreibung");
+        translateMap.put("Since", "Seit");
+        translateMap.put("Company Location", "Ort des Unternehmens");
+        translateMap.put("Company Website", "Unternehmens Website");
     }
 }
