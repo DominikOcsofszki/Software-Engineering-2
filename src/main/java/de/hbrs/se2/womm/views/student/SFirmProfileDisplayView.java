@@ -146,8 +146,17 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         // Link to Company Website with Icon
         HorizontalLayout websiteLayout = new HorizontalLayout();
         Icon linkIcon = new Icon(VaadinIcon.EXTERNAL_LINK);
-        linkIcon.setColor(""); // Set the color as needed #hex vaadin blue ????
-        websiteLayout.add(linkIcon, new Anchor(checkIfNullShowTextLink(null), checkIfNullShowTextLink(null)));
+        //linkIcon.setColor(""); // Set the color as needed #hex vaadin blue ????
+
+        String website;
+        if(this.unternehmenDTO.getWebsite_url().substring(0,4).equalsIgnoreCase("http")){
+            website = this.unternehmenDTO.getWebsite_url();
+        }else{
+            website = "https://" + this.unternehmenDTO.getWebsite_url();
+        }
+        Anchor anchor = new Anchor(website,this.unternehmenDTO.getWebsite_url());
+        anchor.getStyle().setColor("#0000EE");
+        websiteLayout.add(linkIcon, anchor);
         detailsLayout.add(websiteLayout);
 
         add(detailsLayout);
@@ -171,8 +180,10 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         return dummyStellenanzeigen;
     }
 
-    private String checkIfNullShowTextLink(String checkString) {
+   /* private String checkIfNullShowTextLink(String checkString) {
         if (checkString == null) return "N/A";
         return checkString;
+
     }
+    */
 }

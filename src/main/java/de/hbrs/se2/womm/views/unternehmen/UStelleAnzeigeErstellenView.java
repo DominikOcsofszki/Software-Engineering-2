@@ -54,7 +54,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     private StelleDTO stelleToEdit;
     private int stellePrimaryKey;
 
-    private static final String URL_REGEX = "(https://www.)|(www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+    private static final String URL_REGEX = "(https://www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]|(www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
@@ -106,18 +106,21 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         //TextfeldTitel
         stelleTitel.setPlaceholder("Stellenbezeichnung");
         stelleTitel.setClearButtonVisible(true);
+        stelleTitel.setRequired(true);
 
         stellenanzeige.add(stelleTitel);
 
         //Textfeld StelleOrt
         stelleOrt.setPlaceholder("Ortsname");
         stelleOrt.setClearButtonVisible(true);
+        stelleOrt.setRequired(true);
 
         stellenanzeige.add(stelleOrt);
 
         //Textfeld StelleWebsite
         stelleWebsite.setPlaceholder("URL");
         stelleWebsite.setClearButtonVisible(true);
+        stelleWebsite.setRequired(true);
 
         stelleWebsite.setPattern(URL_REGEX);
         stelleWebsite.setRequiredIndicatorVisible(true);
@@ -128,6 +131,8 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stelleBeschreibung.setWidthFull();
         stelleBeschreibung.setPlaceholder("Stellenbeschreibung");
         stelleBeschreibung.setClearButtonVisible(true);
+        stelleBeschreibung.setRequired(true);
+        stelleWebsite.setRequiredIndicatorVisible(true);
 
         stellenanzeige.add(stelleBeschreibung);
 
@@ -136,14 +141,14 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         //Erstellen-Button
         Button erstellenButton = getWommBuilder().Button.create("Erstellen");
         erstellenButton.addClickListener(e -> {
-            if (stelleWebsite.getValue().matches(URL_REGEX)) {
+            if (stelleWebsite.getValue().matches(URL_REGEX) && !stelleBeschreibung.isEmpty() && !stelleWebsite.isEmpty() && !stelleOrt.isEmpty() && !stelleTitel.isEmpty()) {
                 buildAndSaveStelleDTO();
 //                UI.getCurrent().navigate(UFirmProfileDisplayView.class);
             } else {
                 Notification notification = new Notification();
-                notification.setText("Bitte überprüfen Sie ihre Eingaben!");
+                notification.setText("Bitte überprüfen Sie ihre Eingaben! Alle Felder müssen korrekt gefüllt sein!");
                 notification.open();
-                notification.setDuration(3000);
+                notification.setDuration(6000);
             }
 
         });
