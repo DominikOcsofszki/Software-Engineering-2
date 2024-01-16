@@ -6,7 +6,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.services.BenachrichtigungService;
-import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.unternehmen.*;
 
 public class UnternehmenLayout extends AbstractLayoutLoggedIn {
@@ -29,12 +28,12 @@ public class UnternehmenLayout extends AbstractLayoutLoggedIn {
     @Override
     void createDrawer() {
         addToDrawer(new VerticalLayout(
-                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Homepage"), UHomepageUnternehmenView.class, VaadinIcon.HOME),
-                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Profile"), UFirmProfileDisplayView.class, VaadinIcon.BUILDING),
-                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Applications"), UApplicationsView.class, VaadinIcon.BRIEFCASE),
-                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Notifications"), UNotificationView.class, VaadinIcon.BELL),
-                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Create advertisement"), UStelleAnzeigeErstellenView.class, VaadinIcon.PLUS),
-                setUpMenuBarWommAndTranslateName(VaadinBuilderWomm.translateTextStatic("Edit profile"), UEditFirmProfileDisplayView.class, VaadinIcon.EDIT)
+                setUpMenuBarWommAndTranslateName("Homepage", UHomepageUnternehmenView.class, VaadinIcon.HOME),
+                setUpMenuBarWommAndTranslateName("Profile", UFirmProfileDisplayView.class, VaadinIcon.BUILDING),
+                setUpMenuBarWommAndTranslateName("Applications", UApplicationsView.class, VaadinIcon.BRIEFCASE),
+                setUpMenuBarWommAndTranslateName("Notifications", UNotificationView.class, VaadinIcon.BELL),
+                setUpMenuBarWommAndTranslateName("Create advertisement", UStelleAnzeigeErstellenView.class, VaadinIcon.PLUS),
+                setUpMenuBarWommAndTranslateName("Edit profile", UEditFirmProfileDisplayView.class, VaadinIcon.EDIT)
 
 //                new RouterLink(VaadinBuilderWomm.translateTextStatic("UChatView"), UChatView.class), //TODO final check
 //                new RouterLink(VaadinBuilderWomm.translateTextStatic("UNotificationView"), UNotificationView.class) //TODO Final CHECK
