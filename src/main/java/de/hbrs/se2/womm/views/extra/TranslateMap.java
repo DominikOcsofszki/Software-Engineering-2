@@ -72,7 +72,6 @@ public class TranslateMap {
         translateMap.put("Email is required", "Email ist erforderlich");
         translateMap.put("Select your date of birth", "Wählen Sie Ihr Geburtsdatum");
         translateMap.put("Your desired username", "Ihr gewünschter Benutzername");
-        translateMap.put("Password", "Passwort");
         translateMap.put("Username is required", "Benutzername ist erforderlich");
         translateMap.put("Your REAL surname", "Ihr ECHTER Nachname");
         translateMap.put("Email", "Email");
@@ -161,5 +160,7 @@ public class TranslateMap {
         translateMap.put("Since", "Seit");
         translateMap.put("Company Location", "Ort des Unternehmens");
         translateMap.put("Company Website", "Unternehmens Website");
+//        translateMap.put("Password", "Passwort");
+
     }
 }
