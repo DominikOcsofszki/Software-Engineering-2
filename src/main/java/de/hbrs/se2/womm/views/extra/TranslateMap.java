@@ -160,7 +160,6 @@ public class TranslateMap {
         translateMap.put("Since", "Seit");
         translateMap.put("Company Location", "Ort des Unternehmens");
         translateMap.put("Company Website", "Unternehmens Website");
-//        translateMap.put("Password", "Passwort");
 
         //UStellenAnzeigeErstellenView
         translateMap.put("Please check your Inputs! All fields must be entered correctly!", "Bitte überprüfen Sie ihre Eingaben! Alle Felder müssen korrekt gefüllt sein!");

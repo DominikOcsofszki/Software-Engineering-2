@@ -19,9 +19,4 @@ public class UnternehmenDTO implements AbstractDTO {
     public Image PlaceholderOrImage(){
         return ASSETS.buildPlaceholder(50);
     }
-//    public Image getLogo(){
-//        Image image = new Image(ASSETS.RANDOM.USER, "Alternative image text");
-//        image.setHeight(20, Unit.PIXELS);
-//        return image;
-//    }
 }

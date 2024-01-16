@@ -79,7 +79,6 @@ public class SStudentProfileDisplayView extends AViewWomm {
                 "Semester", String.valueOf(studentDTO.getStudentSemester()),"20"
         );
 
-        // Hr() sind horizontale HTML-Trennlinien (<hr>)
         profilDetails.add(
                 rowName,
                 new Hr(), rowGeburtstag,
