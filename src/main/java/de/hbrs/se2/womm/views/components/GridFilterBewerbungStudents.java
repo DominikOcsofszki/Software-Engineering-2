@@ -13,7 +13,7 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getUnternehmen().getName()).setHeader(unternehmen);
         String stelle = VaadinBuilderWomm.translateTextStatic("Advertisement");
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getStelleTitel()).setHeader(stelle);
-        String b = VaadinBuilderWomm.translateTextStatic("Ad description");
+        String b = VaadinBuilderWomm.translateTextStatic("Application");
         grid.addColumn(BewerbungDTO::getBewerbungText).setHeader(b);
         setUpColorBewerbungen(grid);
         grid.addClassName("styling");
