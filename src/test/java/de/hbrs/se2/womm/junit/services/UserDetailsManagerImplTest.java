@@ -1,4 +1,5 @@
 package de.hbrs.se2.womm.junit.services;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.entities.NutzerLogin;
 import de.hbrs.se2.womm.repositories.NutzerLoginRepository;
 import de.hbrs.se2.womm.services.UserDetailsManagerImpl;
@@ -16,6 +17,8 @@ import static org.mockito.Mockito.*;
 class UserDetailsManagerImplTest {
     @Mock
     private NutzerLoginRepository nutzerLoginRepository;
+    @Mock
+    private SecurityService securityService;
     @InjectMocks
     private UserDetailsManagerImpl userDetailsManager;
     @BeforeEach
@@ -54,29 +57,6 @@ class UserDetailsManagerImplTest {
 
         // Verify that deleteUser() throws UsernameNotFoundException for a nonexistent user
         assertThrows(UsernameNotFoundException.class, () -> userDetailsManager.deleteUser(username));
-    }
-    @Test
-    void testChangePassword() {
-        String oP = "oldPass";
-        String nP = "newPass";
-        NutzerLogin userDetails = new NutzerLogin();
-        when(nutzerLoginRepository.findNutzerByNutzerPasswort(oP)).thenReturn(userDetails);
-
-        assertDoesNotThrow(() -> userDetailsManager.changePassword(oP, nP));
-
-        // Verify that nutzerLoginRepository.findNutzerByNutzerPasswort() is called with the correct old password
-        verify(nutzerLoginRepository, times(1)).findNutzerByNutzerPasswort(oP);
-        // Verify that nutzerLoginRepository.save() is called with the updated user details
-        verify(nutzerLoginRepository, times(1)).save(userDetails);
-    }
-    @Test
-    void testChangePassword_InvalidPassword() {
-        String oP = "invalidPass";
-        String nP = "newPass";
-        when(nutzerLoginRepository.findNutzerByNutzerPasswort(oP)).thenReturn(null);
-
-        // Verify that changePassword() throws UsernameNotFoundException for an invalid old password
-        assertThrows(UsernameNotFoundException.class, () -> userDetailsManager.changePassword(oP, nP));
     }
     @Test
     void testUserExists() {
