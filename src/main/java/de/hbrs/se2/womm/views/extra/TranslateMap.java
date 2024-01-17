@@ -33,9 +33,9 @@ public class TranslateMap {
         translateMap.put("Message","Nachricht");
         translateMap.put("Read","Gelesen");
         translateMap.put("Order","Reihenfolge");
-        translateMap.put("accepted","akzeptiert");
-        translateMap.put("declined","abgelehnt");
-        translateMap.put("pending","ausstehend");
+        translateMap.put("Accepted","Akzeptiert");
+        translateMap.put("Declined","Abgelehnt");
+        translateMap.put("Pending","Ausstehend");
 
         //GridFilterStelle (filter by)
         translateMap.put("Advertisement", "Stellenanzeige"); // dont change!!
