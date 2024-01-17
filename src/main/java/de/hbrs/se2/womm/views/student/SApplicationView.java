@@ -144,47 +144,28 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
         add(header);
     }
 
-
     private void setUpStellenanzeige() {
         VerticalLayout stellenanzeige = new VerticalLayout();
-
-        // Ort
-
         HorizontalLayout ortLayout = new HorizontalLayout();
         Icon ortsIcon = VaadinIcon.PIN.create();
         ortLayout.add(ortsIcon);
-
         Text ort = new Text(this.stelleDTO.getStelleOrt());
         ortLayout.add(ort);
-
         stellenanzeige.add(ortLayout);
-
-        // Hyperlink
-
         HorizontalLayout linkLayout = new HorizontalLayout();
         Icon linkIcon = VaadinIcon.LINK.create();
         linkLayout.add(linkIcon);
-
         Anchor website = new Anchor();
         String url = this.stelleDTO.getStelleWebsite();
         website.setText(url);
-
         linkLayout.add(website);
-
         stellenanzeige.add(linkLayout);
-
-        // Beschreibung + Header
-
         Div beschreibung = new Div();
-
         beschreibung.getStyle().set("margin-top", "20px");
-
         H3 titel = new H3();
         String stelleTitel = this.stelleDTO.getStelleTitel();
         titel.setText(stelleTitel);
-
         beschreibung.add(titel);
-
         List<String> paragraphs = List.of(this.stelleDTO.getStelleBeschreibung().split("\n\n"));
         paragraphs.forEach(paragraph -> {
             List.of(paragraph.split("\n")).forEach(subParagraph -> {
