@@ -30,11 +30,11 @@ public class RegisterTest extends AbstractPrepareTestSelenium {
         loginPage = new LoginPage(driver, wait);
     }
 
-//    @Test
+    @Test
     public void testRegister() {
         registerPage.register(name, surname, username, email, pw, cP, bday, location);
     }
-//    @Test
+    @Test
     public void testRegisterAndLogin() {
         registerPage.register(name, surname, username, email, pw, cP, bday, location);
         loginPage.login(username, pw);
