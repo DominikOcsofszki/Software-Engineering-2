@@ -90,7 +90,7 @@ public class TranslateMap {
         translateMap.put("Your REAL Company Name", "Ihr ECHTER Unternehmensname");
         translateMap.put("The password used for login", "Das Passwort für die Anmeldung");
         translateMap.put("Surname is required", "Nachname ist erforderlich");
-        translateMap.put("Student/in Registration", "Student/in Registrierung");
+        translateMap.put("Student Registration", "Student/in Registrierung");
         translateMap.put("Company Registration", "Unternehmen Registrierung");
         translateMap.put("Your current living location", "Ihr aktueller Wohnort");
         translateMap.put("Company Name is required", "Name Ihres Unternehmens ist erforderlich");
