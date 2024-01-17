@@ -54,7 +54,7 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
     private StelleDTO stelleToEdit;
     private int stellePrimaryKey;
 
-    private static final String URL_REGEX = "(https://www.)|(www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+    private static final String URL_REGEX = "(http://www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]|(https://www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]|(www.)[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
