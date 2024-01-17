@@ -36,6 +36,8 @@ abstract class AbstractLayout extends AppLayout {
         if (withMenu) this.header.add(new DrawerToggle());
         if (logout == null) {
             this.header.add(nameImage, logo);
+            logo.addClickListener(e -> UI.getCurrent().navigate(ROUTING.ALL.LandingPageView));
+            nameImage.addClickListener(e -> UI.getCurrent().navigate(ROUTING.ALL.LandingPageView));
         } else {
             logout.setId("logout-button");
             this.header.add(nameImage, logo, menuBar);
