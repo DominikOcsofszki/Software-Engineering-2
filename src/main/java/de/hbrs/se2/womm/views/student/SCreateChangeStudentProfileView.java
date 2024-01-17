@@ -2,7 +2,6 @@ package de.hbrs.se2.womm.views.student;
 
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -22,7 +21,6 @@ import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.model.ProfilePictureB64;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.services.UserDetailsManagerImpl;
-import de.hbrs.se2.womm.views.LandingPageView;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;

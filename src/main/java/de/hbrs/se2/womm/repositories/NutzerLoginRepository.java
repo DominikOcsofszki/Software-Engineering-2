@@ -1,6 +1,5 @@
 package de.hbrs.se2.womm.repositories;
 
-import de.hbrs.se2.womm.entities.Nutzer;
 import de.hbrs.se2.womm.entities.NutzerLogin;
 import org.springframework.data.jpa.repository.JpaRepository;
 

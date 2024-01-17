@@ -1,13 +1,7 @@
 package de.hbrs.se2.womm.views.unternehmen;
 
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -17,7 +11,6 @@ import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.components.GridFilterStelle;
-import de.hbrs.se2.womm.views.extra.ASSETS;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;

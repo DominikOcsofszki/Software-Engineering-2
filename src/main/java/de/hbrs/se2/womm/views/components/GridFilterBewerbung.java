@@ -3,7 +3,6 @@ package de.hbrs.se2.womm.views.components;
 import com.vaadin.flow.component.UI;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
-import de.hbrs.se2.womm.views.layouts.ROUTING;
 
 public class GridFilterBewerbung extends AGridFilter<BewerbungDTO> {
 

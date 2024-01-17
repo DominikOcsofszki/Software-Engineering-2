@@ -3,7 +3,6 @@ package de.hbrs.se2.womm.views.components;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
 import de.hbrs.se2.womm.dtos.AboDTO;
-import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 

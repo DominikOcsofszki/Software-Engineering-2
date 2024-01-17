@@ -1,6 +1,5 @@
 package de.hbrs.se2.womm.dtos;
 
-import de.hbrs.se2.womm.entities.NutzerLogin;
 import lombok.Builder;
 import lombok.Data;
 

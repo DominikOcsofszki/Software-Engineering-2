@@ -3,7 +3,6 @@ package de.hbrs.se2.womm.services;
 import de.hbrs.se2.womm.dtos.AboTagDTO;
 import de.hbrs.se2.womm.entities.AboTag;
 import de.hbrs.se2.womm.mapper.AboTagMapper;
-import de.hbrs.se2.womm.mapper.UnternehmenMapper;
 import de.hbrs.se2.womm.repositories.AboTagRepository;
 import org.springframework.stereotype.Service;
 

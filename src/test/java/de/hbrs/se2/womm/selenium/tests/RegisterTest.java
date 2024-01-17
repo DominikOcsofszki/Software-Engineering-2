@@ -4,7 +4,6 @@ import de.hbrs.se2.womm.selenium.extra.AbstractPrepareTestSelenium;
 import de.hbrs.se2.womm.selenium.extra.LOCATORS;
 import de.hbrs.se2.womm.selenium.pages.LoginPage;
 import de.hbrs.se2.womm.selenium.pages.RegisterPage;
-import org.junit.jupiter.api.Test;
 
 import java.security.SecureRandom;
 import java.util.Random;
