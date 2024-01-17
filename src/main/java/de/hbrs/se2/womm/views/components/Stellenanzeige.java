@@ -44,7 +44,7 @@ public class Stellenanzeige {
     private void createLinkLayout(String url) {
         Icon linkIcon = VaadinIcon.LINK.create();
 
-        String formattedUrl = formatUrlWithHttpsPrefix(url);
+        String formattedUrl = formatUrlWithHttpsOrHttpPrefix(url);
 
         Anchor website = new Anchor(formattedUrl, formattedUrl);
         website.getStyle().setColor("#0000EE");
@@ -70,8 +70,10 @@ public class Stellenanzeige {
         });
     }
 
-    private String formatUrlWithHttpsPrefix(String url) {
+    private String formatUrlWithHttpsOrHttpPrefix(String url) {
         String httpsPrefix = "https://";
-        return url.substring(0,8).equalsIgnoreCase(httpsPrefix) ? url : httpsPrefix + url;
+        String httpPrefix =  "http://";
+
+        return ((url.substring(0,8).equalsIgnoreCase(httpsPrefix) || url.substring(0,7).equalsIgnoreCase(httpPrefix)) ? url : httpsPrefix + url);
     }
 }
