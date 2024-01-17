@@ -179,7 +179,6 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
                 unternehmenDTO = stelleDTO.getUnternehmen();
     }
     private void buildAndSaveStelleDTO() {
-        System.out.println("UnternehmenDTO: " + unternehmenDTO);
         StelleDTO erzeugDTO = StelleDTO.builder()
                 .stelleId(stelleToEdit == null ? null : stelleToEdit.getStelleId())
                 .stelleTyp(chosenTyp)
@@ -193,9 +192,6 @@ public class UStelleAnzeigeErstellenView extends AViewWomm
         stelleService.saveStelle(erzeugDTO);
         List<AboDTO> allAboDTO =
                 aboStudentUnternehmenService.getByUnternehmenId(unternehmenDTO.getUnternehmenId());
-        System.out.println("-----------------------------------");
-        System.out.println("allAboDTO: " + allAboDTO);
-        System.out.println("-----------------------------------");
 
 String msg  = "Neue Stelle: " + erzeugDTO.getStelleTitel() + "\n" + "Ort: " + erzeugDTO.getStelleOrt() +
         "\n" + "Beschreibung: " + erzeugDTO.getStelleBeschreibung() + "\n" + "Website: " +
@@ -210,14 +206,6 @@ String msg  = "Neue Stelle: " + erzeugDTO.getStelleTitel() + "\n" + "Ort: " + er
                                 .date(new Date())
                                 .nutzer(AboDTO.getStudent().getNutzer())
                                 .build();
-                        System.out.println("====================================");
-                        System.out.println("BenachrichtigungDTO: " + msgDTO);
-                        System.out.println(msgDTO.getNutzer());
-                        System.out.println(msgDTO.getNutzer().getNutzerId());
-                        System.out.println(msgDTO.isGelesen());
-                        System.out.println(msgDTO.getNachricht());
-
-                        System.out.println("====================================");
 
                         benachrichtigungService.saveBenachrichtigung(msgDTO);
                     }

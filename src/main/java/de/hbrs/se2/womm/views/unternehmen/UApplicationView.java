@@ -70,23 +70,6 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
             setup404Page();
         }
     }
-//    private Component getProfil() {
-////        HorizontalLayout profilPage = new HorizontalLayout();
-////        VerticalLayout profilDetails = new VerticalLayout();
-//        VerticalLayout profilBild = new VerticalLayout();
-//
-//        Image bild = student.PlaceholderOrImage();
-//        bild.setWidth("300px");
-//        bild.setHeight("300px");
-//        bild.getStyle().set("margin-left", "auto"); // Sodass das Bild rechtsbündig ist
-//
-//        profilBild.add(bild);
-//        profilPage.setWidth("50%");
-//
-//        profilPage.add(profilDetails);
-//        profilPage.add(profilBild);
-//        return profilPage;
-//    }
 
     void setUpApplication() {
         bewerbungText = bewerbung.getBewerbungText();
