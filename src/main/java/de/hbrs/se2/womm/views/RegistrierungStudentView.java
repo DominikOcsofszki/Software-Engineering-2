@@ -67,7 +67,7 @@ public class RegistrierungStudentView extends AViewWomm {
 
         setJustifyContentMode(JustifyContentMode.CENTER);
 
-        H4 h4 = getWommBuilder().H4.create("Student/in Registration");
+        H4 h4 = getWommBuilder().H4.create("Student Registration");
         add(h4);
 
         nameComponent = getWommBuilder().TextField.create("Name");
