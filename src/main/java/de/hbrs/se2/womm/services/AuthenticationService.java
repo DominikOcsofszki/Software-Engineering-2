@@ -47,11 +47,12 @@ public class AuthenticationService {
         // speichert Studenten mit FK zur Nutzer-Tabelle
         Nutzer user = nutzerRepository.findNutzerByNutzerMail(email);
         studentRepository.save(Student.builder()
-                    .studentVorname(request.getFirstname())
-                    .studentName(request.getLastname())
-                    .studentGeburtstag(request.getDob())
-                    .studentBenachrichtigung(false)
-                    .nutzer(user)
+                .studentSemester(0)
+                .studentVorname(request.getFirstname())
+                .studentName(request.getLastname())
+                .studentGeburtstag(request.getDob())
+                .studentBenachrichtigung(false)
+                .nutzer(user)
                 .build());
     }
 
@@ -62,8 +63,8 @@ public class AuthenticationService {
         // speichert Unternehmen mit FK zur Nutzer-Tabelle
         Nutzer user = nutzerRepository.findNutzerByNutzerMail(email);
         unternehmenRepository.save(Unternehmen.builder()
-                    .nutzer(user)
-                    .name(request.getName())
+                .nutzer(user)
+                .name(request.getName())
                 .build());
     }
 
