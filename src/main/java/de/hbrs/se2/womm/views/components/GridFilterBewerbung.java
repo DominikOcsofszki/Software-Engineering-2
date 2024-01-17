@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.components;
 
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
@@ -10,13 +11,13 @@ public class GridFilterBewerbung extends AGridFilter<BewerbungDTO> {
     @Override
     protected void configureGrid() {
         String nachname = VaadinBuilderWomm.translateTextStatic("Last name");
-        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStudent().getStudentName()).setHeader(nachname);
+        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStudent().getStudentName()).setHeader(new Html("<b>" +nachname+"</b>"));
         String vorname = VaadinBuilderWomm.translateTextStatic("First name");
-        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStudent().getStudentVorname()).setHeader(vorname);
+        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStudent().getStudentVorname()).setHeader(new Html("<b>" +vorname+"</b>"));
         String bewerbung = VaadinBuilderWomm.translateTextStatic("Application");
-        grid.addColumn(BewerbungDTO::getBewerbungText).setHeader(bewerbung);
+        grid.addColumn(BewerbungDTO::getBewerbungText).setHeader(new Html("<b>" +bewerbung+"</b>"));
         String status = VaadinBuilderWomm.translateTextStatic("State");
-        grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader(status);
+        grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader(new Html("<b>" +status+"</b>"));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.components;
 
+import com.vaadin.flow.component.Html;
 import de.hbrs.se2.womm.dtos.BenachrichtigungDTO;
 import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 
@@ -7,9 +8,9 @@ public class GridFilterMessages extends AGridFilter<BenachrichtigungDTO> {
     @Override
     protected void configureGrid() {
         String nachricht = VaadinBuilderWomm.translateTextStatic("Message");
-        grid.addColumn(BenachrichtigungDTO::getNachricht).setHeader(nachricht).setAutoWidth(true);
+        grid.addColumn(BenachrichtigungDTO::getNachricht).setHeader(new Html("<b>" +nachricht+"</b>")).setAutoWidth(true);
         String order = VaadinBuilderWomm.translateTextStatic("Order");
-        grid.addColumn(BenachrichtigungDTO::getId).setHeader(order).setSortable(true);
+        grid.addColumn(BenachrichtigungDTO::getId).setHeader(new Html("<b>" +order+"</b>")).setSortable(true);
 //        String gelesen = VaadinBuilderWomm.translateTextStatic("Read");
 //        grid.addColumn(BenachrichtigungDTO::isGelesen).setHeader(gelesen);
 //        grid.setWidthFull();
