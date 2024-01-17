@@ -48,6 +48,8 @@ public class AuthenticationService {
         Nutzer user = nutzerRepository.findNutzerByNutzerMail(email);
         studentRepository.save(Student.builder()
                 .studentSemester(0)
+                .studentSpezialisierung("")
+                .studentBio("")
                 .studentVorname(request.getFirstname())
                 .studentName(request.getLastname())
                 .studentGeburtstag(request.getDob())
