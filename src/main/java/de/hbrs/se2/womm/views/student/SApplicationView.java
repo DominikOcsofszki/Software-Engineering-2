@@ -55,8 +55,6 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
             fetchedBewerbung.ifPresent(bewerbungDTO -> this.bewerbung = bewerbungDTO);
             Optional<StelleDTO> checkStelleDTO = stelleService.getById(bewerbung.getBewerbungStelle().getStelleId());
             this.stelleDTO = checkStelleDTO.orElse(null);
-
-
             setUpApplication();
         } else {
             setup404Page();
@@ -65,20 +63,15 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
 
     void setUpApplication() {
         bewerbungText = bewerbung.getBewerbungText();
-
         studentID = bewerbung.getBewerbungStudent().getStudentId();
         Optional<StudentDTO> fetchedStudent = studentService.getById(studentID);
         fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
         studentName = student.getStudentName();
         studentVorname = student.getStudentVorname();
-
         setUpTop();
-
         String status = bewerbung.getBewerbungStatus();
         setUpStatus(status);
-
         setUpAnschreiben();
-
     }
 
     private void setUpTop() {
