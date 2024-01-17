@@ -7,7 +7,6 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -25,9 +24,9 @@ import de.hbrs.se2.womm.services.UnternehmenService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
+import de.hbrs.se2.womm.views.utils.TextToParagraphFormatter;
 import jakarta.annotation.security.RolesAllowed;
 
-import java.util.List;
 import java.util.Optional;
 
 @Route(value = ROUTING.UNTERNEHMEN.UApplicationView, layout = UnternehmenLayout.class)
@@ -46,7 +45,6 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
     private Long studentID;
     private String studentName;
     private String studentVorname;
-    private byte[] studentProfilePicture;
 
     public UApplicationView(BewerbungService bewerbungService,
                             StudentService studentService,
@@ -79,7 +77,6 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
         fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
         studentName = student.getStudentName();
         studentVorname = student.getStudentVorname();
-        studentProfilePicture = student.getNutzer().getNutzerProfilbild();
 
         long userId = securityService.getLoggedInNutzerID();
         unternehmen = unternehmenService.getByNutzerId(userId);
@@ -110,11 +107,7 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
     }
 
     private void setUpAnschreiben() {
-        VerticalLayout anschreiben = new VerticalLayout();
-        List.of(bewerbungText.split("\n\n")).forEach(paragraph -> List.of(paragraph.split("\n")).forEach(subParagraph -> {
-            Paragraph newParagraph = new Paragraph(subParagraph);
-            anschreiben.add(newParagraph);
-        }));
+        VerticalLayout anschreiben = TextToParagraphFormatter.formatTextToParagraph(bewerbungText);
         add(anschreiben);
     }
 

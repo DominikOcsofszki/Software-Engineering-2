@@ -1,11 +1,11 @@
 package de.hbrs.se2.womm.views.sonardupplicates;
 
-import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
@@ -23,11 +23,11 @@ import de.hbrs.se2.womm.services.BenachrichtigungService;
 import de.hbrs.se2.womm.services.BewerbungService;
 import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
+import de.hbrs.se2.womm.views.components.Stellenanzeige;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 public abstract class BJobProjectWorkshopDisplayView extends AViewWomm implements HasUrlParameter<Long> {
@@ -65,7 +65,7 @@ public abstract class BJobProjectWorkshopDisplayView extends AViewWomm implement
             } else {
                 this.stelleDTO = checkStelleDTO.get();
                 setUpHeader();
-                setUpStellenanzeige();
+                setupAnzeige();
                 if(securityService.isUserStudent()) {
                     setUpButtons();
                 }
@@ -93,66 +93,10 @@ public abstract class BJobProjectWorkshopDisplayView extends AViewWomm implement
         add(header);
     }
 
-
-    private void setUpStellenanzeige() {
-        VerticalLayout stellenanzeige = new VerticalLayout();
-
-        // Ort
-
-        HorizontalLayout ortLayout = new HorizontalLayout();
-        Icon ortsIcon = VaadinIcon.PIN.create();
-        ortLayout.add(ortsIcon);
-
-        Text ort = new Text(this.stelleDTO.getStelleOrt());
-        ortLayout.add(ort);
-
-        stellenanzeige.add(ortLayout);
-
-        // Hyperlink
-
-        HorizontalLayout websiteLayout = new HorizontalLayout();
-        Icon linkIcon = new Icon(VaadinIcon.EXTERNAL_LINK);
-
-        String website;
-        if(this.stelleDTO.getStelleWebsite().substring(0,4).equalsIgnoreCase("http")){
-            website = this.stelleDTO.getStelleWebsite();
-        }else{
-            website = "https://" + this.stelleDTO.getStelleWebsite();
-        }
-        Anchor anchor = new Anchor(website, this.stelleDTO.getStelleWebsite());
-        anchor.getStyle().setColor("#0000EE");
-        websiteLayout.add(linkIcon, anchor);
-
-        stellenanzeige.add(websiteLayout);
-
-
-        // Beschreibung + Header
-
-        Div beschreibung = new Div();
-
-        beschreibung.getStyle().set("margin-top", "20px");
-
-        H3 titel = new H3();
-        String stelleTitel = this.stelleDTO.getStelleTitel();
-        titel.setText(stelleTitel);
-
-        beschreibung.add(titel);
-
-        List<String> paragraphs = List.of(this.stelleDTO.getStelleBeschreibung().split("\n\n"));
-        paragraphs.forEach(paragraph -> {
-            List.of(paragraph.split("\n")).forEach(subParagraph -> {
-                Paragraph newParagraph = new Paragraph();
-                newParagraph.setWidthFull();
-                newParagraph.setText(subParagraph);
-                beschreibung.add(newParagraph);
-            });
-            beschreibung.add(new Html("<br>"));
-        });
-
-        stellenanzeige.add(beschreibung);
-
-        add(stellenanzeige);
-
+    private void setupAnzeige() {
+        Stellenanzeige stellenanzeige = new Stellenanzeige();
+        VerticalLayout anzeigeLayout = stellenanzeige.fillOutLayout(stelleDTO);
+        add(anzeigeLayout);
     }
 
     private void setUpButtons() {
