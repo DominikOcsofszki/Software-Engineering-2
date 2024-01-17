@@ -30,6 +30,9 @@ public class TranslateMap {
         translateMap.put("Filter by...", "Filter nach...");
         translateMap.put("Message","Nachricht");
         translateMap.put("Read","Gelesen");
+        translateMap.put("ACCEPTED","AKZEPTIERT");
+        translateMap.put("DECLINED","ABGELEHNT");
+        translateMap.put("PENDING","AUSSTEHEND");
 
         //GridFilterStelle (filter by)
         translateMap.put("Advertisement", "Stellenanzeige"); // dont change!!
@@ -184,7 +187,7 @@ public class TranslateMap {
         translateMap.put("Advertisement type","Stellenanzeigentyp");
         translateMap.put("Project","Projekt");
         translateMap.put("Student job","Werkstudentenstelle");
-        translateMap.put("Add description","Stellenbezeichnung");
+        translateMap.put("Ad description","Stellenbezeichnung");
         translateMap.put("Create","Erstellen");
     }
 }
