@@ -13,12 +13,20 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getUnternehmen().getName()).setHeader(unternehmen);
         String stelle = VaadinBuilderWomm.translateTextStatic("Advertisement");
         grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getStelleTitel()).setHeader(stelle);
-        String status = VaadinBuilderWomm.translateTextStatic("State");
-        grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader(status).setSortable(true);
         String b = VaadinBuilderWomm.translateTextStatic("Ad description");
         grid.addColumn(BewerbungDTO::getBewerbungText).setHeader(b);
         setUpColorBewerbungen(grid);
         grid.addClassName("styling");
+        String status = VaadinBuilderWomm.translateTextStatic("State");
+//        grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader(status).setSortable(true);
+        grid.addColumn(bewerbungDTO -> {
+                    if (bewerbungDTO.getBewerbungStatus().equalsIgnoreCase("accepted"))
+                        return VaadinBuilderWomm.translateTextStatic("Accepted");
+                    if (bewerbungDTO.getBewerbungStatus().equalsIgnoreCase("declined"))
+                        return VaadinBuilderWomm.translateTextStatic("Declined");
+            return VaadinBuilderWomm.translateTextStatic("Pending");
+        }).setHeader(status).setSortable(true);
+//                bewerbungDTO.getBewerbungStudent()).setHeader(status).setSortable(true);
     }
 
     void setUpColorBewerbungen(Grid<BewerbungDTO> grid){
