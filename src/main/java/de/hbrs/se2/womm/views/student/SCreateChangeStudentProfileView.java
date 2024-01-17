@@ -233,13 +233,13 @@ public class SCreateChangeStudentProfileView extends AViewWomm {
         passwordOld.setTooltipText(getWommBuilder().translateText("Please enter your current valid Password"));
         passwordNew.setRequiredIndicatorVisible(true);
         passwordNew.setAllowedCharPattern("[A-Za-z0-9]");
-        passwordNew.setMinLength(4);
+        passwordNew.setMinLength(6);
         passwordNew.setMaxLength(12);
         passwordNew.setClearButtonVisible(true);
         passwordNew.setTooltipText(getWommBuilder().translateText("Please enter your new valid Password"));
         passwordNewConfirm.setRequiredIndicatorVisible(true);
         passwordNewConfirm.setAllowedCharPattern("[A-Za-z0-9]");
-        passwordNewConfirm.setMinLength(4);
+        passwordNewConfirm.setMinLength(6);
         passwordNewConfirm.setMaxLength(12);
         passwordNewConfirm.setClearButtonVisible(true);
         passwordNewConfirm.setTooltipText(getWommBuilder().translateText("Please re-enter your new valid Password"));

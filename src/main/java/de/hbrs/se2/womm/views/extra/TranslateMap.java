@@ -125,6 +125,7 @@ public class TranslateMap {
         translateMap.put("Repeat your new password", "Neues Passwort wiederholen");
         translateMap.put("Push Notifications", "Benachrichtigungen");
         translateMap.put("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported.", "Das neue Passwort muss eine Länge von 6 bis 12 Zeichen haben und darf nur Buchstaben von A bis Z und Zahlen beeinhalten");
+        translateMap.put("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported", "Das Passwort muss eine Länge von 6 bis 12 Zeichen haben und darf nur Buchstaben von A bis Z und Zahlen beeinhalten");
         translateMap.put("I would like to receive notifications", "Ich möchte Benachrichtigungen erhalten");
         translateMap.put("Enter your new password", "Neues Passwort");
         translateMap.put("Please enter your current valid Password", "Bitte gib dein aktuelles Passwort ein");
