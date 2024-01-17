@@ -46,6 +46,7 @@ public class SNotificationView extends AViewWomm {
 
         setUpHeader();
         gridFilterStelle.setUpFromOutside(stelleDTOList);
+        this.gridFilterStelle.setColumnClickListener(ROUTING.STUDENT.SJobProjectWorkshopDisplayView);
         add(gridFilterStelle);
     }
 
