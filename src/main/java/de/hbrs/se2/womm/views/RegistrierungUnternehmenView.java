@@ -93,6 +93,9 @@ public class RegistrierungUnternehmenView extends AViewWomm {
         String thePasswordUsedForLogin = getWommBuilder().translateText("The password used for login");
         passwordComponent.setTooltipText(thePasswordUsedForLogin);
         passwordComponent.setRequired(true);
+        passwordComponent.setAllowedCharPattern("[A-Za-z0-9]");
+        passwordComponent.setMinLength(4);
+        passwordComponent.setMaxLength(12);
         passwordComponent.setRequiredIndicatorVisible(true);
         String passwordIsRequired = getWommBuilder().translateText("Password is required");
         passwordComponent.setErrorMessage(passwordIsRequired);
@@ -101,6 +104,9 @@ public class RegistrierungUnternehmenView extends AViewWomm {
         String repeatYourPassword = getWommBuilder().translateText("Repeat your password");
         passwordConfirmComponent.setTooltipText(repeatYourPassword);
         passwordConfirmComponent.setRequired(true);
+        passwordConfirmComponent.setAllowedCharPattern("[A-Za-z0-9]");
+        passwordConfirmComponent.setMinLength(4);
+        passwordConfirmComponent.setMaxLength(12);
         passwordConfirmComponent.setRequiredIndicatorVisible(true);
         String passwordConfirmationIsRequired = getWommBuilder().translateText("Password Confirmation is required");
         passwordConfirmComponent.setErrorMessage(passwordConfirmationIsRequired);
@@ -117,6 +123,7 @@ public class RegistrierungUnternehmenView extends AViewWomm {
 
         registerComponent = getWommBuilder().Button.create("Register", event -> {
             if (!companyNameComponent.isEmpty()  && !usernameComponent.isEmpty() && !emailComponent.isEmpty() &&
+                    !passwordComponent.isInvalid() && !passwordConfirmComponent.isInvalid() &&
                     !passwordComponent.isEmpty() && !passwordConfirmComponent.isEmpty() && !locationComponent.isEmpty()) {
                 if (passwordComponent.getValue().equals(passwordConfirmComponent.getValue())) {
                     Pattern pattern = Pattern.compile(EMAIL_REGEX);
