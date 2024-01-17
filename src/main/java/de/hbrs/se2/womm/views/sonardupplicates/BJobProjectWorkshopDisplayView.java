@@ -58,15 +58,12 @@ public abstract class BJobProjectWorkshopDisplayView extends AViewWomm implement
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter Long parameter) {
         if (parameter != null) {
-            System.out.println("Parameter: " + parameter);
             this.stelleId = parameter;
             Optional<StelleDTO> checkStelleDTO = stelleService.getById(this.stelleId);
             if (checkStelleDTO.isEmpty()) {
-                System.out.println("StelleDTO ist null");
                 add(new H1("Keine Stelle in der DB für ID: " + this.stelleId + " gefunden"));
             } else {
                 this.stelleDTO = checkStelleDTO.get();
-                System.out.println("Parameter: " + parameter);
                 setUpHeader();
                 setUpStellenanzeige();
                 if(securityService.isUserStudent()) {
