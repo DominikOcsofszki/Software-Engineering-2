@@ -1,5 +1,6 @@
 package de.hbrs.se2.womm.views.components;
 
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
@@ -10,11 +11,11 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
     @Override
     protected void configureGrid() {
         String unternehmen = VaadinBuilderWomm.translateTextStatic("Firm");
-        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getUnternehmen().getName()).setHeader(unternehmen);
+        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getUnternehmen().getName()).setHeader(new Html("<b>"+unternehmen+"</b>)"));
         String stelle = VaadinBuilderWomm.translateTextStatic("Advertisement");
-        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getStelleTitel()).setHeader(stelle);
+        grid.addColumn(bewerbungDTO -> bewerbungDTO.getBewerbungStelle().getStelleTitel()).setHeader(new Html("<b>"+stelle+"</b>)"));
         String b = VaadinBuilderWomm.translateTextStatic("Application");
-        grid.addColumn(BewerbungDTO::getBewerbungText).setHeader(b);
+        grid.addColumn(BewerbungDTO::getBewerbungText).setHeader(new Html("<b>"+b+"</b>)"));
         setUpColorBewerbungen(grid);
         grid.addClassName("styling");
         String status = VaadinBuilderWomm.translateTextStatic("State");
@@ -25,7 +26,7 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
                     if (bewerbungDTO.getBewerbungStatus().equalsIgnoreCase("ABGELEHNT"))
                         return VaadinBuilderWomm.translateTextStatic("Declined");
             return VaadinBuilderWomm.translateTextStatic("Pending");
-        }).setHeader(status).setSortable(true);
+        }).setHeader(new Html("<b>"+status+"</b>)")).setSortable(true);
 //                bewerbungDTO.getBewerbungStudent()).setHeader(status).setSortable(true);
     }
 
