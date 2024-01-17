@@ -20,6 +20,7 @@ import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.views.components.GridFilterBewerbungStudents;
 import de.hbrs.se2.womm.views.extra.TEMPLATE;
+import de.hbrs.se2.womm.views.extra.VaadinBuilderWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
 import jakarta.annotation.security.RolesAllowed;
@@ -65,8 +66,9 @@ public class SApplicationsView extends VerticalLayout {
 
         HorizontalLayout header = new HorizontalLayout();
 
-        //Ueberschrift//TODO translate
-        header.add(new H1("Bewerbungen:"));
+        //Ueberschrift
+        H1 headerText = new H1(VaadinBuilderWomm.translateTextStatic("Applications"));
+        header.add(headerText);
 
         add(header);
 
