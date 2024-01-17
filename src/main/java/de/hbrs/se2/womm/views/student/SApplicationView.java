@@ -1,9 +1,9 @@
 package de.hbrs.se2.womm.views.student;
 
-import com.vaadin.flow.component.Html;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -11,18 +11,17 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
-import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.model.ApplicationStatus;
 import de.hbrs.se2.womm.services.BewerbungService;
 import de.hbrs.se2.womm.services.ImageService;
 import de.hbrs.se2.womm.services.StelleService;
-import de.hbrs.se2.womm.services.StudentService;
+import de.hbrs.se2.womm.views.components.Stellenanzeige;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.StudentLayout;
+import de.hbrs.se2.womm.views.utils.TextToParagraphFormatter;
 import jakarta.annotation.security.RolesAllowed;
 
-import java.util.List;
 import java.util.Optional;
 
 @Route(value = ROUTING.STUDENT.SApplicationView, layout = StudentLayout.class)
@@ -30,20 +29,14 @@ import java.util.Optional;
 @PageTitle("ApplicationView")
 public class SApplicationView extends AViewWomm implements HasUrlParameter<Long> {
     private final BewerbungService bewerbungService;
-    private final StudentService studentService;
     private final StelleService stelleService;
     private BewerbungDTO bewerbung;
     private String bewerbungText;
-    private StudentDTO student;
     private StelleDTO stelleDTO;
-    private Long studentID;
-    private String studentName;
-    private String studentVorname;
 
-    public SApplicationView(BewerbungService bewerbungService, StudentService studentService, StelleService stelleService) {
+    public SApplicationView(BewerbungService bewerbungService, StelleService stelleService) {
         super();
         this.bewerbungService = bewerbungService;
-        this.studentService = studentService;
         this.stelleService = stelleService;
     }
 
@@ -66,12 +59,6 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
     void setUpApplication() {
         bewerbungText = bewerbung.getBewerbungText();
 
-        studentID = bewerbung.getBewerbungStudent().getStudentId();
-        Optional<StudentDTO> fetchedStudent = studentService.getById(studentID);
-        fetchedStudent.ifPresent(studentDTO -> student = studentDTO);
-        studentName = student.getStudentName();
-        studentVorname = student.getStudentVorname();
-
         setUpTop();
 
         String status = bewerbung.getBewerbungStatus();
@@ -83,23 +70,13 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
 
     private void setUpTop() {
         setUpHeader();
-        setUpStellenanzeige();
+        setupAnzeige();
     }
 
     private void setUpAnschreiben() {
         add(new H3(getWommBuilder().translateText("Your motivational letter:")));
-        VerticalLayout anschreiben = new VerticalLayout();
-        List.of(bewerbungText.split("\n\n")).forEach(paragraph -> {
-            List.of(paragraph.split("\n")).forEach(subParagraph -> {
-                Paragraph newParagraph = new Paragraph(subParagraph);
-                anschreiben.add(newParagraph);
-            });
-        });
+        VerticalLayout anschreiben = TextToParagraphFormatter.formatTextToParagraph(bewerbungText);
         add(anschreiben);
-    }
-
-    private void setUpDoesNotExist() {
-        //TODO
     }
 
     private void setUpStatus(String bewerbungStatus) {
@@ -144,63 +121,12 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
         add(header);
     }
 
-
-    private void setUpStellenanzeige() {
-        VerticalLayout stellenanzeige = new VerticalLayout();
-
-        // Ort
-
-        HorizontalLayout ortLayout = new HorizontalLayout();
-        Icon ortsIcon = VaadinIcon.PIN.create();
-        ortLayout.add(ortsIcon);
-
-        Text ort = new Text(this.stelleDTO.getStelleOrt());
-        ortLayout.add(ort);
-
-        stellenanzeige.add(ortLayout);
-
-        // Hyperlink
-
-        HorizontalLayout linkLayout = new HorizontalLayout();
-        Icon linkIcon = VaadinIcon.LINK.create();
-        linkLayout.add(linkIcon);
-
-        Anchor website = new Anchor();
-        String url = this.stelleDTO.getStelleWebsite();
-        website.setText(url);
-
-        linkLayout.add(website);
-
-        stellenanzeige.add(linkLayout);
-
-        // Beschreibung + Header
-
-        Div beschreibung = new Div();
-
-        beschreibung.getStyle().set("margin-top", "20px");
-
-        H3 titel = new H3();
-        String stelleTitel = this.stelleDTO.getStelleTitel();
-        titel.setText(stelleTitel);
-
-        beschreibung.add(titel);
-
-        List<String> paragraphs = List.of(this.stelleDTO.getStelleBeschreibung().split("\n\n"));
-        paragraphs.forEach(paragraph -> {
-            List.of(paragraph.split("\n")).forEach(subParagraph -> {
-                Paragraph newParagraph = new Paragraph();
-                newParagraph.setWidthFull();
-                newParagraph.setText(subParagraph);
-                beschreibung.add(newParagraph);
-            });
-            beschreibung.add(new Html("<br>"));
-        });
-
-        stellenanzeige.add(beschreibung);
-
-        add(stellenanzeige);
-
+    private void setupAnzeige() {
+        Stellenanzeige stellenanzeige = new Stellenanzeige();
+        VerticalLayout anzeigeLayout = stellenanzeige.fillOutLayout(stelleDTO);
+        add(anzeigeLayout);
     }
+
     private void setup404Page() {
         add(new H1("404 Not Found! :("));
     }
