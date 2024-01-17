@@ -110,7 +110,7 @@ public class UApplicantView extends AViewWomm implements HasUrlParameter<Long> {
     private VerticalLayout createProfileRow(String description, String content) {
         VerticalLayout row = new VerticalLayout();
 
-        Span header = getWommBuilder().Span.create(description);
+        Span header = new Span(description);
         Span text = new Span(content);
 
         header.getElement().getStyle().set("font-size", "20px");

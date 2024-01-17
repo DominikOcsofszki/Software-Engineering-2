@@ -22,7 +22,7 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
         grid.addColumn(stelleDTO -> stelleDTO.getUnternehmen().getName()).setHeader(new Html("<b>" +header2+"</b>"));
         String header3 = VaadinBuilderWomm.translateTextStatic("Description");
         grid.addColumn(StelleDTO::getStelleBeschreibung).setHeader(new Html("<b>" +header3+"</b>"));
-        String header4 = VaadinBuilderWomm.translateTextStatic("Creationdate");
+        String header4 = VaadinBuilderWomm.translateTextStatic("Creation date");
         grid.addColumn(stelleDTO -> stelleDTO.getErstellungsdatum().toString().substring(0,16)).setHeader(new Html("<b>" +header4+"</b>"));
 //        grid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT); //TODO Adding to show all Text
 //                .setFooter(String.format("%s total Advertisement", 1000));; //TODO any reason for html???/
@@ -39,7 +39,7 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
         String str1 = VaadinBuilderWomm.translateTextStatic("Advertisement");
         String str2 = VaadinBuilderWomm.translateTextStatic("Firm");
         String str3 = VaadinBuilderWomm.translateTextStatic("Description");
-        String str4 = VaadinBuilderWomm.translateTextStatic("Creationdate");
+        String str4 = VaadinBuilderWomm.translateTextStatic("Creation date");
         String str5 = VaadinBuilderWomm.translateTextStatic("Type");
         String str6 = VaadinBuilderWomm.translateTextStatic("Location");
         return new String[]{
@@ -58,8 +58,16 @@ public class GridFilterStelle extends AGridFilter<StelleDTO>{
         return switch (searchBy) {
             case "Stellenanzeige" -> dto.getStelleTitel();
             case "Unternehmen" -> dto.getUnternehmen().toString();
+            case "Beschreibung" -> dto.getStelleBeschreibung();
+            case "Erstellungsdatum" -> dto.getErstellungsdatum().toString().substring(0,16);
+            case "Typ" -> dto.getStelleTyp();
+            case "Ort" -> dto.getStelleOrt();
             case "Advertisement" -> dto.getStelleTitel();
             case "Firm" -> dto.getUnternehmen().toString();
+            case "Description" -> dto.getStelleBeschreibung();
+            case "Creation date" -> dto.getErstellungsdatum().toString().substring(0,16);
+            case "Type" -> dto.getStelleTyp();
+            case "Location" -> dto.getStelleOrt();
             default -> null;
         };
     }

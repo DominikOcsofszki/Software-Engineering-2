@@ -1,5 +1,7 @@
 package de.hbrs.se2.womm.views.extra;
 
+import de.hbrs.se2.womm.views.unternehmen.UApplicantView;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +32,7 @@ public class TranslateMap {
         translateMap.put("Filter by...", "Filter nach...");
         translateMap.put("Message","Nachricht");
         translateMap.put("Read","Gelesen");
+        translateMap.put("Order","Reihenfolge");
         translateMap.put("ACCEPTED","AKZEPTIERT");
         translateMap.put("DECLINED","ABGELEHNT");
         translateMap.put("PENDING","AUSSTEHEND");
@@ -38,7 +41,7 @@ public class TranslateMap {
         translateMap.put("Advertisement", "Stellenanzeige"); // dont change!!
         translateMap.put("Firm", "Unternehmen"); // dont change!!
         translateMap.put("Description", "Beschreibung");
-        translateMap.put("Creationdate", "Erstellungsdatum");
+        translateMap.put("Creation date", "Erstellungsdatum");
         translateMap.put("Type","Typ");
 
         // SCreateChangeStudentProfileView
@@ -140,6 +143,10 @@ public class TranslateMap {
         translateMap.put("Apply later", "Später bewerben");
         translateMap.put("Your application has been sent successfully", "Deine Bewerbung wurde erfolgreich versendet");
 
+        //UApplicantView
+        translateMap.put("Birthday", "Geburtstag");
+
+
         //UApplicationsView
         translateMap.put("Current Applications","Aktuelle Bewerbungen");
         translateMap.put("Last name","Nachname");
@@ -189,5 +196,9 @@ public class TranslateMap {
         translateMap.put("Student job","Werkstudentenstelle");
         translateMap.put("Ad description","Stellenbezeichnung");
         translateMap.put("Create","Erstellen");
+
+        //SFirmProfileDisplayView
+        translateMap.put("Subscribe","Abonnieren");
+        translateMap.put("Chat","Chat");
     }
 }
