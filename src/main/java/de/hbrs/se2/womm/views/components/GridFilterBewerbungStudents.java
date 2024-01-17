@@ -20,9 +20,9 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
         String status = VaadinBuilderWomm.translateTextStatic("State");
 //        grid.addColumn(BewerbungDTO::getBewerbungStatus).setHeader(status).setSortable(true);
         grid.addColumn(bewerbungDTO -> {
-                    if (bewerbungDTO.getBewerbungStatus().equalsIgnoreCase("accepted"))
+                    if (bewerbungDTO.getBewerbungStatus().equalsIgnoreCase("AKZEPTIERT"))
                         return VaadinBuilderWomm.translateTextStatic("Accepted");
-                    if (bewerbungDTO.getBewerbungStatus().equalsIgnoreCase("declined"))
+                    if (bewerbungDTO.getBewerbungStatus().equalsIgnoreCase("ABGELEHNT"))
                         return VaadinBuilderWomm.translateTextStatic("Declined");
             return VaadinBuilderWomm.translateTextStatic("Pending");
         }).setHeader(status).setSortable(true);
@@ -31,9 +31,9 @@ public class GridFilterBewerbungStudents extends AGridFilter<BewerbungDTO> {
 
     void setUpColorBewerbungen(Grid<BewerbungDTO> grid){
         grid.setPartNameGenerator(bewerbung -> {
-            if (bewerbung.getBewerbungStatus().equalsIgnoreCase("accepted"))
+            if (bewerbung.getBewerbungStatus().equalsIgnoreCase("AKZEPTIERT"))
                 return "accepted";
-            if (bewerbung.getBewerbungStatus().equalsIgnoreCase("declined"))
+            if (bewerbung.getBewerbungStatus().equalsIgnoreCase("ABGELEHNT"))
                 return "declined";
             return null;
         });
