@@ -33,9 +33,9 @@ public class TranslateMap {
         translateMap.put("Message","Nachricht");
         translateMap.put("Read","Gelesen");
         translateMap.put("Order","Reihenfolge");
-        translateMap.put("ACCEPTED","AKZEPTIERT");
-        translateMap.put("DECLINED","ABGELEHNT");
-        translateMap.put("PENDING","AUSSTEHEND");
+        translateMap.put("accepted","akzeptiert");
+        translateMap.put("declined","abgelehnt");
+        translateMap.put("pending","ausstehend");
 
         //GridFilterStelle (filter by)
         translateMap.put("Advertisement", "Stellenanzeige"); // dont change!!
@@ -99,6 +99,10 @@ public class TranslateMap {
         translateMap.put("Register", "Registrieren");
         translateMap.put("Surname", "Nachname");
         translateMap.put("Company Name", "Name Ihres Unternehmens");
+        translateMap.put("Registration succesful!","Registrierung erfolgreich!");
+        translateMap.put("Fill in all fields!","Fülle alle Felder aus!");
+        translateMap.put("Passwords not identical!","Passwörter stimmen nicht überein!");
+        translateMap.put("Please enter a valid email!","Bitte eine gültige Email eingeben!");
 
         //StudentProfileDisplayView
         translateMap.put("Location", "Ort");

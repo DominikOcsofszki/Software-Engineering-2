@@ -164,13 +164,13 @@ public class RegistrierungStudentView extends AViewWomm {
                         setUpLoadingBarRegistration();
                         register();
                     } else {
-                        createErrorNotification(getWommBuilder().translateText("Bitte eine gültige Email eingeben!"));
+                        createErrorNotification(getWommBuilder().translateText("Please enter a valid email!"));
                     }
                 } else {
-                    createErrorNotification(getWommBuilder().translateText("Passwörter stimmen nicht überein!"));
+                    createErrorNotification(getWommBuilder().translateText("Passwords not identical!"));
                 }
             } else {
-                createErrorNotification(getWommBuilder().translateText("Fülle alle Felder aus!"));
+                createErrorNotification(getWommBuilder().translateText("Fill in all fields!"));
             }
         });
 
@@ -208,7 +208,7 @@ public class RegistrierungStudentView extends AViewWomm {
                 Notification notification = new Notification();
                 notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 
-                Div text = new Div(getWommBuilder().Text.create("Registrierung erfolgreich!"));
+                Div text = new Div(getWommBuilder().Text.create("Registration succesful!"));
 
                 Button closeButton = new Button(new Icon("lumo", "cross"));
                 closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
