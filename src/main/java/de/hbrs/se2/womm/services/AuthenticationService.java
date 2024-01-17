@@ -63,6 +63,9 @@ public class AuthenticationService {
         // speichert Unternehmen mit FK zur Nutzer-Tabelle
         Nutzer user = nutzerRepository.findNutzerByNutzerMail(email);
         unternehmenRepository.save(Unternehmen.builder()
+                .beschreibung("")
+                .gruendung("")
+                .website_url("")
                 .nutzer(user)
                 .name(request.getName())
                 .build());
