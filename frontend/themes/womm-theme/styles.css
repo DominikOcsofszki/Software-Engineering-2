@@ -45,11 +45,11 @@ html {
     /*--lumo-primary-color: rgba(var(--womm-primary-color), 1);*/
 
 }
-vaadin-grid.styling::part(akzeptiert) {
+vaadin-grid.styling::part(accepted) {
     background-color: rgba(var(--womm-success-color), 0.08);
 }
 
-vaadin-grid.styling::part(abgelehnt) {
+vaadin-grid.styling::part(declined) {
     background-color: rgba(var(--womm-error-color), 0.08);
 }
 .login-view {
