@@ -105,25 +105,25 @@ public class RegistrierungStudentView extends AViewWomm {
         emailComponent.setErrorMessage(emailIsRequired);
 
         passwordComponent = getWommBuilder().PasswordField.create("Enter Password");
-        String thePasswordUsedForLogin = getWommBuilder().translateText("The password used for login");
+        String thePasswordUsedForLogin = getWommBuilder().translateText("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported");
         passwordComponent.setTooltipText(thePasswordUsedForLogin);
         passwordComponent.setRequired(true);
         passwordComponent.setAllowedCharPattern("[A-Za-z0-9]");
-        passwordComponent.setMinLength(4);
+        passwordComponent.setMinLength(6);
         passwordComponent.setMaxLength(12);
         passwordComponent.setRequiredIndicatorVisible(true);
-        String passwordIsRequired = getWommBuilder().translateText("Password is required");
+        String passwordIsRequired = getWommBuilder().translateText("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported");
         passwordComponent.setErrorMessage(passwordIsRequired);
 
         passwordConfirmComponent = getWommBuilder().PasswordField.create("Confirm Password");
-        String repeatYourPassword = getWommBuilder().translateText("Repeat your password");
+        String repeatYourPassword = getWommBuilder().translateText("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported");
         passwordConfirmComponent.setTooltipText(repeatYourPassword);
         passwordConfirmComponent.setRequired(true);
         passwordConfirmComponent.setAllowedCharPattern("[A-Za-z0-9]");
-        passwordConfirmComponent.setMinLength(4);
+        passwordConfirmComponent.setMinLength(6);
         passwordConfirmComponent.setMaxLength(12);
         passwordConfirmComponent.setRequiredIndicatorVisible(true);
-        String passwordConfirmationIsRequired = getWommBuilder().translateText("Password Confirmation is required");
+        String passwordConfirmationIsRequired = getWommBuilder().translateText("Your password must have 6 to 12 characters. Only letters A-Z and numbers supported");
         passwordConfirmComponent.setErrorMessage(passwordConfirmationIsRequired);
 
         DatePicker.DatePickerI18n singleFormatI18n = new DatePicker.DatePickerI18n();
