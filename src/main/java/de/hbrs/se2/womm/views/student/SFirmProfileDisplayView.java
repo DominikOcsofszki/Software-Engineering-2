@@ -135,10 +135,15 @@ public class SFirmProfileDisplayView extends AViewWomm implements HasUrlParamete
         Icon linkIcon = new Icon(VaadinIcon.EXTERNAL_LINK);
 
         String website;
+        if(!this.unternehmenDTO.getWebsite_url().isEmpty()) {
         if(this.unternehmenDTO.getWebsite_url().substring(0,4).equalsIgnoreCase("http")){
             website = this.unternehmenDTO.getWebsite_url();
         }else{
             website = "https://" + this.unternehmenDTO.getWebsite_url();
+        }
+        }
+        else{
+            website = "";
         }
         Anchor anchor = new Anchor(website,this.unternehmenDTO.getWebsite_url());
         anchor.getStyle().setColor("#0000EE");
