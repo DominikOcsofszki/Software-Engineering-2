@@ -126,13 +126,14 @@ public class ChatComponent extends VerticalLayout {
     private List<MessageListItem> prepareMsgToShow(List<ChatNewDTO> chatNewDTO) {
         List<MessageListItem> listOfMessages = new ArrayList<>();
         if (chatNewDTO == null) return listOfMessages;
+        String name = !isStudent? studentName : unternehmenName;
         chatNewDTO.forEach(chat -> {
             LocalDate date = chat.getDate();
             Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
             MessageListItem newMessage = new MessageListItem(
                     chat.getMsg(),
                     instant,  //TODO change time
-                    this.studentName
+                    name
             );
             listOfMessages.add(newMessage);
         });
