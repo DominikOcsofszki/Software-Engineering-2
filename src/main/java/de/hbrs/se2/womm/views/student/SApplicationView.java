@@ -9,12 +9,13 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
+import de.hbrs.se2.womm.config.SecurityService;
 import de.hbrs.se2.womm.dtos.BewerbungDTO;
 import de.hbrs.se2.womm.dtos.StelleDTO;
 import de.hbrs.se2.womm.model.ApplicationStatus;
-import de.hbrs.se2.womm.services.BewerbungService;
-import de.hbrs.se2.womm.services.ImageService;
-import de.hbrs.se2.womm.services.StelleService;
+import de.hbrs.se2.womm.services.*;
+import de.hbrs.se2.womm.views.chat.ChatComponent;
+import de.hbrs.se2.womm.views.chat.ChatNewService;
 import de.hbrs.se2.womm.views.components.Stellenanzeige;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
@@ -33,13 +34,54 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
     private BewerbungDTO bewerbung;
     private String bewerbungText;
     private StelleDTO stelleDTO;
-
-    public SApplicationView(BewerbungService bewerbungService, StelleService stelleService) {
+    ///////////////////////
+    long bewerbungID;
+    //securityService, chatNewService, studentService, unternehmenService
+    private final SecurityService securityService;
+    private final ChatNewService chatNewService;
+    private final StudentService studentService;
+    private final UnternehmenService unternehmenService;
+    public SApplicationView(BewerbungService bewerbungService, StelleService stelleService,
+                            SecurityService securityService, ChatNewService chatNewService,
+                            StudentService studentService, UnternehmenService unternehmenService) {
         super();
+        this.securityService = securityService;
+        this.chatNewService = chatNewService;
+        this.studentService = studentService;
+        this.unternehmenService = unternehmenService;
+        //////////////////
         this.bewerbungService = bewerbungService;
         this.stelleService = stelleService;
+
     }
 
+//    public SApplicationView(BewerbungService bewerbungService, StelleService stelleService) {
+//        super();
+//        this.bewerbungService = bewerbungService;
+//        this.stelleService = stelleService;
+//    }
+
+//    ChatComponent returnChatComponentToAdd() {
+//
+//    }
+ChatComponent setUpChat(SecurityService securityService, ChatNewService chatNewService, StudentService studentService, UnternehmenService unternehmenService) {
+        ////////
+        long studentNutzerId = securityService.getLoggedInNutzerID();
+        long unternehmenNutzerId;
+        if(!bewerbungService.getById(bewerbungID).isPresent()) {
+            throw new RuntimeException("Bewerbung with ID: " + bewerbungID + " not found!");
+        } else {
+            unternehmenNutzerId = bewerbungService.getById(bewerbungID).get().getBewerbungUnternehmen().getNutzer().getNutzerId();
+            ChatComponent chatComponent = new ChatComponent(studentNutzerId, unternehmenNutzerId, true,
+                    securityService, chatNewService, studentService, unternehmenService);
+//            add(getWommBuilder().H2.create("Chat appears after approved application."));
+//            add(chatComponent);
+            return chatComponent;
+            ///////
+        }
+
+
+    }
 
     @Override
     public void setParameter(BeforeEvent beforeEvent, @OptionalParameter Long bewerbungID) {
@@ -48,9 +90,12 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
             fetchedBewerbung.ifPresent(bewerbungDTO -> this.bewerbung = bewerbungDTO);
             Optional<StelleDTO> checkStelleDTO = stelleService.getById(bewerbung.getBewerbungStelle().getStelleId());
             this.stelleDTO = checkStelleDTO.orElse(null);
+            this.bewerbungID = bewerbungID;
 
 
             setUpApplication();
+
+
         } else {
             setup404Page();
         }
@@ -88,7 +133,9 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
             layout.add(icon);
             text = new H3(getWommBuilder().translateText("Your application has been accepted."));
             text.getStyle().setColor("green");
-            layout.add(text);
+//            layout.add(text);
+            ChatComponent chatComponent = setUpChat(securityService, chatNewService, studentService, unternehmenService);
+            layout.add(chatComponent,text); //TODO added chat component
         } else if (ApplicationStatus.ABGELEHNT.toString().equals(bewerbungStatus)) {
             Icon icon = new Icon(VaadinIcon.CLOSE_CIRCLE);
             icon.setColor("red");
@@ -101,8 +148,9 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
             icon.setColor("orange");
             layout.add(icon);
             text = new H3(getWommBuilder().translateText("Your application is awaiting review."));
+            H3 textForChat = new H3(getWommBuilder().translateText("(Chat will appear if accepted)"));
             text.getStyle().setColor("orange");
-            layout.add(text);
+            layout.add(text, textForChat);
         }
         add(layout);
     }
