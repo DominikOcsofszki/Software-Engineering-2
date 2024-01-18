@@ -10,6 +10,7 @@ import de.hbrs.se2.womm.services.UnternehmenService;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,9 +127,11 @@ public class ChatComponent extends VerticalLayout {
         List<MessageListItem> listOfMessages = new ArrayList<>();
         if (chatNewDTO == null) return listOfMessages;
         chatNewDTO.forEach(chat -> {
+            LocalDate date = chat.getDate();
+            Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
             MessageListItem newMessage = new MessageListItem(
                     chat.getMsg(),
-                    Instant.now(),  //TODO change time
+                    instant,  //TODO change time
                     this.studentName
             );
             listOfMessages.add(newMessage);
