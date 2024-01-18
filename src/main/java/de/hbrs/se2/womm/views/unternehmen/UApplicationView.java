@@ -19,8 +19,11 @@ import de.hbrs.se2.womm.dtos.StudentDTO;
 import de.hbrs.se2.womm.dtos.UnternehmenDTO;
 import de.hbrs.se2.womm.model.ApplicationStatus;
 import de.hbrs.se2.womm.services.BewerbungService;
+import de.hbrs.se2.womm.services.StelleService;
 import de.hbrs.se2.womm.services.StudentService;
 import de.hbrs.se2.womm.services.UnternehmenService;
+import de.hbrs.se2.womm.views.chat.ChatComponent;
+import de.hbrs.se2.womm.views.chat.ChatNewService;
 import de.hbrs.se2.womm.views.layouts.AViewWomm;
 import de.hbrs.se2.womm.views.layouts.ROUTING;
 import de.hbrs.se2.womm.views.layouts.UnternehmenLayout;
@@ -45,22 +48,55 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
     private Long studentID;
     private String studentName;
     private String studentVorname;
-
-    public UApplicationView(BewerbungService bewerbungService,
-                            StudentService studentService,
-                            SecurityService securityService,
-                            UnternehmenService unternehmenService) {
+    ///////////////////////
+    long bewerbungID;
+    //securityService, chatNewService, studentService, unternehmenService
+//    private final SecurityService securityService;
+    private final ChatNewService chatNewService;
+    private final StelleService stelleService;
+//    private final StudentService studentService;
+//    private final UnternehmenService unternehmenService;
+    public UApplicationView(BewerbungService bewerbungService, StelleService stelleService,
+                            SecurityService securityService, ChatNewService chatNewService,
+                            StudentService studentService, UnternehmenService unternehmenService) {
         super();
+        this.chatNewService = chatNewService;
+        this.stelleService = stelleService;
+        //////////////////
         this.bewerbungService = bewerbungService;
         this.studentService = studentService;
         this.securityService = securityService;
         this.unternehmenService = unternehmenService;
     }
+    ChatComponent setUpReturnChatComponent(SecurityService securityService, ChatNewService chatNewService, StudentService studentService, UnternehmenService unternehmenService) {
+        ////////
+        long unternehmenNutzerId = securityService.getLoggedInNutzerID();
+        long studentNutzerId;
+        if (!bewerbungService.getById(bewerbungID).isPresent()) {
+            throw new RuntimeException("Bewerbung with ID: " + bewerbungID + " not found!");
+        } else {
+            studentNutzerId = bewerbungService.getById(bewerbungID).get().getBewerbungStudent().getNutzer().getNutzerId();
+            ChatComponent chatComponent = new ChatComponent(studentNutzerId, unternehmenNutzerId, false,
+                    securityService, chatNewService, studentService, unternehmenService);
+            return chatComponent;
+        }
+    }
+//    public UApplicationView(BewerbungService bewerbungService,
+//                            StudentService studentService,
+//                            SecurityService securityService,
+//                            UnternehmenService unternehmenService) {
+//        super();
+//        this.bewerbungService = bewerbungService;
+//        this.studentService = studentService;
+//        this.securityService = securityService;
+//        this.unternehmenService = unternehmenService;
+//    }
 
 
     @Override
     public void setParameter(BeforeEvent beforeEvent, @OptionalParameter Long bewerbungID) {
         if (bewerbungID != null) {
+            this.bewerbungID = bewerbungID;
             Optional<BewerbungDTO> fetchedBewerbung = bewerbungService.getById(bewerbungID);
             fetchedBewerbung.ifPresent(bewerbungDTO -> this.bewerbung = bewerbungDTO);
             setUpApplication();
@@ -161,6 +197,9 @@ public class UApplicationView extends AViewWomm implements HasUrlParameter<Long>
             text = new H3(getWommBuilder().translateText("You have accepted the application"));
             text.getStyle().setColor("green");
             confirmation.add(text);
+            ChatComponent chatComponent = setUpReturnChatComponent(securityService, chatNewService, studentService, unternehmenService);
+            add(chatComponent); //TODO Changed
+
         } else {
             Icon icon = new Icon(VaadinIcon.CLOSE_CIRCLE);
             icon.setColor("red");

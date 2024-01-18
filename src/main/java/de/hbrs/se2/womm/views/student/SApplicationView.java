@@ -64,7 +64,7 @@ public class SApplicationView extends AViewWomm implements HasUrlParameter<Long>
 //    ChatComponent returnChatComponentToAdd() {
 //
 //    }
-ChatComponent setUpChat(SecurityService securityService, ChatNewService chatNewService, StudentService studentService, UnternehmenService unternehmenService) {
+ChatComponent setUpReturnChatComponent(SecurityService securityService, ChatNewService chatNewService, StudentService studentService, UnternehmenService unternehmenService) {
         ////////
         long studentNutzerId = securityService.getLoggedInNutzerID();
         long unternehmenNutzerId;
@@ -134,7 +134,7 @@ ChatComponent setUpChat(SecurityService securityService, ChatNewService chatNewS
             text = new H3(getWommBuilder().translateText("Your application has been accepted."));
             text.getStyle().setColor("green");
 //            layout.add(text);
-            ChatComponent chatComponent = setUpChat(securityService, chatNewService, studentService, unternehmenService);
+            ChatComponent chatComponent = setUpReturnChatComponent(securityService, chatNewService, studentService, unternehmenService);
             layout.add(chatComponent,text); //TODO added chat component
         } else if (ApplicationStatus.ABGELEHNT.toString().equals(bewerbungStatus)) {
             Icon icon = new Icon(VaadinIcon.CLOSE_CIRCLE);

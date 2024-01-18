@@ -51,8 +51,11 @@ public class ChatComponent extends VerticalLayout {
 
         if (isStudent) {
             setUpStudentToUnternehmen();
+
         } else {
-            setUpUnternehmenToStudent();
+            setUpStudentToUnternehmen();
+
+//            setUpUnternehmenToStudent();
         }
     }
 
@@ -70,30 +73,33 @@ public class ChatComponent extends VerticalLayout {
         prepareChat(listOfMessages);
     }
 
+//    private void sendMessageFromUnternehmenToStudent(String text) {
+//        ChatNewDTO ongoingChatDTO = ChatNewDTO.builder()
+//                .nutzerid1(this.nutzerIDFromLoggedIn)
+//                .nutzerid2(this.otherNutzerIDFromParameterOrElse)
+//                .msg(text)
+//                .date(LocalDate.now())
+//                .build();
+//        chatNewService.saveChatNewDTO(ongoingChatDTO);
+//    }
     private void sendMessageFromStudentToUnternehmen(String text) {
         ChatNewDTO ongoingChatDTO = ChatNewDTO.builder()
                 .nutzerid1(this.nutzerIDFromLoggedIn)
                 .nutzerid2(this.otherNutzerIDFromParameterOrElse)
-//                .nutzerid2(this.bewerbungIDOrParameter)
                 .msg(text)
                 .date(LocalDate.now())
                 .build();
         chatNewService.saveChatNewDTO(ongoingChatDTO);
     }
-    private void addInputFieldListenerStudent(MessageInput input, MessageList list) {
+    private void addInputFieldListenerStudent(MessageInput input, MessageList list, boolean isStudent) {
+        String name = isStudent? studentName : unternehmenName;
         input.addSubmitListener(submitEvent -> {
             MessageListItem newMessage = new MessageListItem(
                     submitEvent.getValue(),
                     Instant.now(),
-                    this.studentName
+                    name
             );
             sendMessageFromStudentToUnternehmen(submitEvent.getValue());
-//            chatNewService.saveChatNewDTO(ChatNewDTO.builder()
-//                    .nutzerid1(this.nutzerIDFromLoggedIn)
-//                    .nutzerid2(this.bewerbungIDOrParameter)
-//                    .msg(submitEvent.getValue())
-//                    .date(LocalDate.from(Instant.now()))
-//                    .build());
             newMessage.setUserColorIndex(3);
             List<MessageListItem> items = new ArrayList<>(list.getItems());
             items.add(newMessage);
@@ -104,7 +110,7 @@ public class ChatComponent extends VerticalLayout {
     private void prepareChat(List<MessageListItem> listOfMessages) {
         MessageList list = new MessageList();
         MessageInput input = new MessageInput();
-        addInputFieldListenerStudent(input, list);
+        addInputFieldListenerStudent(input, list, isStudent);
         list.setItems(listOfMessages);
 
         VerticalLayout chatLayout = new VerticalLayout(list, input);
