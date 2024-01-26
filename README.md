@@ -1,4 +1,4 @@
-# W.O.M.M. Projekt
+# W.O.M.M. Projekt (Uniprojekt) Jobportal
 
 - Als Benutzer möchte ich ein Profil registrieren, welches ich personalisieren kann.			1	10
 - Als Benutzer möchte ich mich in die Applikation einloggen/ausloggen können.					1	7
